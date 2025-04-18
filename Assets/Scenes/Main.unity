@@ -626,8 +626,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9edd9e8d730d44d48b7efd010bc1418c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tilesGenerationSpaceSize: {x: 6000, y: 6000}
-  _maxTileChainLength: 3
+  _tilesGenerationSpaceSize: {x: 1000, y: 1000}
+  _minTileChainLength: 4
+  _maxTileChainLength: 8
   _tileSize: {x: 10, y: 10}
   _tilesParent: {fileID: 698537735}
   _tilesThatCanBeSpawned:

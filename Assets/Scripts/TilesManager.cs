@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -30,11 +31,17 @@ public class TilesManager : MonoBehaviour
         public float spawnChance;
     }
 
+    private enum Direction
+    {
+        Up, Down, Left, Right
+    }
+
     [SerializeField] private Vector2 _tilesGenerationSpaceSize;
+    [SerializeField] private int _minTileChainLength = 1;
     [SerializeField] private int _maxTileChainLength = 3;
 
     //Maybe new tile class instead of struct?
-    [SerializeField] private Vector2 _tileSize = new Vector2(10f, 10f);
+    [SerializeField] private Vector2 _tileSize = new(10f, 10f);
 
     [SerializeField] private Transform _tilesParent;
     [SerializeField] private Tile[] _tilesThatCanBeSpawned;
@@ -48,44 +55,59 @@ public class TilesManager : MonoBehaviour
     {
         ClearTilesParent();
 
-        HashSet<Vector2> usedPositions = new();
         Stack<Transform> tilesToExpand = new();
+        HashSet<Vector3> usedPositions = new();
+        int directionsCount = Enum.GetValues(typeof(Direction)).Length;
+
         Transform startTile = Instantiate(_tilesThatCanBeSpawned[0].tilePrefab, Vector3.zero, Quaternion.identity, _tilesParent).transform;
         tilesToExpand.Push(startTile);
         usedPositions.Add(startTile.position);
         while (tilesToExpand.Count > 0)
         {
             Transform tile = tilesToExpand.Pop();
-            int tileChainLength = UnityEngine.Random.Range(1, _maxTileChainLength + 1);
-            Vector2 tileDirection = GetRandomDirection();
+            int tileChainLength = UnityEngine.Random.Range(_minTileChainLength, _maxTileChainLength + 1);
             Transform lastTileInChain = null;
-            for (int i = 0; i < tileChainLength; i++)
+
+            HashSet<Direction> excludedDirections = new();
+            Direction tileDirection = GetRandomDirection(excludedDirections);
+
+            int i = 0;
+            while (i < tileChainLength)
             {
                 float x = tile.position.x;
-                float y = tile.position.y;
-
-                Vector2 spawningPos = tileDirection switch
+                float z = tile.position.z;
+                Vector3 spawningPos = tileDirection switch
                 {
-                    _ when tileDirection == Vector2.up => new Vector2(x, y + _tileSize.y * 2),
-                    _ when tileDirection == Vector2.down => new Vector2(x, y - _tileSize.y * 2),
-                    _ when tileDirection == Vector2.left => new Vector2(x + _tileSize.x * 2, y),
-                    _ when tileDirection == Vector2.right => new Vector2(x - _tileSize.x * 2, y),
+                    Direction.Left => new Vector3(x + _tileSize.x * 2, 0, z),
+                    Direction.Right => new Vector3(x - _tileSize.x * 2, 0, z),
+                    Direction.Up => new Vector3(x, 0, z + _tileSize.y * 2),
+                    Direction.Down => new Vector3(x, 0, z - _tileSize.y * 2),
                     _ => throw new ArgumentOutOfRangeException(),
                 };
 
-                //TODO: Next attempts instead of break;
-                if (spawningPos.magnitude > _tilesGenerationSpaceSize.magnitude
+                if (Mathf.Abs(spawningPos.x) > _tilesGenerationSpaceSize.x / 2
+                    || Mathf.Abs(spawningPos.z) > _tilesGenerationSpaceSize.y / 2
                     || usedPositions.Contains(spawningPos))
                 {
-                    break;
+                    excludedDirections.Add(tileDirection);
+                    if (excludedDirections.Count >= directionsCount)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        tileDirection = GetRandomDirection(excludedDirections);
+                    }
                 }
                 else
                 {
                     GameObject tilePrefab = GetRandomTileBySpawnChance().tilePrefab;
                     Quaternion tileRotation = GetTileRotationRelatedToSpawningDirection();
-                    Transform newTile = Instantiate(tilePrefab, new Vector3(spawningPos.x, 0, spawningPos.y), tileRotation, _tilesParent).transform;
+                    Transform newTile = Instantiate(tilePrefab, spawningPos, tileRotation, _tilesParent).transform;
                     usedPositions.Add(newTile.position);
                     lastTileInChain = newTile;
+                    excludedDirections.Clear();
+                    i++;
                 }
             }
 
@@ -107,10 +129,13 @@ public class TilesManager : MonoBehaviour
         }
     }
 
-    private Vector2 GetRandomDirection()
+    private Direction GetRandomDirection(IEnumerable<Direction> excludedDirections)
     {
-        Vector2[] directions = { Vector2.up, Vector2.down, Vector2.left, Vector2.right };
-        return directions[UnityEngine.Random.Range(0, directions.Length)];
+        var directions = Enum.GetValues(typeof(Direction))
+            .Cast<Direction>()
+            .Where(direction => !excludedDirections.Contains(direction))
+            .ToList();
+        return directions[UnityEngine.Random.Range(0, directions.Count)];
     }
 
     private Tile GetRandomTileBySpawnChance()
