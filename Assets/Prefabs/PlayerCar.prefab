@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8177132126676050262}
   - component: {fileID: 5706654090633985399}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,7 +48,7 @@ WheelCollider:
     targetPosition: 0.5
   m_SuspensionDistance: 0.3
   m_ForceAppPointDistance: 0
-  m_Mass: 20
+  m_Mass: 40
   m_WheelDampingRate: 0.25
   m_ForwardFriction:
     m_ExtremumSlip: 0.4
@@ -80,7 +80,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7193072656616859072}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Meshesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9111843746906056963}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,7 +151,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1886754923336282284}
   - component: {fileID: 3897780278463981742}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -189,7 +189,7 @@ WheelCollider:
     targetPosition: 0.5
   m_SuspensionDistance: 0.3
   m_ForceAppPointDistance: 0
-  m_Mass: 20
+  m_Mass: 40
   m_WheelDampingRate: 0.25
   m_ForwardFriction:
     m_ExtremumSlip: 0.4
@@ -222,7 +222,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5139345572353323446}
   - component: {fileID: 8099860315547605368}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -260,7 +260,7 @@ WheelCollider:
     targetPosition: 0.5
   m_SuspensionDistance: 0.3
   m_ForceAppPointDistance: 0
-  m_Mass: 20
+  m_Mass: 40
   m_WheelDampingRate: 0.25
   m_ForwardFriction:
     m_ExtremumSlip: 0.4
@@ -292,7 +292,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9037885249005726195}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wheels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -326,8 +326,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6257441156095345877}
   - component: {fileID: 2319922352882400150}
+  - component: {fileID: 732167794389132859}
+  - component: {fileID: 4444538082891369474}
   - component: {fileID: 5120778290738025250}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PlayerCar
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -361,6 +363,37 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ed8deb310c42667418e374120168f834, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &732167794389132859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6215313516695621011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373a56a05b64dd04baa3b64e409ac34c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amount: 100
+  maxAmount: 0
+  regenerationAmount: 2
+  startRegenerationDelay: 1
+  onNoHealth:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &4444538082891369474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6215313516695621011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf2be0e7c7189a74d8e17a61814e0935, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 880
@@ -419,7 +452,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7242114706542194262}
   - component: {fileID: 2562169740509317604}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -457,7 +490,7 @@ WheelCollider:
     targetPosition: 0.5
   m_SuspensionDistance: 0.3
   m_ForceAppPointDistance: 0
-  m_Mass: 20
+  m_Mass: 40
   m_WheelDampingRate: 0.25
   m_ForwardFriction:
     m_ExtremumSlip: 0.4
@@ -532,6 +565,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Body
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 135308da80dc14f44940a11d37c1e7a9, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -569,8 +606,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.99287176, y: 0.6894642, z: 3.3272393}
-  m_Center: {x: -0.0072319508, y: 0.0018079877, z: -0.0036159754}
+  m_Size: {x: 0.99287176, y: 0.8529445, z: 3.3272393}
+  m_Center: {x: -0.0072319508, y: -0.07993215, z: -0.0036159754}
 --- !u!1001 &2445200018159372862
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -622,6 +659,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: b615ac95e12dfbe4080b598193faadec, type: 3}
       propertyPath: m_Name
       value: RR
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b615ac95e12dfbe4080b598193faadec, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -690,6 +731,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FR
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b615ac95e12dfbe4080b598193faadec, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -757,6 +802,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FL
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c378eff32a7a1b948bb79a5f7ebf6395, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -823,6 +872,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c378eff32a7a1b948bb79a5f7ebf6395, type: 3}
       propertyPath: m_Name
       value: RL
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c378eff32a7a1b948bb79a5f7ebf6395, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

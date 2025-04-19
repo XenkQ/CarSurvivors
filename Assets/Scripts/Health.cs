@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class Health : MonoBehaviour
 {
     [SerializeField] private float amount;
+    [SerializeField] private float maxAmount;
     [SerializeField] private float regenerationAmount;
     [SerializeField] private float startRegenerationDelay;
     private float regenerationDelay;
@@ -14,7 +15,7 @@ public class Health : MonoBehaviour
     public float RegenerationAmount => regenerationAmount;
     public float RegenerationDelay => regenerationDelay;
 
-    public UnityEvent onNoHealth;
+    [HideInInspector] public UnityEvent onNoHealth;
 
     private void OnEnable()
     {
@@ -47,9 +48,13 @@ public class Health : MonoBehaviour
 
     public void IncreaseHealth(float value)
     {
-        if (amount > 0)
+        if (amount + value < maxAmount)
         {
             amount += value;
+        }
+        else
+        {
+            amount = maxAmount;
         }
     }
 }

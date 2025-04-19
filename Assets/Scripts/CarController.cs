@@ -1,10 +1,10 @@
-using System;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
-public class PlayerCar : MonoBehaviour
+public class CarController : MonoBehaviour
 {
     private enum Axel
     {
@@ -22,19 +22,22 @@ public class PlayerCar : MonoBehaviour
 
     [Header("Speed")]
     [SerializeField] private float _speed = 600f;
+
     [SerializeField] private float _maxAcceleration = 30.0f;
     [SerializeField] private float _brakeAcceleration = 50.0f;
 
     [Header("Rotation")]
     [SerializeField] private float _turnSensitivity = 1.0f;
+
     [SerializeField] private float _maxSteerAngle = 30.0f;
 
     [Header("Physics")]
     [SerializeField] private Vector3 _centerOfMass;
+
     private Rigidbody _rb;
 
     [SerializeField] private List<Wheel> _wheels;
-    
+
     private InputAction _moveAction;
     private Vector2 _moveInput;
 
@@ -71,9 +74,9 @@ public class PlayerCar : MonoBehaviour
 
     private void Steer()
     {
-        foreach(var wheel in _wheels)
+        foreach (var wheel in _wheels)
         {
-            if(wheel.axel == Axel.Front)
+            if (wheel.axel == Axel.Front)
             {
                 float steerAngle = _moveInput.x * _turnSensitivity * _maxSteerAngle;
                 wheel.wheelCollider.steerAngle = Mathf.Lerp(wheel.wheelCollider.steerAngle, steerAngle, 0.6f);
@@ -81,8 +84,7 @@ public class PlayerCar : MonoBehaviour
         }
     }
 
-
-    void AnimateWheels()
+    private void AnimateWheels()
     {
         foreach (var wheel in _wheels)
         {
