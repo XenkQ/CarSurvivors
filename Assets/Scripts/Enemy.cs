@@ -89,4 +89,10 @@ public class Enemy : MonoBehaviour, IDamagable, IKillable
     {
         Destroy(gameObject);
     }
+
+    private void OnDrawGizmos()
+    {
+        int numberOfSegments = 16;
+        DebugDraw.DrawCircle(transform.position, _collisionRadius, numberOfSegments, Color.yellow);
+    }
 }
