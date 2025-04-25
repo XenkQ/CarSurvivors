@@ -11,10 +11,10 @@ TagManager:
   - Ground
   - Water
   - UI
-  - Obstacle
+  - Impassable
   - Enemy
   - Player
-  - 
+  - RoughTerrain
   - 
   - 
   - 

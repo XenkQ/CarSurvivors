@@ -1,51 +1,50 @@
-using System;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Grid
 {
-    private int _width;
-    private int _height;
-    private float _cellSize;
-    private Cell[,] _grid;
+    public int Width { get; private set; }
+    public int Height { get; private set; }
+    public float CellSize { get; private set; }
+    public Cell[,] Cells { get; private set; }
+
+    public byte Cost { get; set; }
 
     public Grid(int width, int height, float cellSize = 0.5f)
     {
-        _width = width;
-        _height = height;
-        _cellSize = cellSize;
+        Width = width;
+        Height = height;
+        CellSize = cellSize;
+        Cells = CreateCells(width, height);
+    }
 
-        Cell[,] grid = new Cell[width, height];
-        Vector3 currentTilePos = Vector3.zero;
-        GameObject gridHolder = new(nameof(Grid));
+    public Cell GetCellFromWorldPos(Vector3 worldPos)
+    {
+        float percentX = worldPos.x / (Width * CellSize);
+        float percentY = worldPos.z / (Height * CellSize);
+
+        percentX = Mathf.Clamp01(percentX);
+        percentY = Mathf.Clamp01(percentY);
+
+        int x = Mathf.Clamp(Mathf.FloorToInt((Width) * percentX), 0, Width - 1);
+        int y = Mathf.Clamp(Mathf.FloorToInt((Height) * percentY), 0, Height - 1);
+        return Cells[x, y];
+    }
+
+    private Cell[,] CreateCells(int width, int height)
+    {
+        Cell[,] cells = new Cell[width, height];
+        Vector3 currentTilePos = new Vector3(CellSize / 2, 0, CellSize / 2);
         for (int i = 0; i < width; i++)
         {
             for (int j = 0; j < height; j++)
             {
                 var gridPos = new Vector2Int(i, j);
-                grid[i, j] = new Cell(currentTilePos, gridPos);
-
-#if DEBUG
-                GameObject visualizer = new(gridPos.ToString());
-                visualizer.transform.parent = gridHolder.transform;
-                visualizer.transform.SetPositionAndRotation(new Vector3(currentTilePos.x, 0, currentTilePos.z),
-                                                            Quaternion.Euler(new Vector3(90, 0, 0)));
-                var rectTransform = visualizer.AddComponent<RectTransform>();
-                rectTransform.rect.Set(0, 0, _cellSize, _cellSize);
-                visualizer.AddComponent<MeshRenderer>();
-                var textComponent = visualizer.AddComponent<TextMeshPro>();
-                textComponent.text = gridPos.ToString();
-                textComponent.fontSize = cellSize;
-                textComponent.alignment = TextAlignmentOptions.Center;
-                Debug.DrawLine(new Vector3(currentTilePos.x - _cellSize, 0, currentTilePos.z),
-                               new Vector3(currentTilePos.x - _cellSize, 0, currentTilePos.z + _cellSize), Color.blue);
-                Debug.DrawLine(new Vector3(currentTilePos.x - _cellSize, 0, currentTilePos.z - _cellSize),
-                               new Vector3(currentTilePos.x + _cellSize, 0, currentTilePos.z - _cellSize), Color.blue);
-#endif
-                currentTilePos.z += _cellSize;
+                cells[i, j] = new Cell(currentTilePos, gridPos);
+                currentTilePos.z += CellSize;
             }
-            currentTilePos = new Vector3(currentTilePos.x + _cellSize, 0, 0);
+            currentTilePos = new Vector3(currentTilePos.x + CellSize, 0, CellSize / 2);
         }
+
+        return cells;
     }
 }

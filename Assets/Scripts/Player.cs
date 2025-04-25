@@ -4,9 +4,20 @@ using UnityEngine;
 public class Player : MonoBehaviour, IDamagable, IKillable
 {
     private Health _health;
+    public static Player Instance { get; private set; }
 
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+            Instance = this;
+        }
+
         _health = GetComponent<Health>();
     }
 
