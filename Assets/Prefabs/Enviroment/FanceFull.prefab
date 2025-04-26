@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: fence_full
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 18d996b3961d8c241966327e67968a78, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -77,3 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 181d2b3c9e9c6fc4984c474a690b6ed0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fenceParts: []
+  explosionForce: 200
+  explosionRadius: 2
+  disableColliderDelay: 1

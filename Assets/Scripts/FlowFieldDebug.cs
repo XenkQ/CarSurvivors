@@ -22,11 +22,11 @@ public class FlowFieldDebug : MonoBehaviour
     private void Awake()
     {
         _flowFieldInfoHolder = new GameObject("FlowFieldInfoHolder").transform;
-        _flowFieldInfoHolder.transform.parent = GridController.Instance.transform;
     }
 
     private void Start()
     {
+        _flowFieldInfoHolder.transform.parent = GridController.Instance.transform;
         _grid = GridController.Instance.Grid;
         _cells = _grid.Cells;
         _cellSize = _grid.CellSize;

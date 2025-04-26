@@ -48,9 +48,37 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5301529219089090008, guid: 0061da5339f235d4aa710bfe2b19113d, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -818356226191685687, guid: 0061da5339f235d4aa710bfe2b19113d, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0061da5339f235d4aa710bfe2b19113d, type: 3}
       propertyPath: m_Name
-      value: fence_broken
+      value: FanceBroken
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0061da5339f235d4aa710bfe2b19113d, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1278410360129134658, guid: 0061da5339f235d4aa710bfe2b19113d, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1839960076210931256, guid: 0061da5339f235d4aa710bfe2b19113d, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938890476054548226, guid: 0061da5339f235d4aa710bfe2b19113d, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7921828118158813806, guid: 0061da5339f235d4aa710bfe2b19113d, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -184,6 +212,9 @@ MonoBehaviour:
   - {fileID: 7384682457141825215}
   - {fileID: 962085992639027884}
   - {fileID: 5885308922506573684}
+  explosionForce: 200
+  explosionRadius: 2
+  disableColliderDelay: 1
 --- !u!1 &2499609868849502770 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7921828118158813806, guid: 0061da5339f235d4aa710bfe2b19113d, type: 3}
@@ -257,6 +288,9 @@ MonoBehaviour:
   - {fileID: 7384682457141825215}
   - {fileID: 962085992639027884}
   - {fileID: 5885308922506573684}
+  explosionForce: 200
+  explosionRadius: 2
+  disableColliderDelay: 1
 --- !u!1 &4322052682908366741 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -818356226191685687, guid: 0061da5339f235d4aa710bfe2b19113d, type: 3}
@@ -330,6 +364,9 @@ MonoBehaviour:
   - {fileID: 7384682457141825215}
   - {fileID: 962085992639027884}
   - {fileID: 5885308922506573684}
+  explosionForce: 200
+  explosionRadius: 2
+  disableColliderDelay: 1
 --- !u!1 &6257541322655102564 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1839960076210931256, guid: 0061da5339f235d4aa710bfe2b19113d, type: 3}
@@ -403,6 +440,9 @@ MonoBehaviour:
   - {fileID: 7384682457141825215}
   - {fileID: 962085992639027884}
   - {fileID: 5885308922506573684}
+  explosionForce: 200
+  explosionRadius: 2
+  disableColliderDelay: 1
 --- !u!1 &6837108745998585886 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1278410360129134658, guid: 0061da5339f235d4aa710bfe2b19113d, type: 3}
@@ -476,6 +516,9 @@ MonoBehaviour:
   - {fileID: 7384682457141825215}
   - {fileID: 962085992639027884}
   - {fileID: 5885308922506573684}
+  explosionForce: 200
+  explosionRadius: 2
+  disableColliderDelay: 1
 --- !u!1 &8733242870050081396 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -5301529219089090008, guid: 0061da5339f235d4aa710bfe2b19113d, type: 3}
@@ -549,3 +592,6 @@ MonoBehaviour:
   - {fileID: 7384682457141825215}
   - {fileID: 962085992639027884}
   - {fileID: 5885308922506573684}
+  explosionForce: 200
+  explosionRadius: 2
+  disableColliderDelay: 1
