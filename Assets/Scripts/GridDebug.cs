@@ -7,17 +7,11 @@ public class GridDebug : MonoBehaviour
     [SerializeField]
     [ColorUsage(false)] private Color _cellBorderColor = Color.blue;
 
-    private GridController _gridController;
     private Grid _grid;
-
-    private void Awake()
-    {
-        _gridController = GetComponent<GridController>();
-    }
 
     private void Start()
     {
-        _grid = _gridController.Grid;
+        _grid = GridController.Instance.Grid;
     }
 
     private void FixedUpdate()

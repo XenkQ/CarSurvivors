@@ -2,16 +2,18 @@ using UnityEngine;
 
 public class Cell
 {
+    private const int DEFAULT_FIELD_COST = 1;
     public Vector3 WorldPos { get; private set; }
     public Vector2Int GridPos { get; private set; }
     public byte Cost { get; set; }
     public ushort BestCost { get; set; }
+    public GridDirection BestDirection { get; set; }
 
     public Cell(Vector3 worldPos, Vector2Int gridPos)
     {
         WorldPos = worldPos;
         GridPos = gridPos;
-        Cost = 1;
+        Cost = DEFAULT_FIELD_COST;
         BestCost = ushort.MaxValue;
     }
 
@@ -29,5 +31,11 @@ public class Cell
         {
             Cost = byte.MaxValue;
         }
+    }
+
+    public void ResetCosts()
+    {
+        Cost = 1;
+        BestCost = ushort.MaxValue;
     }
 }

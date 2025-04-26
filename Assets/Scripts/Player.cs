@@ -14,7 +14,7 @@ public class Player : MonoBehaviour, IDamagable, IKillable
         }
         else
         {
-            Destroy(this);
+            Destroy(Instance);
             Instance = this;
         }
 

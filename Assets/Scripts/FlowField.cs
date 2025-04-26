@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class FlowField
 {
@@ -27,12 +26,13 @@ public class FlowField
             for (int j = 0; j < _grid.Cells.GetLength(1); j++)
             {
                 Cell cell = _grid.Cells[i, j];
+                cell.ResetCosts();
                 Vector3 halfExtents = Vector3.one * (_grid.CellSize / 2);
                 Collider[] obstacles = Physics.OverlapBox(cell.WorldPos,
                                                           halfExtents,
                                                           Quaternion.identity,
                                                           _impassableTerrain | _roughTerrain | _ground);
-                int maxCost = DEFAULT_FIELD_COST;
+                int maxCost = 0;
                 if (obstacles.Length > 0)
                 {
                     foreach (Collider obstacle in obstacles)
@@ -85,6 +85,28 @@ public class FlowField
                     currentNeighbour.BestCost = (ushort)(currentNeighbour.Cost + currentCell.BestCost);
                     cellsToCheck.Enqueue(currentNeighbour);
                 }
+            }
+        }
+    }
+
+    public void CreateFlowField()
+    {
+        foreach (Cell currentCell in _grid.Cells)
+        {
+            List<Cell> currentNeighbours = GetNeighbourCells(currentCell, GridDirection.AllDirections);
+            Cell bestCostCell = currentCell;
+
+            foreach (Cell currentNeighbour in currentNeighbours)
+            {
+                if (currentNeighbour.BestCost < bestCostCell.BestCost)
+                {
+                    bestCostCell = currentNeighbour;
+                }
+            }
+
+            if (bestCostCell != currentCell)
+            {
+                currentCell.BestDirection = GridDirection.GetDirectionFromV2I(bestCostCell.GridPos - currentCell.GridPos);
             }
         }
     }

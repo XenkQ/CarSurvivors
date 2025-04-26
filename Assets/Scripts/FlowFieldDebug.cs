@@ -8,12 +8,12 @@ public class FlowFieldDebug : MonoBehaviour
     {
         CostField,
         IntegrationField,
+        FlowField
     }
 
     [SerializeField] private float _fontSize;
     [SerializeField] private float _yOffset = 0.5f;
     [SerializeField] private DisplayMode _displayMode;
-    private GridController _gridController;
     private Grid _grid;
     private Cell[,] _cells;
     private float _cellSize;
@@ -21,18 +21,17 @@ public class FlowFieldDebug : MonoBehaviour
 
     private void Awake()
     {
-        _gridController = GetComponent<GridController>();
         _flowFieldInfoHolder = new GameObject("FlowFieldInfoHolder").transform;
-        _flowFieldInfoHolder.transform.parent = _gridController.transform;
+        _flowFieldInfoHolder.transform.parent = GridController.Instance.transform;
     }
 
     private void Start()
     {
-        _grid = _gridController.Grid;
+        _grid = GridController.Instance.Grid;
         _cells = _grid.Cells;
         _cellSize = _grid.CellSize;
 
-        _gridController.OnGridUpdate.AddListener(DisplayCellDebugText);
+        GridController.Instance.OnGridUpdate.AddListener(DisplayCellDebugText);
     }
 
     private void DisplayCellDebugText()
@@ -79,6 +78,7 @@ public class FlowFieldDebug : MonoBehaviour
     {
         DisplayMode.CostField => cell.Cost.ToString(),
         DisplayMode.IntegrationField => cell.BestCost.ToString(),
+        DisplayMode.FlowField => cell.BestDirection.Vector.ToString(),
         _ => ""
     };
 }

@@ -14,8 +14,20 @@ public class GridController : MonoBehaviour
 
     private FlowField _flowField;
 
+    public static GridController Instance { get; private set; }
+
     public void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(Instance);
+            Instance = this;
+        }
+
         Grid = new Grid(_width, _height, _cellSize);
         _flowField = new FlowField(Grid);
         _flowField.CreateCostField();
@@ -38,6 +50,9 @@ public class GridController : MonoBehaviour
 
     private void RecreateIntegrationFieldBasedOnPlayerTilePos()
     {
-        _flowField.CreateIntegrationField(Grid.GetCellFromWorldPos(Player.Instance.transform.position));
+        _flowField.CreateCostField();
+        Cell cellClosestToPlayer = Grid.GetCellFromWorldPos(Player.Instance.transform.position);
+        _flowField.CreateIntegrationField(cellClosestToPlayer);
+        _flowField.CreateFlowField();
     }
 }

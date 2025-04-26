@@ -1,29 +1,28 @@
+using NUnit.Framework.Constraints;
 using UnityEngine;
 
 [RequireComponent(typeof(Health), typeof(Collider))]
 public class Enemy : MonoBehaviour, IDamagable, IKillable
 {
     [SerializeField] private float _movementSpeed;
+    [SerializeField][Range(0, 1f)] private float _wandererJitter;
     [SerializeField] private float _collisionRadius;
+    [SerializeField] private float _pushFromCollisionPower = 1f;
+
+    [SerializeField] private float _damage = 1f;
+
     [SerializeField] private LayerMask _collisionLayerMask;
     [SerializeField] private LayerMask _enemyLayer;
     [SerializeField] private LayerMask _playerLayer;
-    [SerializeField] private float _pushFromCollisionPower = 1f;
-    [SerializeField] private float _damage = 1f;
+
     private Collider _collider;
     private Health _health;
-    private Transform _player;
     private float _verticalPosOffset;
 
     private void Awake()
     {
         _health = GetComponent<Health>();
         _collider = GetComponent<Collider>();
-    }
-
-    private void Start()
-    {
-        _player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     private void OnEnable()
@@ -39,7 +38,7 @@ public class Enemy : MonoBehaviour, IDamagable, IKillable
 
     private void Update()
     {
-        MoveInPlayerDirection();
+        MoveOnGrid();
     }
 
     private void FixedUpdate()
@@ -71,13 +70,13 @@ public class Enemy : MonoBehaviour, IDamagable, IKillable
         transform.position = Vector3.Lerp(transform.position, pushDestination, _movementSpeed * Time.deltaTime);
     }
 
-    private void MoveInPlayerDirection()
+    private void MoveOnGrid()
     {
-        transform.position = Vector3.MoveTowards(
-            transform.position,
-            new Vector3(_player.position.x, transform.position.y, _player.transform.position.z),
-            _movementSpeed * Time.deltaTime
-        );
+        Grid grid = GridController.Instance.Grid;
+        Cell currentCell = grid.GetCellFromWorldPos(transform.position);
+        Vector2Int gridDirection = currentCell.BestDirection.Vector;
+        Vector3 moveDirection = new Vector3(gridDirection.x, 0, gridDirection.y);
+        transform.position += _movementSpeed * Time.deltaTime * moveDirection;
     }
 
     public void TakeDamage(float damage)
