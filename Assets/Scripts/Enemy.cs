@@ -1,4 +1,4 @@
-using NUnit.Framework.Constraints;
+using Grid;
 using UnityEngine;
 
 [RequireComponent(typeof(Health), typeof(Collider))]
@@ -14,6 +14,8 @@ public class Enemy : MonoBehaviour, IDamagable, IKillable
     [SerializeField] private LayerMask _collisionLayerMask;
     [SerializeField] private LayerMask _enemyLayer;
     [SerializeField] private LayerMask _playerLayer;
+
+    [SerializeField] private int _difficulty = 1;
 
     private Collider _collider;
     private Health _health;
@@ -72,11 +74,14 @@ public class Enemy : MonoBehaviour, IDamagable, IKillable
 
     private void MoveOnGrid()
     {
-        Grid grid = GridController.Instance.Grid;
+        Grid.Grid grid = GridController.Instance.WorldGrid;
         Cell currentCell = grid.GetCellFromWorldPos(transform.position);
-        Vector2Int gridDirection = currentCell.BestDirection.Vector;
-        Vector3 moveDirection = new Vector3(gridDirection.x, 0, gridDirection.y);
-        transform.position += _movementSpeed * Time.deltaTime * moveDirection;
+        if (currentCell != null && currentCell.BestDirection != null)
+        {
+            Vector2Int gridDirection = currentCell.BestDirection.Vector;
+            Vector3 moveDirection = new Vector3(gridDirection.x, 0, gridDirection.y);
+            transform.position += _movementSpeed * Time.deltaTime * moveDirection;
+        }
     }
 
     public void TakeDamage(float damage)

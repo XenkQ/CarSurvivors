@@ -22,18 +22,15 @@ public class CarController : MonoBehaviour
 
     [Header("Speed")]
     [SerializeField] private float _speed = 600f;
-
     [SerializeField] private float _maxAcceleration = 30.0f;
     [SerializeField] private float _brakeAcceleration = 50.0f;
 
     [Header("Rotation")]
     [SerializeField] private float _turnSensitivity = 1.0f;
-
     [SerializeField] private float _maxSteerAngle = 30.0f;
 
     [Header("Physics")]
     [SerializeField] private Vector3 _centerOfMass;
-
     private Rigidbody _rb;
 
     [SerializeField] private List<Wheel> _wheels;

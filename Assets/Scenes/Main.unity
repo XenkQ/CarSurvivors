@@ -1551,10 +1551,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: TileCross4Roads
       objectReference: {fileID: 0}
-    - target: {fileID: 6004989883034233389, guid: a6adfd57cd59cbb4b9b66ba8d3d08dfb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2463278361356819294, guid: a6adfd57cd59cbb4b9b66ba8d3d08dfb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 50
@@ -1593,6 +1589,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2463278361356819294, guid: a6adfd57cd59cbb4b9b66ba8d3d08dfb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6004989883034233389, guid: a6adfd57cd59cbb4b9b66ba8d3d08dfb, type: 3}
+      propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -4056,7 +4056,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1107999094}
   - component: {fileID: 1107999097}
-  - component: {fileID: 1107999096}
   - component: {fileID: 1107999095}
   m_Layer: 0
   m_Name: GridController
@@ -4087,7 +4086,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1107999093}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 73e014df2906b0c4894daa2bd2999223, type: 3}
   m_Name: 
@@ -4095,19 +4094,6 @@ MonoBehaviour:
   _fontSize: 4
   _yOffset: 0.5
   _displayMode: 0
---- !u!114 &1107999096
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1107999093}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 675905b9806463c4badb2a28ed648101, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _cellBorderColor: {r: 0, g: 0, b: 1, a: 1}
 --- !u!114 &1107999097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4120,9 +4106,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71160a63be8ee4d4aaf1cb0add52032f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _width: 180
-  _height: 140
-  _cellSize: 1
+  _gridWidth: 180
+  _gridHeight: 140
+  _gridCellSize: 1
+  _cellBorderColor: {r: 0, g: 0, b: 1, a: 1}
+  _playerChunkWidth: 30
+  _playerChunkHeigth: 20
   _delayBetweenFlowFieldRecreaction: 2
   OnGridUpdate:
     m_PersistentCalls:
@@ -10606,8 +10595,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1853365877}
+  - component: {fileID: 1853365878}
   m_Layer: 0
-  m_Name: EnemySpawner
+  m_Name: EnemyManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10628,6 +10618,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 517296375}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1853365878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1853365876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d515f033d2b0e3a4d8707ab5be13c789, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _poolEnemiesInfo:
+  - enemyPrefab: {fileID: 1286223690747856801, guid: 04e28f7e31f150146acd7ba9f4db9b56, type: 3}
+    maxAmount: 2
 --- !u!1 &2001922872
 GameObject:
   m_ObjectHideFlags: 0
