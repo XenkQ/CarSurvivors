@@ -5,9 +5,6 @@ namespace Grid.FlowField
 {
     public class FlowField
     {
-        private readonly Grid _grid;
-        private Cell _destinationCell;
-
         private const int IMPASSABLE_COST = 255;
         private const int ROUGH_TERRAIN_COST = 3;
         private const int DEFAULT_FIELD_COST = 1;
@@ -16,20 +13,15 @@ namespace Grid.FlowField
         private readonly LayerMask _roughTerrain = LayerMask.GetMask("RoughTerrain");
         private readonly LayerMask _ground = LayerMask.GetMask("Ground");
 
-        public FlowField(Grid grid)
+        public void CreateCostField(Grid grid)
         {
-            _grid = grid;
-        }
-
-        public void CreateCostField()
-        {
-            for (int i = 0; i < _grid.Cells.GetLength(0); i++)
+            for (int i = 0; i < grid.Cells.GetLength(0); i++)
             {
-                for (int j = 0; j < _grid.Cells.GetLength(1); j++)
+                for (int j = 0; j < grid.Cells.GetLength(1); j++)
                 {
-                    Cell cell = _grid.Cells[i, j];
+                    Cell cell = grid.Cells[i, j];
                     float edgesOffset = -0.05f;
-                    Vector3 halfExtents = Vector3.one * (_grid.CellSize / 2 + edgesOffset);
+                    Vector3 halfExtents = Vector3.one * (grid.CellSize / 2 + edgesOffset);
                     Collider[] obstacles = Physics.OverlapBox(cell.WorldPos,
                                                               halfExtents,
                                                               Quaternion.identity,
@@ -66,19 +58,17 @@ namespace Grid.FlowField
             }
         }
 
-        public void CreateIntegrationField(Cell destinationCell)
+        public void CreateIntegrationField(Grid grid, Cell destinationCell)
         {
-            _destinationCell = destinationCell;
-
-            _destinationCell.Cost = 0;
-            _destinationCell.BestCost = 0;
+            destinationCell.Cost = 0;
+            destinationCell.BestCost = 0;
 
             Queue<Cell> cellsToCheck = new Queue<Cell>();
             cellsToCheck.Enqueue(destinationCell);
             while (cellsToCheck.Count > 0)
             {
                 Cell currentCell = cellsToCheck.Dequeue();
-                List<Cell> currentNeighbours = GetNeighbourCells(currentCell, GridDirection.CardinalDirections);
+                List<Cell> currentNeighbours = GetNeighbourCells(grid, currentCell, GridDirection.CardinalDirections);
                 foreach (Cell currentNeighbour in currentNeighbours)
                 {
                     if (currentNeighbour.Cost == byte.MaxValue)
@@ -94,11 +84,11 @@ namespace Grid.FlowField
             }
         }
 
-        public void CreateFlowField()
+        public void CreateFlowField(Grid grid)
         {
-            foreach (Cell currentCell in _grid.Cells)
+            foreach (Cell currentCell in grid.Cells)
             {
-                List<Cell> currentNeighbours = GetNeighbourCells(currentCell, GridDirection.AllDirections);
+                List<Cell> currentNeighbours = GetNeighbourCells(grid, currentCell, GridDirection.AllDirections);
                 Cell bestCostCell = currentCell;
 
                 foreach (Cell currentNeighbour in currentNeighbours)
@@ -111,23 +101,26 @@ namespace Grid.FlowField
 
                 if (bestCostCell != currentCell)
                 {
-                    currentCell.BestDirection = GridDirection.GetDirectionFromV2I(bestCostCell.GridPos - currentCell.GridPos);
+                    currentCell.BestDirection = GridDirection.GetDirectionFromV2I(bestCostCell.WorldGridPos - currentCell.WorldGridPos);
                 }
             }
         }
 
-        private List<Cell> GetNeighbourCells(Cell currentCell, IEnumerable<GridDirection> gridDirections)
+        private List<Cell> GetNeighbourCells(Grid grid, Cell currentCell, IEnumerable<GridDirection> gridDirections)
         {
             List<Cell> cells = new List<Cell>();
-            Vector2Int gridPos = currentCell.GridPos;
+            Vector2Int gridPos = currentCell.ChunkGridPos;
             foreach (GridDirection gridDirection in gridDirections)
             {
                 Vector2Int positionToCheck = gridPos + gridDirection.Vector;
-                bool isCellOnPositionExistingInGrid = positionToCheck.x >= 0 && positionToCheck.y >= 0 &&
-                                                      positionToCheck.x < _grid.Cells.GetLength(0) && positionToCheck.y < _grid.Cells.GetLength(1);
+                bool isCellOnPositionExistingInGrid = positionToCheck.x >= 0
+                                                      && positionToCheck.y >= 0
+                                                      && positionToCheck.x < grid.Cells.GetLength(0)
+                                                      && positionToCheck.y < grid.Cells.GetLength(1);
+
                 if (isCellOnPositionExistingInGrid)
                 {
-                    cells.Add(_grid.Cells[positionToCheck.x, positionToCheck.y]);
+                    cells.Add(grid.Cells[positionToCheck.x, positionToCheck.y]);
                 }
             }
             return cells;

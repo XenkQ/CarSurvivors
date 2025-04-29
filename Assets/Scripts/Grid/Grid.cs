@@ -63,7 +63,7 @@ namespace Grid
                 for (int j = 0; j < height; j++)
                 {
                     var gridPos = new Vector2Int(i, j);
-                    cells[i, j] = new Cell(currentTilePos, gridPos);
+                    cells[i, j] = new Cell(currentTilePos, gridPos, gridPos);
                     currentTilePos.z += CellSize;
                 }
                 currentTilePos = new Vector3(currentTilePos.x + CellSize, 0, CellSize / 2);

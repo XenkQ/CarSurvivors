@@ -6,15 +6,17 @@ namespace Grid
     {
         private const int DEFAULT_FIELD_COST = 1;
         public Vector3 WorldPos { get; private set; }
-        public Vector2Int GridPos { get; private set; }
+        public Vector2Int WorldGridPos { get; private set; }
+        public Vector2Int ChunkGridPos { get; set; }
         public byte Cost { get; set; }
         public ushort BestCost { get; set; }
         public GridDirection BestDirection { get; set; }
 
-        public Cell(Vector3 worldPos, Vector2Int gridPos)
+        public Cell(Vector3 worldPos, Vector2Int gridPos, Vector2Int chunkGridPos)
         {
             WorldPos = worldPos;
-            GridPos = gridPos;
+            WorldGridPos = gridPos;
+            ChunkGridPos = chunkGridPos;
             Cost = DEFAULT_FIELD_COST;
             BestCost = ushort.MaxValue;
         }
