@@ -153,7 +153,7 @@ namespace Grid
             UpdateWorldGrid();
             UpdatePlayerChunkGrid();
 
-            //Calling debug world grid to prevent lag caused by creating a lot of tmpro objects
+            //Calling debug world gridPerformingUpdate to prevent lag caused by creating a lot of tmpro objects
 #if DEBUG
             DebugWorldGrid();
 #endif
@@ -175,7 +175,7 @@ namespace Grid
         private void UpdatePlayerChunkGrid()
         {
             GridPlayerChunk = CreatePlayerChunkBasedOnPlayerPositionInWorldGrid();
-            UpdateFlowFieldBasedOnPlayerGridPos();
+            UpdateFlowFieldBasedOnPlayerInWorldGridPos(GridPlayerChunk);
         }
 
         private void DebugPlayerChunkGrid()
@@ -189,10 +189,7 @@ namespace Grid
 
         private void UpdateWorldGrid()
         {
-            _flowField.CreateCostField(WorldGrid);
-            Cell cellClosestToPlayer = WorldGrid.GetCellFromWorldPos(Player.Instance.transform.position);
-            _flowField.CreateIntegrationField(WorldGrid, cellClosestToPlayer);
-            _flowField.CreateFlowField(WorldGrid);
+            UpdateFlowFieldBasedOnPlayerInWorldGridPos(WorldGrid);
             OnWorldGridUpdate.Invoke();
         }
 
@@ -246,11 +243,12 @@ namespace Grid
             return new Grid(_playerGridConfiguration, chunkCells);
         }
 
-        private void UpdateFlowFieldBasedOnPlayerGridPos()
+        private void UpdateFlowFieldBasedOnPlayerInWorldGridPos(Grid gridPerformingUpdate)
         {
+            _flowField.CreateCostField(gridPerformingUpdate);
             Cell cellClosestToPlayer = WorldGrid.GetCellFromWorldPos(Player.Instance.transform.position);
-            _flowField.CreateIntegrationField(GridPlayerChunk, cellClosestToPlayer);
-            _flowField.CreateFlowField(GridPlayerChunk);
+            _flowField.CreateIntegrationField(gridPerformingUpdate, cellClosestToPlayer);
+            _flowField.CreateFlowField(gridPerformingUpdate);
         }
     }
 }

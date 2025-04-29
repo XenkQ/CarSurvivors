@@ -2182,7 +2182,7 @@ MonoBehaviour:
     cellSize: 1
   _delayBetweenPlayerChunkGridUpdate: 0.32
   _debugGrid: 1
-  _debugFlowField: 1
+  _debugFlowField: 0
   _worldCellBorderColor: {r: 0, g: 0, b: 1, a: 1}
   _playerChunkCellBorderColor: {r: 0, g: 1, b: 0, a: 1}
   _blockedCellBorderDrawColor: {r: 1, g: 0, b: 0, a: 1}
