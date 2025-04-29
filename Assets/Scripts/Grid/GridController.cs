@@ -1,32 +1,126 @@
 ﻿using Grid.FlowField;
 using UnityEngine;
+using UnityEditor;
 using UnityEngine.Events;
 
 namespace Grid
 {
+    [CustomEditor(typeof(GridController))]
+    public class GridControllerEditor : Editor
+    {
+        #region SerializedProperties
+
+        private SerializedProperty _worldGridConfiguration;
+        private SerializedProperty _delayBetweenWorldGridUpdate;
+
+        private SerializedProperty _playerGridConfiguration;
+        private SerializedProperty _delayBetweenPlayerChunkGridUpdate;
+
+        private SerializedProperty _worldCellBorderColor;
+        private SerializedProperty _playerChunkCellBorderColor;
+        private SerializedProperty _blockedCellBorderDrawColor;
+
+        private SerializedProperty _flowFieldDebugConfiguration;
+
+        private SerializedProperty _debugGrid;
+        private SerializedProperty _debugFlowField;
+
+        #endregion SerializedProperties
+
+        private bool _worldGridGroup;
+        private bool _playerGridChunkGroup;
+        private bool _debugGroup;
+
+        private const int SPACE_BETWEEN_GROUPS = 2;
+
+        private void OnEnable()
+        {
+            _worldGridConfiguration = serializedObject.FindProperty(nameof(_worldGridConfiguration));
+            _delayBetweenWorldGridUpdate = serializedObject.FindProperty(nameof(_delayBetweenWorldGridUpdate));
+
+            _playerGridConfiguration = serializedObject.FindProperty(nameof(_playerGridConfiguration));
+            _delayBetweenPlayerChunkGridUpdate = serializedObject.FindProperty(nameof(_delayBetweenPlayerChunkGridUpdate));
+
+            _worldCellBorderColor = serializedObject.FindProperty(nameof(_worldCellBorderColor));
+            _playerChunkCellBorderColor = serializedObject.FindProperty(nameof(_playerChunkCellBorderColor));
+            _blockedCellBorderDrawColor = serializedObject.FindProperty(nameof(_blockedCellBorderDrawColor));
+
+            _flowFieldDebugConfiguration = serializedObject.FindProperty(nameof(_flowFieldDebugConfiguration));
+
+            _debugGrid = serializedObject.FindProperty(nameof(_debugGrid));
+            _debugFlowField = serializedObject.FindProperty(nameof(_debugFlowField));
+        }
+
+        public override void OnInspectorGUI()
+        {
+            serializedObject.Update();
+
+            _worldGridGroup = EditorGUILayout.BeginFoldoutHeaderGroup(_worldGridGroup, "World Grid Group");
+            if (_worldGridGroup)
+            {
+                EditorGUILayout.PropertyField(_worldGridConfiguration);
+                EditorGUILayout.PropertyField(_delayBetweenWorldGridUpdate);
+            }
+            EditorGUI.EndFoldoutHeaderGroup();
+
+            EditorGUILayout.Space(SPACE_BETWEEN_GROUPS);
+
+            _playerGridChunkGroup = EditorGUILayout.BeginFoldoutHeaderGroup(_playerGridChunkGroup, "Player Grid Chunk Group");
+            if (_playerGridChunkGroup)
+            {
+                EditorGUILayout.PropertyField(_playerGridConfiguration);
+                EditorGUILayout.PropertyField(_delayBetweenPlayerChunkGridUpdate);
+            }
+            EditorGUI.EndFoldoutHeaderGroup();
+
+            EditorGUILayout.Space(SPACE_BETWEEN_GROUPS);
+
+            _debugGroup = EditorGUILayout.BeginFoldoutHeaderGroup(_debugGroup, "Debug");
+            if (_debugGroup)
+            {
+                EditorGUILayout.PropertyField(_debugGrid);
+                if (_debugGrid.boolValue)
+                {
+                    EditorGUILayout.LabelField("Grid Colors", EditorStyles.boldLabel);
+                    EditorGUILayout.PropertyField(_worldCellBorderColor);
+                    EditorGUILayout.PropertyField(_playerChunkCellBorderColor);
+                    EditorGUILayout.PropertyField(_blockedCellBorderDrawColor);
+                }
+
+                EditorGUILayout.PropertyField(_debugFlowField);
+                if (_debugFlowField.boolValue)
+                {
+                    EditorGUILayout.LabelField("FlowField Debug", EditorStyles.boldLabel);
+                    EditorGUILayout.PropertyField(_flowFieldDebugConfiguration);
+                }
+                EditorGUILayout.EndFoldoutHeaderGroup();
+            }
+            EditorGUILayout.EndFoldoutHeaderGroup();
+
+            EditorGUILayout.Space(SPACE_BETWEEN_GROUPS);
+
+            serializedObject.ApplyModifiedProperties();
+        }
+    }
+
     public sealed class GridController : MonoBehaviour
     {
-        [Header("WorldGrid")]
-        [SerializeField] private int _gridWidth;
-        [SerializeField] private int _gridHeight;
-        [SerializeField] private int _gridCellSize;
+        [SerializeField] private GridConfiguration _worldGridConfiguration;
         [SerializeField] private float _delayBetweenWorldGridUpdate = 0.2f;
         public Grid WorldGrid { get; private set; }
 
-        [Header("PlayerChunkGrid")]
-        [SerializeField] private int _playerChunkWidth;
-        [SerializeField] private int _playerChunkHeight;
+        [SerializeField] private GridConfiguration _playerGridConfiguration;
         [SerializeField] private float _delayBetweenPlayerChunkGridUpdate = 0.32f;
         public Grid PlayerChunkGrid { get; private set; }
 
 #if DEBUG
+        [SerializeField] private bool _debugGrid;
+        [SerializeField] private bool _debugFlowField;
 
-        [Header("Debug colors")]
         [SerializeField][ColorUsage(false)] private Color _worldCellBorderColor = Color.blue;
         [SerializeField][ColorUsage(false)] private Color _playerChunkCellBorderColor = Color.green;
         [SerializeField][ColorUsage(false)] private Color _blockedCellBorderDrawColor = Color.red;
 
-        [Header("FlowField Debug")]
         [SerializeField] private FlowFieldDebugConfiguration _flowFieldDebugConfiguration;
 
         private float _playerChunkDrawYOffset = 0.2f;
@@ -53,7 +147,7 @@ namespace Grid
                 Instance = this;
             }
 
-            WorldGrid = new Grid(_gridWidth, _gridHeight, _gridCellSize);
+            WorldGrid = new Grid(_worldGridConfiguration);
             _flowField = new FlowField.FlowField(WorldGrid);
             _flowFieldDebugConfiguration.grid = WorldGrid;
             UpdateWorldGrid();
@@ -83,8 +177,14 @@ namespace Grid
             UpdateFlowFieldBasedOnPlayerGridPos();
 
 #if DEBUG
-            GridDebug.DisplayGrid(WorldGrid, _worldCellBorderColor, _blockedCellBorderDrawColor, 0, _delayBetweenWorldGridUpdate);
-            FlowFieldDebug.DisplayFlowFieldDebugTextOnGrid(_flowFieldDebugConfiguration);
+            if (_debugGrid)
+            {
+                GridDebug.DisplayGrid(WorldGrid, _worldCellBorderColor, _blockedCellBorderDrawColor, 0, _delayBetweenWorldGridUpdate);
+            }
+            if (_debugFlowField)
+            {
+                FlowFieldDebug.DisplayFlowFieldDebugTextOnGrid(_flowFieldDebugConfiguration);
+            }
 #endif
 
             OnWorldGridUpdate.Invoke();
@@ -92,12 +192,14 @@ namespace Grid
 
         private void UpdateGridPlayerChunk()
         {
-            Cell[,] chunkCells = new Cell[_playerChunkWidth, _playerChunkHeight];
+            int chunkWidth = _playerGridConfiguration.width;
+            int chunkHeight = _playerGridConfiguration.height;
+            Cell[,] chunkCells = new Cell[chunkWidth, chunkHeight];
             Cell cellClosestToPlayer = WorldGrid.GetCellFromWorldPos(Player.Instance.transform.position);
-            int maxGridX = cellClosestToPlayer.GridPos.x + _playerChunkWidth / 2;
-            int minGridX = cellClosestToPlayer.GridPos.x - _playerChunkWidth / 2;
-            int maxGridY = cellClosestToPlayer.GridPos.y + _playerChunkHeight / 2;
-            int minGridY = cellClosestToPlayer.GridPos.y - _playerChunkHeight / 2;
+            int maxGridX = cellClosestToPlayer.GridPos.x + chunkWidth / 2;
+            int minGridX = cellClosestToPlayer.GridPos.x - chunkWidth / 2;
+            int maxGridY = cellClosestToPlayer.GridPos.y + chunkHeight / 2;
+            int minGridY = cellClosestToPlayer.GridPos.y - chunkHeight / 2;
 
             int x = minGridX;
             int chunkX = 0;
@@ -122,7 +224,7 @@ namespace Grid
                 x++;
             }
 
-            PlayerChunkGrid = new Grid(_playerChunkWidth, _playerChunkHeight, chunkCells, _gridCellSize);
+            PlayerChunkGrid = new Grid(_playerGridConfiguration, chunkCells);
         }
 
         private void UpdateFlowFieldBasedOnPlayerGridPos()

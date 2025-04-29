@@ -1,7 +1,23 @@
+using System;
 using UnityEngine;
 
 namespace Grid
 {
+    [Serializable]
+    public class GridConfiguration
+    {
+        public int width;
+        public int height;
+        public float cellSize;
+
+        public GridConfiguration(int width, int height, float cellSize)
+        {
+            this.width = width;
+            this.height = height;
+            this.cellSize = cellSize;
+        }
+    }
+
     public class Grid
     {
         public int Width { get; private set; }
@@ -9,20 +25,20 @@ namespace Grid
         public float CellSize { get; private set; }
         public Cell[,] Cells { get; private set; }
 
-        public Grid(int width, int height, float cellSize = 0.5f)
+        public Grid(GridConfiguration gridConfiguration)
         {
-            Width = width;
-            Height = height;
-            CellSize = cellSize;
-            Cells = CreateCells(width, height);
+            Width = gridConfiguration.width;
+            Height = gridConfiguration.height;
+            CellSize = gridConfiguration.cellSize;
+            Cells = CreateCells(Width, Height);
         }
 
-        public Grid(int width, int height, Cell[,] cells, float cellSize = 0.5f)
+        public Grid(GridConfiguration gridConfiguration, Cell[,] existingCells)
         {
-            Width = width;
-            Height = height;
-            CellSize = cellSize;
-            Cells = cells;
+            Width = gridConfiguration.width;
+            Height = gridConfiguration.height;
+            CellSize = gridConfiguration.cellSize;
+            Cells = existingCells;
         }
 
         public Cell GetCellFromWorldPos(Vector3 worldPos)

@@ -2171,13 +2171,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71160a63be8ee4d4aaf1cb0add52032f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gridWidth: 140
-  _gridHeight: 140
-  _gridCellSize: 1
+  _worldGridConfiguration:
+    width: 150
+    height: 150
+    cellSize: 1
   _delayBetweenWorldGridUpdate: 1
-  _playerChunkWidth: 20
-  _playerChunkHeight: 20
+  _playerGridConfiguration:
+    width: 30
+    height: 20
+    cellSize: 1
   _delayBetweenPlayerChunkGridUpdate: 0.32
+  _debugGrid: 1
+  _debugFlowField: 0
   _worldCellBorderColor: {r: 0, g: 0, b: 1, a: 1}
   _playerChunkCellBorderColor: {r: 0, g: 1, b: 0, a: 1}
   _blockedCellBorderDrawColor: {r: 1, g: 0, b: 0, a: 1}
