@@ -143,8 +143,7 @@ namespace Grid
             }
             else
             {
-                Destroy(Instance);
-                Instance = this;
+                Destroy(gameObject);
             }
 
             WorldGrid = new Grid(_worldGridConfiguration);

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Grid
@@ -53,6 +54,29 @@ namespace Grid
             int y = Mathf.Clamp(Mathf.FloorToInt((Height) * percentY), 0, Height - 1);
             return Cells[x, y];
         }
+
+        public List<Cell> GetWalkableEdgeCells()
+        {
+            List<Cell> edgeCells = new List<Cell>();
+            int horizontalCellsCount = Cells.GetLength(0);
+            int verticalCellsCount = Cells.GetLength(1);
+            for (int x = 0; x < horizontalCellsCount; x++)
+            {
+                if (IsCellWalkable(Cells[x, 0])) { edgeCells.Add(Cells[x, 0]); }
+                if (IsCellWalkable(Cells[x, verticalCellsCount - 1])) { edgeCells.Add(Cells[x, verticalCellsCount - 1]); }
+            }
+
+            for (int y = 0; y < verticalCellsCount; y++)
+            {
+                if (IsCellWalkable(Cells[0, y])) { edgeCells.Add(Cells[0, y]); }
+                if (IsCellWalkable(Cells[horizontalCellsCount - 1, y])) { edgeCells.Add(Cells[horizontalCellsCount - 1, y]); }
+            }
+
+            return edgeCells;
+        }
+
+        private bool IsCellWalkable(Cell cell) =>
+            cell.Cost < byte.MaxValue;
 
         private Cell[,] CreateCells(int width, int height)
         {

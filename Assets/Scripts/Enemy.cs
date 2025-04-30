@@ -1,8 +1,10 @@
 using Grid;
+using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Health), typeof(Collider))]
-public class Enemy : MonoBehaviour, IDamagable, IKillable
+public class Enemy : MonoBehaviour
 {
     [SerializeField] private float _movementSpeed;
     [SerializeField][Range(0, 1f)] private float _wandererJitter;
@@ -15,32 +17,27 @@ public class Enemy : MonoBehaviour, IDamagable, IKillable
     [SerializeField] private LayerMask _enemyLayer;
     [SerializeField] private LayerMask _playerLayer;
 
-    [SerializeField] private int _difficulty = 1;
+    [SerializeField] private int _level = 1;
 
     private Collider _collider;
-    private Health _health;
     private float _verticalPosOffset;
+
+    public Health Health { get; private set; }
 
     private void Awake()
     {
-        _health = GetComponent<Health>();
+        Health = GetComponent<Health>();
         _collider = GetComponent<Collider>();
-    }
-
-    private void OnEnable()
-    {
-        _health.onNoHealth.AddListener(Kill);
-        _verticalPosOffset = transform.position.y;
-    }
-
-    private void OnDisable()
-    {
-        _health.onNoHealth.RemoveListener(Kill);
     }
 
     private void Update()
     {
         MoveOnGrid();
+    }
+
+    public void SpawnAtCell(Cell cell)
+    {
+        transform.position = cell.WorldPos;
     }
 
     private void FixedUpdate()
@@ -57,7 +54,7 @@ public class Enemy : MonoBehaviour, IDamagable, IKillable
                 }
                 else if ((1 << collider.gameObject.layer) == _playerLayer.value)
                 {
-                    var damagable = collider.gameObject.GetComponent<IDamagable>();
+                    var damagable = collider.gameObject.GetComponent<IDamageable>();
                     damagable.TakeDamage(_damage);
                 }
             }
@@ -84,19 +81,9 @@ public class Enemy : MonoBehaviour, IDamagable, IKillable
         }
     }
 
-    public void TakeDamage(float damage)
-    {
-        _health.DecreaseHealth(damage);
-    }
-
-    public void Kill()
-    {
-        Destroy(gameObject);
-    }
-
     private void OnDrawGizmos()
     {
         int numberOfSegments = 16;
-        DebugDraw.DrawCircle(transform.position, _collisionRadius, numberOfSegments, Color.yellow);
+        DebugUtilities.DrawCircle(transform.position, _collisionRadius, numberOfSegments, Color.yellow);
     }
 }

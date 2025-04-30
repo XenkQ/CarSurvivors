@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public static class DebugDraw
+public static class DebugUtilities
 {
     public static void DrawCircle(Vector3 center, float radius, int segments = 32, Color? color = null, float duration = 0f)
     {

@@ -1,60 +1,65 @@
 using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 [Serializable]
 public class Health : MonoBehaviour
 {
-    [SerializeField] private float amount;
-    [SerializeField] private float maxAmount;
-    [SerializeField] private float regenerationAmount;
+    [SerializeField] private float maxHealth;
+    [SerializeField] private float maxRegenerationAmount;
     [SerializeField] private float startRegenerationDelay;
-    private float regenerationDelay;
+    private float currentHealth;
+    private float currentRegenerationAmount;
+    private float currentRegenerationDelay;
 
-    public float Amount => amount;
-    public float RegenerationAmount => regenerationAmount;
-    public float RegenerationDelay => regenerationDelay;
+    public float Amount => currentHealth;
+    public float RegenerationAmount => currentRegenerationAmount;
+    public float RegenerationDelay => currentRegenerationDelay;
 
-    [HideInInspector] public UnityEvent onNoHealth;
+    public event EventHandler OnNoHealth;
+
+    public event EventHandler OnHealthDecreased;
 
     private void OnEnable()
     {
-        regenerationDelay = startRegenerationDelay;
+        currentHealth = maxHealth;
+        currentRegenerationAmount = maxRegenerationAmount;
+        currentRegenerationDelay = startRegenerationDelay;
     }
 
     private void Update()
     {
-        if (regenerationDelay > 0)
+        if (currentRegenerationDelay > 0)
         {
-            regenerationDelay -= Time.deltaTime;
+            currentRegenerationDelay -= Time.deltaTime;
         }
         else
         {
-            IncreaseHealth(regenerationAmount);
+            IncreaseHealth(maxRegenerationAmount);
         }
     }
 
     public void DecreaseHealth(float value)
     {
-        if (amount - value > 0)
+        if (currentHealth > value)
         {
-            amount -= amount;
+            currentHealth -= currentHealth;
+            OnHealthDecreased?.Invoke(this, EventArgs.Empty);
         }
         else
         {
-            onNoHealth?.Invoke();
+            OnNoHealth?.Invoke(this, EventArgs.Empty);
         }
     }
 
     public void IncreaseHealth(float value)
     {
-        if (amount + value < maxAmount)
+        if (currentHealth + value < maxHealth)
         {
-            amount += value;
+            currentHealth += value;
         }
         else
         {
-            amount = maxAmount;
+            currentHealth = maxHealth;
         }
     }
 }

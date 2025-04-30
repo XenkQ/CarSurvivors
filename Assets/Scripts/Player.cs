@@ -1,10 +1,11 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Health))]
-public class Player : MonoBehaviour, IDamagable, IKillable
+public class Player : MonoBehaviour, IDamageable
 {
-    private Health _health;
     public static Player Instance { get; private set; }
+
+    public Health Health { get; private set; }
 
     private void Awake()
     {
@@ -14,24 +15,29 @@ public class Player : MonoBehaviour, IDamagable, IKillable
         }
         else
         {
-            Destroy(Instance);
-            Instance = this;
+            Destroy(gameObject);
         }
 
-        _health = GetComponent<Health>();
+        Health = GetComponent<Health>();
     }
 
     private void Start()
     {
-        _health.onNoHealth.AddListener(Kill);
+        Health.OnHealthDecreased += DamageEffect_OnHealthDecreased;
+        Health.OnNoHealth += DeadEffect_OnNoHealth;
     }
 
     public void TakeDamage(float damage)
     {
-        _health.DecreaseHealth(damage);
+        Health.DecreaseHealth(damage);
     }
 
-    public void Kill()
+    private void DamageEffect_OnHealthDecreased(object sender, System.EventArgs e)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    private void DeadEffect_OnNoHealth(object sender, System.EventArgs e)
     {
         Debug.Log("You are dead");
     }
