@@ -3840,9 +3840,9 @@ MonoBehaviour:
   _blockedCellBorderDrawColor: {r: 1, g: 0, b: 0, a: 1}
   _flowFieldDebugConfiguration:
     DebugInfoHolder: {fileID: 1957617909}
-    FontSize: 6
+    FontSize: 4
     TextYOffset: 0.2
-    DisplayMode: 0
+    DisplayMode: 2
 --- !u!1001 &1008927608
 PrefabInstance:
   m_ObjectHideFlags: 0

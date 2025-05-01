@@ -145,7 +145,7 @@ namespace Grid
             WorldGrid = new Grid(_worldGridConfiguration);
             _flowField = new FlowField.FlowField();
             _flowFieldDebugConfiguration.Grid = WorldGrid;
-            UpdateWorldGrid();
+            UpdateFlowFieldBasedOnPlayerInWorldGridPos(WorldGrid);
             UpdatePlayerChunkGrid();
 
             //Calling debug world gridPerformingUpdate to prevent lag caused by creating a lot of tmpro objects
@@ -180,11 +180,6 @@ namespace Grid
                                   _blockedCellBorderDrawColor,
                                   _playerChunkDrawYOffset,
                                   _delayBetweenPlayerChunkGridUpdate);
-        }
-
-        private void UpdateWorldGrid()
-        {
-            UpdateFlowFieldBasedOnPlayerInWorldGridPos(WorldGrid);
         }
 
         private void DebugWorldGrid()

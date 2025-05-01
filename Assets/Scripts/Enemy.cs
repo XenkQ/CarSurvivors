@@ -2,6 +2,7 @@ using Grid;
 using LayerMasks;
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Health), typeof(Collider))]
 public class Enemy : MonoBehaviour, IDamageable
@@ -12,6 +13,7 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] private float _pushFromCollisionPower = 1f;
     [SerializeField] private float _damage = 1f;
     [SerializeField] private int _level = 1;
+    private float _rotationSpeed = 4f;
 
     private Collider _collider;
     private float _verticalPosOffset;
@@ -26,7 +28,10 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private void Update()
     {
-        MoveOnGrid();
+        Vector3 moveDirection = GetMoveDirectionBasedOnGrid();
+        float angle = Mathf.Atan2(moveDirection.z, moveDirection.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, angle, 0);
+        transform.position += _movementSpeed * Time.deltaTime * moveDirection;
     }
 
     private void FixedUpdate()
@@ -68,16 +73,17 @@ public class Enemy : MonoBehaviour, IDamageable
         transform.position = Vector3.Lerp(transform.position, pushDestination, _movementSpeed * Time.deltaTime);
     }
 
-    private void MoveOnGrid()
+    private Vector3 GetMoveDirectionBasedOnGrid()
     {
         Grid.Grid grid = GridController.Instance.WorldGrid;
         Cell currentCell = grid.GetCellFromWorldPos(transform.position);
         if (currentCell != null && currentCell.BestDirection != null)
         {
             Vector2Int gridDirection = currentCell.BestDirection.Vector;
-            Vector3 moveDirection = new Vector3(gridDirection.x, 0, gridDirection.y);
-            transform.position += _movementSpeed * Time.deltaTime * moveDirection;
+            return new Vector3(gridDirection.x, 0, gridDirection.y);
         }
+
+        return Vector3.zero;
     }
 
     private void OnDrawGizmos()

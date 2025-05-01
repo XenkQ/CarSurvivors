@@ -10,7 +10,7 @@ namespace Grid
         public Vector2Int ChunkGridPos { get; set; }
         public byte Cost { get; set; }
         public ushort BestCost { get; set; }
-        public GridDirection BestDirection { get; set; }
+        public GridDirection BestDirection { get; set; } = GridDirection.None;
 
         public Cell(Vector3 worldPos, Vector2Int gridPos, Vector2Int chunkGridPos)
         {

@@ -46,18 +46,18 @@ namespace Grid.FlowField
                 for (int j = 0; j < cells.GetLength(1); j++)
                 {
                     Cell cell = cells[i, j];
-                    byte cellCost = cell.Cost;
                     TextMeshPro textComponent;
+                    string text = GetCellDebugTextBasedOnMode(cell, configuration.DisplayMode);
                     if (cellDebugTextWasPreviouslyCreated)
                     {
                         textComponent = configuration.DebugInfoHolder.GetChild(currentChildIndex).GetComponent<TextMeshPro>();
-                        textComponent.text = GetCellDebugTextBasedOnMode(cell, configuration.DisplayMode);
+                        textComponent.text = text;
                         currentChildIndex++;
                     }
                     else
                     {
-                        textComponent = CreateCellDebugText(configuration, cell, cellCost.ToString());
-                        textComponent.text = GetCellDebugTextBasedOnMode(cell, configuration.DisplayMode);
+                        textComponent = CreateCellDebugText(configuration, cell, text);
+                        textComponent.text = text;
                     }
                 }
             }
