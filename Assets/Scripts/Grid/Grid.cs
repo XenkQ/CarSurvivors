@@ -7,15 +7,15 @@ namespace Grid
     [Serializable]
     public class GridConfiguration
     {
-        public int width;
-        public int height;
-        public float cellSize;
+        public int Width;
+        public int Height;
+        public float CellSize;
 
         public GridConfiguration(int width, int height, float cellSize)
         {
-            this.width = width;
-            this.height = height;
-            this.cellSize = cellSize;
+            Width = width;
+            Height = height;
+            CellSize = cellSize;
         }
     }
 
@@ -28,17 +28,17 @@ namespace Grid
 
         public Grid(GridConfiguration gridConfiguration)
         {
-            Width = gridConfiguration.width;
-            Height = gridConfiguration.height;
-            CellSize = gridConfiguration.cellSize;
+            Width = gridConfiguration.Width;
+            Height = gridConfiguration.Height;
+            CellSize = gridConfiguration.CellSize;
             Cells = CreateCells(Width, Height);
         }
 
         public Grid(GridConfiguration gridConfiguration, Cell[,] existingCells)
         {
-            Width = gridConfiguration.width;
-            Height = gridConfiguration.height;
-            CellSize = gridConfiguration.cellSize;
+            Width = gridConfiguration.Width;
+            Height = gridConfiguration.Height;
+            CellSize = gridConfiguration.CellSize;
             Cells = existingCells;
         }
 

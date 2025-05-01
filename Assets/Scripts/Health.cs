@@ -4,62 +4,80 @@ using UnityEngine;
 [Serializable]
 public class Health : MonoBehaviour
 {
-    [SerializeField] private float maxHealth;
-    [SerializeField] private float maxRegenerationAmount;
-    [SerializeField] private float startRegenerationDelay;
-    private float currentHealth;
-    private float currentRegenerationAmount;
-    private float currentRegenerationDelay;
+    [field: SerializeField] public float MaxHealth { get; private set; }
+    [field: SerializeField] public float MaxRegenerationAmount { get; private set; }
+    [field: SerializeField] public float StartRegenerationDelay { get; private set; }
 
-    public float Amount => currentHealth;
-    public float RegenerationAmount => currentRegenerationAmount;
-    public float RegenerationDelay => currentRegenerationDelay;
+    public float CurrentHealth { get; private set; }
+    public float CurrentRegenerationAmount { get; private set; }
+    public float CurrentRegenerationDelay { get; private set; }
 
     public event EventHandler OnNoHealth;
 
+    public event EventHandler OnHealthChange;
+
     public event EventHandler OnHealthDecreased;
+
+    public event EventHandler OnHealthIncreased;
 
     private void OnEnable()
     {
-        currentHealth = maxHealth;
-        currentRegenerationAmount = maxRegenerationAmount;
-        currentRegenerationDelay = startRegenerationDelay;
+        OnHealthDecreased += OnHealthChange;
+        OnHealthIncreased += OnHealthChange;
+        OnNoHealth += OnHealthChange;
+
+        CurrentHealth = MaxHealth;
+        CurrentRegenerationAmount = MaxRegenerationAmount;
+        CurrentRegenerationDelay = StartRegenerationDelay;
+    }
+
+    private void OnDisable()
+    {
+        OnHealthDecreased -= OnHealthChange;
+        OnHealthIncreased -= OnHealthChange;
+        OnNoHealth -= OnHealthChange;
     }
 
     private void Update()
     {
-        if (currentRegenerationDelay > 0)
+        if (CurrentRegenerationDelay > 0)
         {
-            currentRegenerationDelay -= Time.deltaTime;
+            CurrentRegenerationDelay -= Time.deltaTime;
         }
         else
         {
-            IncreaseHealth(maxRegenerationAmount);
+            if (CurrentHealth > 0)
+            {
+                IncreaseHealth(MaxRegenerationAmount);
+                CurrentRegenerationDelay = StartRegenerationDelay;
+            }
         }
     }
 
     public void DecreaseHealth(float value)
     {
-        if (currentHealth > value)
+        if (CurrentHealth > value)
         {
-            currentHealth -= currentHealth;
+            CurrentHealth -= value;
             OnHealthDecreased?.Invoke(this, EventArgs.Empty);
         }
         else
         {
+            CurrentHealth = 0;
             OnNoHealth?.Invoke(this, EventArgs.Empty);
         }
     }
 
     public void IncreaseHealth(float value)
     {
-        if (currentHealth + value < maxHealth)
+        if (CurrentHealth + value < MaxHealth)
         {
-            currentHealth += value;
+            CurrentHealth += value;
+            OnHealthIncreased?.Invoke(this, EventArgs.Empty);
         }
         else
         {
-            currentHealth = maxHealth;
+            CurrentHealth = MaxHealth;
         }
     }
 }

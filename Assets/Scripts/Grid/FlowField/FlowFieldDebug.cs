@@ -7,11 +7,11 @@ namespace Grid.FlowField
     [Serializable]
     public class FlowFieldDebugConfiguration
     {
-        public Grid grid;
-        public Transform debugInfoHolder;
-        public float fontSize;
-        public float textYOffset;
-        public FlowFieldDebug.DisplayMode displayMode;
+        public Grid Grid;
+        public Transform DebugInfoHolder;
+        public float FontSize;
+        public float TextYOffset;
+        public FlowFieldDebug.DisplayMode DisplayMode;
 
         public FlowFieldDebugConfiguration(Grid grid,
                                            Transform debugInfoHolder,
@@ -19,11 +19,11 @@ namespace Grid.FlowField
                                            float textYOffset = 0,
                                            FlowFieldDebug.DisplayMode displayMode = FlowFieldDebug.DisplayMode.CostField)
         {
-            this.grid = grid;
-            this.debugInfoHolder = debugInfoHolder;
-            this.fontSize = fontSize;
-            this.textYOffset = textYOffset;
-            this.displayMode = displayMode;
+            Grid = grid;
+            DebugInfoHolder = debugInfoHolder;
+            FontSize = fontSize;
+            TextYOffset = textYOffset;
+            DisplayMode = displayMode;
         }
     }
 
@@ -38,9 +38,9 @@ namespace Grid.FlowField
 
         public static void DisplayFlowFieldDebugTextOnGrid(FlowFieldDebugConfiguration configuration)
         {
-            bool cellDebugTextWasPreviouslyCreated = configuration.debugInfoHolder.childCount > 0;
+            bool cellDebugTextWasPreviouslyCreated = configuration.DebugInfoHolder.childCount > 0;
             int currentChildIndex = 0;
-            Cell[,] cells = configuration.grid.Cells;
+            Cell[,] cells = configuration.Grid.Cells;
             for (int i = 0; i < cells.GetLength(0); i++)
             {
                 for (int j = 0; j < cells.GetLength(1); j++)
@@ -50,14 +50,14 @@ namespace Grid.FlowField
                     TextMeshPro textComponent;
                     if (cellDebugTextWasPreviouslyCreated)
                     {
-                        textComponent = configuration.debugInfoHolder.GetChild(currentChildIndex).GetComponent<TextMeshPro>();
-                        textComponent.text = GetCellDebugTextBasedOnMode(cell, configuration.displayMode);
+                        textComponent = configuration.DebugInfoHolder.GetChild(currentChildIndex).GetComponent<TextMeshPro>();
+                        textComponent.text = GetCellDebugTextBasedOnMode(cell, configuration.DisplayMode);
                         currentChildIndex++;
                     }
                     else
                     {
                         textComponent = CreateCellDebugText(configuration, cell, cellCost.ToString());
-                        textComponent.text = GetCellDebugTextBasedOnMode(cell, configuration.displayMode);
+                        textComponent.text = GetCellDebugTextBasedOnMode(cell, configuration.DisplayMode);
                     }
                 }
             }
@@ -66,14 +66,14 @@ namespace Grid.FlowField
         private static TextMeshPro CreateCellDebugText(FlowFieldDebugConfiguration configuration, Cell cell, string textObjectName)
         {
             GameObject visualizer = new(textObjectName);
-            visualizer.transform.parent = configuration.debugInfoHolder;
-            visualizer.transform.SetPositionAndRotation(new Vector3(cell.WorldPos.x, configuration.textYOffset, cell.WorldPos.z),
+            visualizer.transform.parent = configuration.DebugInfoHolder;
+            visualizer.transform.SetPositionAndRotation(new Vector3(cell.WorldPos.x, configuration.TextYOffset, cell.WorldPos.z),
                                                         Quaternion.Euler(new Vector3(90, 0, 0)));
             var rectTransform = visualizer.AddComponent<RectTransform>();
-            rectTransform.rect.Set(0, 0, configuration.grid.CellSize, configuration.grid.CellSize);
+            rectTransform.rect.Set(0, 0, configuration.Grid.CellSize, configuration.Grid.CellSize);
             visualizer.AddComponent<MeshRenderer>();
             var textComponent = visualizer.AddComponent<TextMeshPro>();
-            textComponent.fontSize = configuration.fontSize;
+            textComponent.fontSize = configuration.FontSize;
             textComponent.alignment = TextAlignmentOptions.Center;
             return textComponent;
         }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using LayerMasks;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Grid.FlowField
@@ -9,10 +10,6 @@ namespace Grid.FlowField
         private const int ROUGH_TERRAIN_COST = 3;
         private const int DEFAULT_FIELD_COST = 1;
 
-        private readonly LayerMask _impassableTerrain = LayerMask.GetMask("Impassable");
-        private readonly LayerMask _roughTerrain = LayerMask.GetMask("RoughTerrain");
-        private readonly LayerMask _ground = LayerMask.GetMask("Ground");
-
         public void CreateCostField(Grid grid)
         {
             for (int i = 0; i < grid.Cells.GetLength(0); i++)
@@ -22,11 +19,7 @@ namespace Grid.FlowField
                     Cell cell = grid.Cells[i, j];
                     float edgesOffset = -0.05f;
                     Vector3 halfExtents = Vector3.one * (grid.CellSize / 2 + edgesOffset);
-                    Collider[] obstacles = Physics.OverlapBox(cell.WorldPos,
-                                                              halfExtents,
-                                                              Quaternion.identity,
-                                                              _impassableTerrain | _roughTerrain | _ground);
-
+                    Collider[] obstacles = Physics.OverlapBox(cell.WorldPos, halfExtents, Quaternion.identity, TerrainLayers.All);
                     cell.ResetCosts();
 
                     int maxCost = 0;
@@ -35,11 +28,11 @@ namespace Grid.FlowField
                         foreach (Collider obstacle in obstacles)
                         {
                             int layerValue = 1 << obstacle.gameObject.layer;
-                            if (maxCost < IMPASSABLE_COST && (layerValue & _impassableTerrain.value) == _impassableTerrain.value)
+                            if (maxCost < IMPASSABLE_COST && (layerValue & TerrainLayers.Impassable.value) == TerrainLayers.Impassable.value)
                             {
                                 maxCost = IMPASSABLE_COST;
                             }
-                            else if (maxCost < ROUGH_TERRAIN_COST && (layerValue & _roughTerrain.value) == _roughTerrain.value)
+                            else if (maxCost < ROUGH_TERRAIN_COST && (layerValue & TerrainLayers.Rough.value) == TerrainLayers.Rough.value)
                             {
                                 maxCost = ROUGH_TERRAIN_COST;
                             }

@@ -1,7 +1,6 @@
 ﻿using Grid.FlowField;
 using UnityEngine;
 using UnityEditor;
-using UnityEngine.Events;
 
 namespace Grid
 {
@@ -125,9 +124,6 @@ namespace Grid
 
         private float _playerChunkDrawYOffset = 0.2f;
 #endif
-
-        [HideInInspector] public UnityEvent OnWorldGridUpdate;
-
         private FlowField.FlowField _flowField;
 
         public static GridController Instance { get; private set; }
@@ -148,7 +144,7 @@ namespace Grid
 
             WorldGrid = new Grid(_worldGridConfiguration);
             _flowField = new FlowField.FlowField();
-            _flowFieldDebugConfiguration.grid = WorldGrid;
+            _flowFieldDebugConfiguration.Grid = WorldGrid;
             UpdateWorldGrid();
             UpdatePlayerChunkGrid();
 
@@ -189,7 +185,6 @@ namespace Grid
         private void UpdateWorldGrid()
         {
             UpdateFlowFieldBasedOnPlayerInWorldGridPos(WorldGrid);
-            OnWorldGridUpdate.Invoke();
         }
 
         private void DebugWorldGrid()
@@ -206,8 +201,8 @@ namespace Grid
 
         private Grid CreatePlayerChunkBasedOnPlayerPositionInWorldGrid()
         {
-            int chunkWidth = _playerGridConfiguration.width;
-            int chunkHeight = _playerGridConfiguration.height;
+            int chunkWidth = _playerGridConfiguration.Width;
+            int chunkHeight = _playerGridConfiguration.Height;
             Cell[,] chunkCells = new Cell[chunkWidth, chunkHeight];
             Cell cellClosestToPlayer = WorldGrid.GetCellFromWorldPos(Player.Instance.transform.position);
             int maxGridX = cellClosestToPlayer.WorldGridPos.x + chunkWidth / 2;

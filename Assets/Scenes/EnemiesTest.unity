@@ -1989,14 +1989,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _worldGridConfiguration:
-    width: 150
-    height: 150
-    cellSize: 1
+    Width: 200
+    Height: 200
+    CellSize: 1
   _delayBetweenWorldGridUpdate: 1
   _playerGridConfiguration:
-    width: 35
-    height: 30
-    cellSize: 1
+    Width: 35
+    Height: 30
+    CellSize: 1
   _delayBetweenPlayerChunkGridUpdate: 0.32
   _debugGrid: 1
   _debugFlowField: 0
@@ -2004,13 +2004,10 @@ MonoBehaviour:
   _playerChunkCellBorderColor: {r: 0, g: 1, b: 0, a: 1}
   _blockedCellBorderDrawColor: {r: 1, g: 0, b: 0, a: 1}
   _flowFieldDebugConfiguration:
-    debugInfoHolder: {fileID: 1308204042}
-    fontSize: 4
-    textYOffset: 0.2
-    displayMode: 1
-  OnWorldGridUpdate:
-    m_PersistentCalls:
-      m_Calls: []
+    DebugInfoHolder: {fileID: 1308204042}
+    FontSize: 8
+    TextYOffset: 0.2
+    DisplayMode: 0
 --- !u!1 &918555872
 GameObject:
   m_ObjectHideFlags: 0

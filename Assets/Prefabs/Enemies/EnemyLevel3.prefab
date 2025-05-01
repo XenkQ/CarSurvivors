@@ -137,16 +137,7 @@ MonoBehaviour:
   _wandererJitter: 0.418
   _collisionRadius: 0.52
   _pushFromCollisionPower: 1
-  _damage: 1
-  _collisionLayerMask:
-    serializedVersion: 2
-    m_Bits: 384
-  _enemyLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  _playerLayer:
-    serializedVersion: 2
-    m_Bits: 0
+  _damage: 8
   _level: 3
 --- !u!114 &422639940558306586
 MonoBehaviour:
@@ -160,9 +151,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 373a56a05b64dd04baa3b64e409ac34c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 0
-  maxRegenerationAmount: 0
-  startRegenerationDelay: 2
+  _maxHealth: 0
+  _maxRegenerationAmount: 0
+  _startRegenerationDelay: 0
 --- !u!65 &4176904749440768749
 BoxCollider:
   m_ObjectHideFlags: 0

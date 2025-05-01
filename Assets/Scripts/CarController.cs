@@ -15,9 +15,9 @@ public class CarController : MonoBehaviour
     [Serializable]
     private struct Wheel
     {
-        public GameObject wheelModel;
-        public WheelCollider wheelCollider;
-        public Axel axel;
+        public GameObject WheelModel;
+        public WheelCollider WheelCollider;
+        public Axel Axel;
     }
 
     [Header("Speed")]
@@ -65,7 +65,7 @@ public class CarController : MonoBehaviour
     {
         foreach (var wheel in _wheels)
         {
-            wheel.wheelCollider.motorTorque = _moveInput.y * _speed * _maxAcceleration * Time.deltaTime;
+            wheel.WheelCollider.motorTorque = _moveInput.y * _speed * _maxAcceleration * Time.deltaTime;
         }
     }
 
@@ -73,10 +73,10 @@ public class CarController : MonoBehaviour
     {
         foreach (var wheel in _wheels)
         {
-            if (wheel.axel == Axel.Front)
+            if (wheel.Axel == Axel.Front)
             {
                 float steerAngle = _moveInput.x * _turnSensitivity * _maxSteerAngle;
-                wheel.wheelCollider.steerAngle = Mathf.Lerp(wheel.wheelCollider.steerAngle, steerAngle, 0.6f);
+                wheel.WheelCollider.steerAngle = Mathf.Lerp(wheel.WheelCollider.steerAngle, steerAngle, 0.6f);
             }
         }
     }
@@ -85,8 +85,8 @@ public class CarController : MonoBehaviour
     {
         foreach (var wheel in _wheels)
         {
-            wheel.wheelCollider.GetWorldPose(out Vector3 pos, out Quaternion rot);
-            wheel.wheelModel.transform.SetPositionAndRotation(pos, rot);
+            wheel.WheelCollider.GetWorldPose(out Vector3 pos, out Quaternion rot);
+            wheel.WheelModel.transform.SetPositionAndRotation(pos, rot);
         }
     }
 }
