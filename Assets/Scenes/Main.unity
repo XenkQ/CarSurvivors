@@ -1989,19 +1989,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startSpawnWaveDelay: 8
   _poolEnemiesInfo:
-  - enemyPrefab: {fileID: 1286223690747856801, guid: 04e28f7e31f150146acd7ba9f4db9b56, type: 3}
+  - enemyPrefab: {fileID: 2306377847058156024, guid: 08b441f56ebe2754ab1e7d5eefb63ac5, type: 3}
     maxAmount: 2
     spawnChance: 70
-  - enemyPrefab: {fileID: 1286223690747856801, guid: 08b441f56ebe2754ab1e7d5eefb63ac5, type: 3}
+  - enemyPrefab: {fileID: 2306377847058156024, guid: 6868dd97df9ac574da868db1b133ad18, type: 3}
     maxAmount: 2
     spawnChance: 15
-  - enemyPrefab: {fileID: 1286223690747856801, guid: 07a815fdb11f3b4438cba517c3e360cd, type: 3}
+  - enemyPrefab: {fileID: 2306377847058156024, guid: 5495300357b64ae4e9bc00aa9ec678b0, type: 3}
     maxAmount: 2
     spawnChance: 7
-  - enemyPrefab: {fileID: 1286223690747856801, guid: 16e147e0cc1877c4293f8bf623e273d1, type: 3}
+  - enemyPrefab: {fileID: 2306377847058156024, guid: 1c4e953fc50e7444ab0e5f870c26a9ef, type: 3}
     maxAmount: 2
     spawnChance: 6
-  - enemyPrefab: {fileID: 1286223690747856801, guid: d9fd3a26b7f2a5243b067c301f5fff0e, type: 3}
+  - enemyPrefab: {fileID: 2306377847058156024, guid: e1a12b239e4ee684cb99d952c862adf1, type: 3}
     maxAmount: 2
     spawnChance: 2
 --- !u!1 &550934126
@@ -3840,8 +3840,8 @@ MonoBehaviour:
   _blockedCellBorderDrawColor: {r: 1, g: 0, b: 0, a: 1}
   _flowFieldDebugConfiguration:
     DebugInfoHolder: {fileID: 1957617909}
-    FontSize: 0
-    TextYOffset: 0
+    FontSize: 6
+    TextYOffset: 0.2
     DisplayMode: 0
 --- !u!1001 &1008927608
 PrefabInstance:
