@@ -2,7 +2,6 @@ using Grid;
 using LayerMasks;
 using System;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Health), typeof(Collider))]
 public class Enemy : MonoBehaviour, IDamageable
@@ -28,10 +27,11 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private void Update()
     {
-        Vector3 moveDirection = GetMoveDirectionBasedOnGrid();
-        float angle = Mathf.Atan2(moveDirection.z, moveDirection.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, angle, 0);
-        transform.position += _movementSpeed * Time.deltaTime * moveDirection;
+        Vector3 gridDir = GetMoveDirectionBasedOnGrid();
+        Vector3 movement = _movementSpeed * Time.deltaTime * gridDir;
+        Quaternion targetRotation = Quaternion.LookRotation(movement.normalized);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
+        transform.position += movement;
     }
 
     private void FixedUpdate()
