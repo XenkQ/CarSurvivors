@@ -202,8 +202,8 @@ namespace Grid
             Cell cellClosestToPlayer = WorldGrid.GetCellFromWorldPos(Player.Instance.transform.position);
             int maxGridX = cellClosestToPlayer.WorldGridPos.x + chunkWidth / 2;
             int minGridX = cellClosestToPlayer.WorldGridPos.x - chunkWidth / 2;
-            int maxGridY = cellClosestToPlayer.WorldGridPos.y + chunkHeight / 2;
-            int minGridY = cellClosestToPlayer.WorldGridPos.y - chunkHeight / 2;
+            int maxGridY = cellClosestToPlayer.WorldGridPos.y + chunkWidth / 2;
+            int minGridY = cellClosestToPlayer.WorldGridPos.y - chunkWidth / 2;
 
             int x = minGridX;
             int chunkX = 0;

@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Grid;
 using LayerMasks;
 using System;
@@ -7,14 +8,18 @@ using UnityEngine;
 public class Enemy : MonoBehaviour, IDamageable
 {
     [SerializeField] private float _movementSpeed;
-    [SerializeField][Range(0, 1f)] private float _wandererJitter;
-    [SerializeField] private float _collisionRadius;
-    [SerializeField] private float _pushFromCollisionPower = 1f;
-    [SerializeField] private float _damage = 1f;
-    [SerializeField] private int _level = 1;
     private float _rotationSpeed = 4f;
 
+    [SerializeField] private float _collisionRadius;
+    [SerializeField] private float _pushFromCollisionPower = 1f;
     private Collider _collider;
+
+    [SerializeField] private float _damage = 1f;
+    [SerializeField] private int _level = 1;
+
+    [SerializeField] private float _animationScaleMultiplier = 1f;
+    private Vector3 _startScale;
+
     private float _verticalPosOffset;
 
     public Health Health { get; private set; }
@@ -23,6 +28,12 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         Health = GetComponent<Health>();
         _collider = GetComponent<Collider>();
+    }
+
+    private void Start()
+    {
+        _startScale = transform.localScale;
+        transform.DOScale(_startScale * _animationScaleMultiplier, 1f).SetLoops(-1, LoopType.Yoyo);
     }
 
     private void Update()

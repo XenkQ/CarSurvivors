@@ -81,7 +81,7 @@ namespace Grid
         private Cell[,] CreateCells(int width, int height)
         {
             Cell[,] cells = new Cell[width, height];
-            Vector3 currentTilePos = new Vector3(CellSize / 2, 0, CellSize / 2);
+            Vector3 currentTilePos = new Vector3(CellSize * 0.5f, 0, CellSize * 0.5f);
             for (int i = 0; i < width; i++)
             {
                 for (int j = 0; j < height; j++)
@@ -90,7 +90,7 @@ namespace Grid
                     cells[i, j] = new Cell(currentTilePos, gridPos, gridPos);
                     currentTilePos.z += CellSize;
                 }
-                currentTilePos = new Vector3(currentTilePos.x + CellSize, 0, CellSize / 2);
+                currentTilePos = new Vector3(currentTilePos.x + CellSize, 0, CellSize * 0.5f);
             }
 
             return cells;

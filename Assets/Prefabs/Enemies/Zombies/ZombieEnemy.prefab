@@ -48,11 +48,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movementSpeed: 2
-  _wandererJitter: 0.418
   _collisionRadius: 0.52
   _pushFromCollisionPower: 1
   _damage: 3
   _level: 1
+  _animationScaleMultiplier: 1.2
 --- !u!114 &422639940558306586
 MonoBehaviour:
   m_ObjectHideFlags: 0
