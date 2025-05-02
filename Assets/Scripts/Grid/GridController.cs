@@ -200,10 +200,14 @@ namespace Grid
             int chunkHeight = _playerGridConfiguration.Height;
             Cell[,] chunkCells = new Cell[chunkWidth, chunkHeight];
             Cell cellClosestToPlayer = WorldGrid.GetCellFromWorldPos(Player.Instance.transform.position);
-            int maxGridX = cellClosestToPlayer.WorldGridPos.x + chunkWidth / 2;
-            int minGridX = cellClosestToPlayer.WorldGridPos.x - chunkWidth / 2;
-            int maxGridY = cellClosestToPlayer.WorldGridPos.y + chunkWidth / 2;
-            int minGridY = cellClosestToPlayer.WorldGridPos.y - chunkWidth / 2;
+
+            int halfWidth = chunkWidth >> 1;
+            int maxGridX = cellClosestToPlayer.WorldGridPos.x + halfWidth;
+            int minGridX = cellClosestToPlayer.WorldGridPos.x - halfWidth;
+
+            int halfHeight = chunkHeight >> 1;
+            int maxGridY = cellClosestToPlayer.WorldGridPos.y + halfHeight;
+            int minGridY = cellClosestToPlayer.WorldGridPos.y - halfHeight;
 
             int x = minGridX;
             int chunkX = 0;
