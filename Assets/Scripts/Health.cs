@@ -40,6 +40,14 @@ public class Health : MonoBehaviour
 
     private void Update()
     {
+        if (MaxRegenerationAmount > 0 && StartRegenerationDelay > 0)
+        {
+            RegenerationProcess();
+        }
+    }
+
+    private void RegenerationProcess()
+    {
         if (CurrentRegenerationDelay > 0)
         {
             CurrentRegenerationDelay -= Time.deltaTime;

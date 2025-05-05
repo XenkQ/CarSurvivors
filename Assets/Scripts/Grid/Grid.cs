@@ -55,6 +55,13 @@ namespace Grid
             return Cells[x, y];
         }
 
+        public Cell GetRandomWalkableEdgeCell()
+        {
+            List<Cell> edgeCells = GridController.Instance.GridPlayerChunk.GetWalkableEdgeCells();
+            Cell randomCell = edgeCells[UnityEngine.Random.Range(0, edgeCells.Count)];
+            return randomCell;
+        }
+
         public List<Cell> GetWalkableEdgeCells()
         {
             List<Cell> edgeCells = new List<Cell>();
