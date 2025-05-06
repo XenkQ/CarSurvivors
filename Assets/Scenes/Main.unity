@@ -11710,13 +11710,33 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4427362447296171089, guid: cb84583e0c2818e42b12a0baeb2f6f1b, type: 3}
+      propertyPath: m_Size.x
+      value: 1.5060387
+      objectReference: {fileID: 0}
+    - target: {fileID: 4427362447296171089, guid: cb84583e0c2818e42b12a0baeb2f6f1b, type: 3}
+      propertyPath: m_Size.z
+      value: 0.6899376
+      objectReference: {fileID: 0}
+    - target: {fileID: 4427362447296171089, guid: cb84583e0c2818e42b12a0baeb2f6f1b, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4427362447296171089, guid: cb84583e0c2818e42b12a0baeb2f6f1b, type: 3}
+      propertyPath: m_Center.x
+      value: 0.007966995
+      objectReference: {fileID: 0}
+    - target: {fileID: 4427362447296171089, guid: cb84583e0c2818e42b12a0baeb2f6f1b, type: 3}
+      propertyPath: m_Center.z
+      value: 0.81920815
       objectReference: {fileID: 0}
     - target: {fileID: 5277447736254715040, guid: cb84583e0c2818e42b12a0baeb2f6f1b, type: 3}
       propertyPath: _boxCollider
       value: 
       objectReference: {fileID: 1965919688}
+    - target: {fileID: 5277447736254715040, guid: cb84583e0c2818e42b12a0baeb2f6f1b, type: 3}
+      propertyPath: _knockbackPower
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6215313516695621011, guid: cb84583e0c2818e42b12a0baeb2f6f1b, type: 3}
       propertyPath: m_Name
       value: PlayerCar
