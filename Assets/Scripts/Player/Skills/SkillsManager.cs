@@ -1,18 +1,20 @@
 using System.Linq;
-using Assets.Scripts.Player;
 using UnityEngine;
 
-public class SkillsManager : MonoBehaviour
+namespace Player.Skills
 {
-    [SerializeField] private Skill[] _skills;
-
-    private void ActivateRandomDisabledSkill()
+    public class SkillsManager : MonoBehaviour
     {
-        ISkill[] inactiveSkills = _skills.Where(skill => !skill.gameObject.activeSelf).ToArray();
-        if (inactiveSkills.Length > 0)
+        [SerializeField] private Skill[] _skills;
+
+        private void ActivateRandomDisabledSkill()
         {
-            int index = Random.Range(0, inactiveSkills.Length);
-            inactiveSkills[index].Activate();
+            ISkill[] inactiveSkills = _skills.Where(skill => !skill.gameObject.activeSelf).ToArray();
+            if (inactiveSkills.Length > 0)
+            {
+                int index = Random.Range(0, inactiveSkills.Length);
+                inactiveSkills[index].Activate();
+            }
         }
     }
 }

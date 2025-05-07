@@ -3,72 +3,75 @@ using DG.Tweening;
 using LayerMasks;
 using UnityEngine;
 
-public class SawBladeSkill : Skill
+namespace Player.Skills
 {
-    [SerializeField] private float _knockbackPower = 2f;
-    private float _knockbackMoveSpeed = 0.4f;
-    [SerializeField] private float _damage;
-    [SerializeField] private float _size;
-    [SerializeField] private float _cooldown;
-    private float _currentCooldown;
-    private int _level;
-
-    [SerializeField] private BoxCollider _boxCollider;
-
-    public override event EventHandler OnLevelUp;
-
-    private void Awake()
+    public class SawBladeSkill : Skill
     {
-        _boxCollider = GetComponent<BoxCollider>();
-    }
+        [SerializeField] private float _knockbackPower = 2f;
+        private float _knockbackMoveSpeed = 0.4f;
+        [SerializeField] private float _damage;
+        [SerializeField] private float _size;
+        [SerializeField] private float _cooldown;
+        private float _currentCooldown;
+        private int _level;
 
-    private void Start()
-    {
-        _currentCooldown = _cooldown;
-    }
+        [SerializeField] private BoxCollider _boxCollider;
 
-    public void Update()
-    {
-        if (_currentCooldown > 0)
+        public override event EventHandler OnLevelUp;
+
+        private void Awake()
         {
-            _currentCooldown -= Time.deltaTime;
+            _boxCollider = GetComponent<BoxCollider>();
         }
-        else
+
+        private void Start()
         {
-            AtackAllEnemiesInsideCollider();
             _currentCooldown = _cooldown;
         }
-    }
 
-    public void OnTriggerEnter(Collider other)
-    {
-        AttackCollidingEntity(other);
-    }
-
-    public override void LevelUp()
-    {
-        _level++;
-    }
-
-    private void AtackAllEnemiesInsideCollider()
-    {
-        RaycastHit[] hits = Physics.BoxCastAll(transform.position + _boxCollider.center, _boxCollider.size, Vector3.down, transform.rotation);
-        foreach (RaycastHit hit in hits)
+        public void Update()
         {
-            AttackCollidingEntity(hit.collider);
-        }
-    }
-
-    private void AttackCollidingEntity(Collider other)
-    {
-        GameObject collisionObject = other.transform.gameObject;
-        Debug.Log(collisionObject.name);
-        if ((1 << collisionObject.layer) == EntityLayers.Enemy)
-        {
-            if (collisionObject.TryGetComponent(out IDamageable damageable))
+            if (_currentCooldown > 0)
             {
-                collisionObject.transform.DOMove(other.transform.position + transform.forward * _knockbackPower, _knockbackMoveSpeed);
-                damageable.TakeDamage(_damage);
+                _currentCooldown -= Time.deltaTime;
+            }
+            else
+            {
+                AtackAllEnemiesInsideCollider();
+                _currentCooldown = _cooldown;
+            }
+        }
+
+        public void OnTriggerEnter(Collider other)
+        {
+            AttackCollidingEntity(other);
+        }
+
+        public override void LevelUp()
+        {
+            _level++;
+        }
+
+        private void AtackAllEnemiesInsideCollider()
+        {
+            RaycastHit[] hits = Physics.BoxCastAll(transform.position + _boxCollider.center, _boxCollider.size, Vector3.down, transform.rotation);
+            foreach (RaycastHit hit in hits)
+            {
+                AttackCollidingEntity(hit.collider);
+            }
+        }
+
+        private void AttackCollidingEntity(Collider other)
+        {
+            GameObject collisionObject = other.transform.gameObject;
+            Debug.Log(collisionObject.name);
+            if ((1 << collisionObject.layer) == EntityLayers.Enemy)
+            {
+                if (collisionObject.TryGetComponent(out IDamageable damageable))
+                {
+                    collisionObject.transform.DOMove(other.transform.position + transform.forward * _knockbackPower, _knockbackMoveSpeed);
+                    damageable.TakeDamage(_damage);
+                }
             }
         }
     }

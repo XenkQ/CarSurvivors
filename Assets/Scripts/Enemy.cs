@@ -1,5 +1,5 @@
 using DG.Tweening;
-using Grid;
+using GridSystem;
 using LayerMasks;
 using UnityEngine;
 
@@ -19,6 +19,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private float _verticalPosOffset;
     private float _currentStunAfterDamageDelay;
+    private Tween _scaleTween;
 
     private void Awake()
     {
@@ -26,11 +27,25 @@ public class Enemy : MonoBehaviour, IDamageable
         _collider = GetComponent<Collider>();
     }
 
-    private void Start()
+    private void OnEnable()
     {
         _startScale = transform.localScale;
         _verticalPosOffset = transform.position.y;
-        transform.DOScale(_startScale * _stats.AnimationScaleMultiplier, 1f).SetLoops(-1, LoopType.Yoyo);
+        if (_scaleTween == null)
+        {
+            _scaleTween = transform.DOScale(_startScale * _stats.AnimationScaleMultiplier, 1f).SetLoops(-1, LoopType.Yoyo);
+        }
+        else
+        {
+            _scaleTween.Restart();
+        }
+    }
+
+    private void OnDisable()
+    {
+        transform.localScale = _startScale;
+        transform.position = new Vector3(0, _verticalPosOffset, 0);
+        _scaleTween.Pause();
     }
 
     private void Update()
@@ -91,7 +106,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private Vector3 GetMoveDirectionBasedOnCurrentCell()
     {
-        Grid.Grid grid = GridController.Instance.WorldGrid;
+        GridSystem.Grid grid = GridController.Instance.WorldGrid;
         Cell currentCell = grid.GetCellFromWorldPos(transform.position);
         if (currentCell != null && currentCell.BestDirection != null)
         {

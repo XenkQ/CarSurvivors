@@ -1,15 +1,17 @@
 ﻿using System;
-using Assets.Scripts.Player;
 using UnityEngine;
 
-public abstract class Skill : MonoBehaviour, ISkill
+namespace Player.Skills
 {
-    public abstract event EventHandler OnLevelUp;
-
-    public virtual void Activate()
+    public abstract class Skill : MonoBehaviour, ISkill
     {
-        gameObject.SetActive(true);
-    }
+        public abstract event EventHandler OnLevelUp;
 
-    public abstract void LevelUp();
+        public virtual void Activate()
+        {
+            gameObject.SetActive(true);
+        }
+
+        public abstract void LevelUp();
+    }
 }

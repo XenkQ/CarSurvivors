@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Grid
+namespace GridSystem
 {
     [Serializable]
     public class GridConfiguration

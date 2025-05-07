@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Grid
+namespace GridSystem
 {
     public static class GridDebug
     {

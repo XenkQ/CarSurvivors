@@ -3,7 +3,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
-namespace Grid
+namespace GridSystem
 {
     public class GridDirection
     {

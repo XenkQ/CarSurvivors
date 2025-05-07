@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Assets.Scripts.Player
+namespace Player.Skills
 {
     public interface ISkill
     {

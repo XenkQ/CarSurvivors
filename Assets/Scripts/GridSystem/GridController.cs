@@ -1,8 +1,9 @@
-﻿using Grid.FlowField;
+﻿using GridSystem.FlowField;
 using UnityEngine;
 using UnityEditor;
+using Player;
 
-namespace Grid
+namespace GridSystem
 {
     [CustomEditor(typeof(GridController))]
     public class GridControllerEditor : Editor
@@ -54,7 +55,7 @@ namespace Grid
         {
             serializedObject.Update();
 
-            _worldGridGroup = EditorGUILayout.BeginFoldoutHeaderGroup(_worldGridGroup, "World Grid Group");
+            _worldGridGroup = EditorGUILayout.BeginFoldoutHeaderGroup(_worldGridGroup, "World GridSystem Group");
             if (_worldGridGroup)
             {
                 EditorGUILayout.PropertyField(_worldGridConfiguration);
@@ -64,7 +65,7 @@ namespace Grid
 
             EditorGUILayout.Space(SPACE_BETWEEN_GROUPS);
 
-            _playerGridChunkGroup = EditorGUILayout.BeginFoldoutHeaderGroup(_playerGridChunkGroup, "Player Grid Chunk Group");
+            _playerGridChunkGroup = EditorGUILayout.BeginFoldoutHeaderGroup(_playerGridChunkGroup, "Player GridSystem Chunk Group");
             if (_playerGridChunkGroup)
             {
                 EditorGUILayout.PropertyField(_playerGridConfiguration);
@@ -80,7 +81,7 @@ namespace Grid
                 EditorGUILayout.PropertyField(_debugGrid);
                 if (_debugGrid.boolValue)
                 {
-                    EditorGUILayout.LabelField("Grid Colors", EditorStyles.boldLabel);
+                    EditorGUILayout.LabelField("GridSystem Colors", EditorStyles.boldLabel);
                     EditorGUILayout.PropertyField(_worldCellBorderColor);
                     EditorGUILayout.PropertyField(_playerChunkCellBorderColor);
                     EditorGUILayout.PropertyField(_blockedCellBorderDrawColor);
@@ -199,7 +200,7 @@ namespace Grid
             int chunkWidth = _playerGridConfiguration.Width;
             int chunkHeight = _playerGridConfiguration.Height;
             Cell[,] chunkCells = new Cell[chunkWidth, chunkHeight];
-            Cell cellClosestToPlayer = WorldGrid.GetCellFromWorldPos(Player.Instance.transform.position);
+            Cell cellClosestToPlayer = WorldGrid.GetCellFromWorldPos(PlayerManager.Instance.transform.position);
 
             int halfWidth = chunkWidth >> 1;
             int maxGridX = cellClosestToPlayer.WorldGridPos.x + halfWidth;
@@ -239,7 +240,7 @@ namespace Grid
         private void UpdateFlowFieldBasedOnPlayerInWorldGridPos(Grid gridPerformingUpdate)
         {
             _flowField.CreateCostField(gridPerformingUpdate);
-            Cell cellClosestToPlayer = WorldGrid.GetCellFromWorldPos(Player.Instance.transform.position);
+            Cell cellClosestToPlayer = WorldGrid.GetCellFromWorldPos(PlayerManager.Instance.transform.position);
             _flowField.CreateIntegrationField(gridPerformingUpdate, cellClosestToPlayer);
             _flowField.CreateFlowField(gridPerformingUpdate);
         }

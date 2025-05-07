@@ -1,4 +1,4 @@
-using Grid;
+using GridSystem;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -122,7 +122,7 @@ public class WaveManager : MonoBehaviour
     {
         List<Enemy> enemies = new List<Enemy>();
 
-        Grid.Grid playerChunk = GridController.Instance.GridPlayerChunk;
+        GridSystem.Grid playerChunk = GridController.Instance.GridPlayerChunk;
         Cell centerCell = playerChunk.Cells[playerChunk.Width / 2, playerChunk.Height / 2];
         Vector3 center = centerCell.WorldPos;
 
