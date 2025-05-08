@@ -13,7 +13,7 @@ namespace Player.Skills
         [SerializeField] private float _size;
         [SerializeField] private float _cooldown;
         private float _currentCooldown;
-        private int _level;
+        private ushort _level;
 
         [SerializeField] private BoxCollider _boxCollider;
 
@@ -24,7 +24,7 @@ namespace Player.Skills
             _boxCollider = GetComponent<BoxCollider>();
         }
 
-        private void Start()
+        private void OnEnable()
         {
             _currentCooldown = _cooldown;
         }
@@ -50,11 +50,13 @@ namespace Player.Skills
         public override void LevelUp()
         {
             _level++;
+            OnLevelUp?.Invoke(this, EventArgs.Empty);
         }
 
         private void AtackAllEnemiesInsideCollider()
         {
-            RaycastHit[] hits = Physics.BoxCastAll(transform.position + _boxCollider.center, _boxCollider.size, Vector3.down, transform.rotation);
+            RaycastHit[] hits = Physics.BoxCastAll(transform.position + _boxCollider.center, _boxCollider.size,
+                                                   Vector3.down, transform.rotation, _boxCollider.size.y, EntityLayers.All);
             foreach (RaycastHit hit in hits)
             {
                 AttackCollidingEntity(hit.collider);
@@ -64,7 +66,6 @@ namespace Player.Skills
         private void AttackCollidingEntity(Collider other)
         {
             GameObject collisionObject = other.transform.gameObject;
-            Debug.Log(collisionObject.name);
             if ((1 << collisionObject.layer) == EntityLayers.Enemy)
             {
                 if (collisionObject.TryGetComponent(out IDamageable damageable))

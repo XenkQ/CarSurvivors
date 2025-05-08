@@ -20,7 +20,7 @@ public class CarController : MonoBehaviour
         public Axel Axel;
     }
 
-    [Header("Speed")]
+    [Header("TimeToArriveAtRangeEnd")]
     [SerializeField] private float _speed = 600f;
     [SerializeField] private float _maxAcceleration = 30.0f;
     [SerializeField] private float _brakeAcceleration = 50.0f;

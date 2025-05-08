@@ -15,10 +15,10 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] private float _collisionRadius;
     private Collider _collider;
 
-    private Vector3 _startScale;
-
     private float _verticalPosOffset;
     private float _currentStunAfterDamageDelay;
+
+    private Vector3 _startScale;
     private Tween _scaleTween;
 
     private void Awake()
@@ -73,12 +73,10 @@ public class Enemy : MonoBehaviour, IDamageable
                 {
                     PreventInterectingWithColliderByPush(collider);
                 }
-                else if ((1 << collider.gameObject.layer) == EntityLayers.Player)
+                else if ((1 << collider.gameObject.layer) == EntityLayers.Player
+                         && collider.gameObject.TryGetComponent(out IDamageable damagable))
                 {
-                    if (collider.gameObject.TryGetComponent(out IDamageable damagable))
-                    {
-                        damagable.TakeDamage(_stats.Damage);
-                    }
+                    damagable.TakeDamage(_stats.Damage);
                 }
             }
         }
