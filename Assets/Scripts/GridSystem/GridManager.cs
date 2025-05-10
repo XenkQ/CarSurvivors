@@ -5,8 +5,8 @@ using Player;
 
 namespace GridSystem
 {
-    [CustomEditor(typeof(GridController))]
-    public class GridControllerEditor : Editor
+    [CustomEditor(typeof(GridManager))]
+    public class GridManagerEditor : Editor
     {
         #region SerializedProperties
 
@@ -103,7 +103,7 @@ namespace GridSystem
         }
     }
 
-    public sealed class GridController : MonoBehaviour
+    public sealed class GridManager : MonoBehaviour
     {
         [SerializeField] private GridConfiguration _worldGridConfiguration;
         [SerializeField] private float _delayBetweenWorldGridUpdate = 0.2f;
@@ -127,9 +127,9 @@ namespace GridSystem
 #endif
         private FlowField.FlowField _flowField;
 
-        public static GridController Instance { get; private set; }
+        public static GridManager Instance { get; private set; }
 
-        private GridController()
+        private GridManager()
         { }
 
         public void Awake()

@@ -6,7 +6,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     [SerializeField] private ProjectileStatsSO _stats;
-    [SerializeField] private BoxCollider _boxCollider;
+    [SerializeField] private SphereCollider _sphereCollider;
     private ushort _piercedCounter;
 
     public event EventHandler OnLifeEnd;
@@ -21,16 +21,21 @@ public class Projectile : MonoBehaviour
 
     private void FixedUpdate()
     {
-        RaycastHit[] hits = Physics.BoxCastAll(transform.position + _boxCollider.center, _boxCollider.size,
-                                          Vector3.down, transform.rotation, _boxCollider.size.y,
-                                          EntityLayers.Enemy, QueryTriggerInteraction.Collide);
-        foreach (RaycastHit hit in hits)
+        Collider[] colliders = Physics.OverlapSphere(transform.position + _sphereCollider.center, _sphereCollider.radius,
+                                                     EntityLayers.Enemy | TerrainLayers.Impassable);
+        foreach (Collider collider in colliders)
         {
-            if (hit.collider != null && hit.transform.gameObject.TryGetComponent(out IDamageable damagable))
+            if (collider == null)
+            {
+                return;
+            }
+
+            if (collider.transform.gameObject.TryGetComponent(out IDamageable damagable))
             {
                 damagable.TakeDamage(_stats.Damage);
-                DecreasePiercing();
             }
+
+            DecreasePiercing();
         }
     }
 

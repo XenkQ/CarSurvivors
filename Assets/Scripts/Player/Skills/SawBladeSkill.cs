@@ -55,11 +55,10 @@ namespace Player.Skills
 
         private void AtackAllEnemiesInsideCollider()
         {
-            RaycastHit[] hits = Physics.BoxCastAll(transform.position + _boxCollider.center, _boxCollider.size,
-                                                   Vector3.down, transform.rotation, _boxCollider.size.y, EntityLayers.All);
-            foreach (RaycastHit hit in hits)
+            Collider[] colliders = Physics.OverlapBox(transform.position + _boxCollider.center, _boxCollider.size, transform.rotation, EntityLayers.All);
+            foreach (Collider collider in colliders)
             {
-                AttackCollidingEntity(hit.collider);
+                AttackCollidingEntity(collider);
             }
         }
 

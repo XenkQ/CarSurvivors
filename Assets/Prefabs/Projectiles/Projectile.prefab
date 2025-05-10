@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6147078258092543939}
   - component: {fileID: 148469418258665263}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: Projectile_Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,7 +110,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7578351466348702196}
   - component: {fileID: 2427746680333010372}
-  - component: {fileID: 92642958029709907}
+  - component: {fileID: -3319223557082848545}
   m_Layer: 0
   m_Name: Projectile
   m_TagString: Untagged
@@ -147,8 +147,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stats: {fileID: 0}
---- !u!65 &92642958029709907
-BoxCollider:
+  _sphereCollider: {fileID: -3319223557082848545}
+--- !u!135 &-3319223557082848545
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -166,5 +167,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.3, y: 0.3, z: 0.3}
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}

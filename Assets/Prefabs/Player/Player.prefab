@@ -46,11 +46,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89a61df61a74ff148bad628d8a4eaa75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _minigunTurretsConfiguration: {fileID: 0}
   _turretsProejctile: {fileID: 4901841786317894366, guid: 19270b55571e60c4489d44d93aa14239, type: 3}
+  _projectilesParent: {fileID: 0}
   _turrets:
   - {fileID: 941515347815423511}
   - {fileID: 8759251485031666997}
-  _projectileSpawnDelay: 0
+  _projectileSpawnDelay: 0.06
 --- !u!1 &1285516617489979006
 GameObject:
   m_ObjectHideFlags: 0
@@ -63,7 +65,7 @@ GameObject:
   - component: {fileID: 5277447736254715040}
   - component: {fileID: 4427362447296171089}
   m_Layer: 0
-  m_Name: SawBlades
+  m_Name: SawBlade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -124,6 +126,53 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.5060387, y: 0.33458298, z: 0.6899376}
   m_Center: {x: 0.007966995, y: 0.05733937, z: 0.81920815}
+--- !u!1 &1319725124535658448
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4451731468149088330}
+  - component: {fileID: 1721377312614150865}
+  m_Layer: 0
+  m_Name: Landmine
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4451731468149088330
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1319725124535658448}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.581, z: -1.435}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3247043444263234489}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1721377312614150865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1319725124535658448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 522f6f112bbd45d4f91ccd435fc3420a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _landminePrefab: {fileID: 6048307613972475818, guid: f5dbe1699bc9b4d47bbf530373b001d0, type: 3}
+  _landminesParent: {fileID: 0}
+  _cooldown: 2
 --- !u!1 &1549863008132447798
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,7 +254,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7193072656616859072}
   m_Layer: 8
-  m_Name: Meshesh
+  m_Name: Wheels_Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -271,7 +320,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9111843746906056963}
   m_Layer: 8
-  m_Name: Colliders
+  m_Name: Wheels_Colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -398,6 +447,7 @@ Transform:
   m_Children:
   - {fileID: 8133086250023960409}
   - {fileID: 5450912998383506267}
+  - {fileID: 4451731468149088330}
   m_Father: {fileID: 6257441156095345877}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4105977957052641957
@@ -787,7 +837,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 135308da80dc14f44940a11d37c1e7a9, type: 3}
       propertyPath: m_Name
-      value: Body
+      value: Player_Visual
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 135308da80dc14f44940a11d37c1e7a9, type: 3}
       propertyPath: m_Layer
@@ -1062,6 +1112,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Turret
       objectReference: {fileID: 0}
+    - target: {fileID: 2714479283582284822, guid: 027ddf779200ba34c8294e72ec6c3d5f, type: 3}
+      propertyPath: _stats
+      value: 
+      objectReference: {fileID: 11400000, guid: 6a1203ade72efae429dbe8d7b2beb0c3, type: 2}
     - target: {fileID: 3513241825416687479, guid: 027ddf779200ba34c8294e72ec6c3d5f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.414
@@ -1272,6 +1326,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Turret (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2714479283582284822, guid: 027ddf779200ba34c8294e72ec6c3d5f, type: 3}
+      propertyPath: _stats
+      value: 
+      objectReference: {fileID: 11400000, guid: 6a1203ade72efae429dbe8d7b2beb0c3, type: 2}
     - target: {fileID: 2714479283582284822, guid: 027ddf779200ba34c8294e72ec6c3d5f, type: 3}
       propertyPath: _inverseRotation
       value: 1

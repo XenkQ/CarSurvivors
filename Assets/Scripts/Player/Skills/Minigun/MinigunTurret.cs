@@ -7,21 +7,22 @@ namespace Player.Skills
     {
         [field: SerializeField] public Transform GunTip { get; private set; }
         [SerializeField] private Transform _visual;
-        [SerializeField] private float _range = 2f;
-        [SerializeField][Range(0, 180f)] private float _radiusAngle;
+        [SerializeField] private TurretStatsSO _stats;
         [SerializeField] private bool _inverseRotation;
-        [SerializeField] private float _rotationDuration = 0.3f;
         private Tween _rotateTween;
 
         private Quaternion _startRotation;
 
-        public void OnEnable()
+        private void OnEnable()
         {
-            _visual.localRotation = Quaternion.Euler(0, (_inverseRotation ? _radiusAngle : -_radiusAngle) * 0.5f, 0);
+            _visual.localRotation = Quaternion.Euler(0, (_inverseRotation ? _stats.RadiusAngle : -_stats.RadiusAngle) * 0.5f, 0);
 
             if (_rotateTween == null)
             {
-                _rotateTween = _visual.DOLocalRotate(new Vector3(0, (_inverseRotation ? -_radiusAngle : _radiusAngle) * 0.5f, 0), _rotationDuration).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
+                _rotateTween = _visual
+                    .DOLocalRotate(new Vector3(0, (_inverseRotation ? -_stats.RadiusAngle : _stats.RadiusAngle) * 0.5f, 0), _stats.RotationDuration)
+                    .SetEase(Ease.InOutSine)
+                    .SetLoops(-1, LoopType.Yoyo);
             }
             else
             {
@@ -29,7 +30,7 @@ namespace Player.Skills
             }
         }
 
-        public void OnDisable()
+        private void OnDisable()
         {
             transform.rotation = _startRotation;
             _rotateTween.Pause();

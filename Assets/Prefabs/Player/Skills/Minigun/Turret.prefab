@@ -47,10 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <GunTip>k__BackingField: {fileID: 6387729289892807497}
   _visual: {fileID: 8980045539191705095}
-  _range: 2
-  _radiusAngle: 120
+  _stats: {fileID: 0}
   _inverseRotation: 0
-  _rotationDuration: 1
 --- !u!1 &2839812882640289078
 GameObject:
   m_ObjectHideFlags: 0
@@ -144,7 +142,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6d43305601edcae468e72f5fca18513b, type: 3}
       propertyPath: m_Name
-      value: Model
+      value: Turret_Visual
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

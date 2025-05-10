@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class WaveManager : MonoBehaviour
+public sealed class WaveManager : MonoBehaviour
 {
     [Serializable]
     private class EnemyInfo
@@ -27,6 +27,9 @@ public class WaveManager : MonoBehaviour
 
     [SerializeField] private List<EnemyInfo> _poolEnemiesInfo;
     private Dictionary<EnemyInfo, ObjectPool<Enemy>> _enemyPools = new();
+
+    private WaveManager()
+    { }
 
     private void Awake()
     {
@@ -115,14 +118,14 @@ public class WaveManager : MonoBehaviour
 
     private Vector3 GetSpawnPos()
     {
-        return GridController.Instance.GridPlayerChunk.GetRandomWalkableEdgeCell().WorldPos;
+        return GridManager.Instance.GridPlayerChunk.GetRandomWalkableEdgeCell().WorldPos;
     }
 
     private Enemy[] GetEnemiesOutsidePlayerChunk()
     {
         List<Enemy> enemies = new List<Enemy>();
 
-        GridSystem.Grid playerChunk = GridController.Instance.GridPlayerChunk;
+        GridSystem.Grid playerChunk = GridManager.Instance.GridPlayerChunk;
         Cell centerCell = playerChunk.Cells[playerChunk.Width / 2, playerChunk.Height / 2];
         Vector3 center = centerCell.WorldPos;
 

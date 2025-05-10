@@ -5,24 +5,34 @@ namespace Player.Skills
 {
     public class MinigunSkill : Skill
     {
+        [SerializeField] private TurretStatsSO _minigunTurretsConfiguration;
         [SerializeField] private Projectile _turretsProejctile;
+        [SerializeField] private Transform _projectilesParent;
+
         [SerializeField] private MinigunTurret[] _turrets;
+
         [SerializeField] private float _projectileSpawnDelay;
         private const float SPAWN_FIRST_PROJECTILE_DELAY = 0.5f;
         private ushort _level;
 
         public override event EventHandler OnLevelUp;
 
-        private void OnEnable()
+        private void Start()
         {
-            InvokeRepeating("SpawnProjectile", SPAWN_FIRST_PROJECTILE_DELAY, _projectileSpawnDelay)];
+            InvokeRepeating("SpawnProjectile", SPAWN_FIRST_PROJECTILE_DELAY, _projectileSpawnDelay);
+        }
+
+        public override void LevelUp()
+        {
+            _level++;
+            OnLevelUp?.Invoke(this, EventArgs.Empty);
         }
 
         private void SpawnProjectile()
         {
             foreach (MinigunTurret turret in _turrets)
             {
-                Projectile projectile = Instantiate(_turretsProejctile, turret.GunTip.position, turret.GunTip.rotation);
+                Projectile projectile = Instantiate(_turretsProejctile, turret.GunTip.position, turret.GunTip.rotation, _projectilesParent);
                 projectile.OnLifeEnd += Projectile_OnLifeEnd;
             }
         }
@@ -34,12 +44,6 @@ namespace Player.Skills
             {
                 Destroy(projectile.gameObject);
             }
-        }
-
-        public override void LevelUp()
-        {
-            _level++;
-            OnLevelUp?.Invoke(this, EventArgs.Empty);
         }
     }
 }

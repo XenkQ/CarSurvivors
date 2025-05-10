@@ -104,7 +104,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private Vector3 GetMoveDirectionBasedOnCurrentCell()
     {
-        GridSystem.Grid grid = GridController.Instance.WorldGrid;
+        GridSystem.Grid grid = GridManager.Instance.WorldGrid;
         Cell currentCell = grid.GetCellFromWorldPos(transform.position);
         if (currentCell != null && currentCell.BestDirection != null)
         {
