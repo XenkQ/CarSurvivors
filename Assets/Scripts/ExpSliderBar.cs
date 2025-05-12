@@ -44,11 +44,9 @@ namespace Assets.Scripts
 
             if (notNextLvl && currentlyNotPlayingLvlUpAnim)
             {
+                KillExpIncreaseTweenIfPlaying();
+
                 _expData = new ExpData(_expData.Lvl, e.ExpData.Exp, _expData.MaxExp);
-                if (_expIncreaseTween != null && _expIncreaseTween.IsPlaying())
-                {
-                    _expIncreaseTween.Kill();
-                }
                 _expIncreaseTween = AnimateSliderExpGain(_expData.Exp);
             }
         }
@@ -62,6 +60,8 @@ namespace Assets.Scripts
         {
             if (_levelUpQueue.Count > 0 && (_lvlUpTween == null || !_lvlUpTween.IsPlaying()))
             {
+                KillExpIncreaseTweenIfPlaying();
+
                 _lvlUpTween = AnimateSliderExpGain(_expData.MaxExp).OnComplete(() =>
                 {
                     _expData = _levelUpQueue.Dequeue();
@@ -75,6 +75,14 @@ namespace Assets.Scripts
                         _expIncreaseTween = AnimateSliderExpGain(_expData.Exp);
                     }
                 });
+            }
+        }
+
+        private void KillExpIncreaseTweenIfPlaying()
+        {
+            if (_expIncreaseTween != null && _expIncreaseTween.IsPlaying())
+            {
+                _expIncreaseTween.Kill();
             }
         }
 
