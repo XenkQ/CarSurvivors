@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 47da6be86f852ee429e86d67c9bd13ad, type: 3}
       propertyPath: m_Name
-      value: ConcBarrier
+      value: ConcreteBarrier
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 47da6be86f852ee429e86d67c9bd13ad, type: 3}
       propertyPath: m_Layer
@@ -92,5 +92,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.48636058, y: 0.66069835, z: 1.1260855}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.48636058, y: 1.3600187, z: 1.1260855}
+  m_Center: {x: 0, y: 0.34966004, z: 0}

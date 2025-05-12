@@ -1,28 +1,25 @@
 using DG.Tweening;
-using Grid;
+using GridSystem;
 using LayerMasks;
-using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Health), typeof(Collider))]
 public class Enemy : MonoBehaviour, IDamageable
 {
-    [SerializeField] private float _movementSpeed;
-    private float _rotationSpeed = 4f;
+    public Health Health { get; private set; }
+
+    private const float PUSH_FROM_COLLISION_POWER = 1f;
+
+    [SerializeField] private EnemyStatsSO _stats;
 
     [SerializeField] private float _collisionRadius;
-    [SerializeField] private float _pushFromCollisionPower = 1f;
     private Collider _collider;
 
-    [SerializeField] private float _damage = 1f;
-    [SerializeField] private int _level = 1;
-
-    [SerializeField] private float _animationScaleMultiplier = 1f;
-    private Vector3 _startScale;
-
     private float _verticalPosOffset;
+    private float _currentStunAfterDamageDelay;
 
-    public Health Health { get; private set; }
+    private Vector3 _startScale;
+    private Tween _scaleTween;
 
     private void Awake()
     {
@@ -30,19 +27,38 @@ public class Enemy : MonoBehaviour, IDamageable
         _collider = GetComponent<Collider>();
     }
 
-    private void Start()
+    private void OnEnable()
     {
         _startScale = transform.localScale;
-        transform.DOScale(_startScale * _animationScaleMultiplier, 1f).SetLoops(-1, LoopType.Yoyo);
+        _verticalPosOffset = transform.position.y;
+        if (_scaleTween == null)
+        {
+            _scaleTween = transform.DOScale(_startScale * _stats.AnimationScaleMultiplier, 1f).SetLoops(-1, LoopType.Yoyo);
+        }
+        else
+        {
+            _scaleTween.Restart();
+        }
+    }
+
+    private void OnDisable()
+    {
+        transform.localScale = _startScale;
+        transform.position = new Vector3(0, _verticalPosOffset, 0);
+        _scaleTween.Pause();
     }
 
     private void Update()
     {
-        Vector3 gridDir = GetMoveDirectionBasedOnGrid();
-        Vector3 movement = _movementSpeed * Time.deltaTime * gridDir;
-        Quaternion targetRotation = Quaternion.LookRotation(movement.normalized);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
-        transform.position += movement;
+        if (_currentStunAfterDamageDelay > 0)
+        {
+            _currentStunAfterDamageDelay -= Time.deltaTime;
+        }
+        else
+        {
+            Vector3 movement = MoveOnGrid();
+            RotateTowardsMovementDirection(movement);
+        }
     }
 
     private void FixedUpdate()
@@ -57,36 +73,38 @@ public class Enemy : MonoBehaviour, IDamageable
                 {
                     PreventInterectingWithColliderByPush(collider);
                 }
-                else if ((1 << collider.gameObject.layer) == EntityLayers.Player)
+                else if ((1 << collider.gameObject.layer) == EntityLayers.Player
+                         && collider.gameObject.TryGetComponent(out IDamageable damagable))
                 {
-                    collider.gameObject.TryGetComponent(out IDamageable damagable);
-                    damagable.TakeDamage(_damage);
+                    damagable.TakeDamage(_stats.Damage);
                 }
             }
         }
     }
 
-    public void SpawnAtCell(Cell cell)
+    private void OnDrawGizmos()
     {
-        transform.position = cell.WorldPos;
+        int numberOfSegments = 16;
+        DebugUtilities.DrawCircle(transform.position, _collisionRadius, numberOfSegments, Color.yellow);
     }
 
     public void TakeDamage(float damage)
     {
-        throw new NotImplementedException();
+        _currentStunAfterDamageDelay = _stats.StunAfterDamageDuration;
+        Health.DecreaseHealth(damage);
     }
 
-    private void PreventInterectingWithColliderByPush(Collider collider)
+    private Vector3 MoveOnGrid()
     {
-        Vector3 otherEnemyDirection = (collider.transform.position - transform.position).normalized;
-        Vector3 pushDestination = transform.position + (-otherEnemyDirection * _pushFromCollisionPower);
-        pushDestination.y = _verticalPosOffset;
-        transform.position = Vector3.Lerp(transform.position, pushDestination, _movementSpeed * Time.deltaTime);
+        Vector3 gridDir = GetMoveDirectionBasedOnCurrentCell();
+        Vector3 movement = _stats.MovementSpeed * Time.deltaTime * gridDir;
+        transform.position += movement;
+        return movement;
     }
 
-    private Vector3 GetMoveDirectionBasedOnGrid()
+    private Vector3 GetMoveDirectionBasedOnCurrentCell()
     {
-        Grid.Grid grid = GridController.Instance.WorldGrid;
+        GridSystem.Grid grid = GridManager.Instance.WorldGrid;
         Cell currentCell = grid.GetCellFromWorldPos(transform.position);
         if (currentCell != null && currentCell.BestDirection != null)
         {
@@ -97,9 +115,17 @@ public class Enemy : MonoBehaviour, IDamageable
         return Vector3.zero;
     }
 
-    private void OnDrawGizmos()
+    private void RotateTowardsMovementDirection(Vector3 movement)
     {
-        int numberOfSegments = 16;
-        DebugUtilities.DrawCircle(transform.position, _collisionRadius, numberOfSegments, Color.yellow);
+        Quaternion targetRotation = Quaternion.LookRotation(movement.normalized);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _stats.RotationSpeed * Time.deltaTime);
+    }
+
+    private void PreventInterectingWithColliderByPush(Collider collider)
+    {
+        Vector3 otherEnemyDirection = (collider.transform.position - transform.position).normalized;
+        Vector3 pushDestination = transform.position + (-otherEnemyDirection * PUSH_FROM_COLLISION_POWER);
+        pushDestination.y = _verticalPosOffset;
+        transform.position = Vector3.Lerp(transform.position, pushDestination, _stats.MovementSpeed * Time.deltaTime);
     }
 }

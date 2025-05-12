@@ -1,11 +1,11 @@
-using Grid;
+using GridSystem;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class WaveManager : MonoBehaviour
+public sealed class WaveManager : MonoBehaviour
 {
     [Serializable]
     private class EnemyInfo
@@ -27,6 +27,9 @@ public class WaveManager : MonoBehaviour
 
     [SerializeField] private List<EnemyInfo> _poolEnemiesInfo;
     private Dictionary<EnemyInfo, ObjectPool<Enemy>> _enemyPools = new();
+
+    private WaveManager()
+    { }
 
     private void Awake()
     {
@@ -51,48 +54,6 @@ public class WaveManager : MonoBehaviour
     {
         WavesProcess();
         EnemiesToPlayerChunkTeleporter();
-    }
-
-    private void EnemiesToPlayerChunkTeleporter()
-    {
-        if (_currentEnemiesOutsidePlayerChunkCheckDelay > 0)
-        {
-            _currentEnemiesOutsidePlayerChunkCheckDelay -= Time.deltaTime;
-        }
-        else
-        {
-            _currentEnemiesOutsidePlayerChunkCheckDelay = _startEnemiesOutsidePlayerChunkCheckDelay;
-            foreach (Enemy enemy in GetEnemiesOutsidePlayerChunk())
-            {
-                enemy.transform.position = GetRandomEdgeCellWorldPos();
-            }
-        }
-    }
-
-    private Enemy[] GetEnemiesOutsidePlayerChunk()
-    {
-        List<Enemy> enemies = new List<Enemy>();
-
-        Grid.Grid playerChunk = GridController.Instance.GridPlayerChunk;
-        Cell centerCell = playerChunk.Cells[playerChunk.Width / 2, playerChunk.Height / 2];
-        Vector3 center = centerCell.WorldPos;
-
-        float width = playerChunk.Width * 0.5f * playerChunk.CellSize;
-        float height = playerChunk.Height * 0.5f * playerChunk.CellSize;
-
-        foreach (Transform child in transform)
-        {
-            if (child.TryGetComponent(out Enemy enemy))
-            {
-                Vector3 enemyPos = enemy.transform.position;
-                if (Mathf.Abs(enemyPos.x - center.x) > width || Mathf.Abs(enemyPos.z - center.z) > height)
-                {
-                    enemies.Add(enemy);
-                }
-            }
-        }
-
-        return enemies.ToArray();
     }
 
     private void WavesProcess()
@@ -139,30 +100,79 @@ public class WaveManager : MonoBehaviour
         return null;
     }
 
+    private void EnemiesToPlayerChunkTeleporter()
+    {
+        if (_currentEnemiesOutsidePlayerChunkCheckDelay > 0)
+        {
+            _currentEnemiesOutsidePlayerChunkCheckDelay -= Time.deltaTime;
+        }
+        else
+        {
+            _currentEnemiesOutsidePlayerChunkCheckDelay = _startEnemiesOutsidePlayerChunkCheckDelay;
+            foreach (Enemy enemy in GetEnemiesOutsidePlayerChunk())
+            {
+                enemy.transform.position = GetSpawnPos();
+            }
+        }
+    }
+
+    private Vector3 GetSpawnPos()
+    {
+        return GridManager.Instance.GridPlayerChunk.GetRandomWalkableEdgeCell().WorldPos;
+    }
+
+    private Enemy[] GetEnemiesOutsidePlayerChunk()
+    {
+        List<Enemy> enemies = new List<Enemy>();
+
+        GridSystem.Grid playerChunk = GridManager.Instance.GridPlayerChunk;
+        Cell centerCell = playerChunk.Cells[playerChunk.Width / 2, playerChunk.Height / 2];
+        Vector3 center = centerCell.WorldPos;
+
+        float width = playerChunk.Width * 0.5f * playerChunk.CellSize;
+        float height = playerChunk.Height * 0.5f * playerChunk.CellSize;
+
+        foreach (Transform child in transform)
+        {
+            if (child.TryGetComponent(out Enemy enemy))
+            {
+                Vector3 enemyPos = enemy.transform.position;
+                if (Mathf.Abs(enemyPos.x - center.x) > width || Mathf.Abs(enemyPos.z - center.z) > height)
+                {
+                    enemies.Add(enemy);
+                }
+            }
+        }
+
+        return enemies.ToArray();
+    }
+
     private void OnEnemyGet(Enemy enemy)
     {
-        enemy.transform.position = GetRandomEdgeCellWorldPos();
-        enemy.Health.OnNoHealth += ReleaseEnemy_OnNoHealth;
+        enemy.transform.position = GetSpawnPos();
+        enemy.Health.OnNoHealth += Health_OnNoHealth;
         enemy.gameObject.SetActive(true);
         _spawnedEnemiesCounter++;
     }
 
     private void OnEnemyRelease(Enemy enemy)
     {
-        enemy.Health.OnNoHealth -= ReleaseEnemy_OnNoHealth;
+        enemy.Health.OnNoHealth -= Health_OnNoHealth;
         enemy.gameObject.SetActive(false);
         _spawnedEnemiesCounter--;
     }
 
-    private void ReleaseEnemy_OnNoHealth(object sender, EventArgs e)
+    private void Health_OnNoHealth(object sender, EventArgs e)
     {
-        OnEnemyRelease((Enemy)sender);
-    }
+        Health healthComponent = sender as Health;
+        if (healthComponent == null)
+        {
+            return;
+        }
 
-    private static Vector3 GetRandomEdgeCellWorldPos()
-    {
-        List<Cell> edgeCells = GridController.Instance.GridPlayerChunk.GetWalkableEdgeCells();
-        Cell randomCell = edgeCells[UnityEngine.Random.Range(0, edgeCells.Count)];
-        return randomCell.WorldPos;
+        if (healthComponent.gameObject.TryGetComponent(out Enemy enemy))
+        {
+            OnEnemyRelease(enemy);
+        }
     }
 }
