@@ -150,19 +150,19 @@ public sealed class WaveManager : MonoBehaviour
     private void OnEnemyGet(Enemy enemy)
     {
         enemy.transform.position = GetSpawnPos();
-        enemy.Health.OnNoHealth += ReleaseEnemy_OnNoHealth;
+        enemy.Health.OnNoHealth += Health_OnNoHealth;
         enemy.gameObject.SetActive(true);
         _spawnedEnemiesCounter++;
     }
 
     private void OnEnemyRelease(Enemy enemy)
     {
-        enemy.Health.OnNoHealth -= ReleaseEnemy_OnNoHealth;
+        enemy.Health.OnNoHealth -= Health_OnNoHealth;
         enemy.gameObject.SetActive(false);
         _spawnedEnemiesCounter--;
     }
 
-    private void ReleaseEnemy_OnNoHealth(object sender, EventArgs e)
+    private void Health_OnNoHealth(object sender, EventArgs e)
     {
         Health healthComponent = sender as Health;
         if (healthComponent == null)

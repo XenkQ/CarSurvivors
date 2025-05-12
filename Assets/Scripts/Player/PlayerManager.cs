@@ -30,8 +30,8 @@ namespace Player
         private void Start()
         {
             _currentDelayBetweenTakingDamage = _startDelayBetweenTakingDamage;
-            Health.OnHealthDecreased += DamageEffect_OnHealthDecreased;
-            Health.OnNoHealth += DeadEffect_OnNoHealth;
+            Health.OnHealthDecreased += Health_OnHealthDecreased;
+            Health.OnNoHealth += Health_OnNoHealth;
         }
 
         private void Update()
@@ -56,12 +56,12 @@ namespace Player
             }
         }
 
-        private void DamageEffect_OnHealthDecreased(object sender, System.EventArgs e)
+        private void Health_OnHealthDecreased(object sender, System.EventArgs e)
         {
             Debug.Log("DAMAGED");
         }
 
-        private void DeadEffect_OnNoHealth(object sender, System.EventArgs e)
+        private void Health_OnNoHealth(object sender, System.EventArgs e)
         {
             Debug.Log("You are dead");
         }

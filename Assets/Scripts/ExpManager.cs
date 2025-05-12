@@ -1,21 +1,43 @@
-using DG.Tweening;
-using TMPro;
+using System;
 using UnityEngine;
-using UnityEngine.UI;
+
+public readonly struct ExpData
+{
+    public readonly byte Lvl;
+    public readonly float Exp;
+    public readonly float MaxExp;
+
+    public ExpData(byte lvl = 1, float exp = 0, float maxExp = float.MaxValue)
+    {
+        Lvl = lvl;
+        Exp = exp;
+        MaxExp = maxExp;
+    }
+
+    public void Deconstruct(out byte lvl, out float exp, out float maxExp)
+    {
+        lvl = Lvl;
+        exp = Exp;
+        maxExp = MaxExp;
+    }
+}
+
+public class ExpDataEventArgs : EventArgs
+{
+    public ExpData ExpData { get; set; }
+}
 
 public sealed class ExpManager : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI _levelText;
-    [SerializeField] private Slider _expSlider;
     [SerializeField] private AnimationCurve _expCurve;
-    [SerializeField] private float _timeToVisualiseCurrentExpInLvlOnSlider = 4f;
-    private float _currentExpInLvl;
-    private float _expToNextLvl;
-    private byte _currentLevel = 1;
 
-    public ExpManager Instance { get; private set; }
+    public ExpData ExpData { get; private set; } = new ExpData();
 
-    private Tween _expIncreaseTween;
+    public static ExpManager Instance { get; private set; }
+
+    public event EventHandler<ExpDataEventArgs> OnLvlUp;
+
+    public event EventHandler<ExpDataEventArgs> OnExpChange;
 
     private ExpManager()
     { }
@@ -30,86 +52,59 @@ public sealed class ExpManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
 
-    private void Start()
-    {
-        _expToNextLvl = CalculateExpToNextLevel(_currentLevel);
-        _expSlider.maxValue = _expToNextLvl;
-        _expSlider.value = _currentExpInLvl;
+        ExpData = new ExpData(maxExp: CalculateMaxExp(ExpData.Lvl));
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            AddExp(20f);
+            AddExp(10f);
         }
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            AddExp(1000000f);
+            AddExp(115f);
+        }
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            AddExp(10000f);
         }
     }
 
-    public void AddExp(float exp)
+    public void AddExp(float value)
     {
-        if (_currentLevel == byte.MaxValue)
+        if (ExpData.Lvl == byte.MaxValue)
         {
             return;
         }
 
-        _currentExpInLvl += exp;
+        (byte lvl, float exp, float maxExp) = ExpData;
+        byte prevLvl = lvl;
+        exp += value;
 
-        while (_currentLevel < byte.MaxValue && _currentExpInLvl >= _expToNextLvl)
+        while (lvl < byte.MaxValue && exp >= maxExp)
         {
-            _currentExpInLvl -= _expToNextLvl;
-            _currentLevel++;
-            _expToNextLvl = CalculateExpToNextLevel(_currentLevel);
+            lvl++;
+            exp -= maxExp;
+            maxExp = CalculateMaxExp(lvl);
+
+            ExpData = new ExpData(lvl, exp, maxExp);
+            OnLvlUp?.Invoke(this, new ExpDataEventArgs()
+            {
+                ExpData = ExpData
+            });
         }
 
-        UpdateExpVisuals();
+        ExpData = new ExpData(lvl, exp + value, maxExp);
+        OnExpChange?.Invoke(this, new ExpDataEventArgs()
+        {
+            ExpData = ExpData
+        });
     }
 
-    private float CalculateExpToNextLevel(byte level)
+    private float CalculateMaxExp(byte level)
         => _expCurve.Evaluate(level);
-
-    private void UpdateExpVisuals()
-    {
-        if (_expIncreaseTween != null)
-        {
-            _expIncreaseTween.Kill();
-        }
-
-        if (_expSlider.maxValue < _expToNextLvl)
-        {
-            _expIncreaseTween = TweenSliderToValue(_expSlider.maxValue)
-                .OnComplete(() =>
-                {
-                    UpdateLvlText(_currentLevel);
-                    _expSlider.value = 0;
-                    _expIncreaseTween = TweenSliderToValue(_currentExpInLvl);
-                });
-        }
-        else
-        {
-            _expIncreaseTween = TweenSliderToValue(_currentExpInLvl);
-        }
-
-        _expSlider.maxValue = _expToNextLvl;
-    }
-
-    private void UpdateLvlText(byte level)
-    => _levelText.text = $"{_currentLevel} Lvl";
-
-    private Tween TweenSliderToValue(float value)
-    {
-        return DOTween
-            .To(
-                () => _expSlider.value,
-                x => _expSlider.value = x,
-                value,
-                _timeToVisualiseCurrentExpInLvlOnSlider)
-            .SetEase(Ease.InOutSine);
-    }
 }
