@@ -20,6 +20,11 @@ public readonly struct ExpData
         exp = Exp;
         maxExp = MaxExp;
     }
+
+    public override string ToString()
+    {
+        return $"ExpData(Level: {Lvl}, Exp: {Exp}, MaxExp: {MaxExp})";
+    }
 }
 
 public class ExpDataEventArgs : EventArgs
@@ -98,7 +103,7 @@ public sealed class ExpManager : MonoBehaviour
             });
         }
 
-        ExpData = new ExpData(lvl, exp + value, maxExp);
+        ExpData = new ExpData(lvl, exp, maxExp);
         OnExpChange?.Invoke(this, new ExpDataEventArgs()
         {
             ExpData = ExpData
