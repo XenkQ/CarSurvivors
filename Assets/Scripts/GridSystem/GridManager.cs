@@ -1,9 +1,9 @@
-﻿using GridSystem.FlowField;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEditor;
 using Player;
+using Assets.Scripts.GridSystem.FlowField;
 
-namespace GridSystem
+namespace Assets.Scripts.GridSystem
 {
     [CustomEditor(typeof(GridManager))]
     public class GridManagerEditor : Editor

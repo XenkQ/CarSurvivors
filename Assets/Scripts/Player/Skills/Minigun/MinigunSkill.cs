@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Player.Skills
+namespace Assets.Scripts.Player.Skills.Minigun
 {
     public class MinigunSkill : Skill
     {

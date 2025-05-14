@@ -2,7 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 
-namespace GridSystem.FlowField
+namespace Assets.Scripts.GridSystem.FlowField
 {
     [Serializable]
     public class FlowFieldDebugConfiguration

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace LayerMasks
+namespace Assets.Scripts.LayerMasks
 {
     public static class EntityLayers
     {

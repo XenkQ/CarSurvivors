@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Player.Skills
+namespace Assets.Scripts.Player.Skills
 {
     public abstract class Skill : MonoBehaviour, ISkill
     {

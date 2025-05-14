@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.Exp
 {
     public class ExpSliderBar : MonoBehaviour
     {
@@ -125,7 +125,7 @@ namespace Assets.Scripts
             float slowestSpeedPercent;
             if (newExp > 0)
             {
-                slowestSpeedPercent = 1f - (_expSlider.value / newExp);
+                slowestSpeedPercent = 1f - _expSlider.value / newExp;
             }
             else
             {

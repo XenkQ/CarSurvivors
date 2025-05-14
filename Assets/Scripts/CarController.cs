@@ -3,90 +3,93 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody))]
-public class CarController : MonoBehaviour
+namespace Assets.Scripts
 {
-    private enum Axel
+    [RequireComponent(typeof(Rigidbody))]
+    public class CarController : MonoBehaviour
     {
-        Front,
-        Rear
-    }
-
-    [Serializable]
-    private struct Wheel
-    {
-        public GameObject WheelModel;
-        public WheelCollider WheelCollider;
-        public Axel Axel;
-    }
-
-    [Header("TimeToArriveAtRangeEnd")]
-    [SerializeField] private float _speed = 600f;
-    [SerializeField] private float _maxAcceleration = 30.0f;
-    [SerializeField] private float _brakeAcceleration = 50.0f;
-
-    [Header("Rotation")]
-    [SerializeField] private float _turnSensitivity = 1.0f;
-    [SerializeField] private float _maxSteerAngle = 30.0f;
-
-    [Header("Physics")]
-    [SerializeField] private Vector3 _centerOfMass;
-    private Rigidbody _rb;
-
-    [SerializeField] private List<Wheel> _wheels;
-
-    private InputAction _moveAction;
-    private Vector2 _moveInput;
-
-    private void Awake()
-    {
-        _rb = GetComponent<Rigidbody>();
-    }
-
-    private void Start()
-    {
-        _moveAction = InputSystem.actions.FindAction("Move");
-        _rb.centerOfMass = _centerOfMass;
-    }
-
-    private void Update()
-    {
-        _moveInput = _moveAction.ReadValue<Vector2>().normalized;
-    }
-
-    private void FixedUpdate()
-    {
-        Move();
-        Steer();
-        AnimateWheels();
-    }
-
-    private void Move()
-    {
-        foreach (var wheel in _wheels)
+        private enum Axel
         {
-            wheel.WheelCollider.motorTorque = _moveInput.y * _speed * _maxAcceleration * Time.deltaTime;
+            Front,
+            Rear
         }
-    }
 
-    private void Steer()
-    {
-        foreach (var wheel in _wheels)
+        [Serializable]
+        private struct Wheel
         {
-            if (wheel.Axel == Axel.Front)
+            public GameObject WheelModel;
+            public WheelCollider WheelCollider;
+            public Axel Axel;
+        }
+
+        [Header("TimeToArriveAtRangeEnd")]
+        [SerializeField] private float _speed = 600f;
+        [SerializeField] private float _maxAcceleration = 30.0f;
+        [SerializeField] private float _brakeAcceleration = 50.0f;
+
+        [Header("Rotation")]
+        [SerializeField] private float _turnSensitivity = 1.0f;
+        [SerializeField] private float _maxSteerAngle = 30.0f;
+
+        [Header("Physics")]
+        [SerializeField] private Vector3 _centerOfMass;
+        private Rigidbody _rb;
+
+        [SerializeField] private List<Wheel> _wheels;
+
+        private InputAction _moveAction;
+        private Vector2 _moveInput;
+
+        private void Awake()
+        {
+            _rb = GetComponent<Rigidbody>();
+        }
+
+        private void Start()
+        {
+            _moveAction = InputSystem.actions.FindAction("Move");
+            _rb.centerOfMass = _centerOfMass;
+        }
+
+        private void Update()
+        {
+            _moveInput = _moveAction.ReadValue<Vector2>().normalized;
+        }
+
+        private void FixedUpdate()
+        {
+            Move();
+            Steer();
+            AnimateWheels();
+        }
+
+        private void Move()
+        {
+            foreach (var wheel in _wheels)
             {
-                float steerAngle = _moveInput.x * _turnSensitivity * _maxSteerAngle;
-                wheel.WheelCollider.steerAngle = Mathf.Lerp(wheel.WheelCollider.steerAngle, steerAngle, 0.6f);
+                wheel.WheelCollider.motorTorque = _moveInput.y * _speed * _maxAcceleration * Time.deltaTime;
             }
         }
-    }
 
-    private void AnimateWheels()
-    {
-        foreach (var wheel in _wheels)
+        private void Steer()
         {
-            wheel.WheelCollider.GetWorldPose(out Vector3 pos, out Quaternion rot);
-            wheel.WheelModel.transform.SetPositionAndRotation(pos, rot);
+            foreach (var wheel in _wheels)
+            {
+                if (wheel.Axel == Axel.Front)
+                {
+                    float steerAngle = _moveInput.x * _turnSensitivity * _maxSteerAngle;
+                    wheel.WheelCollider.steerAngle = Mathf.Lerp(wheel.WheelCollider.steerAngle, steerAngle, 0.6f);
+                }
+            }
+        }
+
+        private void AnimateWheels()
+        {
+            foreach (var wheel in _wheels)
+            {
+                wheel.WheelCollider.GetWorldPose(out Vector3 pos, out Quaternion rot);
+                wheel.WheelModel.transform.SetPositionAndRotation(pos, rot);
+            }
         }
     }
 }

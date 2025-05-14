@@ -1,4 +1,9 @@
-﻿public interface IHealthy
+﻿using Assets.Scripts.HealthSystem;
+
+namespace Scripts
 {
-    public Health Health { get; }
+    public interface IHealthy
+    {
+        public Health Health { get; }
+    }
 }

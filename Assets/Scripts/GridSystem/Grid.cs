@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GridSystem
+namespace Assets.Scripts.GridSystem
 {
     [Serializable]
     public class GridConfiguration
@@ -50,8 +50,8 @@ namespace GridSystem
             percentX = Mathf.Clamp01(percentX);
             percentY = Mathf.Clamp01(percentY);
 
-            int x = Mathf.Clamp(Mathf.FloorToInt((Width) * percentX), 0, Width - 1);
-            int y = Mathf.Clamp(Mathf.FloorToInt((Height) * percentY), 0, Height - 1);
+            int x = Mathf.Clamp(Mathf.FloorToInt(Width * percentX), 0, Width - 1);
+            int y = Mathf.Clamp(Mathf.FloorToInt(Height * percentY), 0, Height - 1);
             return Cells[x, y];
         }
 

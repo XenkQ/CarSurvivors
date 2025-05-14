@@ -1,4 +1,6 @@
-﻿public interface IDamageable : IHealthy
+﻿using Scripts;
+
+public interface IDamageable : IHealthy
 {
     public void TakeDamage(float damage);
 }
