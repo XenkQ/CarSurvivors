@@ -33,7 +33,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 755451714005535117}
+  - {fileID: 1073219461358712514}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1286223690747856801
@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stats: {fileID: 0}
+  _growShrinkAnimation: {fileID: 8394479680608116729}
   _collisionRadius: 0.52
 --- !u!114 &422639940558306586
 MonoBehaviour:
@@ -113,13 +114,63 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &5794725852362024996
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1073219461358712514}
+  - component: {fileID: 8394479680608116729}
+  m_Layer: 7
+  m_Name: GrowShrinkPivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1073219461358712514
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5794725852362024996}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 755451714005535117}
+  m_Father: {fileID: 3688238668444586915}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8394479680608116729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5794725852362024996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae1e6738093c4c5418a916434c3e9a33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enableHandConfiguration: 0
+  _configuration:
+    AnimationSpeed: 0
+    AnimationScaleMultiplier: 0
+    StartScale: {x: 0, y: 0, z: 0}
 --- !u!1001 &1004687724969455206
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 3688238668444586915}
+    m_TransformParent: {fileID: 1073219461358712514}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: bcf2ce51dcfdcd040b5da1fc923ea6ef, type: 3}
       propertyPath: m_LocalScale.x
@@ -151,7 +202,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bcf2ce51dcfdcd040b5da1fc923ea6ef, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bcf2ce51dcfdcd040b5da1fc923ea6ef, type: 3}
       propertyPath: m_LocalRotation.y
@@ -159,7 +210,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bcf2ce51dcfdcd040b5da1fc923ea6ef, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bcf2ce51dcfdcd040b5da1fc923ea6ef, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -175,7 +226,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bcf2ce51dcfdcd040b5da1fc923ea6ef, type: 3}
       propertyPath: m_Name
-      value: zombiee
+      value: Zombie_Visual
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

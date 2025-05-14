@@ -1,10 +1,10 @@
+using Assets.Scripts.Exp;
 using Assets.Scripts.GridSystem;
 using Assets.Scripts.HealthSystem;
 using Assets.Scripts.LayerMasks;
-using DG.Tweening;
 using UnityEngine;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.Enemy
 {
     [RequireComponent(typeof(Health), typeof(Collider))]
     public class Enemy : MonoBehaviour, IDamageable
@@ -14,6 +14,7 @@ namespace Assets.Scripts
         private const float PUSH_FROM_COLLISION_POWER = 1f;
 
         [SerializeField] private EnemyStatsSO _stats;
+        [SerializeField] private GrowShrinkAnimation _growShrinkAnimation;
 
         [SerializeField] private float _collisionRadius;
         private Collider _collider;
@@ -21,34 +22,29 @@ namespace Assets.Scripts
         private float _verticalPosOffset;
         private float _currentStunAfterDamageDelay;
 
-        private Vector3 _startScale;
-        private Tween _scaleTween;
-
         private void Awake()
         {
             Health = GetComponent<Health>();
             _collider = GetComponent<Collider>();
+            _growShrinkAnimation.Initialize(_stats.GrowShrinkAnimationConfiguration);
         }
 
         private void OnEnable()
         {
-            _startScale = transform.localScale;
             _verticalPosOffset = transform.position.y;
-            if (_scaleTween == null)
-            {
-                _scaleTween = transform.DOScale(_startScale * _stats.AnimationScaleMultiplier, 1f).SetLoops(-1, LoopType.Yoyo);
-            }
-            else
-            {
-                _scaleTween.Restart();
-            }
+
+            _growShrinkAnimation.StartAnimation();
+
+            Health.OnNoHealth += Health_OnNoHealth;
         }
 
         private void OnDisable()
         {
-            transform.localScale = _startScale;
             transform.position = new Vector3(0, _verticalPosOffset, 0);
-            _scaleTween.Pause();
+
+            _growShrinkAnimation.StopAnimation();
+
+            Health.OnNoHealth -= Health_OnNoHealth;
         }
 
         private void Update()
@@ -87,8 +83,13 @@ namespace Assets.Scripts
 
         private void OnDrawGizmos()
         {
-            int numberOfSegments = 16;
+            const int numberOfSegments = 16;
             DebugUtilities.DrawCircle(transform.position, _collisionRadius, numberOfSegments, Color.yellow);
+        }
+
+        private void Health_OnNoHealth(object sender, System.EventArgs e)
+        {
+            ExpManager.Instance.AddExp(_stats.ExpFromKill);
         }
 
         public void TakeDamage(float damage)

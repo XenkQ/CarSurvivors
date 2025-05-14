@@ -1,4 +1,4 @@
-using Assets.Scripts;
+using Assets.Scripts.Enemy;
 using Assets.Scripts.GridSystem;
 using Assets.Scripts.HealthSystem;
 using System;

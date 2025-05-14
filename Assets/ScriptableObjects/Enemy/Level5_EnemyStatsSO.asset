@@ -14,6 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MovementSpeed: 2
   RotationSpeed: 2
-  AnimationScaleMultiplier: 1.35
   Damage: 25
   Level: 5
+  StunAfterDamageDuration: 0
+  ExpFromKill: 110
+  GrowShrinkAnimationConfiguration:
+    AnimationTimeToLoop: 1
+    AnimationScaleMultiplier: 1.28
+    StartScale: {x: 1, y: 1, z: 1}
