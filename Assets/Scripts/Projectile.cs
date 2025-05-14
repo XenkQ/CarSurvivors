@@ -1,58 +1,62 @@
+using Assets.Scripts.LayerMasks;
 using DG.Tweening;
-using LayerMasks;
+using Scripts;
 using System;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+namespace Assets.Scripts
 {
-    [SerializeField] private ProjectileStatsSO _stats;
-    [SerializeField] private SphereCollider _sphereCollider;
-    private ushort _piercedCounter;
-
-    public event EventHandler OnLifeEnd;
-
-    private void OnEnable()
+    public class Projectile : MonoBehaviour
     {
-        _piercedCounter = _stats.MaxPiercing;
-        Vector3 targetPos = transform.position + transform.forward * _stats.Range;
-        targetPos.y = transform.position.y;
-        transform.DOMove(targetPos, _stats.TimeToArriveAtRangeEnd).SetEase(Ease.Linear).OnComplete(EndLife);
-    }
+        [SerializeField] private ProjectileStatsSO _stats;
+        [SerializeField] private SphereCollider _sphereCollider;
+        private ushort _piercedCounter;
 
-    private void FixedUpdate()
-    {
-        Collider[] colliders = Physics.OverlapSphere(transform.position + _sphereCollider.center, _sphereCollider.radius,
-                                                     EntityLayers.Enemy | TerrainLayers.Impassable);
-        foreach (Collider collider in colliders)
+        public event EventHandler OnLifeEnd;
+
+        private void OnEnable()
         {
-            if (collider == null)
-            {
-                return;
-            }
-
-            if (collider.transform.gameObject.TryGetComponent(out IDamageable damagable))
-            {
-                damagable.TakeDamage(_stats.Damage);
-            }
-
-            DecreasePiercing();
+            _piercedCounter = _stats.MaxPiercing;
+            Vector3 targetPos = transform.position + transform.forward * _stats.Range;
+            targetPos.y = transform.position.y;
+            transform.DOMove(targetPos, _stats.TimeToArriveAtRangeEnd).SetEase(Ease.Linear).OnComplete(EndLife);
         }
-    }
 
-    private void EndLife()
-    {
-        OnLifeEnd?.Invoke(this, EventArgs.Empty);
-    }
-
-    private void DecreasePiercing()
-    {
-        if (_piercedCounter > 0)
+        private void FixedUpdate()
         {
-            _piercedCounter--;
+            Collider[] colliders = Physics.OverlapSphere(transform.position + _sphereCollider.center, _sphereCollider.radius,
+                                                         EntityLayers.Enemy | TerrainLayers.Impassable);
+            foreach (Collider collider in colliders)
+            {
+                if (collider == null)
+                {
+                    return;
+                }
+
+                if (collider.transform.gameObject.TryGetComponent(out IDamageable damagable))
+                {
+                    damagable.TakeDamage(_stats.Damage);
+                }
+
+                DecreasePiercing();
+            }
         }
-        else
+
+        private void EndLife()
         {
-            EndLife();
+            OnLifeEnd?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void DecreasePiercing()
+        {
+            if (_piercedCounter > 0)
+            {
+                _piercedCounter--;
+            }
+            else
+            {
+                EndLife();
+            }
         }
     }
 }

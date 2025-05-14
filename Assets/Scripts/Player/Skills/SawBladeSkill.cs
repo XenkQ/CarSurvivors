@@ -1,9 +1,9 @@
 using System;
+using Assets.Scripts.LayerMasks;
 using DG.Tweening;
-using LayerMasks;
 using UnityEngine;
 
-namespace Player.Skills
+namespace Assets.Scripts.Player.Skills
 {
     public class SawBladeSkill : Skill
     {
@@ -65,7 +65,7 @@ namespace Player.Skills
         private void AttackCollidingEntity(Collider other)
         {
             GameObject collisionObject = other.transform.gameObject;
-            if ((1 << collisionObject.layer) == EntityLayers.Enemy)
+            if (1 << collisionObject.layer == EntityLayers.Enemy)
             {
                 if (collisionObject.TryGetComponent(out IDamageable damageable))
                 {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace GridSystem
+namespace Assets.Scripts.GridSystem
 {
     public static class GridDebug
     {

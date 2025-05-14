@@ -1,8 +1,8 @@
-﻿using LayerMasks;
+﻿using Assets.Scripts.LayerMasks;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GridSystem.FlowField
+namespace Assets.Scripts.GridSystem.FlowField
 {
     public class FlowField
     {

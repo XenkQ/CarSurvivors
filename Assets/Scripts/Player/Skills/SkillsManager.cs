@@ -1,7 +1,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace Player.Skills
+namespace Assets.Scripts.Player.Skills
 {
     public class SkillsManager : MonoBehaviour
     {

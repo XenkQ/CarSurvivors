@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using DG.Tweening;
 
-namespace Player.Skills
+namespace Assets.Scripts.Player.Skills.Minigun
 {
     public class MinigunTurret : MonoBehaviour
     {
