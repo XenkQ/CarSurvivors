@@ -5,13 +5,24 @@ namespace Assets.Scripts.Player.Skills
 {
     public abstract class Skill : MonoBehaviour, ISkill
     {
-        public abstract event EventHandler OnLevelUp;
+        public event EventHandler OnLevelUp;
+
+        protected ushort _level;
 
         public virtual void Activate()
         {
             gameObject.SetActive(true);
         }
 
-        public abstract void LevelUp();
+        public virtual void LevelUp()
+        {
+            _level++;
+            OnLevelUp?.Invoke(this, EventArgs.Empty);
+        }
+
+        public bool IsActive()
+        {
+            return gameObject.activeSelf;
+        }
     }
 }

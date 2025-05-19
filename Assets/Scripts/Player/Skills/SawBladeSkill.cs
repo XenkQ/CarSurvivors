@@ -1,4 +1,4 @@
-using System;
+using Assets.Scripts.HealthSystem;
 using Assets.Scripts.LayerMasks;
 using DG.Tweening;
 using UnityEngine;
@@ -13,11 +13,8 @@ namespace Assets.Scripts.Player.Skills
         [SerializeField] private float _size;
         [SerializeField] private float _cooldown;
         private float _currentCooldown;
-        private ushort _level;
 
         [SerializeField] private BoxCollider _boxCollider;
-
-        public override event EventHandler OnLevelUp;
 
         private void Awake()
         {
@@ -45,12 +42,6 @@ namespace Assets.Scripts.Player.Skills
         public void OnTriggerEnter(Collider other)
         {
             AttackCollidingEntity(other);
-        }
-
-        public override void LevelUp()
-        {
-            _level++;
-            OnLevelUp?.Invoke(this, EventArgs.Empty);
         }
 
         private void AtackAllEnemiesInsideCollider()

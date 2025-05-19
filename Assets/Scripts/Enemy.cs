@@ -36,7 +36,7 @@ namespace Assets.Scripts
             _verticalPosOffset = transform.position.y;
             if (_scaleTween == null)
             {
-                _scaleTween = transform.DOScale(_startScale * _stats.AnimationScaleMultiplier, 1f).SetLoops(-1, LoopType.Yoyo);
+                _scaleTween = transform.StartGrowShrinkLoopTween(_startScale * _stats.AnimationScaleMultiplier);
             }
             else
             {

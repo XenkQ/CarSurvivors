@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace Assets.Scripts.GridSystem
 {
@@ -52,19 +54,30 @@ namespace Assets.Scripts.GridSystem
 
             int x = Mathf.Clamp(Mathf.FloorToInt(Width * percentX), 0, Width - 1);
             int y = Mathf.Clamp(Mathf.FloorToInt(Height * percentY), 0, Height - 1);
+
             return Cells[x, y];
         }
 
         public Cell GetRandomWalkableEdgeCell()
         {
             List<Cell> edgeCells = GridManager.Instance.GridPlayerChunk.GetWalkableEdgeCells();
-            Cell randomCell = edgeCells[UnityEngine.Random.Range(0, edgeCells.Count)];
-            return randomCell;
+            int randomIndex = UnityEngine.Random.Range(0, edgeCells.Count);
+
+            return edgeCells[randomIndex];
+        }
+
+        public Cell GetRandomWalkableNotOccupiedByCollectibleCell()
+        {
+            Cell[] notOccupiedCells = Cells.Cast<Cell>().Where(c => !c.IsOccupiedByCollectible && IsCellWalkable(c)).ToArray();
+            int randomIndex = UnityEngine.Random.Range(0, notOccupiedCells.Length);
+
+            return notOccupiedCells[randomIndex];
         }
 
         public List<Cell> GetWalkableEdgeCells()
         {
             List<Cell> edgeCells = new List<Cell>();
+
             int horizontalCellsCount = Cells.GetLength(0);
             int verticalCellsCount = Cells.GetLength(1);
             for (int x = 0; x < horizontalCellsCount; x++)

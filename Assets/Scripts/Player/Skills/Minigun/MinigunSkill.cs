@@ -13,19 +13,10 @@ namespace Assets.Scripts.Player.Skills.Minigun
 
         [SerializeField] private float _projectileSpawnDelay;
         private const float SPAWN_FIRST_PROJECTILE_DELAY = 0.5f;
-        private ushort _level;
-
-        public override event EventHandler OnLevelUp;
 
         private void Start()
         {
             InvokeRepeating("SpawnProjectile", SPAWN_FIRST_PROJECTILE_DELAY, _projectileSpawnDelay);
-        }
-
-        public override void LevelUp()
-        {
-            _level++;
-            OnLevelUp?.Invoke(this, EventArgs.Empty);
         }
 
         private void SpawnProjectile()

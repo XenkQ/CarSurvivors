@@ -11,6 +11,7 @@ namespace Assets.Scripts.GridSystem
         public byte Cost { get; set; }
         public ushort BestCost { get; set; }
         public GridDirection BestDirection { get; set; } = GridDirection.None;
+        public bool IsOccupiedByCollectible { get; set; }
 
         public Cell(Vector3 worldPos, Vector2Int gridPos, Vector2Int chunkGridPos)
         {

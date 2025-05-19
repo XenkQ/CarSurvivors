@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Player.Skills.LandmineTrap
 {
-    public class LandmineSkill : MonoBehaviour
+    public class LandmineSkill : Skill
     {
         [SerializeField] private Landmine _landminePrefab;
         [SerializeField] private Transform _landminesParent;

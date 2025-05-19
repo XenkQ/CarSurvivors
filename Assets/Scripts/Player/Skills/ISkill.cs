@@ -9,5 +9,7 @@ namespace Assets.Scripts.Player.Skills
         public void LevelUp();
 
         public void Activate();
+
+        public bool IsActive();
     }
 }

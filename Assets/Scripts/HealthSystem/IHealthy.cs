@@ -1,6 +1,4 @@
-﻿using Assets.Scripts.HealthSystem;
-
-namespace Scripts
+﻿namespace Assets.Scripts.HealthSystem
 {
     public interface IHealthy
     {

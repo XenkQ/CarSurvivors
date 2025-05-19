@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Player
 {
     [RequireComponent(typeof(Health))]
-    public class PlayerManager : MonoBehaviour, IDamageable
+    public sealed class PlayerManager : MonoBehaviour, IDamageable
     {
         public static PlayerManager Instance { get; private set; }
 
@@ -13,6 +13,9 @@ namespace Player
         private readonly float _startDelayBetweenTakingDamage = 0.2f;
         private float _currentDelayBetweenTakingDamage;
         private bool _canTakeDamage = true;
+
+        private PlayerManager()
+        { }
 
         private void Awake()
         {
