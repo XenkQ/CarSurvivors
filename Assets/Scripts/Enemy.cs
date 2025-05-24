@@ -1,3 +1,4 @@
+using Assets.Scripts.Extensions;
 using Assets.Scripts.GridSystem;
 using Assets.Scripts.HealthSystem;
 using Assets.Scripts.LayerMasks;
@@ -7,13 +8,13 @@ using UnityEngine;
 namespace Assets.Scripts
 {
     [RequireComponent(typeof(Health), typeof(Collider))]
-    public class Enemy : MonoBehaviour, IDamageable
+    public class Enemy : MonoBehaviour, IDamageable, IKnockable
     {
         public Health Health { get; private set; }
 
         private const float PUSH_FROM_COLLISION_POWER = 1f;
 
-        [SerializeField] private EnemyStatsSO _stats;
+        [SerializeField] private EnemyConfigSO _stats;
 
         [SerializeField] private float _collisionRadius;
         private Collider _collider;
@@ -88,7 +89,12 @@ namespace Assets.Scripts
         private void OnDrawGizmos()
         {
             int numberOfSegments = 16;
-            DebugUtilities.DrawCircle(transform.position, _collisionRadius, numberOfSegments, Color.yellow);
+            new Debug().DrawCircle(transform.position, _collisionRadius, numberOfSegments, Color.yellow);
+        }
+
+        public void ApplyKnockBack(Vector3 locationAfterKnockBack, float timeToArriveAtLocation)
+        {
+            transform.DOMove(locationAfterKnockBack, timeToArriveAtLocation);
         }
 
         public void TakeDamage(float damage)

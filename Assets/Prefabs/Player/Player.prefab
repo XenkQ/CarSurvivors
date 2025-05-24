@@ -46,13 +46,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89a61df61a74ff148bad628d8a4eaa75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _minigunTurretsConfiguration: {fileID: 0}
+  <StartEndScriptableConfig>k__BackingField:
+    <StartConfig>k__BackingField: {fileID: 11400000, guid: 941f5411a5b567d47a096e0811f75fc3, type: 2}
+    <EndConfig>k__BackingField: {fileID: 11400000, guid: ae2c0892709ea3b4397836547aba0b39, type: 2}
   _turretsProejctile: {fileID: 4901841786317894366, guid: 19270b55571e60c4489d44d93aa14239, type: 3}
   _projectilesParent: {fileID: 0}
   _turrets:
   - {fileID: 941515347815423511}
   - {fileID: 8759251485031666997}
-  _projectileSpawnDelay: 0.06
 --- !u!1 &1285516617489979006
 GameObject:
   m_ObjectHideFlags: 0
@@ -100,10 +101,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b198cbfa417d9ee499466b64cbd95236, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _knockbackPower: 2
-  _damage: 10
-  _size: 1
-  _cooldown: 0.1
+  <StartEndScriptableConfig>k__BackingField:
+    <StartConfig>k__BackingField: {fileID: 11400000, guid: 246b65a0be0839d4e8779b26d50131fb, type: 2}
+    <EndConfig>k__BackingField: {fileID: 11400000, guid: ea459f1dbe73c924ea676ba650a7e7c4, type: 2}
   _boxCollider: {fileID: 4427362447296171089}
 --- !u!65 &4427362447296171089
 BoxCollider:
@@ -170,6 +170,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522f6f112bbd45d4f91ccd435fc3420a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <StartEndScriptableConfig>k__BackingField:
+    <StartConfig>k__BackingField: {fileID: 11400000, guid: 18926d7209511304ebda84a7a76ec21d, type: 2}
+    <EndConfig>k__BackingField: {fileID: 11400000, guid: cb3a57d79ecb38946a48ff25e072b717, type: 2}
   _landminePrefab: {fileID: 6048307613972475818, guid: f5dbe1699bc9b4d47bbf530373b001d0, type: 3}
   _landminesParent: {fileID: 0}
   _cooldown: 2
@@ -425,8 +428,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3247043444263234489}
+  - component: {fileID: 78788118026478637}
   m_Layer: 0
-  m_Name: Skills
+  m_Name: SkillsManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -450,6 +454,19 @@ Transform:
   - {fileID: 4451731468149088330}
   m_Father: {fileID: 6257441156095345877}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &78788118026478637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3300655100864642006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2f1193144a02804ea44c32dbd5a9925, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Skills>k__BackingField: []
 --- !u!1 &4105977957052641957
 GameObject:
   m_ObjectHideFlags: 0
@@ -666,8 +683,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2f1193144a02804ea44c32dbd5a9925, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _skills:
-  - {fileID: 5277447736254715040}
+  <Skills>k__BackingField: []
 --- !u!54 &5120778290738025250
 Rigidbody:
   m_ObjectHideFlags: 0

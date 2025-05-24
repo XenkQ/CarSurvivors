@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72b0ca93e84f7904c9271fecf2696efb, type: 3}
+  m_Name: EndLandmineSkillConfig
+  m_EditorClassIdentifier: 
+  SpawnCooldown: 2
+  ExplosionRadius: 8
+  Damage: 12
+  Size: 1
+  Level: 10

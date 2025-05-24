@@ -9,7 +9,7 @@ namespace Assets.Scripts
 {
     public class Projectile : MonoBehaviour
     {
-        [SerializeField] private ProjectileStatsSO _stats;
+        [SerializeField] private ProjectileConfigSO _stats;
         [SerializeField] private SphereCollider _sphereCollider;
         private ushort _piercedCounter;
 
