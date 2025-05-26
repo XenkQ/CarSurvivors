@@ -5,7 +5,6 @@ TagManager:
   serializedVersion: 3
   tags:
   - TilesContainer
-  - Skill
   layers:
   - Default
   - TransparentFX
@@ -17,7 +16,7 @@ TagManager:
   - Enemy
   - Player
   - RoughTerrain
-  - 
+  - ItemToUI
   - 
   - 
   - 

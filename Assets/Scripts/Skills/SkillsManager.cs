@@ -4,12 +4,25 @@ using UnityEngine;
 
 namespace Assets.Scripts.Skills
 {
-    public class SkillsManager : MonoBehaviour
+    public sealed class SkillsManager : MonoBehaviour
     {
         public IEnumerable<ISkill> Skills { get; private set; }
+        public static SkillsManager Instance { get; private set; }
+
+        private SkillsManager()
+        { }
 
         private void Awake()
         {
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+
             SetAllSkills();
         }
 
@@ -17,17 +30,17 @@ namespace Assets.Scripts.Skills
         {
 #if DEBUG
             InitializeAllSkills();
+            Debug.Log("Skills count: " + Skills.Count());
 #endif
         }
 
         private void SetAllSkills()
         {
-            GameObject[] skillGameObjects = GameObject.FindGameObjectsWithTag("Skill");
-            List<ISkill> skills = new List<ISkill>();
+            var skills = new List<ISkill>();
 
-            foreach (GameObject gameObject in skillGameObjects)
+            foreach (Transform skillChild in transform)
             {
-                if (gameObject.TryGetComponent(out ISkill skill))
+                if (skillChild.gameObject.TryGetComponent(out ISkill skill))
                 {
                     skills.Add(skill);
                 }
@@ -46,7 +59,7 @@ namespace Assets.Scripts.Skills
 
         private void ActivateRandomDisabledSkill()
         {
-            ISkill[] inactiveSkills = Skills.Where(skill => !skill.IsInitialized()).ToArray();
+            var inactiveSkills = Skills.Where(skill => !skill.IsInitialized()).ToArray();
             if (inactiveSkills.Length > 0)
             {
                 int index = Random.Range(0, inactiveSkills.Length);

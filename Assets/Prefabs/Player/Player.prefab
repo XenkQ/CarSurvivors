@@ -466,7 +466,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2f1193144a02804ea44c32dbd5a9925, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Skills>k__BackingField: []
 --- !u!1 &4105977957052641957
 GameObject:
   m_ObjectHideFlags: 0
@@ -583,7 +582,6 @@ GameObject:
   - component: {fileID: 3205813391929429011}
   - component: {fileID: 732167794389132859}
   - component: {fileID: 4444538082891369474}
-  - component: {fileID: 800308983421375513}
   - component: {fileID: 5120778290738025250}
   - component: {fileID: 7480640710395550981}
   m_Layer: 8
@@ -671,19 +669,6 @@ MonoBehaviour:
   - WheelModel: {fileID: 3255664546788292463}
     WheelCollider: {fileID: 3897780278463981742}
     Axel: 1
---- !u!114 &800308983421375513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6215313516695621011}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2f1193144a02804ea44c32dbd5a9925, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Skills>k__BackingField: []
 --- !u!54 &5120778290738025250
 Rigidbody:
   m_ObjectHideFlags: 0

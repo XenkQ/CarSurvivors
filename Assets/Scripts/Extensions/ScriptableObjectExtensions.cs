@@ -4,7 +4,8 @@ namespace Assets.Scripts.Extensions
 {
     public static class ScriptableObjectExtensions
     {
-        public static T Clone<T>(this T scriptableObject) where T : ScriptableObject
+        public static T Clone<T>(this T scriptableObject)
+            where T : ScriptableObject
         {
             if (scriptableObject == null)
             {

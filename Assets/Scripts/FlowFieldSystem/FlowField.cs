@@ -1,8 +1,9 @@
-﻿using Assets.Scripts.LayerMasks;
+﻿using Assets.Scripts.GridSystem;
+using Assets.Scripts.LayerMasks;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Scripts.GridSystem.FlowField
+namespace Assets.Scripts.FlowFieldSystem
 {
     public class FlowField
     {
@@ -10,7 +11,7 @@ namespace Assets.Scripts.GridSystem.FlowField
         private const int ROUGH_TERRAIN_COST = 3;
         private const int DEFAULT_FIELD_COST = 1;
 
-        public void CreateCostField(Grid grid)
+        public void CreateCostField(GridSystem.Grid grid)
         {
             for (int i = 0; i < grid.Cells.GetLength(0); i++)
             {
@@ -51,7 +52,7 @@ namespace Assets.Scripts.GridSystem.FlowField
             }
         }
 
-        public void CreateIntegrationField(Grid grid, Cell destinationCell)
+        public void CreateIntegrationField(GridSystem.Grid grid, Cell destinationCell)
         {
             destinationCell.Cost = 0;
             destinationCell.BestCost = 0;
@@ -77,7 +78,7 @@ namespace Assets.Scripts.GridSystem.FlowField
             }
         }
 
-        public void CreateFlowField(Grid grid)
+        public void CreateFlowField(GridSystem.Grid grid)
         {
             foreach (Cell currentCell in grid.Cells)
             {
@@ -99,7 +100,7 @@ namespace Assets.Scripts.GridSystem.FlowField
             }
         }
 
-        private List<Cell> GetNeighbourCells(Grid grid, Cell currentCell, IEnumerable<GridDirection> gridDirections)
+        private List<Cell> GetNeighbourCells(GridSystem.Grid grid, Cell currentCell, IEnumerable<GridDirection> gridDirections)
         {
             List<Cell> cells = new List<Cell>();
             Vector2Int gridPos = currentCell.ChunkGridPos;

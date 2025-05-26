@@ -1,3 +1,4 @@
+using Assets.ScriptableObjects.Player.Skills;
 using Assets.Scripts.HealthSystem;
 using Assets.Scripts.LayerMasks;
 using Assets.Scripts.Player.Skills;
@@ -7,9 +8,8 @@ namespace Assets.Scripts.Skills.PlayerSkills
 {
     public class SawSkill : Skill<SawSkillConfigSO>
     {
-        [field: SerializeField] public override StartEndScriptableConfig<SawSkillConfigSO> StartEndScriptableConfig { get; protected set; }
+        [field: SerializeField] public override StartEndScriptableConfig<SkillConfig> StartEndScriptableConfig { get; protected set; }
         [SerializeField] private BoxCollider _boxCollider;
-        public override SawSkillConfigSO CurrentConfig { get; set; }
 
         private void Awake()
         {
@@ -24,7 +24,8 @@ namespace Assets.Scripts.Skills.PlayerSkills
         public override void Initialize()
         {
             base.Initialize();
-            InvokeRepeating(nameof(AtackAllEnemiesInsideCollider), CurrentConfig.AttackCooldown, CurrentConfig.AttackCooldown);
+
+            InvokeRepeating(nameof(AtackAllEnemiesInsideCollider), _currentConfig.AttackCooldown, _currentConfig.AttackCooldown);
         }
 
         private void AtackAllEnemiesInsideCollider()
@@ -47,14 +48,14 @@ namespace Assets.Scripts.Skills.PlayerSkills
             {
                 if (collisionObject.TryGetComponent(out IDamageable damageable))
                 {
-                    damageable.TakeDamage(CurrentConfig.Damage);
+                    damageable.TakeDamage(_currentConfig.Damage);
                 }
 
                 if (collisionObject.TryGetComponent(out IKnockable knockable))
                 {
                     knockable.ApplyKnockBack(
-                        other.transform.position + transform.forward * CurrentConfig.KnockbackPower,
-                        CurrentConfig.TimeToArriveAtKnockbackLocation);
+                        other.transform.position + transform.forward * _currentConfig.KnockbackPower,
+                        _currentConfig.TimeToArriveAtKnockbackLocation);
                 }
             }
         }

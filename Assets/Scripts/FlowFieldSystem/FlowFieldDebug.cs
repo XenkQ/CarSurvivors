@@ -1,19 +1,20 @@
+using Assets.Scripts.GridSystem;
 using System;
 using TMPro;
 using UnityEngine;
 
-namespace Assets.Scripts.GridSystem.FlowField
+namespace Assets.Scripts.FlowFieldSystem
 {
     [Serializable]
     public class FlowFieldDebugConfiguration
     {
-        public Grid Grid;
+        public GridSystem.Grid Grid;
         public Transform DebugInfoHolder;
         public float FontSize;
         public float TextYOffset;
         public FlowFieldDebug.DisplayMode DisplayMode;
 
-        public FlowFieldDebugConfiguration(Grid grid,
+        public FlowFieldDebugConfiguration(GridSystem.Grid grid,
                                            Transform debugInfoHolder,
                                            float fontSize = 1f,
                                            float textYOffset = 0,

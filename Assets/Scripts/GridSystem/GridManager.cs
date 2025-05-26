@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using Player;
-using Assets.Scripts.GridSystem.FlowField;
+using Assets.Scripts.FlowFieldSystem;
 
 namespace Assets.Scripts.GridSystem
 {
@@ -125,7 +125,7 @@ namespace Assets.Scripts.GridSystem
 
         private float _playerChunkDrawYOffset = 0.2f;
 #endif
-        private FlowField.FlowField _flowField;
+        private FlowFieldSystem.FlowField _flowField;
 
         public static GridManager Instance { get; private set; }
 
@@ -144,7 +144,7 @@ namespace Assets.Scripts.GridSystem
             }
 
             WorldGrid = new Grid(_worldGridConfiguration);
-            _flowField = new FlowField.FlowField();
+            _flowField = new FlowField();
             _flowFieldDebugConfiguration.Grid = WorldGrid;
             UpdateFlowFieldBasedOnPlayerInWorldGridPos(WorldGrid);
             UpdatePlayerChunkGrid();

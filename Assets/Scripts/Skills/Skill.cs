@@ -2,20 +2,32 @@
 using Assets.Scripts.Extensions;
 using System;
 using UnityEngine;
+using Assets.ScriptableObjects.Player.Skills;
 
 namespace Assets.Scripts.Skills
 {
-    public abstract class Skill<TScriptableConfig> : MonoBehaviour, ISkill
-        where TScriptableConfig : ScriptableObject
+    public interface ISkill : IInitializable
     {
-        public abstract StartEndScriptableConfig<TScriptableConfig> StartEndScriptableConfig { get; protected set; }
-        public abstract TScriptableConfig CurrentConfig { get; set; }
+        public StartEndScriptableConfig<SkillConfig> StartEndScriptableConfig { get; }
+        public SkillConfig CurrentConfig { get; }
 
         public event EventHandler OnLevelUp;
 
+        public void LevelUp();
+    }
+
+    public abstract class Skill<TConfig> : MonoBehaviour, ISkill
+        where TConfig : SkillConfig
+    {
+        public event EventHandler OnLevelUp;
+
+        public abstract StartEndScriptableConfig<SkillConfig> StartEndScriptableConfig { get; protected set; }
+        public virtual SkillConfig CurrentConfig => _currentConfig;
+        protected TConfig _currentConfig;
+
         public virtual void Initialize()
         {
-            CurrentConfig = StartEndScriptableConfig.StartConfig.Clone();
+            _currentConfig = (StartEndScriptableConfig.StartConfig as TConfig)?.Clone();
         }
 
         public virtual bool IsInitialized()
