@@ -46,9 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89a61df61a74ff148bad628d8a4eaa75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <StartEndScriptableConfig>k__BackingField:
-    <StartConfig>k__BackingField: {fileID: 11400000, guid: 941f5411a5b567d47a096e0811f75fc3, type: 2}
-    <EndConfig>k__BackingField: {fileID: 11400000, guid: ae2c0892709ea3b4397836547aba0b39, type: 2}
+  <Config>k__BackingField: {fileID: 11400000, guid: 941f5411a5b567d47a096e0811f75fc3, type: 2}
   _turretsProejctile: {fileID: 4901841786317894366, guid: 19270b55571e60c4489d44d93aa14239, type: 3}
   _projectilesParent: {fileID: 0}
   _turrets:
@@ -101,9 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b198cbfa417d9ee499466b64cbd95236, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <StartEndScriptableConfig>k__BackingField:
-    <StartConfig>k__BackingField: {fileID: 11400000, guid: 246b65a0be0839d4e8779b26d50131fb, type: 2}
-    <EndConfig>k__BackingField: {fileID: 11400000, guid: ea459f1dbe73c924ea676ba650a7e7c4, type: 2}
+  <Config>k__BackingField: {fileID: 11400000, guid: 246b65a0be0839d4e8779b26d50131fb, type: 2}
   _boxCollider: {fileID: 4427362447296171089}
 --- !u!65 &4427362447296171089
 BoxCollider:
@@ -170,9 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522f6f112bbd45d4f91ccd435fc3420a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <StartEndScriptableConfig>k__BackingField:
-    <StartConfig>k__BackingField: {fileID: 11400000, guid: 18926d7209511304ebda84a7a76ec21d, type: 2}
-    <EndConfig>k__BackingField: {fileID: 11400000, guid: cb3a57d79ecb38946a48ff25e072b717, type: 2}
+  <Config>k__BackingField: {fileID: 11400000, guid: 18926d7209511304ebda84a7a76ec21d, type: 2}
   _landminePrefab: {fileID: 6048307613972475818, guid: f5dbe1699bc9b4d47bbf530373b001d0, type: 3}
   _landminesParent: {fileID: 0}
   _cooldown: 2

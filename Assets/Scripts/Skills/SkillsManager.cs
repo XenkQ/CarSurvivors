@@ -1,3 +1,4 @@
+using Assets.ScriptableObjects.Player.Skills;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -6,7 +7,7 @@ namespace Assets.Scripts.Skills
 {
     public sealed class SkillsManager : MonoBehaviour
     {
-        public IEnumerable<ISkill> Skills { get; private set; }
+        public IEnumerable<ISkillBase> Skills { get; private set; }
         public static SkillsManager Instance { get; private set; }
 
         private SkillsManager()
@@ -36,11 +37,11 @@ namespace Assets.Scripts.Skills
 
         private void SetAllSkills()
         {
-            var skills = new List<ISkill>();
+            var skills = new List<ISkillBase>();
 
             foreach (Transform skillChild in transform)
             {
-                if (skillChild.gameObject.TryGetComponent(out ISkill skill))
+                if (skillChild.gameObject.TryGetComponent(out ISkillBase skill))
                 {
                     skills.Add(skill);
                 }
@@ -53,13 +54,20 @@ namespace Assets.Scripts.Skills
         {
             foreach (var skill in Skills)
             {
-                skill.Initialize();
+                if (skill is IInitializable initializable)
+                {
+                    initializable.Initialize();
+                }
             }
         }
 
         private void ActivateRandomDisabledSkill()
         {
-            var inactiveSkills = Skills.Where(skill => !skill.IsInitialized()).ToArray();
+            var inactiveSkills = Skills
+                .Select(skill => skill as IInitializable)
+                .Where(skill => !skill.IsInitialized())
+                .ToArray();
+
             if (inactiveSkills.Length > 0)
             {
                 int index = Random.Range(0, inactiveSkills.Length);

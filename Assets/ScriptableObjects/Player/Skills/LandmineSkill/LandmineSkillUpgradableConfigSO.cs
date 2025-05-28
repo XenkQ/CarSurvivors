@@ -3,7 +3,7 @@ using Assets.Scripts.CustomTypes;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "LandmineSkillSO", menuName = "Scriptable Objects/Skills/LandmineSkillSO")]
-public class LandmineSkillConfigSO : SkillConfig
+public class LandmineSkillUpgradableConfigSO : SkillUpgradableConfig
 {
     [SerializeField] private FloatUpgradableStat _spawnCooldown;
     [SerializeField] private FloatUpgradableStat _explosionRadius;

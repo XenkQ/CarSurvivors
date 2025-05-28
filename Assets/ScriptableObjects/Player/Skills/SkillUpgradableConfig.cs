@@ -14,7 +14,7 @@ namespace Assets.ScriptableObjects.Player.Skills
         void UpdateConfigStatByFieldName(string fieldName, float value);
     }
 
-    public class SkillConfig : ScriptableObject, ISkillConfig
+    public class SkillUpgradableConfig : ScriptableObject, ISkillConfig
     {
         protected virtual string[] ExcludedFieldNames { get; set; }
 

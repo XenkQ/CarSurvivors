@@ -7,7 +7,10 @@ namespace Assets.Scripts.Skills
     {
         public ISkillConfig GetRandomSkillConfigReadyForUpgrade()
         {
-            var skills = SkillsManager.Instance.Skills;
+            var skills = SkillsManager
+                .Instance
+                .Skills
+                .Select(skill => skill as IConfigurableSkill<SkillUpgradableConfig>);
 
             if (skills.Count() == 0)
             {
@@ -20,7 +23,7 @@ namespace Assets.Scripts.Skills
             {
                 if (currentIndex == randomSkillIndex)
                 {
-                    return skill.CurrentConfig;
+                    return skill.Config;
                 }
                 currentIndex++;
             }

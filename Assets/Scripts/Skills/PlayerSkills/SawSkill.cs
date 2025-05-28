@@ -1,14 +1,12 @@
-using Assets.ScriptableObjects;
-using Assets.ScriptableObjects.Player.Skills;
 using Assets.Scripts.HealthSystem;
 using Assets.Scripts.LayerMasks;
 using UnityEngine;
 
 namespace Assets.Scripts.Skills.PlayerSkills
 {
-    public class SawSkill : Skill<SawSkillConfigSO>
+    public class SawSkill : ConfigurableSkill<SawSkillUpgradableConfigSO>
     {
-        [field: SerializeField] public override StartEndScriptableConfig<SkillConfig> StartEndScriptableConfig { get; protected set; }
+        [field: SerializeField] public override SawSkillUpgradableConfigSO Config { get; protected set; }
         [SerializeField] private BoxCollider _boxCollider;
 
         private void Awake()
@@ -25,7 +23,7 @@ namespace Assets.Scripts.Skills.PlayerSkills
         {
             base.Initialize();
 
-            InvokeRepeating(nameof(AtackAllEnemiesInsideCollider), _currentConfig.AttackCooldown, _currentConfig.AttackCooldown);
+            InvokeRepeating(nameof(AtackAllEnemiesInsideCollider), Config.AttackCooldown.Value, Config.AttackCooldown.Value);
         }
 
         private void AtackAllEnemiesInsideCollider()
@@ -48,14 +46,14 @@ namespace Assets.Scripts.Skills.PlayerSkills
             {
                 if (collisionObject.TryGetComponent(out IDamageable damageable))
                 {
-                    damageable.TakeDamage(_currentConfig.Damage);
+                    damageable.TakeDamage(Config.Damage.Value);
                 }
 
                 if (collisionObject.TryGetComponent(out IKnockable knockable))
                 {
                     knockable.ApplyKnockBack(
-                        other.transform.position + transform.forward * _currentConfig.KnockbackPower,
-                        _currentConfig.TimeToArriveAtKnockbackLocation);
+                        other.transform.position + transform.forward * Config.KnockbackPower.Value,
+                        Config.TimeToArriveAtKnockbackLocation.Value);
                 }
             }
         }

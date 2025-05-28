@@ -1,13 +1,11 @@
-﻿using Assets.ScriptableObjects;
-using Assets.ScriptableObjects.Player.Skills;
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace Assets.Scripts.Skills.PlayerSkills.Minigun
 {
-    public class MinigunSkill : Skill<MinigunSkillConfigSO>
+    public class MinigunSkill : ConfigurableSkill<MinigunSkillUpgradableConfigSO>
     {
-        [field: SerializeField] public override StartEndScriptableConfig<SkillConfig> StartEndScriptableConfig { get; protected set; }
+        [field: SerializeField] public override MinigunSkillUpgradableConfigSO Config { get; protected set; }
         [SerializeField] private Projectile _turretsProejctile;
         [SerializeField] private Transform _projectilesParent;
         [SerializeField] private MinigunTurret[] _turrets;
@@ -16,9 +14,9 @@ namespace Assets.Scripts.Skills.PlayerSkills.Minigun
         {
             base.Initialize();
 
-            InvokeRepeating("SpawnProjectile",
-                            _currentConfig.DelayBetweenSpawningProjectile,
-                            _currentConfig.DelayBetweenSpawningProjectile);
+            InvokeRepeating(nameof(SpawnProjectile),
+                            Config.DelayBetweenSpawningProjectile.Value,
+                            Config.DelayBetweenSpawningProjectile.Value);
 
             InitializeTurrets();
         }
@@ -36,7 +34,7 @@ namespace Assets.Scripts.Skills.PlayerSkills.Minigun
         {
             foreach (MinigunTurret turret in _turrets)
             {
-                turret.Initialize(_currentConfig.TurretStats);
+                turret.Initialize(Config.TurretStats);
             }
         }
 

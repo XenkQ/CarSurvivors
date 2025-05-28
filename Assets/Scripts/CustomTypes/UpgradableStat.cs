@@ -114,19 +114,31 @@ namespace Assets.Scripts.CustomTypes
         [SerializeField] private FloatValueRange _floatRangeOfPossibleValuesForUpgrade;
 
         public FloatUpgradableStat(float value, float maxValue, FloatValueRange rangeOfPossibleValuesForUpgrade, bool willRangeOfPossibleValuesChange = true, bool alwaysUseMinValueForUpgrade = false)
+            : base(value, maxValue, rangeOfPossibleValuesForUpgrade, willRangeOfPossibleValuesChange, alwaysUseMinValueForUpgrade)
+        {
+        }
+
+        public FloatUpgradableStat(float value, float maxValue, bool willRangeOfPossibleValuesChange = true, bool alwaysUseMinValueForUpgrade = false)
             : base(value, maxValue, willRangeOfPossibleValuesChange, alwaysUseMinValueForUpgrade)
         {
-            _rangeOfPossibleValuesForUpgrade = rangeOfPossibleValuesForUpgrade;
+            _rangeOfPossibleValuesForUpgrade = _floatRangeOfPossibleValuesForUpgrade;
         }
     }
 
     [Serializable]
     public class ByteUpgradableStat : UpgradableStat<byte>
     {
+        [SerializeField] private ByteValueRange _byteRangeOfPossibleValuesForUpgrade;
+
         public ByteUpgradableStat(byte value, byte maxValue, ByteValueRange rangeOfPossibleValuesForUpgrade, bool willRangeOfPossibleValuesChange = true, bool alwaysUseMinValueForUpgrade = false)
+            : base(value, maxValue, rangeOfPossibleValuesForUpgrade, willRangeOfPossibleValuesChange, alwaysUseMinValueForUpgrade)
+        {
+        }
+
+        public ByteUpgradableStat(byte value, byte maxValue, bool willRangeOfPossibleValuesChange = true, bool alwaysUseMinValueForUpgrade = false)
             : base(value, maxValue, willRangeOfPossibleValuesChange, alwaysUseMinValueForUpgrade)
         {
-            _rangeOfPossibleValuesForUpgrade = rangeOfPossibleValuesForUpgrade;
+            _rangeOfPossibleValuesForUpgrade = _byteRangeOfPossibleValuesForUpgrade;
         }
     }
 }
