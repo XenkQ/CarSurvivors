@@ -15,12 +15,12 @@ namespace Assets.Scripts.Skills.PlayerSkills.LandmineTrap
                 return;
             }
 
-            Collider[] colliders = Physics.OverlapSphere(transform.position, _config.ExplosionRadius, EntityLayers.Enemy, QueryTriggerInteraction.Collide);
+            Collider[] colliders = Physics.OverlapSphere(transform.position, _config.ExplosionRadius.Value, EntityLayers.Enemy, QueryTriggerInteraction.Collide);
             foreach (Collider collider in colliders)
             {
                 if (collider.TryGetComponent(out IDamageable damageable))
                 {
-                    damageable.TakeDamage(_config.Damage);
+                    damageable.TakeDamage(_config.Damage.Value);
                     Destroy(gameObject);
                 }
             }
@@ -29,7 +29,7 @@ namespace Assets.Scripts.Skills.PlayerSkills.LandmineTrap
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, _config.ExplosionRadius);
+            Gizmos.DrawWireSphere(transform.position, _config.ExplosionRadius.Value);
         }
 
         public void Initialize(LandmineSkillConfigSO config)

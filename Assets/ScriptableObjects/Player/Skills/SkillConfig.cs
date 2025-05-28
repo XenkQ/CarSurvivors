@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.CustomTypes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -20,6 +21,11 @@ namespace Assets.ScriptableObjects.Player.Skills
         public IEnumerable<string> GetConfigFieldNames()
             => GetType().GetFields(BindingFlags.Public).Select(f => f.ToString());
 
+        public void UpdateConfigStatByFieldName(string fieldName, ValueRange<float> valueRange)
+        {
+            UpdateConfigStatByFieldName(fieldName, valueRange.GetRandomValueInRange());
+        }
+
         public void UpdateConfigStatByFieldName(string fieldName, float value)
         {
             if (ExcludedFieldNames.Contains(fieldName))
@@ -34,19 +40,24 @@ namespace Assets.ScriptableObjects.Player.Skills
                 return;
             }
 
-            object currentValue = fieldInfo.GetValue(fieldInfo);
+            object valueObject = fieldInfo.GetValue(fieldInfo);
 
-            if (currentValue is int intValue)
+            HandleFieldUpgrade(valueObject, fieldInfo, value);
+        }
+
+        protected virtual void HandleFieldUpgrade(object valueObject, FieldInfo fieldInfo, float value)
+        {
+            if (valueObject is int intValue)
             {
                 fieldInfo.SetValue(GetType(), intValue + (int)value);
             }
-            else if (currentValue is float floatValue)
+            else if (valueObject is float floatValue)
             {
                 fieldInfo.SetValue(GetType(), floatValue + value);
             }
             else
             {
-                throw new ArgumentException($"Type of {fieldName} is not handled");
+                throw new ArgumentException($"Type of {fieldInfo.Name} is not handled");
             }
         }
     }

@@ -1,7 +1,7 @@
+using Assets.ScriptableObjects;
 using Assets.ScriptableObjects.Player.Skills;
 using Assets.Scripts.HealthSystem;
 using Assets.Scripts.LayerMasks;
-using Assets.Scripts.Player.Skills;
 using UnityEngine;
 
 namespace Assets.Scripts.Skills.PlayerSkills

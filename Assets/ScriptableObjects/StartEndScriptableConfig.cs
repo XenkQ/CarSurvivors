@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Assets.Scripts.Player.Skills
+namespace Assets.ScriptableObjects
 {
     public interface IStartEndScriptableConfig<T> where T : ScriptableObject
     {

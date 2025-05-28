@@ -12,8 +12,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72b0ca93e84f7904c9271fecf2696efb, type: 3}
   m_Name: StartLandmineSkillConfig
   m_EditorClassIdentifier: 
-  SpawnCooldown: 10
-  ExplosionRadius: 2
-  Damage: 5
-  Size: 1
-  Level: 1
+  _spawnCooldown:
+    <Value>k__BackingField: 8
+    _maxValue: 2
+    _willRangeOfPossibleValuesChange: 1
+    _alwaysUseMinValueForUpgrade: 0
+    _substractMode: 1
+    _floatRangeOfPossibleValuesForUpgrade:
+      Min: 1
+      Max: 2
+  _explosionRadius:
+    <Value>k__BackingField: 2
+    _maxValue: 12
+    _willRangeOfPossibleValuesChange: 1
+    _alwaysUseMinValueForUpgrade: 0
+    _substractMode: 0
+    _floatRangeOfPossibleValuesForUpgrade:
+      Min: 0
+      Max: 0
+  _damage:
+    <Value>k__BackingField: 4
+    _maxValue: 14
+    _willRangeOfPossibleValuesChange: 1
+    _alwaysUseMinValueForUpgrade: 0
+    _substractMode: 0
+    _floatRangeOfPossibleValuesForUpgrade:
+      Min: 0
+      Max: 0
+  _size:
+    <Value>k__BackingField: 1
+    _maxValue: 1
+    _willRangeOfPossibleValuesChange: 0
+    _alwaysUseMinValueForUpgrade: 1
+    _substractMode: 0
+    _floatRangeOfPossibleValuesForUpgrade:
+      Min: 0
+      Max: 0
+  _level:
+    <Value>k__BackingField: 1
+    _maxValue: 10
+    _willRangeOfPossibleValuesChange: 1
+    _alwaysUseMinValueForUpgrade: 1
+    _substractMode: 0

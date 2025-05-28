@@ -1,5 +1,5 @@
-﻿using Assets.ScriptableObjects.Player.Skills;
-using Assets.Scripts.Player.Skills;
+﻿using Assets.ScriptableObjects;
+using Assets.ScriptableObjects.Player.Skills;
 using System;
 using UnityEngine;
 

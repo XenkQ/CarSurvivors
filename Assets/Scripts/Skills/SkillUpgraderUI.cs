@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.ScriptableObjects.Player.Skills;
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -10,8 +11,31 @@ namespace Assets.Scripts.Skills
     {
         [SerializeField] private Button _buttonPrefab;
         [SerializeField] private Transform _buttonsHolder;
+        private SkillUpgrader _skillUpgrader;
+        private ISkillConfig _currentSkillConfigToUpgrade;
 
-        public void SetUpgradeButtons(IEnumerable<string> buttonsTexts, Action onClick)
+        private void Awake()
+        {
+            _skillUpgrader = new SkillUpgrader();
+        }
+
+        private void OnEnable()
+        {
+            _currentSkillConfigToUpgrade = _skillUpgrader.GetRandomSkillConfigReadyForUpgrade();
+
+            if (_currentSkillConfigToUpgrade != null)
+            {
+                var buttonsTexts = _currentSkillConfigToUpgrade.GetConfigFieldNames();
+                //DisplayNewButtons(buttonsTexts,
+            }
+        }
+
+        private void OnDisable()
+        {
+            _currentSkillConfigToUpgrade = null;
+        }
+
+        private void DisplayNewButtons(IEnumerable<string> buttonsTexts, Action onClick)
         {
             DestroyAllButtons();
             CreateUpgradeButtons(buttonsTexts, onClick);

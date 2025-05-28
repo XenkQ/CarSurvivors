@@ -1,5 +1,5 @@
+using Assets.ScriptableObjects;
 using Assets.ScriptableObjects.Player.Skills;
-using Assets.Scripts.Player.Skills;
 using UnityEngine;
 
 namespace Assets.Scripts.Skills.PlayerSkills.LandmineTrap
@@ -15,7 +15,7 @@ namespace Assets.Scripts.Skills.PlayerSkills.LandmineTrap
         {
             base.Initialize();
 
-            InvokeRepeating(nameof(SpawnLandmine), _currentConfig.SpawnCooldown, _currentConfig.SpawnCooldown);
+            InvokeRepeating(nameof(SpawnLandmine), _currentConfig.SpawnCooldown.Value, _currentConfig.SpawnCooldown.Value);
         }
 
         private void SpawnLandmine()

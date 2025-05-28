@@ -1,8 +1,8 @@
-﻿using Assets.Scripts.Player.Skills;
-using Assets.Scripts.Extensions;
+﻿using Assets.Scripts.Extensions;
 using System;
 using UnityEngine;
 using Assets.ScriptableObjects.Player.Skills;
+using Assets.ScriptableObjects;
 
 namespace Assets.Scripts.Skills
 {

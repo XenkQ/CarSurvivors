@@ -5,7 +5,7 @@ namespace Assets.Scripts.Skills
 {
     public class SkillUpgrader
     {
-        public ISkillConfig GetRandomSkillConfigToUpdate()
+        public ISkillConfig GetRandomSkillConfigReadyForUpgrade()
         {
             var skills = SkillsManager.Instance.Skills;
 
@@ -27,5 +27,7 @@ namespace Assets.Scripts.Skills
 
             return null;
         }
+
+        //public void UpgradeSkillConfig(ISkillConfig config, )
     }
 }
