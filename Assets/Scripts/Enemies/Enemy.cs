@@ -5,7 +5,7 @@ using Assets.Scripts.LayerMasks;
 using DG.Tweening;
 using UnityEngine;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.Enemies
 {
     [RequireComponent(typeof(Health), typeof(Collider))]
     public class Enemy : MonoBehaviour, IDamageable, IKnockable
@@ -114,7 +114,7 @@ namespace Assets.Scripts
         private Vector3 GetMoveDirectionBasedOnCurrentCell()
         {
             GridSystem.Grid grid = GridManager.Instance.WorldGrid;
-            Cell currentCell = grid.GetCellFromWorldPos(transform.position);
+            Cell currentCell = WorldPosToCellConverter.GetCellFromGridByWorldPos(grid, transform.position);
             if (currentCell != null && currentCell.BestDirection != null)
             {
                 Vector2Int gridDirection = currentCell.BestDirection.Vector;

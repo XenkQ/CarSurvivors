@@ -1,16 +1,15 @@
-using Assets.ScriptableObjects.Player.Skills;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace Assets.Scripts.Skills
 {
-    public sealed class SkillsManager : MonoBehaviour
+    public sealed class SkillsRegistry : MonoBehaviour
     {
         public IEnumerable<ISkillBase> Skills { get; private set; }
-        public static SkillsManager Instance { get; private set; }
+        public static SkillsRegistry Instance { get; private set; }
 
-        private SkillsManager()
+        private SkillsRegistry()
         { }
 
         private void Awake()
@@ -25,6 +24,11 @@ namespace Assets.Scripts.Skills
             }
 
             SetAllSkills();
+        }
+
+        private void Start()
+        {
+            InitializeAllSkills();
         }
 
         private void SetAllSkills()
@@ -50,20 +54,6 @@ namespace Assets.Scripts.Skills
                 {
                     initializable.Initialize();
                 }
-            }
-        }
-
-        private void ActivateRandomDisabledSkill()
-        {
-            var inactiveSkills = Skills
-                .Select(skill => skill as IInitializable)
-                .Where(skill => !skill.IsInitialized())
-                .ToArray();
-
-            if (inactiveSkills.Length > 0)
-            {
-                int index = Random.Range(0, inactiveSkills.Length);
-                inactiveSkills[index].Initialize();
             }
         }
     }

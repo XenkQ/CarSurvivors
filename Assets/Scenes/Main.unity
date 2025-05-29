@@ -305,7 +305,7 @@ GameObject:
   - component: {fileID: 36651506}
   - component: {fileID: 36651507}
   m_Layer: 0
-  m_Name: CrateSpawnManager
+  m_Name: CrateSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1037,6 +1037,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 167353813}
   m_CullTransparentMesh: 1
+--- !u!1 &172225607
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 172225608}
+  - component: {fileID: 172225609}
+  m_Layer: 0
+  m_Name: EnemiesOutsidePlayerChunkTeleporter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &172225608
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172225607}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 517296375}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &172225609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172225607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0714d18ea669954bb400e241f10ea50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemiesHolder: {fileID: 549734346}
+  _checkForEnemiesOutsidePlayerChunkDelay: 2
 --- !u!1001 &207979100
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2064,6 +2110,66 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &449990455
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 449990456}
+  - component: {fileID: 449990457}
+  m_Layer: 0
+  m_Name: EnemiesSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &449990456
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 449990455}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 517296375}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &449990457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 449990455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d02287d755432c439551ccb3d414ee3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _poolEnemiesInfo:
+  - enemyPrefab: {fileID: 2306377847058156024, guid: 08b441f56ebe2754ab1e7d5eefb63ac5, type: 3}
+    maxAmount: 100
+    spawnChance: 70
+  - enemyPrefab: {fileID: 2306377847058156024, guid: 6868dd97df9ac574da868db1b133ad18, type: 3}
+    maxAmount: 70
+    spawnChance: 15
+  - enemyPrefab: {fileID: 2306377847058156024, guid: 5495300357b64ae4e9bc00aa9ec678b0, type: 3}
+    maxAmount: 50
+    spawnChance: 10
+  - enemyPrefab: {fileID: 2306377847058156024, guid: 1c4e953fc50e7444ab0e5f870c26a9ef, type: 3}
+    maxAmount: 30
+    spawnChance: 4
+  - enemyPrefab: {fileID: 2306377847058156024, guid: e1a12b239e4ee684cb99d952c862adf1, type: 3}
+    maxAmount: 25
+    spawnChance: 1
 --- !u!1 &458689168
 GameObject:
   m_ObjectHideFlags: 0
@@ -2578,6 +2684,8 @@ Transform:
   - {fileID: 990888777}
   - {fileID: 693928360}
   - {fileID: 36651506}
+  - {fileID: 172225608}
+  - {fileID: 449990456}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &521650945
@@ -2687,22 +2795,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startSpawnWaveDelay: 8
-  _poolEnemiesInfo:
-  - enemyPrefab: {fileID: 2306377847058156024, guid: 08b441f56ebe2754ab1e7d5eefb63ac5, type: 3}
-    maxAmount: 2
-    spawnChance: 70
-  - enemyPrefab: {fileID: 2306377847058156024, guid: 6868dd97df9ac574da868db1b133ad18, type: 3}
-    maxAmount: 2
-    spawnChance: 15
-  - enemyPrefab: {fileID: 2306377847058156024, guid: 5495300357b64ae4e9bc00aa9ec678b0, type: 3}
-    maxAmount: 2
-    spawnChance: 7
-  - enemyPrefab: {fileID: 2306377847058156024, guid: 1c4e953fc50e7444ab0e5f870c26a9ef, type: 3}
-    maxAmount: 2
-    spawnChance: 6
-  - enemyPrefab: {fileID: 2306377847058156024, guid: e1a12b239e4ee684cb99d952c862adf1, type: 3}
-    maxAmount: 2
-    spawnChance: 2
 --- !u!1 &550934126
 GameObject:
   m_ObjectHideFlags: 0
@@ -13315,6 +13407,23 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!1 &2060139804 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3300655100864642006, guid: cb84583e0c2818e42b12a0baeb2f6f1b, type: 3}
+  m_PrefabInstance: {fileID: 2007183185026868721}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2060139806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2060139804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26387815917b0a14dae3de2d332a6bbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2066760389
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13820,6 +13929,10 @@ PrefabInstance:
       propertyPath: _landminesParent
       value: 
       objectReference: {fileID: 1938938823}
+    - target: {fileID: 3300655100864642006, guid: cb84583e0c2818e42b12a0baeb2f6f1b, type: 3}
+      propertyPath: m_Name
+      value: SkillsRegistry
+      objectReference: {fileID: 0}
     - target: {fileID: 6215313516695621011, guid: cb84583e0c2818e42b12a0baeb2f6f1b, type: 3}
       propertyPath: m_Name
       value: PlayerCar
@@ -13868,10 +13981,14 @@ PrefabInstance:
       propertyPath: _projectilesParent
       value: 
       objectReference: {fileID: 1169998850}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 78788118026478637, guid: cb84583e0c2818e42b12a0baeb2f6f1b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3300655100864642006, guid: cb84583e0c2818e42b12a0baeb2f6f1b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2060139806}
   m_SourcePrefab: {fileID: 100100000, guid: cb84583e0c2818e42b12a0baeb2f6f1b, type: 3}
 --- !u!1001 &2648407486126309846
 PrefabInstance:

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Skills.ObjectsImpactingSkills.Crate
 {
-    public class SkillCrateSpawnManager : MonoBehaviour
+    public class SkillCrateSpawner : MonoBehaviour
     {
         private const byte MAX_SPAWN_COUNT = 5;
         private const float CRATE_Y_OFFSET = 0.925f;
@@ -25,7 +25,14 @@ namespace Assets.Scripts.Skills.ObjectsImpactingSkills.Crate
         {
             if (_spawnCount < MAX_SPAWN_COUNT)
             {
-                Cell drawnCell = GridManager.Instance.WorldGrid.GetRandomWalkableNotOccupiedByCollectibleCell();
+                Cell drawnCell = RandomGridCellWithConditionFinder
+                    .FindRandomWalkableCellWithoutCollectibleOrNull(GridManager.Instance.WorldGrid);
+
+                if (drawnCell == null)
+                {
+                    Debug.LogError("No walkable cell without collectible found for spawning a skill crate.");
+                    return;
+                }
 
                 SkillCrate skillCrate = Instantiate(
                     _skillCratePrefab,

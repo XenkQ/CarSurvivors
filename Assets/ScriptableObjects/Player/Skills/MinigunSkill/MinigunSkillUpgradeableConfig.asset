@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce8fdf32c96f4e449ae2b242d559ee50, type: 3}
   m_Name: MinigunSkillUpgradeableConfig
   m_EditorClassIdentifier: 
+  <TurretStats>k__BackingField: {fileID: 11400000, guid: 6a1203ade72efae429dbe8d7b2beb0c3, type: 2}
   _delayBetweenSpawningProjectile:
     <Value>k__BackingField: 1
     _maxValue: 0.1
-    _willRangeOfPossibleValuesChange: 0
     _alwaysUseMinValueForUpgrade: 0
     _substractMode: 1
     _floatRangeOfPossibleValuesForUpgrade:
@@ -24,19 +24,8 @@ MonoBehaviour:
   _numberOfTurrets:
     <Value>k__BackingField: 2
     _maxValue: 2
-    _willRangeOfPossibleValuesChange: 0
     _alwaysUseMinValueForUpgrade: 1
     _substractMode: 0
     _byteRangeOfPossibleValuesForUpgrade:
       Min: 1
       Max: 1
-  _level:
-    <Value>k__BackingField: 1
-    _maxValue: 10
-    _willRangeOfPossibleValuesChange: 0
-    _alwaysUseMinValueForUpgrade: 1
-    _substractMode: 0
-    _byteRangeOfPossibleValuesForUpgrade:
-      Min: 1
-      Max: 1
-  <TurretStats>k__BackingField: {fileID: 11400000, guid: 6a1203ade72efae429dbe8d7b2beb0c3, type: 2}

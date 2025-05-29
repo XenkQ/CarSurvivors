@@ -200,7 +200,8 @@ namespace Assets.Scripts.GridSystem
             int chunkWidth = _playerGridConfiguration.Width;
             int chunkHeight = _playerGridConfiguration.Height;
             Cell[,] chunkCells = new Cell[chunkWidth, chunkHeight];
-            Cell cellClosestToPlayer = WorldGrid.GetCellFromWorldPos(PlayerManager.Instance.transform.position);
+            Cell cellClosestToPlayer = WorldPosToCellConverter.GetCellFromGridByWorldPos(WorldGrid,
+                (PlayerManager.Instance.transform.position));
 
             int halfWidth = chunkWidth >> 1;
             int maxGridX = cellClosestToPlayer.WorldGridPos.x + halfWidth;
@@ -240,7 +241,7 @@ namespace Assets.Scripts.GridSystem
         private void UpdateFlowFieldBasedOnPlayerInWorldGridPos(Grid gridPerformingUpdate)
         {
             _flowField.CreateCostField(gridPerformingUpdate);
-            Cell cellClosestToPlayer = WorldGrid.GetCellFromWorldPos(PlayerManager.Instance.transform.position);
+            Cell cellClosestToPlayer = WorldPosToCellConverter.GetCellFromGridByWorldPos(WorldGrid, PlayerManager.Instance.transform.position);
             _flowField.CreateIntegrationField(gridPerformingUpdate, cellClosestToPlayer);
             _flowField.CreateFlowField(gridPerformingUpdate);
         }

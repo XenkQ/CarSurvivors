@@ -7,7 +7,7 @@ namespace Assets.Scripts.Skills
     {
         public ISkillConfig GetRandomSkillConfigReadyForUpgrade()
         {
-            var skills = SkillsManager
+            var skills = SkillsRegistry
                 .Instance
                 .Skills
                 .Select(skill => skill as IUpgradeableSkill<SkillUpgradeableConfig>);

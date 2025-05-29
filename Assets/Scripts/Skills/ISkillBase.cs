@@ -1,6 +1,6 @@
 ﻿namespace Assets.Scripts.Skills
 {
-    public interface ISkillBase
+    public interface ISkillBase : IInitializable
     {
     }
 }
