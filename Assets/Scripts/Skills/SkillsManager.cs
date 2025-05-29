@@ -27,14 +27,6 @@ namespace Assets.Scripts.Skills
             SetAllSkills();
         }
 
-        private void Start()
-        {
-#if DEBUG
-            InitializeAllSkills();
-            Debug.Log("Skills count: " + Skills.Count());
-#endif
-        }
-
         private void SetAllSkills()
         {
             var skills = new List<ISkillBase>();

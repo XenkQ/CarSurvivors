@@ -9,51 +9,46 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab88dc14be596ca40ba31bbba640df6a, type: 3}
-  m_Name: LandmineSkillUpgradableConfig
+  m_Script: {fileID: 11500000, guid: deadad81ccf1bf44dafb9148b836e2c0, type: 3}
+  m_Name: LandmineSkillUpgradeableConfig
   m_EditorClassIdentifier: 
   _spawnCooldown:
     <Value>k__BackingField: 6
     _maxValue: 1
-    _willRangeOfPossibleValuesChange: 1
     _alwaysUseMinValueForUpgrade: 0
     _substractMode: 1
     _floatRangeOfPossibleValuesForUpgrade:
       Min: 0.5
-      Max: 1.5
+      Max: 1
   _explosionRadius:
     <Value>k__BackingField: 2
     _maxValue: 8
-    _willRangeOfPossibleValuesChange: 1
     _alwaysUseMinValueForUpgrade: 0
     _substractMode: 0
     _floatRangeOfPossibleValuesForUpgrade:
       Min: 0.5
-      Max: 1.2
+      Max: 1
   _damage:
-    <Value>k__BackingField: 4
+    <Value>k__BackingField: 6
     _maxValue: 16
-    _willRangeOfPossibleValuesChange: 1
     _alwaysUseMinValueForUpgrade: 0
     _substractMode: 0
     _floatRangeOfPossibleValuesForUpgrade:
       Min: 1
-      Max: 4
+      Max: 2
   _size:
     <Value>k__BackingField: 1
     _maxValue: 2
-    _willRangeOfPossibleValuesChange: 1
     _alwaysUseMinValueForUpgrade: 0
     _substractMode: 0
     _floatRangeOfPossibleValuesForUpgrade:
       Min: 0.1
-      Max: 0.4
+      Max: 0.25
   _level:
-    <Value>k__BackingField: 1
-    _maxValue: 10
-    _willRangeOfPossibleValuesChange: 0
-    _alwaysUseMinValueForUpgrade: 1
+    <Value>k__BackingField: 0
+    _maxValue: 0
+    _alwaysUseMinValueForUpgrade: 0
     _substractMode: 0
     _byteRangeOfPossibleValuesForUpgrade:
-      Min: 1
-      Max: 1
+      Min: 0
+      Max: 0

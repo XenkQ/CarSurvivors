@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace Assets.Scripts.Skills.PlayerSkills
 {
-    public class SawSkill : ConfigurableSkill<SawSkillUpgradableConfigSO>
+    public class SawSkill : UpgradeableSkill<SawSkillUpgradeableConfigSO>
     {
-        [field: SerializeField] public override SawSkillUpgradableConfigSO Config { get; protected set; }
+        [field: SerializeField] public override SawSkillUpgradeableConfigSO Config { get; protected set; }
         [SerializeField] private BoxCollider _boxCollider;
 
         private void Awake()

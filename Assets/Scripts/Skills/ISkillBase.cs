@@ -1,11 +1,6 @@
-﻿using System;
-
-namespace Assets.Scripts.Skills
+﻿namespace Assets.Scripts.Skills
 {
-    public interface ISkillBase : IInitializable
+    public interface ISkillBase
     {
-        public event EventHandler OnLevelUp;
-
-        public void LevelUp();
     }
 }

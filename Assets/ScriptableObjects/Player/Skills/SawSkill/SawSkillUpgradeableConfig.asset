@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4ed7d23dc37d50468b19db7f408bd36, type: 3}
-  m_Name: SawSkillUpgradableConfig
+  m_Name: SawSkillUpgradeableConfig
   m_EditorClassIdentifier: 
   _knockbackPower:
     <Value>k__BackingField: 4

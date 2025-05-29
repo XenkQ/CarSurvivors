@@ -10,7 +10,7 @@ namespace Assets.Scripts.Skills
             var skills = SkillsManager
                 .Instance
                 .Skills
-                .Select(skill => skill as IConfigurableSkill<SkillUpgradableConfig>);
+                .Select(skill => skill as IUpgradeableSkill<SkillUpgradeableConfig>);
 
             if (skills.Count() == 0)
             {

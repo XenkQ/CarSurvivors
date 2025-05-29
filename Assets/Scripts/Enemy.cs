@@ -78,9 +78,9 @@ namespace Assets.Scripts
                         PreventInterectingWithColliderByPush(collider);
                     }
                     else if (1 << collider.gameObject.layer == EntityLayers.Player
-                             && collider.gameObject.TryGetComponent(out IDamageable damagable))
+                             && collider.gameObject.TryGetComponent(out IDamageable damageable))
                     {
-                        damagable.TakeDamage(_stats.Damage);
+                        damageable.TakeDamage(_stats.Damage);
                     }
                 }
             }

@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace Assets.Scripts.Skills.PlayerSkills.LandmineTrap
 {
-    public class Landmine : MonoBehaviour, IInitializable<LandmineSkillUpgradableConfigSO>
+    public class Landmine : MonoBehaviour, IInitializable<LandmineSkillUpgradeableConfigSO>
     {
-        [SerializeField] private LandmineSkillUpgradableConfigSO _config;
+        [SerializeField] private LandmineSkillUpgradeableConfigSO _config;
 
         private void OnTriggerEnter(Collider other)
         {
@@ -32,7 +32,7 @@ namespace Assets.Scripts.Skills.PlayerSkills.LandmineTrap
             Gizmos.DrawWireSphere(transform.position, _config.ExplosionRadius.Value);
         }
 
-        public void Initialize(LandmineSkillUpgradableConfigSO config)
+        public void Initialize(LandmineSkillUpgradeableConfigSO config)
         {
             _config = config;
         }

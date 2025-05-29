@@ -34,9 +34,9 @@ namespace Assets.Scripts
                     return;
                 }
 
-                if (collider.transform.gameObject.TryGetComponent(out IDamageable damagable))
+                if (collider.transform.gameObject.TryGetComponent(out IDamageable damageable))
                 {
-                    damagable.TakeDamage(_stats.Damage);
+                    damageable.TakeDamage(_stats.Damage);
                 }
 
                 DecreasePiercing();

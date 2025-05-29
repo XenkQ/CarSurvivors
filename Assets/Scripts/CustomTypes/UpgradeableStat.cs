@@ -3,42 +3,35 @@ using UnityEngine;
 
 namespace Assets.Scripts.CustomTypes
 {
-    public interface IUpgradableStat<T>
-        where T : struct, IComparable<T>, IConvertible
+    public interface IUpgradeableStat
     {
         public void UpgradeValueBasedOnUpdateRange();
-
-        public void UpdateRangeOfPossibleValuesForUpgradeBasedOnScalar(T scalar);
     }
 
-    public abstract class UpgradableStat<T> : IUpgradableStat<T>
+    public abstract class UpgradeableStat<T> : IUpgradeableStat
         where T : struct, IComparable<T>, IConvertible
     {
         [field: SerializeField] public T Value { get; protected set; }
         [SerializeField] protected T _maxValue;
-        [SerializeField] protected bool _willRangeOfPossibleValuesChange = true;
         [SerializeField] protected bool _alwaysUseMinValueForUpgrade;
         [SerializeField] protected bool _substractMode;
         protected ValueRange<T> _rangeOfPossibleValuesForUpgrade;
 
-        public UpgradableStat(
+        public UpgradeableStat(
             T value,
             T maxValue,
-            bool willRangeOfPossibleValuesChange = true,
             bool alwaysUseMinValueForUpgrade = false)
         {
             Value = value;
             _maxValue = maxValue;
-            _willRangeOfPossibleValuesChange = willRangeOfPossibleValuesChange;
             _alwaysUseMinValueForUpgrade = alwaysUseMinValueForUpgrade;
         }
 
-        public UpgradableStat(
+        public UpgradeableStat(
             T value,
             T maxValue,
             ValueRange<T> rangeOfPossibleValuesForUpgrade,
-            bool willRangeOfPossibleValuesChange = true,
-            bool alwaysUseMinValueForUpgrade = false) : this(value, maxValue, willRangeOfPossibleValuesChange, alwaysUseMinValueForUpgrade)
+            bool alwaysUseMinValueForUpgrade = false) : this(value, maxValue, alwaysUseMinValueForUpgrade)
         {
             _rangeOfPossibleValuesForUpgrade = rangeOfPossibleValuesForUpgrade;
         }
@@ -82,19 +75,6 @@ namespace Assets.Scripts.CustomTypes
             }
         }
 
-        public virtual void UpdateRangeOfPossibleValuesForUpgradeBasedOnScalar(T scalar)
-        {
-            if (_willRangeOfPossibleValuesChange)
-            {
-                float min = FromTypeToFloat(_rangeOfPossibleValuesForUpgrade.Min);
-                float max = FromTypeToFloat(_rangeOfPossibleValuesForUpgrade.Max);
-                float convertedScalar = FromTypeToFloat(scalar);
-
-                _rangeOfPossibleValuesForUpgrade.Min = FromFloatToType(min + convertedScalar);
-                _rangeOfPossibleValuesForUpgrade.Max = FromFloatToType(max + convertedScalar);
-            }
-        }
-
         private float FromTypeToFloat(T value)
         {
             return Convert.ToSingle(value);
@@ -109,34 +89,34 @@ namespace Assets.Scripts.CustomTypes
     // For unity serialization we need to use nongeneric class.
 
     [Serializable]
-    public class FloatUpgradableStat : UpgradableStat<float>
+    public class FloatUpgradeableStat : UpgradeableStat<float>
     {
         [SerializeField] private FloatValueRange _floatRangeOfPossibleValuesForUpgrade;
 
-        public FloatUpgradableStat(float value, float maxValue, FloatValueRange rangeOfPossibleValuesForUpgrade, bool willRangeOfPossibleValuesChange = true, bool alwaysUseMinValueForUpgrade = false)
-            : base(value, maxValue, rangeOfPossibleValuesForUpgrade, willRangeOfPossibleValuesChange, alwaysUseMinValueForUpgrade)
+        public FloatUpgradeableStat(float value, float maxValue, FloatValueRange rangeOfPossibleValuesForUpgrade, bool alwaysUseMinValueForUpgrade = false)
+            : base(value, maxValue, rangeOfPossibleValuesForUpgrade, alwaysUseMinValueForUpgrade)
         {
         }
 
-        public FloatUpgradableStat(float value, float maxValue, bool willRangeOfPossibleValuesChange = true, bool alwaysUseMinValueForUpgrade = false)
-            : base(value, maxValue, willRangeOfPossibleValuesChange, alwaysUseMinValueForUpgrade)
+        public FloatUpgradeableStat(float value, float maxValue, bool alwaysUseMinValueForUpgrade = false)
+            : base(value, maxValue, alwaysUseMinValueForUpgrade)
         {
             _rangeOfPossibleValuesForUpgrade = _floatRangeOfPossibleValuesForUpgrade;
         }
     }
 
     [Serializable]
-    public class ByteUpgradableStat : UpgradableStat<byte>
+    public class ByteUpgradeableStat : UpgradeableStat<byte>
     {
         [SerializeField] private ByteValueRange _byteRangeOfPossibleValuesForUpgrade;
 
-        public ByteUpgradableStat(byte value, byte maxValue, ByteValueRange rangeOfPossibleValuesForUpgrade, bool willRangeOfPossibleValuesChange = true, bool alwaysUseMinValueForUpgrade = false)
-            : base(value, maxValue, rangeOfPossibleValuesForUpgrade, willRangeOfPossibleValuesChange, alwaysUseMinValueForUpgrade)
+        public ByteUpgradeableStat(byte value, byte maxValue, ByteValueRange rangeOfPossibleValuesForUpgrade, bool alwaysUseMinValueForUpgrade = false)
+            : base(value, maxValue, rangeOfPossibleValuesForUpgrade, alwaysUseMinValueForUpgrade)
         {
         }
 
-        public ByteUpgradableStat(byte value, byte maxValue, bool willRangeOfPossibleValuesChange = true, bool alwaysUseMinValueForUpgrade = false)
-            : base(value, maxValue, willRangeOfPossibleValuesChange, alwaysUseMinValueForUpgrade)
+        public ByteUpgradeableStat(byte value, byte maxValue, bool alwaysUseMinValueForUpgrade = false)
+            : base(value, maxValue, alwaysUseMinValueForUpgrade)
         {
             _rangeOfPossibleValuesForUpgrade = _byteRangeOfPossibleValuesForUpgrade;
         }

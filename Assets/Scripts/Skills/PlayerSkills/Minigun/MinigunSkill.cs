@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace Assets.Scripts.Skills.PlayerSkills.Minigun
 {
-    public class MinigunSkill : ConfigurableSkill<MinigunSkillUpgradableConfigSO>
+    public class MinigunSkill : UpgradeableSkill<MinigunSkillUpgradeableConfigSO>
     {
-        [field: SerializeField] public override MinigunSkillUpgradableConfigSO Config { get; protected set; }
+        [field: SerializeField] public override MinigunSkillUpgradeableConfigSO Config { get; protected set; }
         [SerializeField] private Projectile _turretsProejctile;
         [SerializeField] private Transform _projectilesParent;
         [SerializeField] private MinigunTurret[] _turrets;
