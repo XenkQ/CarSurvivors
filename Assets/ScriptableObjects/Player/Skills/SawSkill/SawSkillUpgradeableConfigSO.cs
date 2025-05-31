@@ -3,7 +3,7 @@ using Assets.Scripts.CustomTypes;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "SawSkillSO", menuName = "Scriptable Objects/Skills/SawSkillSO")]
-public class SawSkillUpgradeableConfigSO : SkillUpgradeableConfig
+public class SawSkillUpgradeableConfigSO : SkillUpgradeableStatsConfig
 {
     [SerializeField] private FloatUpgradeableStat _knockbackPower;
     [SerializeField] private FloatUpgradeableStat _timeToArriveAtKnockbackLocation;

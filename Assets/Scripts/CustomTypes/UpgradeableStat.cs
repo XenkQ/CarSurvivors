@@ -5,7 +5,9 @@ namespace Assets.Scripts.CustomTypes
 {
     public interface IUpgradeableStat
     {
-        public void UpgradeValueBasedOnUpdateRange();
+        public void Upgrade(float upgradeValue);
+
+        public float GetUpgradeValueBasedOnUpdateRange();
     }
 
     public abstract class UpgradeableStat<T> : IUpgradeableStat
@@ -36,7 +38,7 @@ namespace Assets.Scripts.CustomTypes
             _rangeOfPossibleValuesForUpgrade = rangeOfPossibleValuesForUpgrade;
         }
 
-        public virtual void UpgradeValueBasedOnUpdateRange()
+        public virtual void Upgrade(float upgradeValue)
         {
             float value = FromTypeToFloat(Value);
             float minValue = FromTypeToFloat(_rangeOfPossibleValuesForUpgrade.Min);
@@ -63,16 +65,20 @@ namespace Assets.Scripts.CustomTypes
             }
             else
             {
-                float randomValueFromUpgradeRange = (float)(object)_rangeOfPossibleValuesForUpgrade.GetRandomValueInRange();
-                if (value + randomValueFromUpgradeRange <= maxValue)
+                if (value + upgradeValue <= maxValue)
                 {
-                    Value = FromFloatToType(value + randomValueFromUpgradeRange);
+                    Value = FromFloatToType(value + upgradeValue);
                 }
                 else
                 {
                     Value = FromFloatToType(value + minValue);
                 }
             }
+        }
+
+        public float GetUpgradeValueBasedOnUpdateRange()
+        {
+            return (float)(object)_rangeOfPossibleValuesForUpgrade.GetRandomValueInRange();
         }
 
         private float FromTypeToFloat(T value)

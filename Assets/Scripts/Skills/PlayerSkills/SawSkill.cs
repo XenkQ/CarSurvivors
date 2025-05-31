@@ -6,7 +6,7 @@ namespace Assets.Scripts.Skills.PlayerSkills
 {
     public class SawSkill : UpgradeableSkill<SawSkillUpgradeableConfigSO>
     {
-        [field: SerializeField] public override SawSkillUpgradeableConfigSO Config { get; protected set; }
+        [field: SerializeField] protected override SawSkillUpgradeableConfigSO _config { get; set; }
         [SerializeField] private BoxCollider _boxCollider;
 
         private void Awake()
@@ -23,7 +23,7 @@ namespace Assets.Scripts.Skills.PlayerSkills
         {
             base.Initialize();
 
-            InvokeRepeating(nameof(AtackAllEnemiesInsideCollider), Config.AttackCooldown.Value, Config.AttackCooldown.Value);
+            InvokeRepeating(nameof(AtackAllEnemiesInsideCollider), _config.AttackCooldown.Value, _config.AttackCooldown.Value);
         }
 
         private void AtackAllEnemiesInsideCollider()
@@ -46,14 +46,14 @@ namespace Assets.Scripts.Skills.PlayerSkills
             {
                 if (collisionObject.TryGetComponent(out IDamageable damageable))
                 {
-                    damageable.TakeDamage(Config.Damage.Value);
+                    damageable.TakeDamage(_config.Damage.Value);
                 }
 
                 if (collisionObject.TryGetComponent(out IKnockable knockable))
                 {
                     knockable.ApplyKnockBack(
-                        other.transform.position + transform.forward * Config.KnockbackPower.Value,
-                        Config.TimeToArriveAtKnockbackLocation.Value);
+                        other.transform.position + transform.forward * _config.KnockbackPower.Value,
+                        _config.TimeToArriveAtKnockbackLocation.Value);
                 }
             }
         }

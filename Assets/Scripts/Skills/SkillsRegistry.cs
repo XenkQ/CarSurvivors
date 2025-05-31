@@ -23,15 +23,19 @@ namespace Assets.Scripts.Skills
                 Destroy(gameObject);
             }
 
-            SetAllSkills();
+            RegisterAllSkills();
         }
 
-        private void Start()
+        public IEnumerable<ISkillBase> GetUninitializedSkills()
         {
-            InitializeAllSkills();
+            return Skills
+                .Select(skill => skill as IInitializable)
+                .Where(skill => !skill.IsInitialized())
+                .Select(skill => skill as ISkillBase)
+                .ToArray();
         }
 
-        private void SetAllSkills()
+        private void RegisterAllSkills()
         {
             var skills = new List<ISkillBase>();
 
@@ -44,17 +48,6 @@ namespace Assets.Scripts.Skills
             }
 
             Skills = skills;
-        }
-
-        private void InitializeAllSkills()
-        {
-            foreach (var skill in Skills)
-            {
-                if (skill is IInitializable initializable)
-                {
-                    initializable.Initialize();
-                }
-            }
         }
     }
 }

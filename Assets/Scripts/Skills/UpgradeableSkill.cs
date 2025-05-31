@@ -4,16 +4,18 @@ using Assets.ScriptableObjects.Player.Skills;
 
 namespace Assets.Scripts.Skills
 {
-    public interface IUpgradeableSkill<TUpgradeableConfig> : IConfigurableByScriptableObject<TUpgradeableConfig>, ISkillBase
-        where TUpgradeableConfig : SkillUpgradeableConfig
+    public interface IUpgradeableSkill : ISkillBase
     {
+        public ISkillUpgradeableStatsConfig Config { get; }
+
         public event EventHandler OnUpgrade;
     }
 
-    public abstract class UpgradeableSkill<TUpgradeableConfig> : MonoBehaviour, IUpgradeableSkill<TUpgradeableConfig>
-        where TUpgradeableConfig : SkillUpgradeableConfig
+    public abstract class UpgradeableSkill<TUpgradeableConfig> : MonoBehaviour, IUpgradeableSkill
+        where TUpgradeableConfig : ISkillUpgradeableStatsConfig
     {
-        public abstract TUpgradeableConfig Config { get; protected set; }
+        protected abstract TUpgradeableConfig _config { get; set; }
+        public ISkillUpgradeableStatsConfig Config => _config;
 
         public event EventHandler OnUpgrade;
 

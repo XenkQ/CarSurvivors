@@ -3,14 +3,14 @@ using System.Linq;
 
 namespace Assets.Scripts.Skills
 {
-    public class SkillUpgrader
+    public static class RandomUpgradeableSkillFinder
     {
-        public ISkillConfig GetRandomSkillConfigReadyForUpgrade()
+        public static IUpgradeableSkill Find()
         {
             var skills = SkillsRegistry
                 .Instance
                 .Skills
-                .Select(skill => skill as IUpgradeableSkill<SkillUpgradeableConfig>);
+                .Select(skill => skill as IUpgradeableSkill);
 
             if (skills.Count() == 0)
             {
@@ -23,14 +23,12 @@ namespace Assets.Scripts.Skills
             {
                 if (currentIndex == randomSkillIndex)
                 {
-                    return skill.Config;
+                    return skill;
                 }
                 currentIndex++;
             }
 
             return null;
         }
-
-        //public void UpgradeSkillConfig(ISkillConfig config, )
     }
 }

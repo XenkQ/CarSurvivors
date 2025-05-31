@@ -3,7 +3,7 @@ using Assets.Scripts.CustomTypes;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "MinigunSkillSO", menuName = "Scriptable Objects/Skills/MinigunSkillSO")]
-public class MinigunSkillUpgradeableConfigSO : SkillUpgradeableConfig
+public class MinigunSkillUpgradeableConfigSO : SkillUpgradeableStatsConfig
 {
     [field: SerializeField] public TurretConfigSO TurretStats { get; private set; }
     [SerializeField] private FloatUpgradeableStat _delayBetweenSpawningProjectile;
@@ -17,7 +17,4 @@ public class MinigunSkillUpgradeableConfigSO : SkillUpgradeableConfig
         DelayBetweenSpawningProjectile = _delayBetweenSpawningProjectile;
         NumberOfTurrets = _numberOfTurrets;
     }
-
-    protected override string[] ExcludedFieldNames { get; set; }
-        = new string[] { nameof(TurretStats), nameof(NumberOfTurrets) };
 }

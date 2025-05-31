@@ -1,14 +1,16 @@
+using Assets.Scripts.Exp;
 using Assets.Scripts.HealthSystem;
 using UnityEngine;
 
 namespace Player
 {
-    [RequireComponent(typeof(Health))]
+    [RequireComponent(typeof(Health), typeof(LevelSystem))]
     public sealed class PlayerManager : MonoBehaviour, IDamageable
     {
         public static PlayerManager Instance { get; private set; }
 
         public Health Health { get; private set; }
+        public LevelSystem ExpController { get; private set; }
 
         private readonly float _startDelayBetweenTakingDamage = 0.2f;
         private float _currentDelayBetweenTakingDamage;
@@ -29,6 +31,7 @@ namespace Player
             }
 
             Health = GetComponent<Health>();
+            ExpController = GetComponent<LevelSystem>();
         }
 
         private void Start()

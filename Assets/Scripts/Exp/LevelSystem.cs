@@ -3,13 +3,13 @@ using UnityEngine;
 
 namespace Assets.Scripts.Exp
 {
-    public readonly struct ExpData
+    public readonly struct LevelData
     {
         public readonly byte Lvl;
         public readonly float Exp;
         public readonly float MaxExp;
 
-        public ExpData(byte lvl = 1, float exp = 0, float maxExp = float.MaxValue)
+        public LevelData(byte lvl = 1, float exp = 0, float maxExp = float.MaxValue)
         {
             Lvl = lvl;
             Exp = exp;
@@ -25,60 +25,30 @@ namespace Assets.Scripts.Exp
 
         public override string ToString()
         {
-            return $"ExpData(Level: {Lvl}, Exp: {Exp}, MaxExp: {MaxExp})";
+            return $"LevelData(Level: {Lvl}, Exp: {Exp}, MaxExp: {MaxExp})";
         }
     }
 
     public class ExpDataEventArgs : EventArgs
     {
-        public ExpData ExpData { get; set; }
+        public LevelData ExpData { get; set; }
     }
 
-    public sealed class ExpManager : MonoBehaviour
+    public class LevelSystem : MonoBehaviour
     {
         [SerializeField] private AnimationCurve _expCurve;
 
-        public ExpData ExpData { get; private set; } = new ExpData();
+        public LevelData ExpData { get; private set; } = new LevelData();
 
-        public static ExpManager Instance { get; private set; }
+        public static LevelSystem Instance { get; private set; }
 
         public event EventHandler<ExpDataEventArgs> OnLvlUp;
 
         public event EventHandler<ExpDataEventArgs> OnExpChange;
 
-        private ExpManager()
-        { }
-
         private void Awake()
         {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-
-            ExpData = new ExpData(maxExp: CalculateMaxExp(ExpData.Lvl));
-        }
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                AddExp(10f);
-            }
-
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                AddExp(115f);
-            }
-
-            if (Input.GetKeyDown(KeyCode.T))
-            {
-                AddExp(10000f);
-            }
+            ExpData = new LevelData(maxExp: CalculateMaxExp(ExpData.Lvl));
         }
 
         public void AddExp(float value)
@@ -98,14 +68,14 @@ namespace Assets.Scripts.Exp
                 exp -= maxExp;
                 maxExp = CalculateMaxExp(lvl);
 
-                ExpData = new ExpData(lvl, exp, maxExp);
+                ExpData = new LevelData(lvl, exp, maxExp);
                 OnLvlUp?.Invoke(this, new ExpDataEventArgs()
                 {
                     ExpData = ExpData
                 });
             }
 
-            ExpData = new ExpData(lvl, exp, maxExp);
+            ExpData = new LevelData(lvl, exp, maxExp);
             OnExpChange?.Invoke(this, new ExpDataEventArgs()
             {
                 ExpData = ExpData
