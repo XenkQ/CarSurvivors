@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Assets.Scripts.UI.Skills
+namespace Assets.Scripts.UI
 {
     public struct ClickableButtonData
     {

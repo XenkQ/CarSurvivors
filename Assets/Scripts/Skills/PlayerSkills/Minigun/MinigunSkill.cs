@@ -5,6 +5,7 @@ namespace Assets.Scripts.Skills.PlayerSkills.Minigun
 {
     public class MinigunSkill : UpgradeableSkill<MinigunSkillUpgradeableConfigSO>
     {
+        [field: SerializeField] public override SkillInfoSO SkillInfo { get; protected set; }
         [field: SerializeField] protected override MinigunSkillUpgradeableConfigSO _config { get; set; }
         [SerializeField] private Projectile _turretsProejctile;
         [SerializeField] private Transform _projectilesParent;

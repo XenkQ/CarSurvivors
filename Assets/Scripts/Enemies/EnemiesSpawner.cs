@@ -1,4 +1,3 @@
-using Assets.Scripts.Enemies;
 using Assets.Scripts.GridSystem;
 using Assets.Scripts.HealthSystem;
 using System;
@@ -7,9 +6,9 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Pool;
 
-namespace Scripts
+namespace Assets.Scripts.Enemies
 {
-    public sealed class EnemiesSpawner : MonoBehaviour
+    public sealed class EnemiesSpawner : MonoBehaviour, ISpawner
     {
         [Serializable]
         private class EnemyInfo
@@ -21,6 +20,9 @@ namespace Scripts
 
         [SerializeField] private List<EnemyInfo> _poolEnemiesInfo;
         private Dictionary<EnemyInfo, ObjectPool<Enemy>> _enemyPools = new();
+
+        public event EventHandler OnSpawnedEntityReleased;
+
         public ushort SpawnedEnemiesCounter { get; private set; }
 
         public static EnemiesSpawner Instance { get; private set; }
@@ -47,7 +49,7 @@ namespace Scripts
         {
             foreach (EnemyInfo poolEnemyInfo in _poolEnemiesInfo)
             {
-                ObjectPool<Enemy> currentEnemyPool = new(createFunc: () => Instantiate(poolEnemyInfo.enemyPrefab, this.transform),
+                ObjectPool<Enemy> currentEnemyPool = new(createFunc: () => Instantiate(poolEnemyInfo.enemyPrefab, transform),
                                                          actionOnGet: OnEnemyGet,
                                                          actionOnRelease: OnEnemyRelease,
                                                          defaultCapacity: poolEnemyInfo.maxAmount,
@@ -70,6 +72,7 @@ namespace Scripts
         private void OnEnemyRelease(Enemy enemy)
         {
             enemy.Health.OnNoHealth -= Health_OnNoHealth;
+            OnSpawnedEntityReleased?.Invoke(enemy, EventArgs.Empty);
             enemy.gameObject.SetActive(false);
             SpawnedEnemiesCounter--;
         }

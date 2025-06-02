@@ -9,13 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 076a553c77658ca4d909724cdba5d9dd, type: 3}
-  m_Name: Level5_EnemyStatsSO
+  m_Script: {fileID: 11500000, guid: a6540e703deba09488636e1451ac1abd, type: 3}
+  m_Name: LandmineSkillInfo
   m_EditorClassIdentifier: 
-  MovementSpeed: 2
-  RotationSpeed: 2
-  AnimationScaleMultiplier: 1.35
-  Damage: 25
-  Level: 5
-  StunAfterDamageDuration: 0
-  ExpForKill: 40
+  <Name>k__BackingField: Landmine
+  <Description>k__BackingField: Place landmines that will explode after enemy steps
+    on it

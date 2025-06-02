@@ -1,6 +1,4 @@
-using Assets.Scripts.Extensions;
 using Assets.Scripts.LayerMasks;
-using DG.Tweening;
 using System;
 using UnityEngine;
 
@@ -14,8 +12,8 @@ namespace Assets.Scripts.Skills.ObjectsImpactingSkills.Crate
         {
             if (1 << other.gameObject.layer == EntityLayers.Player)
             {
-                Destroy(gameObject);
                 OnCollected?.Invoke(this, EventArgs.Empty);
+                Destroy(gameObject);
             }
         }
     }

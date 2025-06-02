@@ -34,13 +34,11 @@ namespace Assets.Scripts.Exp
         public LevelData ExpData { get; set; }
     }
 
-    public class LevelSystem : MonoBehaviour
+    public class LevelController : MonoBehaviour
     {
         [SerializeField] private AnimationCurve _expCurve;
 
         public LevelData ExpData { get; private set; } = new LevelData();
-
-        public static LevelSystem Instance { get; private set; }
 
         public event EventHandler<ExpDataEventArgs> OnLvlUp;
 

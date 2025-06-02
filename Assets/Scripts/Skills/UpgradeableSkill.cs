@@ -14,6 +14,7 @@ namespace Assets.Scripts.Skills
     public abstract class UpgradeableSkill<TUpgradeableConfig> : MonoBehaviour, IUpgradeableSkill
         where TUpgradeableConfig : ISkillUpgradeableStatsConfig
     {
+        public abstract SkillInfoSO SkillInfo { get; protected set; }
         protected abstract TUpgradeableConfig _config { get; set; }
         public ISkillUpgradeableStatsConfig Config => _config;
 

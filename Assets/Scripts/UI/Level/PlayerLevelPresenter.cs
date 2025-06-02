@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Exp;
 using DG.Tweening;
+using Player;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -7,7 +8,7 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts.UI.Level
 {
-    public class LevelPresenter : MonoBehaviour
+    public class PlayerLevelPresenter : MonoBehaviour
     {
         private const float FASTEST_EXP_INCREASE_ANIM_SPEED = 0.5f;
         private const float SLOWEST_EXP_INCREASE_ANIM_SPEED = 4f;
@@ -25,14 +26,18 @@ namespace Assets.Scripts.UI.Level
         private Tween _expIncreaseTween;
         private Tween _lvlUpTween;
 
+        private LevelController _playerLevelController;
+
         private void Start()
         {
-            _expData = LevelSystem.Instance.ExpData;
+            _playerLevelController = PlayerManager.Instance.LevelController;
+
+            _expData = _playerLevelController.ExpData;
             _expSlider.value = _expData.Exp;
             _expSlider.maxValue = _expData.MaxExp;
 
-            LevelSystem.Instance.OnExpChange += ExpManager_OnExpChange;
-            LevelSystem.Instance.OnLvlUp += ExpManager_OnLvlChange;
+            _playerLevelController.OnExpChange += ExpManager_OnExpChange;
+            _playerLevelController.OnLvlUp += ExpManager_OnLvlChange;
 
             InvokeRepeating(nameof(HandleTweensAnimations), DELAY_BETWEEN_TWEENS_ANIMATION_CHECK, DELAY_BETWEEN_TWEENS_ANIMATION_CHECK);
         }
@@ -44,6 +49,7 @@ namespace Assets.Scripts.UI.Level
 
         private void ExpManager_OnLvlChange(object sender, ExpDataEventArgs e)
         {
+            Debug.Log("LEVEL UP");
             _levelUpQueue.Enqueue(e.ExpData);
         }
 
@@ -120,7 +126,7 @@ namespace Assets.Scripts.UI.Level
 
         private float CalculateSliderExpGainAnimSpeed(float newExp)
         {
-            byte levelsDiff = (byte)(LevelSystem.Instance.ExpData.Lvl - _expData.Lvl);
+            byte levelsDiff = (byte)(_playerLevelController.ExpData.Lvl - _expData.Lvl);
             float speedBoost = levelsDiff * EXP_PERCENT_ANIM_SPEED_BOOST_BY_LVL_DIFF;
 
             float slowestSpeedPercent;

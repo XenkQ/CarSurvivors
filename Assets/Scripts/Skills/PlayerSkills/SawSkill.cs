@@ -6,6 +6,7 @@ namespace Assets.Scripts.Skills.PlayerSkills
 {
     public class SawSkill : UpgradeableSkill<SawSkillUpgradeableConfigSO>
     {
+        [field: SerializeField] public override SkillInfoSO SkillInfo { get; protected set; }
         [field: SerializeField] protected override SawSkillUpgradeableConfigSO _config { get; set; }
         [SerializeField] private BoxCollider _boxCollider;
 

@@ -7,6 +7,7 @@ namespace Assets.Scripts.Effects
     public class XY360RotationLoop : MonoBehaviour
     {
         [SerializeField] private float _tweenIterationTime = 2.5f;
+        [SerializeField] private bool _unscaleWithTime;
         private Vector3 _maxTweenRotation = new Vector3(360, 360, 0);
         private Tween _rotationTween;
 
@@ -14,7 +15,8 @@ namespace Assets.Scripts.Effects
         {
             if (_rotationTween == null)
             {
-                _rotationTween = transform.StartXY360RotateLoopTween(_maxTweenRotation, _tweenIterationTime);
+                _rotationTween = transform.StartXY360RotateLoopTween(_maxTweenRotation, _tweenIterationTime)
+                    .SetUpdate(_unscaleWithTime);
             }
             else
             {

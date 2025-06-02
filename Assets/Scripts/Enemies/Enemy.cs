@@ -50,6 +50,8 @@ namespace Assets.Scripts.Enemies
             transform.localScale = _startScale;
             transform.position = new Vector3(0, _verticalPosOffset, 0);
             _scaleTween.Pause();
+
+            Player.PlayerManager.Instance.LevelController.AddExp(_stats.ExpForKill);
         }
 
         private void Update()

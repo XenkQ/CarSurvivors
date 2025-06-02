@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5450912998383506267
 Transform:
   m_ObjectHideFlags: 0
@@ -46,7 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89a61df61a74ff148bad628d8a4eaa75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Config>k__BackingField: {fileID: 11400000, guid: 941f5411a5b567d47a096e0811f75fc3, type: 2}
+  <SkillInfo>k__BackingField: {fileID: 11400000, guid: b817fac1bbb5b6f41b1438125b575d7c, type: 2}
+  <_config>k__BackingField: {fileID: 11400000, guid: 941f5411a5b567d47a096e0811f75fc3, type: 2}
   _turretsProejctile: {fileID: 4901841786317894366, guid: 19270b55571e60c4489d44d93aa14239, type: 3}
   _projectilesParent: {fileID: 0}
   _turrets:
@@ -99,7 +100,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b198cbfa417d9ee499466b64cbd95236, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Config>k__BackingField: {fileID: 11400000, guid: 246b65a0be0839d4e8779b26d50131fb, type: 2}
+  <SkillInfo>k__BackingField: {fileID: 11400000, guid: fc985a254f408d64d88b8ae6c901d8d0, type: 2}
+  <_config>k__BackingField: {fileID: 11400000, guid: 246b65a0be0839d4e8779b26d50131fb, type: 2}
   _boxCollider: {fileID: 4427362447296171089}
 --- !u!65 &4427362447296171089
 BoxCollider:
@@ -138,7 +140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4451731468149088330
 Transform:
   m_ObjectHideFlags: 0
@@ -166,7 +168,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522f6f112bbd45d4f91ccd435fc3420a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Config>k__BackingField: {fileID: 11400000, guid: 18926d7209511304ebda84a7a76ec21d, type: 2}
+  <SkillInfo>k__BackingField: {fileID: 11400000, guid: dfcbb06cccb4b9e4f9e9f111659cd512, type: 2}
+  <_config>k__BackingField: {fileID: 11400000, guid: 18926d7209511304ebda84a7a76ec21d, type: 2}
   _landminePrefab: {fileID: 6048307613972475818, guid: f5dbe1699bc9b4d47bbf530373b001d0, type: 3}
   _landminesParent: {fileID: 0}
   _cooldown: 2
@@ -422,9 +425,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3247043444263234489}
-  - component: {fileID: 78788118026478637}
+  - component: {fileID: 7146412437918463802}
   m_Layer: 0
-  m_Name: SkillsManager
+  m_Name: SkillsRegistry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -448,7 +451,7 @@ Transform:
   - {fileID: 4451731468149088330}
   m_Father: {fileID: 6257441156095345877}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &78788118026478637
+--- !u!114 &7146412437918463802
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -457,7 +460,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3300655100864642006}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2f1193144a02804ea44c32dbd5a9925, type: 3}
+  m_Script: {fileID: 11500000, guid: 26387815917b0a14dae3de2d332a6bbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4105977957052641957
@@ -576,6 +579,7 @@ GameObject:
   - component: {fileID: 3205813391929429011}
   - component: {fileID: 732167794389132859}
   - component: {fileID: 4444538082891369474}
+  - component: {fileID: 8489968326519551025}
   - component: {fileID: 5120778290738025250}
   - component: {fileID: 7480640710395550981}
   m_Layer: 8
@@ -663,6 +667,42 @@ MonoBehaviour:
   - WheelModel: {fileID: 3255664546788292463}
     WheelCollider: {fileID: 3897780278463981742}
     Axel: 1
+--- !u!114 &8489968326519551025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6215313516695621011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9556b9460d41014cbfe327ac1a28644, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _expCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 255
+      value: 65.535
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!54 &5120778290738025250
 Rigidbody:
   m_ObjectHideFlags: 0

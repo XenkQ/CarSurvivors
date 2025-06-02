@@ -7,15 +7,16 @@ namespace Assets.Scripts.Skills
     {
         public static ISkillBase InitializeRandomUninitializedSkill()
         {
-            var inactiveSkills = SkillsRegistry.Instance.GetUninitializedSkills()
-                .Where(skill => skill is IInitializable)
-                .ToArray();
-
-            if (inactiveSkills.Length > 0)
+            if (SkillsRegistry.Instance.UninitializedSkillsCounter > 0)
             {
+                var inactiveSkills = SkillsRegistry.Instance.GetUninitializedSkills().ToArray();
                 int index = Random.Range(0, inactiveSkills.Length);
-                inactiveSkills[index].Initialize();
-                return inactiveSkills[index] as ISkillBase;
+                ISkillBase inactiveSkill = inactiveSkills[index];
+
+                if (inactiveSkill != null)
+                {
+                    return SkillsRegistry.Instance.InitializeSkill(inactiveSkill);
+                }
             }
 
             return null;

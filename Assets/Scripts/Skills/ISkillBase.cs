@@ -2,5 +2,6 @@
 {
     public interface ISkillBase : IInitializable
     {
+        public SkillInfoSO SkillInfo { get; }
     }
 }

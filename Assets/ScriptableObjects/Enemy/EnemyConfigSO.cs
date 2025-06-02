@@ -12,4 +12,5 @@ public class EnemyConfigSO : ScriptableObject
 
     public byte Level;
     public float StunAfterDamageDuration;
+    public float ExpForKill;
 }

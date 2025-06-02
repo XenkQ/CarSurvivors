@@ -1,5 +1,4 @@
-﻿using Assets.ScriptableObjects.Player.Skills;
-using System.Linq;
+﻿using System.Linq;
 
 namespace Assets.Scripts.Skills
 {

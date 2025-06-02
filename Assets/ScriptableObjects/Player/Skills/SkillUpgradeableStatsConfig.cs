@@ -11,7 +11,7 @@ namespace Assets.ScriptableObjects.Player.Skills
         public IEnumerable<IUpgradeableStat> GetUpgradeableStats();
     }
 
-    public class SkillUpgradeableStatsConfig : ScriptableObject, ISkillUpgradeableStatsConfig
+    public abstract class SkillUpgradeableStatsConfig : ScriptableObject, ISkillUpgradeableStatsConfig
     {
         public IEnumerable<IUpgradeableStat> GetUpgradeableStats()
         {

@@ -17,3 +17,5 @@ MonoBehaviour:
   AnimationScaleMultiplier: 1.22
   Damage: 5
   Level: 4
+  StunAfterDamageDuration: 0
+  ExpForKill: 28
