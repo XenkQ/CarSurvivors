@@ -6,23 +6,42 @@ using UnityEngine;
 
 namespace Assets.ScriptableObjects.Player.Skills
 {
+    public readonly struct NameUpgradableStatPair
+    {
+        public string Name { get; }
+        public IUpgradeableStat UpgradeableStat { get; }
+
+        public NameUpgradableStatPair(string name, IUpgradeableStat upgradeableStat)
+        {
+            Name = name;
+            UpgradeableStat = upgradeableStat;
+        }
+    }
+
     public interface ISkillUpgradeableStatsConfig
     {
-        public IEnumerable<IUpgradeableStat> GetUpgradeableStats();
+        public IEnumerable<NameUpgradableStatPair> GetUpgradeableStats();
     }
 
     public abstract class SkillUpgradeableStatsConfig : ScriptableObject, ISkillUpgradeableStatsConfig
     {
-        public IEnumerable<IUpgradeableStat> GetUpgradeableStats()
+        public IEnumerable<NameUpgradableStatPair> GetUpgradeableStats()
         {
-            List<IUpgradeableStat> upgradeableStats = new List<IUpgradeableStat>();
-            FieldInfo[] upgradeableStatsFields = GetType().GetFields(BindingFlags.Public)
-                                          .Where(f => typeof(IUpgradeableStat).IsAssignableFrom(f.FieldType))
+            List<NameUpgradableStatPair> upgradeableStats = new List<NameUpgradableStatPair>();
+            PropertyInfo[] upgradeableStatsProperties = GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                                          .Where(f => typeof(IUpgradeableStat).IsAssignableFrom(f.PropertyType))
                                           .ToArray();
-            return upgradeableStatsFields
-                .Select(f => f.GetValue(this))
-                .OfType<IUpgradeableStat>()
-                .ToList();
+
+            foreach (PropertyInfo property in upgradeableStatsProperties)
+            {
+                IUpgradeableStat upgradeableStat = (IUpgradeableStat)property.GetValue(this);
+                if (upgradeableStat != null)
+                {
+                    upgradeableStats.Add(new NameUpgradableStatPair(property.Name, upgradeableStat));
+                }
+            }
+
+            return upgradeableStats;
         }
     }
 }

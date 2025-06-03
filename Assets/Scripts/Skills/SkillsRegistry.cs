@@ -9,7 +9,7 @@ namespace Assets.Scripts.Skills
         public IEnumerable<ISkillBase> Skills { get; private set; }
         public static SkillsRegistry Instance { get; private set; }
 
-        public byte UninitializedSkillsCounter { get; private set; }
+        public byte UninitializedSkillsCount { get; private set; }
 
         private SkillsRegistry()
         { }
@@ -30,34 +30,7 @@ namespace Assets.Scripts.Skills
 
         public void Start()
         {
-            UninitializedSkillsCounter = (byte)GetUninitializedSkills().Count();
-        }
-
-        public IEnumerable<ISkillBase> GetUninitializedSkills()
-        {
-            if (UninitializedSkillsCounter > 0)
-            {
-                return Skills
-                        .Select(skill => skill as IInitializable)
-                        .Where(skill => !skill.IsInitialized())
-                        .Select(skill => skill as ISkillBase)
-                        .ToArray();
-            }
-            else
-            {
-                return Enumerable.Empty<ISkillBase>();
-            }
-        }
-        public ISkillBase InitializeSkill(ISkillBase skill)
-        {
-            if (skill is IInitializable initializableSkill && !initializableSkill.IsInitialized())
-            {
-                initializableSkill.Initialize();
-                UninitializedSkillsCounter--;
-                return skill;
-            }
-
-            return null;
+            UninitializedSkillsCount = (byte)GetUninitializedSkills().Count();
         }
 
         private void RegisterAllSkills()
@@ -73,6 +46,32 @@ namespace Assets.Scripts.Skills
             }
 
             Skills = skills;
+        }
+
+        public IEnumerable<ISkillBase> GetUninitializedSkills()
+        {
+            return Skills
+                    .Select(skill => skill as IInitializable)
+                    .Where(skill => !skill.IsInitialized())
+                    .Select(skill => skill as ISkillBase)
+                    .ToArray();
+        }
+
+        public ISkillBase InitializeSkill(ISkillBase skill)
+        {
+            if (skill is IInitializable initializableSkill && !initializableSkill.IsInitialized())
+            {
+                initializableSkill.Initialize();
+
+                if (UninitializedSkillsCount - 1 >= 0)
+                {
+                    UninitializedSkillsCount--;
+                }
+
+                return skill;
+            }
+
+            return null;
         }
     }
 }

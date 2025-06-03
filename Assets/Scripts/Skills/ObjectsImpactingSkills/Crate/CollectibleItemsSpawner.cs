@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.GridSystem;
-using Unity.Collections;
 using UnityEngine;
 
 namespace Assets.Scripts.Skills.ObjectsImpactingSkills.Crate
@@ -101,11 +100,11 @@ namespace Assets.Scripts.Skills.ObjectsImpactingSkills.Crate
 
         private void Collectible_OnCollected(object sender, EventArgs e)
         {
-            var skillCrateObject = sender as GameObject;
+            var collectibleGameObject = (sender as ICollectible)?.GameObject;
 
-            if (skillCrateObject != null && skillCrateObject.TryGetComponent(out ICollectible collectible))
+            if (collectibleGameObject != null && collectibleGameObject.TryGetComponent(out ICollectible collectible))
             {
-                ReleaseOccupiedCellByCollectible(skillCrateObject);
+                ReleaseOccupiedCellByCollectible(collectibleGameObject);
 
                 _spawnedCollectibleItems.Remove(collectible);
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Assets.Scripts.CustomTypes
 {
@@ -24,12 +25,15 @@ namespace Assets.Scripts.CustomTypes
         {
             if (typeof(T) == typeof(float))
             {
-                return (T)(object)UnityEngine.Random.Range((float)(object)Min, (float)(object)Max);
+                return (T)(object)(Math.Round(UnityEngine.Random.Range((float)(object)Min, (float)(object)Max), 2));
             }
-            else if (typeof(T) == typeof(int)
-                || typeof(T) == typeof(byte))
+            else if (typeof(T) == typeof(int))
             {
                 return (T)(object)UnityEngine.Random.Range((int)(object)Min, (int)(object)Max);
+            }
+            else if (typeof(T) == typeof(byte))
+            {
+                return (T)(object)(byte)UnityEngine.Random.Range((byte)(object)Min, (byte)(object)Max);
             }
             else
             {

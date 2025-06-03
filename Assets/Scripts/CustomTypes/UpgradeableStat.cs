@@ -10,7 +10,7 @@ namespace Assets.Scripts.CustomTypes
         public float GetUpgradeValueBasedOnUpdateRange();
     }
 
-    public abstract class UpgradeableStat<T> : IUpgradeableStat
+    public abstract class UpgradeableStat<T> : IUpgradeableStat, ISerializationCallbackReceiver
         where T : struct, IComparable<T>, IConvertible
     {
         [field: SerializeField] public T Value { get; protected set; }
@@ -90,6 +90,10 @@ namespace Assets.Scripts.CustomTypes
         {
             return (T)Convert.ChangeType(value, typeof(T));
         }
+
+        public abstract void OnBeforeSerialize();
+
+        public abstract void OnAfterDeserialize();
     }
 
     // For unity serialization we need to use nongeneric class.
@@ -109,6 +113,15 @@ namespace Assets.Scripts.CustomTypes
         {
             _rangeOfPossibleValuesForUpgrade = _floatRangeOfPossibleValuesForUpgrade;
         }
+
+        public override void OnAfterDeserialize()
+        {
+            _rangeOfPossibleValuesForUpgrade = _floatRangeOfPossibleValuesForUpgrade;
+        }
+
+        public override void OnBeforeSerialize()
+        {
+        }
     }
 
     [Serializable]
@@ -125,6 +138,15 @@ namespace Assets.Scripts.CustomTypes
             : base(value, maxValue, alwaysUseMinValueForUpgrade)
         {
             _rangeOfPossibleValuesForUpgrade = _byteRangeOfPossibleValuesForUpgrade;
+        }
+
+        public override void OnAfterDeserialize()
+        {
+            _rangeOfPossibleValuesForUpgrade = _byteRangeOfPossibleValuesForUpgrade;
+        }
+
+        public override void OnBeforeSerialize()
+        {
         }
     }
 }

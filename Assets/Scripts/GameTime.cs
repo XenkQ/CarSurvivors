@@ -4,7 +4,7 @@ namespace Assets.Scripts
 {
     public static class GameTime
     {
-        public static void StopTime()
+        public static void PauseTime()
         {
             Time.timeScale = 0f;
         }

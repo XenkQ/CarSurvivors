@@ -2,7 +2,7 @@
 
 namespace Assets.Scripts
 {
-    public interface ICollectible
+    public interface ICollectible : IGameObjectProvider
     {
         public event EventHandler OnCollected;
     }

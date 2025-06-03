@@ -6,7 +6,14 @@ namespace Assets.Scripts.Skills.ObjectsImpactingSkills.Crate
 {
     public class SkillCrate : MonoBehaviour, ICollectible
     {
+        public GameObject GameObject { get; private set; }
+
         public event EventHandler OnCollected;
+
+        private void Start()
+        {
+            GameObject = gameObject;
+        }
 
         private void OnTriggerEnter(Collider other)
         {

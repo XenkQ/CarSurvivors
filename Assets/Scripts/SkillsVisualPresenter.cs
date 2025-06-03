@@ -23,11 +23,15 @@ public sealed class SkillsVisualPresenter : MonoBehaviour
 
     public void ShowSkillVisualBasedOnSkillInfo(SkillInfoSO skillInfoSO)
     {
+        Debug.Log($"Showing skill visual for: {skillInfoSO.Name}");
         _skillsVisuals.First(s => s.name == skillInfoSO.Name)?.SetActive(true);
     }
 
-    public void HideSkillVisualBasedOnSkillInfo(SkillInfoSO skillInfoSO)
+    public void HideAll()
     {
-        _skillsVisuals.First(s => s.name == skillInfoSO.Name)?.SetActive(false);
+        foreach(GameObject skillVisual in _skillsVisuals)
+        {
+            skillVisual.SetActive(false);
+        }
     }
 }

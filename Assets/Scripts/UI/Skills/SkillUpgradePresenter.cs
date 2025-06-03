@@ -1,7 +1,7 @@
 ﻿using Assets.ScriptableObjects.Player.Skills;
 using Assets.Scripts.Skills;
 using Assets.Scripts.Skills.ObjectsImpactingSkills.Crate;
-using Player;
+using Assets.Scripts.UI.Level;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -22,60 +22,100 @@ namespace Assets.Scripts.UI.Skills
         [SerializeField] private GameObject _newSkillSection;
         [SerializeField] private TextMeshProUGUI _newSkillName;
         [SerializeField] private TextMeshProUGUI _newSkillDescription;
+        [SerializeField] private Button _continueButton;
         private const string SKILL_NAME_TEMPLATE = "New Skill: {0}";
+
+        private Queue<ISkillBase> _skillsQueuedForInitialization = new Queue<ISkillBase>();
+        private Queue<IUpgradeableSkill> _skillsQueuedForUpgrade = new Queue<IUpgradeableSkill>();
+
+        private bool _isShowingAnySection;
 
         private void Start()
         {
-            CollectibleItemsSpawner.Instance.OnSpawnedEntityReleased += ShowButtonsWithRandomConfigStatsUpgrades_OnEvent;
-            PlayerManager.Instance.LevelController.OnLvlUp += ShowButtonsWithRandomConfigStatsUpgrades_OnEvent;
+            CollectibleItemsSpawner.Instance.OnSpawnedEntityReleased += ShowRandomSkillInInitializationOrUpgradeSection_OnEvent;
+            PlayerLevelPresenter.Instance.OnExpSliderVisualEndValueReached += ShowRandomSkillInInitializationOrUpgradeSection_OnEvent;
+            _continueButton.onClick.AddListener(() => HandleUpgradeableOrInitializableSkillsShowing());
         }
 
-        private void ShowButtonsWithRandomConfigStatsUpgrades_OnEvent(object sender, System.EventArgs e)
+        private void ShowRandomSkillInInitializationOrUpgradeSection_OnEvent(object sender, System.EventArgs e)
         {
-            GameTime.StopTime();
-
-            ISkillBase skillToWorkWith;
-            if (SkillsRegistry.Instance.UninitializedSkillsCounter > 0)
+            if (_skillsQueuedForInitialization.Count < SkillsRegistry.Instance.UninitializedSkillsCount)
             {
-                skillToWorkWith = RandomDisabledSkillsInitializer.InitializeRandomUninitializedSkill();
-                ShowNewSkillPanel(skillToWorkWith);
+                _skillsQueuedForInitialization.Enqueue(RandomUninitializedSkillsInitializator.Initialize());
             }
             else
             {
-                skillToWorkWith = RandomUpgradeableSkillFinder.Find();
-                ShowButtonsWithStatsUpgrades((skillToWorkWith as IUpgradeableSkill).Config);
+                _skillsQueuedForUpgrade.Enqueue(RandomUpgradeableSkillFinder.Find());
             }
 
-            SkillsVisualPresenter.Instance.ShowSkillVisualBasedOnSkillInfo(skillToWorkWith.SkillInfo);
+            if (!_isShowingAnySection)
+            {
+                _isShowingAnySection = true;
+                HandleUpgradeableOrInitializableSkillsShowing();
+            }
         }
 
-        private void ShowNewSkillPanel(ISkillBase skillBase)
+        private void HandleUpgradeableOrInitializableSkillsShowing()
         {
-            _newSkillSection.SetActive(true);
+            SkillsVisualPresenter.Instance.HideAll();
+
+            GameTime.ResumeTime();
+
+            if (_skillsQueuedForInitialization.Count > 0)
+            {
+                ISkillBase skill = _skillsQueuedForInitialization.Dequeue();
+                SkillsRegistry.Instance.InitializeSkill(skill);
+                ShowNewSkillSection(skill);
+                GameTime.PauseTime();
+            }
+            else if (_skillsQueuedForUpgrade.Count > 0)
+            {
+                IUpgradeableSkill skill = _skillsQueuedForUpgrade.Dequeue();
+                Debug.Log($"Showing upgrade section for skill: {skill.Config}");
+                ShowStatsUpgradeSection(skill);
+                GameTime.PauseTime();
+            }
+            else
+            {
+                _newSkillSection.SetActive(false);
+                _upgradeSkillSection.SetActive(false);
+                _isShowingAnySection = false;
+            }
+        }
+
+        private void ShowNewSkillSection(ISkillBase skillBase)
+        {
             _newSkillName.text = string.Format(SKILL_NAME_TEMPLATE, skillBase.SkillInfo.Name);
             _newSkillDescription.text = skillBase.SkillInfo.Description;
+
+            SkillsVisualPresenter.Instance.ShowSkillVisualBasedOnSkillInfo(skillBase.SkillInfo);
+
+            _newSkillSection.SetActive(true);
         }
 
-        private void ShowButtonsWithStatsUpgrades(ISkillUpgradeableStatsConfig skillUpgradeableStatsConfig)
+        private void ShowStatsUpgradeSection(IUpgradeableSkill upgradeableStats)
         {
             List<ClickableButtonData> skillStatsUpgradeButtonsData = new List<ClickableButtonData>();
 
-            foreach (var upgradeableStat in skillUpgradeableStatsConfig.GetUpgradeableStats())
+            foreach (var upgradeableStat in upgradeableStats.Config.GetUpgradeableStats())
             {
-                float upgradeValue = upgradeableStat.GetUpgradeValueBasedOnUpdateRange();
+                float upgradeValue = upgradeableStat.UpgradeableStat.GetUpgradeValueBasedOnUpdateRange();
                 skillStatsUpgradeButtonsData.Add(new ClickableButtonData
                 {
-                    Text = (upgradeValue > 0 ? "Increase" : "Decrease") + $" {upgradeableStat.GetType().Name} by {upgradeValue}",
+                    Text = (upgradeValue > 0 ? "Increase" : "Decrease")
+                        + $" {upgradeableStat.Name.PascalCaseToWords()} by {upgradeValue}",
+
                     OnClick = () =>
                     {
-                        upgradeableStat.Upgrade(upgradeValue);
-                        _upgradeSkillSection.SetActive(false);
-                        GameTime.ResumeTime();
+                        upgradeableStat.UpgradeableStat.Upgrade(upgradeValue);
+                        HandleUpgradeableOrInitializableSkillsShowing();
                     }
                 });
             }
 
             DisplayNewButtons(skillStatsUpgradeButtonsData.Shuffle().Take(MAX_SKILLS_UPGRADE_BUTTONS));
+
+            SkillsVisualPresenter.Instance.ShowSkillVisualBasedOnSkillInfo(upgradeableStats.SkillInfo);
 
             _upgradeSkillSection.SetActive(true);
         }
@@ -86,27 +126,25 @@ namespace Assets.Scripts.UI.Skills
             CreateUpgradeButtons(clickableButtonsData);
         }
 
+        private void DestroyAllButtons()
+        {
+            foreach (Button child in _buttonsHolder.GetComponentsInChildren<Button>())
+            {
+                Destroy(child.gameObject);
+            }
+        }
+
         private void CreateUpgradeButtons(IEnumerable<ClickableButtonData> clickableButtonsData)
         {
             foreach (var clickableButtonData in clickableButtonsData)
             {
                 Button button = Instantiate(_upgradeButtonPrefab, _buttonsHolder);
                 button.onClick.AddListener(() => clickableButtonData.OnClick?.Invoke());
+                TextMeshProUGUI buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
 
-                if (button.TryGetComponent(out TextMeshProUGUI buttonText))
+                if (button != null)
                 {
                     buttonText.text = clickableButtonData.Text;
-                }
-            }
-        }
-
-        private void DestroyAllButtons()
-        {
-            foreach (Transform child in _buttonsHolder)
-            {
-                if (child.gameObject.TryGetComponent<Button>(out _))
-                {
-                    Destroy(child.gameObject);
                 }
             }
         }
