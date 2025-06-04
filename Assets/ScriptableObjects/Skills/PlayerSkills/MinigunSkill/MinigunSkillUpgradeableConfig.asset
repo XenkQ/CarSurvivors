@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce8fdf32c96f4e449ae2b242d559ee50, type: 3}
+  m_Name: MinigunSkillUpgradeableConfig
+  m_EditorClassIdentifier: 
+  _turretRotationAngle: 120
+  _numberOfTurrets:
+    <Value>k__BackingField: 2
+    _maxValue: 2
+    _alwaysUseMinValueForUpgrade: 1
+    _substractMode: 0
+    _byteRangeOfPossibleValuesForUpgrade:
+      Min: 1
+      Max: 1
+  _turretRotationDuration:
+    <Value>k__BackingField: 1
+    _maxValue: 0.2
+    _alwaysUseMinValueForUpgrade: 0
+    _substractMode: 0
+    _floatRangeOfPossibleValuesForUpgrade:
+      Min: 0.1
+      Max: 0.2
+  _delayBetweenSpawningProjectile:
+    <Value>k__BackingField: 0.8
+    _maxValue: 0.1
+    _alwaysUseMinValueForUpgrade: 0
+    _substractMode: 1
+    _floatRangeOfPossibleValuesForUpgrade:
+      Min: 0.1
+      Max: 0.2
+  _startBulletDamage:
+    <Value>k__BackingField: 6
+    _maxValue: 16
+    _alwaysUseMinValueForUpgrade: 0
+    _substractMode: 0
+    _floatRangeOfPossibleValuesForUpgrade:
+      Min: 2
+      Max: 4.5
+  _startBulletSize:
+    <Value>k__BackingField: 1
+    _maxValue: 2
+    _alwaysUseMinValueForUpgrade: 0
+    _substractMode: 0
+    _floatRangeOfPossibleValuesForUpgrade:
+      Min: 0.1
+      Max: 0.25
+  _startBulletTimeToArriveAtRangeEnd:
+    <Value>k__BackingField: 1
+    _maxValue: 0.1
+    _alwaysUseMinValueForUpgrade: 0
+    _substractMode: 1
+    _floatRangeOfPossibleValuesForUpgrade:
+      Min: 0.1
+      Max: 0.2
+  _startShootingRange:
+    <Value>k__BackingField: 18
+    _maxValue: 30
+    _alwaysUseMinValueForUpgrade: 0
+    _substractMode: 0
+    _floatRangeOfPossibleValuesForUpgrade:
+      Min: 2
+      Max: 6
+  _startBulletMaxPiercing:
+    <Value>k__BackingField: 0
+    _maxValue: 12
+    _alwaysUseMinValueForUpgrade: 0
+    _substractMode: 0
+    _byteRangeOfPossibleValuesForUpgrade:
+      Min: 1
+      Max: 4

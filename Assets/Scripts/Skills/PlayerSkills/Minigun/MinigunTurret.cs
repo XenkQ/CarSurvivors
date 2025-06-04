@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using Assets.Scripts.Extensions;
+using Assets.ScriptableObjects;
 
 namespace Assets.Scripts.Skills.PlayerSkills.Minigun
 {
-    public class MinigunTurret : MonoBehaviour, IInitializable<TurretConfigSO>
+    public class MinigunTurret : MonoBehaviour, IInitializableWithScriptableConfig<TurretConfigSO>
     {
         [field: SerializeField] public Transform GunTip { get; private set; }
         [SerializeField] private Transform _visual;

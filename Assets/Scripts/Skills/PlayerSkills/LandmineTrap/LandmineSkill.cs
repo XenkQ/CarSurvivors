@@ -1,3 +1,5 @@
+using Assets.ScriptableObjects.Skills;
+using Assets.ScriptableObjects.Skills.PlayerSkills.LandmineSkill;
 using UnityEngine;
 
 namespace Assets.Scripts.Skills.PlayerSkills.LandmineTrap

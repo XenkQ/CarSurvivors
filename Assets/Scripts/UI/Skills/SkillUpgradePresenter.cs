@@ -70,7 +70,6 @@ namespace Assets.Scripts.UI.Skills
             else if (_skillsQueuedForUpgrade.Count > 0)
             {
                 IUpgradeableSkill skill = _skillsQueuedForUpgrade.Dequeue();
-                Debug.Log($"Showing upgrade section for skill: {skill.Config}");
                 ShowStatsUpgradeSection(skill);
                 GameTime.PauseTime();
             }

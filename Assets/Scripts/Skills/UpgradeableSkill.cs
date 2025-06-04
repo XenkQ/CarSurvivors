@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using Assets.ScriptableObjects.Player.Skills;
+using Assets.ScriptableObjects.Skills;
 
 namespace Assets.Scripts.Skills
 {

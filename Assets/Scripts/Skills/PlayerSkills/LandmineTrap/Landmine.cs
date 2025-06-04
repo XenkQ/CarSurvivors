@@ -1,10 +1,11 @@
+using Assets.ScriptableObjects.Skills.PlayerSkills.LandmineSkill;
 using Assets.Scripts.HealthSystem;
 using Assets.Scripts.LayerMasks;
 using UnityEngine;
 
 namespace Assets.Scripts.Skills.PlayerSkills.LandmineTrap
 {
-    public class Landmine : MonoBehaviour, IInitializable<LandmineSkillUpgradeableConfigSO>
+    public class Landmine : MonoBehaviour, IInitializableWithScriptableConfig<LandmineSkillUpgradeableConfigSO>
     {
         [SerializeField] private LandmineSkillUpgradeableConfigSO _config;
 

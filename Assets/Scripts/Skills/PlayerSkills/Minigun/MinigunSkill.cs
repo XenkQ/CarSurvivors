@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Assets.ScriptableObjects.Skills;
+using Assets.ScriptableObjects.Skills.PlayerSkills.MinigunSkill;
+using System;
 using UnityEngine;
 
 namespace Assets.Scripts.Skills.PlayerSkills.Minigun
@@ -16,8 +18,8 @@ namespace Assets.Scripts.Skills.PlayerSkills.Minigun
             base.Initialize();
 
             InvokeRepeating(nameof(SpawnProjectile),
-                            _config.DelayBetweenSpawningProjectile.Value,
-                            _config.DelayBetweenSpawningProjectile.Value);
+                            _config.DelayBetweenSpawningBullets.Value,
+                            _config.DelayBetweenSpawningBullets.Value);
 
             InitializeTurrets();
         }
@@ -35,7 +37,7 @@ namespace Assets.Scripts.Skills.PlayerSkills.Minigun
         {
             foreach (MinigunTurret turret in _turrets)
             {
-                turret.Initialize(_config.TurretStats);
+                turret.Initialize(_config.TurretConfig);
             }
         }
 
