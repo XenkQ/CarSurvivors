@@ -5,6 +5,8 @@ namespace Assets.Scripts.CustomTypes
 {
     public interface IUpgradeableStat
     {
+        public event EventHandler OnUpgrade;
+
         public void Upgrade(float upgradeValue);
 
         public float GetUpgradeValueBasedOnUpdateRange();
@@ -18,6 +20,8 @@ namespace Assets.Scripts.CustomTypes
         [SerializeField] protected bool _alwaysUseMinValueForUpgrade;
         [SerializeField] protected bool _substractMode;
         protected ValueRange<T> _rangeOfPossibleValuesForUpgrade;
+
+        public event EventHandler OnUpgrade;
 
         public UpgradeableStat(
             T value,
@@ -40,9 +44,9 @@ namespace Assets.Scripts.CustomTypes
 
         public virtual void Upgrade(float upgradeValue)
         {
-            float value = FromTypeToFloat(Value);
-            float minValue = FromTypeToFloat(_rangeOfPossibleValuesForUpgrade.Min);
-            float maxValue = FromTypeToFloat(_rangeOfPossibleValuesForUpgrade.Max);
+            float value = Convert.ToSingle(Value);
+            float minValue = Convert.ToSingle(_rangeOfPossibleValuesForUpgrade.Min);
+            float maxValue = Convert.ToSingle(_rangeOfPossibleValuesForUpgrade.Max);
 
             if (_substractMode)
             {
@@ -78,12 +82,7 @@ namespace Assets.Scripts.CustomTypes
 
         public float GetUpgradeValueBasedOnUpdateRange()
         {
-            return (float)(object)_rangeOfPossibleValuesForUpgrade.GetRandomValueInRange();
-        }
-
-        private float FromTypeToFloat(T value)
-        {
-            return Convert.ToSingle(value);
+            return Convert.ToSingle(_rangeOfPossibleValuesForUpgrade.GetRandomValueInRange());
         }
 
         private T FromFloatToType(float value)

@@ -15,16 +15,14 @@ MonoBehaviour:
   _knockbackPower:
     <Value>k__BackingField: 4
     _maxValue: 9
-    _willRangeOfPossibleValuesChange: 1
     _alwaysUseMinValueForUpgrade: 0
     _substractMode: 0
     _floatRangeOfPossibleValuesForUpgrade:
-      Min: 1
-      Max: 2
+      Min: 2
+      Max: 3
   _timeToArriveAtKnockbackLocation:
     <Value>k__BackingField: 1
     _maxValue: 1
-    _willRangeOfPossibleValuesChange: 0
     _alwaysUseMinValueForUpgrade: 0
     _substractMode: 0
     _floatRangeOfPossibleValuesForUpgrade:
@@ -33,36 +31,24 @@ MonoBehaviour:
   _damage:
     <Value>k__BackingField: 8
     _maxValue: 25
-    _willRangeOfPossibleValuesChange: 1
     _alwaysUseMinValueForUpgrade: 0
     _substractMode: 0
     _floatRangeOfPossibleValuesForUpgrade:
-      Min: 2
+      Min: 3
       Max: 5
   _size:
     <Value>k__BackingField: 1
-    _maxValue: 1.3
-    _willRangeOfPossibleValuesChange: 0
-    _alwaysUseMinValueForUpgrade: 1
+    _maxValue: 1.5
+    _alwaysUseMinValueForUpgrade: 0
     _substractMode: 0
     _floatRangeOfPossibleValuesForUpgrade:
-      Min: 0.1
-      Max: 0.1
+      Min: 0.2
+      Max: 0.5
   _attackCooldown:
-    <Value>k__BackingField: 0.5
-    _maxValue: 0.2
-    _willRangeOfPossibleValuesChange: 0
-    _alwaysUseMinValueForUpgrade: 1
+    <Value>k__BackingField: 0.3
+    _maxValue: 0.1
+    _alwaysUseMinValueForUpgrade: 0
     _substractMode: 1
     _floatRangeOfPossibleValuesForUpgrade:
       Min: 0.1
-      Max: 0.1
-  _level:
-    <Value>k__BackingField: 1
-    _maxValue: 10
-    _willRangeOfPossibleValuesChange: 0
-    _alwaysUseMinValueForUpgrade: 1
-    _substractMode: 0
-    _byteRangeOfPossibleValuesForUpgrade:
-      Min: 1
-      Max: 1
+      Max: 0.15

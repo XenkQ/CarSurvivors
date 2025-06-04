@@ -1,5 +1,4 @@
-﻿using Assets.ScriptableObjects.Player.Skills;
-using Assets.Scripts.Skills;
+﻿using Assets.Scripts.Skills;
 using Assets.Scripts.Skills.ObjectsImpactingSkills.Crate;
 using Assets.Scripts.UI.Level;
 using System.Collections.Generic;

@@ -25,7 +25,7 @@ namespace Assets.Scripts.CustomTypes
         {
             if (typeof(T) == typeof(float))
             {
-                return (T)(object)(Math.Round(UnityEngine.Random.Range((float)(object)Min, (float)(object)Max), 2));
+                return (T)(object)(float)Math.Round(UnityEngine.Random.Range((float)(object)Min, (float)(object)Max), 2);
             }
             else if (typeof(T) == typeof(int))
             {
@@ -33,7 +33,7 @@ namespace Assets.Scripts.CustomTypes
             }
             else if (typeof(T) == typeof(byte))
             {
-                return (T)(object)(byte)UnityEngine.Random.Range((byte)(object)Min, (byte)(object)Max);
+                return (T)(object)(byte)UnityEngine.Random.Range(Convert.ToByte(Min), Convert.ToByte(Max));
             }
             else
             {
