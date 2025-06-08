@@ -12,68 +12,66 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce8fdf32c96f4e449ae2b242d559ee50, type: 3}
   m_Name: MinigunSkillUpgradeableConfig
   m_EditorClassIdentifier: 
-  _turretRotationAngle: 120
+  _turretConfig: {fileID: 11400000, guid: 09a2094f8392219419795ba6f67d3425, type: 2}
+  _delayBetweenShootingBullets:
+    <IsSubstractModeOn>k__BackingField: 1
+    <Value>k__BackingField: 1.2
+    _alwaysUseMinValueForUpgrade: 0
+    _floatMinMaxRange:
+      <Min>k__BackingField: 1.2
+      <Max>k__BackingField: 0.1
+    _floatRangeOfPossibleValuesForUpgrade:
+      <Min>k__BackingField: 0.2
+      <Max>k__BackingField: 0.3
   _numberOfTurrets:
-    <Value>k__BackingField: 2
-    _maxValue: 2
+    <IsSubstractModeOn>k__BackingField: 0
+    <Value>k__BackingField: 1
     _alwaysUseMinValueForUpgrade: 1
-    _substractMode: 0
+    _byteMinMaxRange:
+      <Min>k__BackingField: 1
+      <Max>k__BackingField: 4
     _byteRangeOfPossibleValuesForUpgrade:
-      Min: 1
-      Max: 1
-  _turretRotationDuration:
-    <Value>k__BackingField: 1
-    _maxValue: 0.2
-    _alwaysUseMinValueForUpgrade: 0
-    _substractMode: 0
-    _floatRangeOfPossibleValuesForUpgrade:
-      Min: 0.1
-      Max: 0.2
-  _delayBetweenSpawningProjectile:
-    <Value>k__BackingField: 0.8
-    _maxValue: 0.1
-    _alwaysUseMinValueForUpgrade: 0
-    _substractMode: 1
-    _floatRangeOfPossibleValuesForUpgrade:
-      Min: 0.1
-      Max: 0.2
+      <Min>k__BackingField: 1
+      <Max>k__BackingField: 1
+  _bulletTimeToArriveAtEndRangeMultiplier: 0.1
+  _projectileConfig: {fileID: 11400000, guid: b196fd0c1c6051341865604dd4fa9534, type: 2}
   _startBulletDamage:
-    <Value>k__BackingField: 6
-    _maxValue: 16
+    <IsSubstractModeOn>k__BackingField: 0
+    <Value>k__BackingField: 4.5
     _alwaysUseMinValueForUpgrade: 0
-    _substractMode: 0
+    _floatMinMaxRange:
+      <Min>k__BackingField: 4.5
+      <Max>k__BackingField: 18
     _floatRangeOfPossibleValuesForUpgrade:
-      Min: 2
-      Max: 4.5
+      <Min>k__BackingField: 4
+      <Max>k__BackingField: 6.8
   _startBulletSize:
+    <IsSubstractModeOn>k__BackingField: 0
     <Value>k__BackingField: 1
-    _maxValue: 2
     _alwaysUseMinValueForUpgrade: 0
-    _substractMode: 0
+    _floatMinMaxRange:
+      <Min>k__BackingField: 1
+      <Max>k__BackingField: 2
     _floatRangeOfPossibleValuesForUpgrade:
-      Min: 0.1
-      Max: 0.25
-  _startBulletTimeToArriveAtRangeEnd:
-    <Value>k__BackingField: 1
-    _maxValue: 0.1
-    _alwaysUseMinValueForUpgrade: 0
-    _substractMode: 1
-    _floatRangeOfPossibleValuesForUpgrade:
-      Min: 0.1
-      Max: 0.2
+      <Min>k__BackingField: 0.2
+      <Max>k__BackingField: 0.4
   _startShootingRange:
-    <Value>k__BackingField: 18
-    _maxValue: 30
+    <IsSubstractModeOn>k__BackingField: 0
+    <Value>k__BackingField: 8
     _alwaysUseMinValueForUpgrade: 0
-    _substractMode: 0
+    _floatMinMaxRange:
+      <Min>k__BackingField: 8
+      <Max>k__BackingField: 22
     _floatRangeOfPossibleValuesForUpgrade:
-      Min: 2
-      Max: 6
+      <Min>k__BackingField: 3
+      <Max>k__BackingField: 8
   _startBulletMaxPiercing:
-    <Value>k__BackingField: 0
-    _maxValue: 12
+    <IsSubstractModeOn>k__BackingField: 0
+    <Value>k__BackingField: 1
     _alwaysUseMinValueForUpgrade: 0
-    _substractMode: 0
+    _byteMinMaxRange:
+      <Min>k__BackingField: 1
+      <Max>k__BackingField: 10
     _byteRangeOfPossibleValuesForUpgrade:
-      Min: 1
-      Max: 4
+      <Min>k__BackingField: 1
+      <Max>k__BackingField: 4

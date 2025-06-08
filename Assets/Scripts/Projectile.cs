@@ -7,40 +7,59 @@ using UnityEngine;
 
 namespace Assets.Scripts
 {
-    public class Projectile : MonoBehaviour
+    public class Projectile : MonoBehaviour, IInitializableWithScriptableConfig<ProjectileConfigSO>
     {
-        [SerializeField] private ProjectileConfigSO _stats;
+        [SerializeField] private ProjectileConfigSO _config;
         [SerializeField] private SphereCollider _sphereCollider;
-        private ushort _piercedCounter;
+        private byte _piercedCounter;
+        private bool _isInitialized;
 
         public event EventHandler OnLifeEnd;
 
-        private void OnEnable()
-        {
-            _piercedCounter = _stats.MaxPiercing;
-            Vector3 targetPos = transform.position + transform.forward * _stats.Range;
-            targetPos.y = transform.position.y;
-            transform.DOMove(targetPos, _stats.TimeToArriveAtRangeEnd).SetEase(Ease.Linear).OnComplete(EndLife);
-        }
-
         private void FixedUpdate()
         {
-            Collider[] colliders = Physics.OverlapSphere(transform.position + _sphereCollider.center, _sphereCollider.radius,
-                                                         EntityLayers.Enemy | TerrainLayers.Impassable);
-            foreach (Collider collider in colliders)
+            if (_isInitialized)
             {
-                if (collider == null)
+                Collider[] colliders = Physics.OverlapSphere(transform.position + _sphereCollider.center, _sphereCollider.radius,
+                                             EntityLayers.Enemy | TerrainLayers.Impassable);
+                foreach (Collider collider in colliders)
                 {
-                    return;
-                }
+                    if (collider == null)
+                    {
+                        return;
+                    }
 
-                if (collider.transform.gameObject.TryGetComponent(out IDamageable damageable))
-                {
-                    damageable.TakeDamage(_stats.Damage);
-                }
+                    if (collider.transform.gameObject.TryGetComponent(out IDamageable damageable))
+                    {
+                        damageable.TakeDamage(_config.Damage);
+                    }
 
-                DecreasePiercing();
+                    DecreasePiercing();
+                }
             }
+        }
+
+        public void Initialize(ProjectileConfigSO config)
+        {
+            _config = config;
+
+            _piercedCounter = _config.MaxPiercing;
+
+            StartMovingBulletForward();
+
+            _isInitialized = true;
+        }
+
+        public bool IsInitialized() => _isInitialized;
+
+        private void StartMovingBulletForward()
+        {
+            Vector3 targetPos = transform.position + transform.forward * _config.Range;
+            targetPos.y = transform.position.y;
+            transform
+                .DOMove(targetPos, _config.TimeToArriveAtEndRangeMultiplier * _config.Range)
+                .SetEase(Ease.Linear)
+                .OnComplete(EndLife);
         }
 
         private void EndLife()

@@ -1,0 +1,212 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!181963792 &2655988077585873504
+Preset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MinigunSkillUpgradeableConfigSO
+  m_TargetType:
+    m_NativeTypeID: 114
+    m_ManagedTypePPtr: {fileID: 11500000, guid: ce8fdf32c96f4e449ae2b242d559ee50, type: 3}
+    m_ManagedTypeFallback: 
+  m_Properties:
+  - target: {fileID: 0}
+    propertyPath: m_Enabled
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorHideFlags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorClassIdentifier
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _turretConfig
+    value: 
+    objectReference: {fileID: 11400000, guid: 09a2094f8392219419795ba6f67d3425, type: 2}
+  - target: {fileID: 0}
+    propertyPath: _delayBetweenShootingBullets.<IsSubstractModeOn>k__BackingField
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _delayBetweenShootingBullets.<Value>k__BackingField
+    value: 1.4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _delayBetweenShootingBullets._alwaysUseMinValueForUpgrade
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _delayBetweenShootingBullets._floatMinMaxRange.<Min>k__BackingField
+    value: 1.4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _delayBetweenShootingBullets._floatMinMaxRange.<Max>k__BackingField
+    value: 0.1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _delayBetweenShootingBullets._floatRangeOfPossibleValuesForUpgrade.<Min>k__BackingField
+    value: 0.2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _delayBetweenShootingBullets._floatRangeOfPossibleValuesForUpgrade.<Max>k__BackingField
+    value: 0.3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _numberOfTurrets.<IsSubstractModeOn>k__BackingField
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _numberOfTurrets.<Value>k__BackingField
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _numberOfTurrets._alwaysUseMinValueForUpgrade
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _numberOfTurrets._byteMinMaxRange.<Min>k__BackingField
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _numberOfTurrets._byteMinMaxRange.<Max>k__BackingField
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _numberOfTurrets._byteRangeOfPossibleValuesForUpgrade.<Min>k__BackingField
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _numberOfTurrets._byteRangeOfPossibleValuesForUpgrade.<Max>k__BackingField
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _bulletTimeToArriveAtEndRangeMultiplier
+    value: 0.2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _projectileConfig
+    value: 
+    objectReference: {fileID: 11400000, guid: b196fd0c1c6051341865604dd4fa9534, type: 2}
+  - target: {fileID: 0}
+    propertyPath: _startBulletDamage.<IsSubstractModeOn>k__BackingField
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startBulletDamage.<Value>k__BackingField
+    value: 4.5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startBulletDamage._alwaysUseMinValueForUpgrade
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startBulletDamage._floatMinMaxRange.<Min>k__BackingField
+    value: 4.5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startBulletDamage._floatMinMaxRange.<Max>k__BackingField
+    value: 18
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startBulletDamage._floatRangeOfPossibleValuesForUpgrade.<Min>k__BackingField
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startBulletDamage._floatRangeOfPossibleValuesForUpgrade.<Max>k__BackingField
+    value: 6.8
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startBulletSize.<IsSubstractModeOn>k__BackingField
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startBulletSize.<Value>k__BackingField
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startBulletSize._alwaysUseMinValueForUpgrade
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startBulletSize._floatMinMaxRange.<Min>k__BackingField
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startBulletSize._floatMinMaxRange.<Max>k__BackingField
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startBulletSize._floatRangeOfPossibleValuesForUpgrade.<Min>k__BackingField
+    value: 0.2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startBulletSize._floatRangeOfPossibleValuesForUpgrade.<Max>k__BackingField
+    value: 0.4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startShootingRange.<IsSubstractModeOn>k__BackingField
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startShootingRange.<Value>k__BackingField
+    value: 8
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startShootingRange._alwaysUseMinValueForUpgrade
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startShootingRange._floatMinMaxRange.<Min>k__BackingField
+    value: 8
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startShootingRange._floatMinMaxRange.<Max>k__BackingField
+    value: 22
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startShootingRange._floatRangeOfPossibleValuesForUpgrade.<Min>k__BackingField
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startShootingRange._floatRangeOfPossibleValuesForUpgrade.<Max>k__BackingField
+    value: 8
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startBulletMaxPiercing.<IsSubstractModeOn>k__BackingField
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startBulletMaxPiercing.<Value>k__BackingField
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startBulletMaxPiercing._alwaysUseMinValueForUpgrade
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startBulletMaxPiercing._byteMinMaxRange.<Min>k__BackingField
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startBulletMaxPiercing._byteMinMaxRange.<Max>k__BackingField
+    value: 10
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startBulletMaxPiercing._byteRangeOfPossibleValuesForUpgrade.<Min>k__BackingField
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startBulletMaxPiercing._byteRangeOfPossibleValuesForUpgrade.<Max>k__BackingField
+    value: 4
+    objectReference: {fileID: 0}
+  m_ExcludedProperties: []
+  m_CoupledType:
+    m_NativeTypeID: 0
+    m_ManagedTypePPtr: {fileID: 0}
+    m_ManagedTypeFallback: 
+  m_CoupledProperties: []

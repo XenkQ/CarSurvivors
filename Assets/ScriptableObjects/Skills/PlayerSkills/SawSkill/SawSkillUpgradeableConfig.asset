@@ -12,43 +12,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4ed7d23dc37d50468b19db7f408bd36, type: 3}
   m_Name: SawSkillUpgradeableConfig
   m_EditorClassIdentifier: 
+  <TimeToArriveAtKnockbackLocation>k__BackingField: 1
+  <AttackCooldown>k__BackingField: 0.14
   _knockbackPower:
+    <IsSubstractModeOn>k__BackingField: 0
     <Value>k__BackingField: 4
-    _maxValue: 9
     _alwaysUseMinValueForUpgrade: 0
-    _substractMode: 0
+    _floatMinMaxRange:
+      <Min>k__BackingField: 4
+      <Max>k__BackingField: 9
     _floatRangeOfPossibleValuesForUpgrade:
-      Min: 2
-      Max: 3
-  _timeToArriveAtKnockbackLocation:
-    <Value>k__BackingField: 1
-    _maxValue: 1
-    _alwaysUseMinValueForUpgrade: 0
-    _substractMode: 0
-    _floatRangeOfPossibleValuesForUpgrade:
-      Min: 0
-      Max: 0
+      <Min>k__BackingField: 1
+      <Max>k__BackingField: 3
   _damage:
+    <IsSubstractModeOn>k__BackingField: 0
     <Value>k__BackingField: 8
-    _maxValue: 25
     _alwaysUseMinValueForUpgrade: 0
-    _substractMode: 0
+    _floatMinMaxRange:
+      <Min>k__BackingField: 8
+      <Max>k__BackingField: 25
     _floatRangeOfPossibleValuesForUpgrade:
-      Min: 3
-      Max: 5
+      <Min>k__BackingField: 3
+      <Max>k__BackingField: 7.2
   _size:
+    <IsSubstractModeOn>k__BackingField: 0
     <Value>k__BackingField: 1
-    _maxValue: 1.5
     _alwaysUseMinValueForUpgrade: 0
-    _substractMode: 0
+    _floatMinMaxRange:
+      <Min>k__BackingField: 1
+      <Max>k__BackingField: 1.4
     _floatRangeOfPossibleValuesForUpgrade:
-      Min: 0.2
-      Max: 0.5
-  _attackCooldown:
-    <Value>k__BackingField: 0.3
-    _maxValue: 0.1
-    _alwaysUseMinValueForUpgrade: 0
-    _substractMode: 1
-    _floatRangeOfPossibleValuesForUpgrade:
-      Min: 0.1
-      Max: 0.15
+      <Min>k__BackingField: 0.1
+      <Max>k__BackingField: 0.24

@@ -1,6 +1,8 @@
 ﻿using Assets.ScriptableObjects.Skills;
 using Assets.ScriptableObjects.Skills.PlayerSkills.MinigunSkill;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Assets.Scripts.Skills.PlayerSkills.Minigun
@@ -17,29 +19,56 @@ namespace Assets.Scripts.Skills.PlayerSkills.Minigun
         {
             base.Initialize();
 
-            InvokeRepeating(nameof(SpawnProjectile),
-                            _config.DelayBetweenSpawningBullets.Value,
-                            _config.DelayBetweenSpawningBullets.Value);
+            StartCoroutine(SpawnBulletsProcess());
 
-            InitializeTurrets();
+            InitializeActiveUninitializedTurrets();
+
+            _config.NumberOfTurrets.OnUpgrade += (s, e) => ActiveRandomInactiveTurret()?.Initialize(_config.TurretConfig);
+            _config.NumberOfTurrets.OnUpgrade += (s, e) => Debug.Log("UPGRADE");
         }
 
-        private void SpawnProjectile()
+        private System.Collections.IEnumerator SpawnBulletsProcess()
         {
-            foreach (MinigunTurret turret in _turrets)
+            while (true)
             {
-                Projectile projectile = Instantiate(_turretsProejctile, turret.GunTip.position, turret.GunTip.rotation, _projectilesParent);
-                projectile.OnLifeEnd += Projectile_OnLifeEnd;
+                foreach (MinigunTurret turret in GetActiveInitializedTurrets())
+                {
+                    Projectile projectile = Instantiate(_turretsProejctile, turret.GunTip.position, turret.GunTip.rotation, _projectilesParent);
+                    projectile.OnLifeEnd += Projectile_OnLifeEnd;
+                    projectile.Initialize(_config.TurretConfig.ProjectileStatsSO);
+                }
+
+                yield return new WaitForSeconds(_config.DelayBetweenSpawningBullets.Value);
             }
         }
 
-        private void InitializeTurrets()
+        private void InitializeActiveUninitializedTurrets()
         {
-            foreach (MinigunTurret turret in _turrets)
+            foreach (MinigunTurret turret in GetActiveUninitializedTurrets())
             {
                 turret.Initialize(_config.TurretConfig);
             }
         }
+
+        private MinigunTurret ActiveRandomInactiveTurret()
+        {
+            var inactiveTurrets = _turrets.Where(t => !t.gameObject.activeSelf);
+            Debug.Log(inactiveTurrets.Count());
+            if (inactiveTurrets.Any())
+            {
+                MinigunTurret turret = inactiveTurrets.Shuffle().First();
+                turret.gameObject.SetActive(true);
+                return turret;
+            }
+
+            return null;
+        }
+
+        private IEnumerable<MinigunTurret> GetActiveInitializedTurrets()
+            => _turrets.Where(t => t.IsInitialized() && t.gameObject.activeSelf);
+
+        private IEnumerable<MinigunTurret> GetActiveUninitializedTurrets() =>
+            _turrets.Where(t => !t.IsInitialized() && t.gameObject.activeSelf);
 
         private void Projectile_OnLifeEnd(object sender, EventArgs e)
         {

@@ -6,28 +6,20 @@ namespace Assets.Scripts.Skills
     {
         public static IUpgradeableSkill Find()
         {
-            var skills = SkillsRegistry
+            var upgradeableSkills = SkillsRegistry
                 .Instance
                 .Skills
-                .Select(skill => skill as IUpgradeableSkill);
+                .Select(skill => skill as IUpgradeableSkill)
+                .Where(skill => skill.CanBeUgraded());
 
-            if (skills.Count() == 0)
+            if (upgradeableSkills.Count() == 0)
             {
                 return null;
             }
 
-            int randomSkillIndex = UnityEngine.Random.Range(0, skills.Count());
-            int currentIndex = 0;
-            foreach (var skill in skills)
-            {
-                if (currentIndex == randomSkillIndex)
-                {
-                    return skill;
-                }
-                currentIndex++;
-            }
+            int randomSkillIndex = UnityEngine.Random.Range(0, upgradeableSkills.Count());
 
-            return null;
+            return upgradeableSkills.ElementAtOrDefault(randomSkillIndex);
         }
     }
 }

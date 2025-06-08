@@ -13,34 +13,42 @@ MonoBehaviour:
   m_Name: LandmineSkillUpgradeableConfig
   m_EditorClassIdentifier: 
   _spawnCooldown:
-    <Value>k__BackingField: 6
-    _maxValue: 1
+    <IsSubstractModeOn>k__BackingField: 1
+    <Value>k__BackingField: 8
     _alwaysUseMinValueForUpgrade: 0
-    _substractMode: 1
+    _floatMinMaxRange:
+      <Min>k__BackingField: 8
+      <Max>k__BackingField: 1
     _floatRangeOfPossibleValuesForUpgrade:
-      Min: 1
-      Max: 2
+      <Min>k__BackingField: 2
+      <Max>k__BackingField: 4
   _explosionRadius:
+    <IsSubstractModeOn>k__BackingField: 0
     <Value>k__BackingField: 2
-    _maxValue: 8
     _alwaysUseMinValueForUpgrade: 0
-    _substractMode: 0
+    _floatMinMaxRange:
+      <Min>k__BackingField: 2
+      <Max>k__BackingField: 8
     _floatRangeOfPossibleValuesForUpgrade:
-      Min: 1
-      Max: 2
+      <Min>k__BackingField: 1.4
+      <Max>k__BackingField: 3
   _damage:
-    <Value>k__BackingField: 6
-    _maxValue: 16
+    <IsSubstractModeOn>k__BackingField: 0
+    <Value>k__BackingField: 5
     _alwaysUseMinValueForUpgrade: 0
-    _substractMode: 0
+    _floatMinMaxRange:
+      <Min>k__BackingField: 5
+      <Max>k__BackingField: 18
     _floatRangeOfPossibleValuesForUpgrade:
-      Min: 2
-      Max: 5
+      <Min>k__BackingField: 2
+      <Max>k__BackingField: 5
   _size:
+    <IsSubstractModeOn>k__BackingField: 0
     <Value>k__BackingField: 1
-    _maxValue: 2
     _alwaysUseMinValueForUpgrade: 0
-    _substractMode: 0
+    _floatMinMaxRange:
+      <Min>k__BackingField: 1
+      <Max>k__BackingField: 3
     _floatRangeOfPossibleValuesForUpgrade:
-      Min: 0.1
-      Max: 0.25
+      <Min>k__BackingField: 0.5
+      <Max>k__BackingField: 1

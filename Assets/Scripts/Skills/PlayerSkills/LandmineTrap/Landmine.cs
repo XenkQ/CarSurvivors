@@ -8,6 +8,7 @@ namespace Assets.Scripts.Skills.PlayerSkills.LandmineTrap
     public class Landmine : MonoBehaviour, IInitializableWithScriptableConfig<LandmineSkillUpgradeableConfigSO>
     {
         [SerializeField] private LandmineSkillUpgradeableConfigSO _config;
+        private bool _isInitialized;
 
         private void OnTriggerEnter(Collider other)
         {
@@ -38,9 +39,6 @@ namespace Assets.Scripts.Skills.PlayerSkills.LandmineTrap
             _config = config;
         }
 
-        public bool IsInitialized()
-        {
-            return gameObject.activeSelf;
-        }
+        public bool IsInitialized() => _isInitialized;
     }
 }

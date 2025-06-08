@@ -1,4 +1,5 @@
 using Assets.ScriptableObjects.Player.Skills;
+using Assets.Scripts;
 using Assets.Scripts.CustomTypes;
 using UnityEngine;
 
@@ -19,10 +20,10 @@ namespace Assets.ScriptableObjects.Skills.PlayerSkills.LandmineSkill
 
         private void OnEnable()
         {
-            SpawnCooldown = _spawnCooldown;
-            ExplosionRadius = _explosionRadius;
-            Damage = _damage;
-            Size = _size;
+            SpawnCooldown = DeepCopyUtility.DeepCopy(_spawnCooldown);
+            ExplosionRadius = DeepCopyUtility.DeepCopy(_explosionRadius);
+            Damage = DeepCopyUtility.DeepCopy(_damage);
+            Size = DeepCopyUtility.DeepCopy(_size);
         }
     }
 }

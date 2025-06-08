@@ -14583,18 +14583,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 550934127}
     m_Modifications:
-    - target: {fileID: 653629325135610590, guid: cb84583e0c2818e42b12a0baeb2f6f1b, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1285516617489979006, guid: cb84583e0c2818e42b12a0baeb2f6f1b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1319725124535658448, guid: cb84583e0c2818e42b12a0baeb2f6f1b, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1549669939771682502, guid: cb84583e0c2818e42b12a0baeb2f6f1b, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -14655,14 +14643,6 @@ PrefabInstance:
       propertyPath: _projectilesParent
       value: 
       objectReference: {fileID: 1169998850}
-    - target: {fileID: 8489968326519551025, guid: cb84583e0c2818e42b12a0baeb2f6f1b, type: 3}
-      propertyPath: _expCurve.m_Curve.Array.data[0].value
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 8489968326519551025, guid: cb84583e0c2818e42b12a0baeb2f6f1b, type: 3}
-      propertyPath: _expCurve.m_Curve.Array.data[1].value
-      value: 65535
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

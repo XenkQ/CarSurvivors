@@ -9,11 +9,12 @@ namespace Assets.Scripts.CustomTypes
         public T GetRandomValueInRange();
     }
 
+    [Serializable]
     public class ValueRange<T> : IValueRange<T>
         where T : struct, IComparable<T>, IConvertible
     {
-        public T Min;
-        public T Max;
+        [field: SerializeField] public T Min { get; protected set; }
+        [field: SerializeField] public T Max { get; protected set; }
 
         public ValueRange(T min, T max)
         {

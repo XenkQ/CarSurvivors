@@ -26,7 +26,7 @@ namespace Assets.Scripts.Skills.PlayerSkills
         {
             base.Initialize();
 
-            InvokeRepeating(nameof(AtackAllEnemiesInsideCollider), _config.AttackCooldown.Value, _config.AttackCooldown.Value);
+            InvokeRepeating(nameof(AtackAllEnemiesInsideCollider), _config.AttackCooldown, _config.AttackCooldown);
         }
 
         private void AtackAllEnemiesInsideCollider()
@@ -56,7 +56,7 @@ namespace Assets.Scripts.Skills.PlayerSkills
                 {
                     knockable.ApplyKnockBack(
                         other.transform.position + transform.forward * _config.KnockbackPower.Value,
-                        _config.TimeToArriveAtKnockbackLocation.Value);
+                        _config.TimeToArriveAtKnockbackLocation);
                 }
             }
         }

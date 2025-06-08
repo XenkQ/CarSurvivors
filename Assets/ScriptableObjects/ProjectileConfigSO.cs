@@ -7,21 +7,22 @@ namespace Assets.ScriptableObjects
     {
         [SerializeField] private float _startDamage;
         [SerializeField] private float _startSize;
+        [SerializeField] private float _timeToArriveAtEndRangeMultiplier;
         [SerializeField] private float _startTimeToArriveAtRangeEnd;
         [SerializeField] private float _startRange;
         [SerializeField] private byte _startMaxPiercing;
 
         public float Damage { get; set; }
+        public float TimeToArriveAtEndRangeMultiplier { get; set; }
         public float Size { get; set; }
-        public float TimeToArriveAtRangeEnd { get; set; }
         public float Range { get; set; }
         public byte MaxPiercing { get; set; }
 
         private void OnEnable()
         {
             Damage = _startDamage;
+            TimeToArriveAtEndRangeMultiplier = _timeToArriveAtEndRangeMultiplier;
             Size = _startSize;
-            TimeToArriveAtRangeEnd = _startTimeToArriveAtRangeEnd;
             Range = _startRange;
             MaxPiercing = _startMaxPiercing;
         }

@@ -2,11 +2,14 @@
 using UnityEngine;
 using Assets.ScriptableObjects.Player.Skills;
 using Assets.ScriptableObjects.Skills;
+using System.Linq;
 
 namespace Assets.Scripts.Skills
 {
     public interface IUpgradeableSkill : ISkillBase
     {
+        public bool CanBeUgraded();
+
         public ISkillUpgradeableStatsConfig Config { get; }
 
         public event EventHandler OnUpgrade;
@@ -21,14 +24,28 @@ namespace Assets.Scripts.Skills
 
         public event EventHandler OnUpgrade;
 
+        protected bool _isInitialized;
+
+        protected virtual void OnEnable()
+        {
+            if (gameObject.activeSelf)
+            {
+                _isInitialized = true;
+            }
+        }
+
+        public virtual bool CanBeUgraded()
+        {
+            return _config != null && _config.GetUpgradeableStatsThatCanBeUpgraded().Count() > 0;
+        }
+
         public virtual void Initialize()
         {
+            _isInitialized = true;
             gameObject.SetActive(true);
         }
 
         public virtual bool IsInitialized()
-        {
-            return gameObject.activeSelf;
-        }
+            => _isInitialized;
     }
 }

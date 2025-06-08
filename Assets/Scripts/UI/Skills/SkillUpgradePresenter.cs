@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.UI.Skills
@@ -34,6 +35,18 @@ namespace Assets.Scripts.UI.Skills
             CollectibleItemsSpawner.Instance.OnSpawnedEntityReleased += ShowRandomSkillInInitializationOrUpgradeSection_OnEvent;
             PlayerLevelPresenter.Instance.OnExpSliderVisualEndValueReached += ShowRandomSkillInInitializationOrUpgradeSection_OnEvent;
             _continueButton.onClick.AddListener(() => HandleUpgradeableOrInitializableSkillsShowing());
+
+            SkillsRegistry.Instance.InitializeSkill(SkillsRegistry.Instance.Skills.Take(2).Last());
+        }
+
+        private void Update()
+        {
+            if (Keyboard.current.eKey.wasPressedThisFrame)
+            {
+                _skillsQueuedForUpgrade.Enqueue(SkillsRegistry.Instance.Skills.Take(2).Last() as IUpgradeableSkill);
+
+                HandleUpgradeableOrInitializableSkillsShowing();
+            }
         }
 
         private void ShowRandomSkillInInitializationOrUpgradeSection_OnEvent(object sender, System.EventArgs e)
@@ -95,17 +108,17 @@ namespace Assets.Scripts.UI.Skills
         {
             List<ClickableButtonData> skillStatsUpgradeButtonsData = new List<ClickableButtonData>();
 
-            foreach (var upgradeableStat in upgradeableStats.Config.GetUpgradeableStats())
+            foreach (var nameUpgradeableStatPair in upgradeableStats.Config.GetUpgradeableStatsThatCanBeUpgraded())
             {
-                float upgradeValue = upgradeableStat.UpgradeableStat.GetUpgradeValueBasedOnUpdateRange();
+                float upgradeValue = nameUpgradeableStatPair.UpgradeableStat.GetUpgradeValueBasedOnUpdateRange();
                 skillStatsUpgradeButtonsData.Add(new ClickableButtonData
                 {
-                    Text = (upgradeValue > 0 ? "Increase" : "Decrease")
-                        + $" {upgradeableStat.Name.PascalCaseToWords()} by {upgradeValue}",
+                    Text = (nameUpgradeableStatPair.UpgradeableStat.IsSubstractModeOn ? "Decrease" : "Increase")
+                        + $" {nameUpgradeableStatPair.Name.PascalCaseToWords()} by {upgradeValue}",
 
                     OnClick = () =>
                     {
-                        upgradeableStat.UpgradeableStat.Upgrade(upgradeValue);
+                        nameUpgradeableStatPair.UpgradeableStat.Upgrade(upgradeValue);
                         HandleUpgradeableOrInitializableSkillsShowing();
                     }
                 });
