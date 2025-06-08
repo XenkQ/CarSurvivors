@@ -35,18 +35,6 @@ namespace Assets.Scripts.UI.Skills
             CollectibleItemsSpawner.Instance.OnSpawnedEntityReleased += ShowRandomSkillInInitializationOrUpgradeSection_OnEvent;
             PlayerLevelPresenter.Instance.OnExpSliderVisualEndValueReached += ShowRandomSkillInInitializationOrUpgradeSection_OnEvent;
             _continueButton.onClick.AddListener(() => HandleUpgradeableOrInitializableSkillsShowing());
-
-            SkillsRegistry.Instance.InitializeSkill(SkillsRegistry.Instance.Skills.Take(2).Last());
-        }
-
-        private void Update()
-        {
-            if (Keyboard.current.eKey.wasPressedThisFrame)
-            {
-                _skillsQueuedForUpgrade.Enqueue(SkillsRegistry.Instance.Skills.Take(2).Last() as IUpgradeableSkill);
-
-                HandleUpgradeableOrInitializableSkillsShowing();
-            }
         }
 
         private void ShowRandomSkillInInitializationOrUpgradeSection_OnEvent(object sender, System.EventArgs e)
