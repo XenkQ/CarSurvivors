@@ -63,8 +63,6 @@ namespace Assets.Scripts.CustomTypes
 
             float newValue = value + delta;
 
-            Debug.Log("Value: " + value + "DELTA: " + delta + "NEW VAL " + newValue);
-
             if ((IsSubstractModeOn && newValue <= maxValue)
                 || (!IsSubstractModeOn && newValue >= maxValue))
             {
