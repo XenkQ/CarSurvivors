@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -3319223557082848545, guid: 84b4a38de8cbeb84094350735da962b4, type: 3}
       propertyPath: m_Radius
-      value: 0.1
+      value: 0.12
       objectReference: {fileID: 0}
     - target: {fileID: 92642958029709907, guid: 84b4a38de8cbeb84094350735da962b4, type: 3}
       propertyPath: m_Size.x
@@ -60,17 +60,21 @@ PrefabInstance:
       propertyPath: _stats
       value: 
       objectReference: {fileID: 11400000, guid: b196fd0c1c6051341865604dd4fa9534, type: 2}
+    - target: {fileID: 2427746680333010372, guid: 84b4a38de8cbeb84094350735da962b4, type: 3}
+      propertyPath: _config
+      value: 
+      objectReference: {fileID: 11400000, guid: b196fd0c1c6051341865604dd4fa9534, type: 2}
     - target: {fileID: 3728330371357296212, guid: 84b4a38de8cbeb84094350735da962b4, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.2
+      value: 0.24
       objectReference: {fileID: 0}
     - target: {fileID: 3728330371357296212, guid: 84b4a38de8cbeb84094350735da962b4, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.2
+      value: 0.24
       objectReference: {fileID: 0}
     - target: {fileID: 3728330371357296212, guid: 84b4a38de8cbeb84094350735da962b4, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.2
+      value: 0.24
       objectReference: {fileID: 0}
     - target: {fileID: 6874762501377470492, guid: 84b4a38de8cbeb84094350735da962b4, type: 3}
       propertyPath: m_Name

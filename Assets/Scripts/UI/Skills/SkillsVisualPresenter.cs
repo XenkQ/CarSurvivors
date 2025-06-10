@@ -4,25 +4,9 @@ using UnityEngine;
 
 namespace Assets.Scripts.UI.Skills
 {
-    public sealed class SkillsVisualPresenter : MonoBehaviour
+    public class SkillsVisualPresenter : MonoBehaviour
     {
         [SerializeField] private GameObject[] _skillsVisuals;
-        public static SkillsVisualPresenter Instance { get; private set; }
-
-        private SkillsVisualPresenter()
-        { }
-
-        private void Awake()
-        {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-        }
 
         public void ShowSkillVisualBasedOnSkillInfo(SkillInfoSO skillInfoSO)
         {

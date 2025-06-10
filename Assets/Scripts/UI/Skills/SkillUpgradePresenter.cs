@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.UI.Skills
@@ -28,10 +27,16 @@ namespace Assets.Scripts.UI.Skills
         private Queue<ISkillBase> _skillsQueuedForInitialization = new Queue<ISkillBase>();
         private Queue<IUpgradeableSkill> _skillsQueuedForUpgrade = new Queue<IUpgradeableSkill>();
 
+        private SkillsVisualPresenter _skillsVisualPresenter;
+
         private bool _isShowingAnySection;
 
         private void Start()
         {
+            _skillsVisualPresenter = GameObject
+                .FindGameObjectWithTag(typeof(SkillsVisualPresenter).Name)
+                .GetComponent<SkillsVisualPresenter>();
+
             CollectibleItemsSpawner.Instance.OnSpawnedEntityReleased += ShowRandomSkillInInitializationOrUpgradeSection_OnEvent;
             PlayerLevelPresenter.Instance.OnExpSliderVisualEndValueReached += ShowRandomSkillInInitializationOrUpgradeSection_OnEvent;
             _continueButton.onClick.AddListener(() => HandleUpgradeableOrInitializableSkillsShowing());
@@ -57,7 +62,7 @@ namespace Assets.Scripts.UI.Skills
 
         private void HandleUpgradeableOrInitializableSkillsShowing()
         {
-            SkillsVisualPresenter.Instance.HideAll();
+            _skillsVisualPresenter.HideAll();
 
             GameTime.ResumeTime();
 
@@ -87,7 +92,7 @@ namespace Assets.Scripts.UI.Skills
             _newSkillName.text = string.Format(SKILL_NAME_TEMPLATE, skillBase.SkillInfo.Name);
             _newSkillDescription.text = skillBase.SkillInfo.Description;
 
-            SkillsVisualPresenter.Instance.ShowSkillVisualBasedOnSkillInfo(skillBase.SkillInfo);
+            _skillsVisualPresenter.ShowSkillVisualBasedOnSkillInfo(skillBase.SkillInfo);
 
             _newSkillSection.SetActive(true);
         }
@@ -114,7 +119,7 @@ namespace Assets.Scripts.UI.Skills
 
             DisplayNewButtons(skillStatsUpgradeButtonsData.Shuffle().Take(MAX_SKILLS_UPGRADE_BUTTONS));
 
-            SkillsVisualPresenter.Instance.ShowSkillVisualBasedOnSkillInfo(upgradeableStats.SkillInfo);
+            _skillsVisualPresenter.ShowSkillVisualBasedOnSkillInfo(upgradeableStats.SkillInfo);
 
             _upgradeSkillSection.SetActive(true);
         }

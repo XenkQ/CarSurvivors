@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Assets.Scripts.Exp
+namespace Assets.Scripts.LevelSystem
 {
     public readonly struct LevelData
     {

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SawSkillUpgradeableConfig
   m_EditorClassIdentifier: 
   <TimeToArriveAtKnockbackLocation>k__BackingField: 1
-  <AttackCooldown>k__BackingField: 0.14
+  <AttackCooldown>k__BackingField: 0.05
   _knockbackPower:
     <IsSubstractModeOn>k__BackingField: 0
     <Value>k__BackingField: 4

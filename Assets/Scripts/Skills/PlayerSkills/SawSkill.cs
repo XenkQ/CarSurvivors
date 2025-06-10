@@ -26,7 +26,7 @@ namespace Assets.Scripts.Skills.PlayerSkills
         {
             base.Initialize();
 
-            InvokeRepeating(nameof(AtackAllEnemiesInsideCollider), _config.AttackCooldown, _config.AttackCooldown);
+            InvokeRepeating(nameof(AtackAllEnemiesInsideCollider), 0.05f, 0.05f);
         }
 
         private void AtackAllEnemiesInsideCollider()
