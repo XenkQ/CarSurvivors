@@ -12,6 +12,18 @@ PrefabInstance:
       propertyPath: <MaxHealth>k__BackingField
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 1025450493727768952, guid: 04e28f7e31f150146acd7ba9f4db9b56, type: 3}
+      propertyPath: <MaxHealth>k__BackingField
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 1025450493727768952, guid: 04e28f7e31f150146acd7ba9f4db9b56, type: 3}
+      propertyPath: <MaxRegenerationAmount>k__BackingField
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1025450493727768952, guid: 04e28f7e31f150146acd7ba9f4db9b56, type: 3}
+      propertyPath: <StartRegenerationDelay>k__BackingField
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1286223690747856801, guid: 04e28f7e31f150146acd7ba9f4db9b56, type: 3}
       propertyPath: _level
       value: 2
@@ -83,6 +95,14 @@ PrefabInstance:
     - target: {fileID: 3688238668444586915, guid: 04e28f7e31f150146acd7ba9f4db9b56, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5137694293864681286, guid: 04e28f7e31f150146acd7ba9f4db9b56, type: 3}
+      propertyPath: <Config>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: e8a2efd860640e54594ee96aa730616c, type: 2}
+    - target: {fileID: 7089495505635615785, guid: 04e28f7e31f150146acd7ba9f4db9b56, type: 3}
+      propertyPath: _animationScaleMultiplier
+      value: 1.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

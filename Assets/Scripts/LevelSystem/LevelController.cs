@@ -25,7 +25,7 @@ namespace Assets.Scripts.LevelSystem
 
         public override string ToString()
         {
-            return $"LevelData(Level: {Lvl}, Exp: {Exp}, MaxExp: {MaxExp})";
+            return $"LevelData(DangerLevel: {Lvl}, Exp: {Exp}, MaxExp: {MaxExp})";
         }
     }
 

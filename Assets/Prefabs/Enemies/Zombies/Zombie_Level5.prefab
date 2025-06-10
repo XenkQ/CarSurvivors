@@ -28,6 +28,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.975
       objectReference: {fileID: 0}
+    - target: {fileID: 1025450493727768952, guid: 04e28f7e31f150146acd7ba9f4db9b56, type: 3}
+      propertyPath: <MaxRegenerationAmount>k__BackingField
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1025450493727768952, guid: 04e28f7e31f150146acd7ba9f4db9b56, type: 3}
+      propertyPath: <StartRegenerationDelay>k__BackingField
+      value: 1.2
+      objectReference: {fileID: 0}
     - target: {fileID: 1286223690747856801, guid: 04e28f7e31f150146acd7ba9f4db9b56, type: 3}
       propertyPath: _level
       value: 5
@@ -111,6 +119,14 @@ PrefabInstance:
     - target: {fileID: 4176904749440768749, guid: 04e28f7e31f150146acd7ba9f4db9b56, type: 3}
       propertyPath: m_Center.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5137694293864681286, guid: 04e28f7e31f150146acd7ba9f4db9b56, type: 3}
+      propertyPath: <Config>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: 811376c18df7ab04991b7e990121a406, type: 2}
+    - target: {fileID: 7089495505635615785, guid: 04e28f7e31f150146acd7ba9f4db9b56, type: 3}
+      propertyPath: _animationScaleMultiplier
+      value: 1.42
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

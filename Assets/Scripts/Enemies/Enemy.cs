@@ -7,9 +7,8 @@ namespace Assets.Scripts.Enemies
 {
     public class Enemy : MonoBehaviour, IDamageable, IKnockable, IStunable
     {
-        [SerializeField] private EnemyConfigSO _config;
+        [field: SerializeField] public EnemyConfigSO Config { get; private set; }
 
-        [SerializeField] private float _collisionRadius;
         public Health Health { get; private set; }
 
         public StunController StunController { get; private set; }
@@ -17,8 +16,6 @@ namespace Assets.Scripts.Enemies
         private EnemyCollisions _enemyCollisions;
 
         private EnemyStuckInsideOtherEnemyPreventer _enemyStuckInsideOtherEnemyPreventer;
-
-        public bool IsStunned;
 
         private void Awake()
         {
@@ -36,20 +33,14 @@ namespace Assets.Scripts.Enemies
 
         private void OnDisable()
         {
-            Player.PlayerManager.Instance.LevelController.AddExp(_config.ExpForKill);
-        }
-
-        private void OnDrawGizmos()
-        {
-            int numberOfSegments = 16;
-            new Debug().DrawCircle(transform.position, _collisionRadius, numberOfSegments, Color.yellow);
+            Player.PlayerManager.Instance.LevelController.AddExp(Config.ExpForKill);
         }
 
         private void EnemyCollisions_OnCollisionWithPlayer(object sender, CollisionEventArgs e)
         {
             if (e.Collider.TryGetComponent(out IDamageable damageable))
             {
-                damageable.TakeDamage(_config.Damage);
+                damageable.TakeDamage(Config.Damage);
             }
         }
 

@@ -2,11 +2,12 @@
 using DG.Tweening;
 using UnityEngine;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.Effects
 {
     public class GrowShrinkAnimation : MonoBehaviour
     {
-        private Vector3 _startScale;
+        [SerializeField] private float _animationScaleMultiplier = 1f;
+        private Vector3 _startScale = Vector3.one;
         private Tween _scaleTween;
 
         private void OnEnable()
@@ -25,7 +26,7 @@ namespace Assets.Scripts
         {
             if (_scaleTween == null)
             {
-                _scaleTween = transform.StartGrowShrinkLoopTween(_startScale * _stats.AnimationScaleMultiplier);
+                _scaleTween = transform.StartGrowShrinkLoopTween(_startScale * _animationScaleMultiplier);
             }
             else
             {

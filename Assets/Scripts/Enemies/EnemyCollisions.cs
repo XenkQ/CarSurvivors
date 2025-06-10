@@ -1,10 +1,12 @@
-﻿using Assets.Scripts.LayerMasks;
+﻿using Assets.Scripts.Extensions;
+using Assets.Scripts.LayerMasks;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.Enemies
 {
+    [RequireComponent(typeof(Enemy))]
     public class EnemyCollisions : MonoBehaviour
     {
         [SerializeField] private float _collisionCheckDelay = 0.05f;
@@ -18,13 +20,7 @@ namespace Assets.Scripts.Enemies
 
         private void Awake()
         {
-            foreach (Collider collider in GetComponentsInChildren<Collider>())
-            {
-                if (collider.isTrigger)
-                {
-                    _colliders.Add(collider);
-                }
-            }
+            SetAllColliders();
         }
 
         private void OnEnable()
@@ -35,6 +31,24 @@ namespace Assets.Scripts.Enemies
         private void OnDisable()
         {
             CancelInvoke(nameof(HandleCollisionsCheck));
+        }
+
+        private void OnDrawGizmos()
+        {
+            int numberOfSegments = 16;
+            new Debug().DrawCircle(transform.position, _collisionRadius, numberOfSegments, Color.yellow);
+        }
+
+        private void SetAllColliders()
+        {
+            _colliders = new List<Collider>();
+            foreach (Collider collider in GetComponentsInChildren<Collider>())
+            {
+                if (collider.isTrigger)
+                {
+                    _colliders.Add(collider);
+                }
+            }
         }
 
         private void HandleCollisionsCheck()

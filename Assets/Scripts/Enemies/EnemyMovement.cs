@@ -6,14 +6,22 @@ namespace Assets.Scripts.Enemies
     [RequireComponent(typeof(Enemy))]
     public class EnemyMovement : MonoBehaviour
     {
-        [SerializeField] private EnemyConfigSO _config;
+        private const float MOVING_TO_POSITION_ACCURACY = 0.02f;
+
+        private Enemy _enemy;
+
         private float _verticalPosOffset;
-        private bool _isMovingToPositionUnrelatedToGrid;
+
         private IStunable _stunableSelf;
         private bool _isStunable;
 
+        private bool _isMovingToPositionUnrelatedToGrid;
+        private Vector3 _currentMovementPositionUnrelatedToGrid;
+
         private void Awake()
         {
+            _enemy = GetComponent<Enemy>();
+
             if (gameObject.TryGetComponent(out IStunable stunable))
             {
                 _stunableSelf = stunable;
@@ -43,29 +51,43 @@ namespace Assets.Scripts.Enemies
             bool isStunned = _isStunable && _stunableSelf.StunController.IsStunned;
             if (!isStunned && !_isMovingToPositionUnrelatedToGrid)
             {
-                Vector3 movement = MoveOnGrid();
+                Vector3 movement = MoveOnFlowFieldGrid();
                 RotateTowardsMovementDirection(movement);
             }
             else if (!isStunned && _isMovingToPositionUnrelatedToGrid)
             {
-                MoveToPosition();
+                MoveToPosition(_currentMovementPositionUnrelatedToGrid);
             }
         }
 
-        public void MoveToPosition()
+        public void MoveToPosition(Vector3 pos)
         {
+            bool isOnPosition = Vector3.Distance(transform.position, pos) <= MOVING_TO_POSITION_ACCURACY;
+            if (_isMovingToPositionUnrelatedToGrid && !isOnPosition)
+            {
+                transform.position = Vector3.Lerp(transform.position, pos, _enemy.Config.MovementSpeed * Time.deltaTime);
+            }
+            else if (isOnPosition)
+            {
+                _isMovingToPositionUnrelatedToGrid = false;
+            }
+            else
+            {
+                _currentMovementPositionUnrelatedToGrid = pos;
+                _isMovingToPositionUnrelatedToGrid = true;
+            }
         }
 
         private void RotateTowardsMovementDirection(Vector3 movement)
         {
             Quaternion targetRotation = Quaternion.LookRotation(movement.normalized);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _config.RotationSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _enemy.Config.RotationSpeed * Time.deltaTime);
         }
 
-        private Vector3 MoveOnGrid()
+        private Vector3 MoveOnFlowFieldGrid()
         {
             Vector3 gridDir = GetMoveDirectionBasedOnCurrentCell();
-            Vector3 movement = _config.MovementSpeed * Time.deltaTime * gridDir;
+            Vector3 movement = _enemy.Config.MovementSpeed * Time.deltaTime * gridDir;
             transform.position += movement;
             return movement;
         }

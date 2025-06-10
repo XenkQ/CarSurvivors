@@ -16,16 +16,6 @@ namespace Assets.Scripts.HealthSystem
             _slider = GetComponent<Slider>();
         }
 
-        private void Start()
-        {
-            InvokeRepeating(nameof(Display), 1f, 1f);
-        }
-
-        private void Display()
-        {
-            Debug.Log("IS PLAYER NOT NULL: " + (_health != null) + " " + _health.CurrentHealth);
-        }
-
         private void OnEnable()
         {
             _slider.maxValue = _health.MaxHealth;

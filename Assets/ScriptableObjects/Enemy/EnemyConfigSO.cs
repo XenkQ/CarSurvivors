@@ -6,11 +6,10 @@ public class EnemyConfigSO : ScriptableObject
     public float MovementSpeed;
     public float RotationSpeed;
 
-    public float AnimationScaleMultiplier;
-
     public float Damage;
 
-    public byte Level;
+    public byte DangerLevel;
+
     public float StunAfterDamageDuration;
     public float ExpForKill;
 }
