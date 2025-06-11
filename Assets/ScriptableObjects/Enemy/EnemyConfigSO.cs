@@ -11,4 +11,6 @@ public class EnemyConfigSO : ScriptableObject
     public byte DangerLevel;
 
     public float ExpForKill;
+
+    public bool IsMovingByCrawling;
 }

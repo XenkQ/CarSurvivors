@@ -51,7 +51,7 @@ namespace Assets.Scripts.Enemies
         private void Update()
         {
             bool isStunned = _isStunable && _stunableSelf.StunController.IsStunned;
-            if (!isStunned)
+            if (!isStunned && !_enemy.EnemyAnimator.IsPlayingAttackAnimation)
             {
                 _lastPos = transform.position;
                 Vector3? movement;

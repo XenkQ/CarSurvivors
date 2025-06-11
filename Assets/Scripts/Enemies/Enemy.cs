@@ -13,29 +13,30 @@ namespace Assets.Scripts.Enemies
 
         public IStunController StunController { get; private set; }
 
-        private ICollisionsController _enemyCollisions;
+        public ICollisionsController CollisionsController { get; private set; }
 
-        private IMovementController _enemyMovement;
+        public IMovementController MovementController { get; private set; }
 
-        private EnemyAnimationsController _enemyAnimationsController;
+        public EnemyAnimator EnemyAnimator { get; private set; }
 
         private void Awake()
         {
             Health = GetComponent<IHealth>();
             StunController = GetComponent<IStunController>();
-            _enemyCollisions = GetComponent<ICollisionsController>();
-            _enemyMovement = GetComponent<IMovementController>();
-            _enemyAnimationsController = GetComponent<EnemyAnimationsController>();
+            CollisionsController = GetComponent<ICollisionsController>();
+            MovementController = GetComponent<IMovementController>();
+            EnemyAnimator = GetComponentInChildren<EnemyAnimator>();
         }
 
         private void OnEnable()
         {
-            _enemyCollisions.OnCollisionWithPlayer += EnemyCollisions_OnCollisionWithPlayer;
+            EnemyAnimator.IsMovingByCrawling = Config.IsMovingByCrawling;
+            CollisionsController.OnCollisionWithPlayer += EnemyCollisions_OnCollisionWithPlayer;
         }
 
         private void OnDisable()
         {
-            _enemyCollisions.OnCollisionWithPlayer -= EnemyCollisions_OnCollisionWithPlayer;
+            CollisionsController.OnCollisionWithPlayer -= EnemyCollisions_OnCollisionWithPlayer;
 
             Player.PlayerManager.Instance.LevelController.AddExp(Config.ExpForKill);
         }
@@ -43,7 +44,7 @@ namespace Assets.Scripts.Enemies
         public void ApplyKnockBack(Vector3 locationAfterKnockBack, float timeToArriveAtLocation)
         {
             Debug.Log("KNOCKBACK");
-            _enemyMovement.MoveToPosition(locationAfterKnockBack);
+            MovementController.MoveToPosition(locationAfterKnockBack);
         }
 
         public void TakeDamage(float damage)
@@ -56,7 +57,7 @@ namespace Assets.Scripts.Enemies
         {
             if (e.Collider.TryGetComponent(out IDamageable damageable))
             {
-                _enemyAnimationsController.PlayAttackAnimation();
+                EnemyAnimator.PlayAttackAnimation();
                 damageable.TakeDamage(Config.Damage);
             }
         }

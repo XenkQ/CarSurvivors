@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 5328113168761846994}
   - component: {fileID: 6626357694038879756}
   - component: {fileID: 347190357356235707}
-  - component: {fileID: 3278336291573811538}
   - component: {fileID: 4176904749440768749}
   - component: {fileID: 7128695265574407790}
   m_Layer: 7
@@ -118,20 +117,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stunDuration: 0.5
---- !u!114 &3278336291573811538
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3261852426992956232}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1869b74d14005354392b5d1db0e0cffd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animationResponseSpeed: 0.05
-  animator: {fileID: 1461077094748054093}
 --- !u!65 &4176904749440768749
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -285,6 +270,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b391274d088176440a16866fa8aab180, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1461077094748054093}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b391274d088176440a16866fa8aab180, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3402772935746238773}
   m_SourcePrefab: {fileID: 100100000, guid: b391274d088176440a16866fa8aab180, type: 3}
 --- !u!1 &7303375517415397702 stripped
 GameObject:
@@ -313,6 +301,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3402772935746238773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7303375517415397702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 838856613cfaed54db067b943df4888e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemy: {fileID: 5137694293864681286}
+  _animationResponseSpeed: 0.05
 --- !u!4 &7931153378529510396 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b391274d088176440a16866fa8aab180, type: 3}
