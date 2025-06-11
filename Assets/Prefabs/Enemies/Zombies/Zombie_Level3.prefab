@@ -28,6 +28,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.852
       objectReference: {fileID: 0}
+    - target: {fileID: 1000585550949315244, guid: 04e28f7e31f150146acd7ba9f4db9b56, type: 3}
+      propertyPath: _animationScaleMultiplier
+      value: 1.16
+      objectReference: {fileID: 0}
     - target: {fileID: 1025450493727768952, guid: 04e28f7e31f150146acd7ba9f4db9b56, type: 3}
       propertyPath: <MaxHealth>k__BackingField
       value: 42
@@ -112,12 +116,32 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4909408010617150076, guid: 04e28f7e31f150146acd7ba9f4db9b56, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0207c3b42b294284b9002c3e6ade9ab1, type: 2}
+    - target: {fileID: 4909408010617150076, guid: 04e28f7e31f150146acd7ba9f4db9b56, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e786230d93c144e4b8dfe830cc9035c0, type: 2}
     - target: {fileID: 5137694293864681286, guid: 04e28f7e31f150146acd7ba9f4db9b56, type: 3}
       propertyPath: <Config>k__BackingField
       value: 
       objectReference: {fileID: 11400000, guid: 1690343bc4e65f94eb5fc05d3c5bf366, type: 2}
     - target: {fileID: 7089495505635615785, guid: 04e28f7e31f150146acd7ba9f4db9b56, type: 3}
       propertyPath: _animationScaleMultiplier
+      value: 1.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 7972600806242769793, guid: 04e28f7e31f150146acd7ba9f4db9b56, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 7972600806242769793, guid: 04e28f7e31f150146acd7ba9f4db9b56, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 7972600806242769793, guid: 04e28f7e31f150146acd7ba9f4db9b56, type: 3}
+      propertyPath: m_LocalScale.z
       value: 1.14
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -16,11 +16,11 @@ MonoBehaviour:
   <AttackCooldown>k__BackingField: 0.05
   _knockbackPower:
     <IsSubstractModeOn>k__BackingField: 0
-    <Value>k__BackingField: 4
+    <Value>k__BackingField: 8
     _alwaysUseMinValueForUpgrade: 0
     _floatMinMaxRange:
-      <Min>k__BackingField: 4
-      <Max>k__BackingField: 9
+      <Min>k__BackingField: 8
+      <Max>k__BackingField: 20
     _floatRangeOfPossibleValuesForUpgrade:
       <Min>k__BackingField: 1
       <Max>k__BackingField: 3

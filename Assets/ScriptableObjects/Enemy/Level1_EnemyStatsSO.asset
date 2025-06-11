@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MovementSpeed: 2.4
   RotationSpeed: 2
-  AnimationScaleMultiplier: 1.14
   Damage: 2
-  Level: 1
+  DangerLevel: 1
   StunAfterDamageDuration: 0
   ExpForKill: 5

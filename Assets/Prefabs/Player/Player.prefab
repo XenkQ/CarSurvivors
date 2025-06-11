@@ -1142,6 +1142,10 @@ PrefabInstance:
       propertyPath: m_Transition
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6941146590113762250, guid: 8dec117a41ce26d4282c7cfc833994ec, type: 3}
+      propertyPath: _health
+      value: 
+      objectReference: {fileID: 4300351418844164862}
     - target: {fileID: 8895422677561366378, guid: 8dec117a41ce26d4282c7cfc833994ec, type: 3}
       propertyPath: m_Name
       value: HealthBarCanvas

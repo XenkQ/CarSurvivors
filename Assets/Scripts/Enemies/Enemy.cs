@@ -17,12 +17,15 @@ namespace Assets.Scripts.Enemies
 
         private IMovementController _enemyMovement;
 
+        private EnemyAnimationsController _enemyAnimationsController;
+
         private void Awake()
         {
             Health = GetComponent<IHealth>();
             StunController = GetComponent<IStunController>();
             _enemyCollisions = GetComponent<ICollisionsController>();
             _enemyMovement = GetComponent<IMovementController>();
+            _enemyAnimationsController = GetComponent<EnemyAnimationsController>();
         }
 
         private void OnEnable()
@@ -39,6 +42,7 @@ namespace Assets.Scripts.Enemies
 
         public void ApplyKnockBack(Vector3 locationAfterKnockBack, float timeToArriveAtLocation)
         {
+            Debug.Log("KNOCKBACK");
             _enemyMovement.MoveToPosition(locationAfterKnockBack);
         }
 
@@ -52,6 +56,7 @@ namespace Assets.Scripts.Enemies
         {
             if (e.Collider.TryGetComponent(out IDamageable damageable))
             {
+                _enemyAnimationsController.PlayAttackAnimation();
                 damageable.TakeDamage(Config.Damage);
             }
         }

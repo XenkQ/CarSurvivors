@@ -42,18 +42,18 @@ namespace Assets.Scripts.HealthSystem
 
         protected virtual void OnEnable()
         {
-            OnHealthDecreased += OnHealthChange;
-            OnHealthIncreased += OnHealthChange;
-            OnNoHealth += OnHealthChange;
+            OnHealthDecreased += InvokeOnHealthChange;
+            OnHealthIncreased += InvokeOnHealthChange;
+            OnNoHealth += InvokeOnHealthChange;
 
             CurrentHealth = MaxHealth;
         }
 
         protected virtual void OnDisable()
         {
-            OnHealthDecreased -= OnHealthChange;
-            OnHealthIncreased -= OnHealthChange;
-            OnNoHealth -= OnHealthChange;
+            OnHealthDecreased -= InvokeOnHealthChange;
+            OnHealthIncreased -= InvokeOnHealthChange;
+            OnNoHealth -= InvokeOnHealthChange;
         }
 
         public void DecreaseHealth(float value)
@@ -81,6 +81,11 @@ namespace Assets.Scripts.HealthSystem
             {
                 CurrentHealth = MaxHealth;
             }
+        }
+
+        private void InvokeOnHealthChange(object sender, EventArgs e)
+        {
+            OnHealthChange?.Invoke(sender, e);
         }
     }
 }

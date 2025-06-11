@@ -30,7 +30,7 @@ namespace Assets.Scripts.HealthSystem
 
         private void Update()
         {
-            if (MaxRegenerationAmount > 0 && StartRegenerationDelay > 0)
+            if (CurrentHealth < MaxHealth && MaxRegenerationAmount > 0 && StartRegenerationDelay > 0)
             {
                 RegenerationProcess();
             }

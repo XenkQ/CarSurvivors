@@ -18,6 +18,7 @@ namespace Assets.Scripts.Enemies
 
         private bool _isMovingToPositionUnrelatedToGrid;
         private Vector3 _currentMovementPositionUnrelatedToGrid;
+        private Vector3 _lastPos;
 
         private void Awake()
         {
@@ -50,33 +51,60 @@ namespace Assets.Scripts.Enemies
         private void Update()
         {
             bool isStunned = _isStunable && _stunableSelf.StunController.IsStunned;
-            if (!isStunned && !_isMovingToPositionUnrelatedToGrid)
+            if (!isStunned)
             {
-                Vector3 movement = MoveOnFlowFieldGrid();
-                RotateTowardsMovementDirection(movement);
-            }
-            else if (!isStunned && _isMovingToPositionUnrelatedToGrid)
-            {
-                MoveToPosition(_currentMovementPositionUnrelatedToGrid);
+                _lastPos = transform.position;
+                Vector3? movement;
+                if (_isMovingToPositionUnrelatedToGrid)
+                {
+                    movement = MoveToPosition(_currentMovementPositionUnrelatedToGrid);
+                    if (movement.HasValue)
+                    {
+                        RotateTowardsMovementDirection(movement.Value);
+                    }
+                }
+                else
+                {
+                    movement = MoveOnFlowFieldGrid();
+                }
+
+                if (movement.HasValue)
+                {
+                    RotateTowardsMovementDirection(movement.Value);
+                }
             }
         }
 
-        public void MoveToPosition(Vector3 pos)
+        public float GetCurrentMovementSpeed()
+        {
+            return Vector3.Distance(transform.position, _lastPos) / Time.deltaTime;
+        }
+
+        public Vector3? MoveToPosition(Vector3 pos)
         {
             bool isOnPosition = Vector3.Distance(transform.position, pos) <= MOVING_TO_POSITION_ACCURACY;
             if (_isMovingToPositionUnrelatedToGrid && !isOnPosition)
             {
-                transform.position = Vector3.Lerp(transform.position, pos, _enemy.Config.MovementSpeed * Time.deltaTime);
+                return Move(pos);
             }
             else if (isOnPosition)
             {
                 _isMovingToPositionUnrelatedToGrid = false;
+                return null;
             }
             else
             {
                 _currentMovementPositionUnrelatedToGrid = pos;
                 _isMovingToPositionUnrelatedToGrid = true;
+                return Move(pos);
             }
+        }
+
+        private Vector3 Move(Vector3 pos)
+        {
+            Vector3 movement = Vector3.Lerp(transform.position, pos, _enemy.Config.MovementSpeed * Time.deltaTime);
+            transform.position = movement;
+            return movement;
         }
 
         private void RotateTowardsMovementDirection(Vector3 movement)

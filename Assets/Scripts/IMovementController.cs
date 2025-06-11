@@ -4,6 +4,8 @@ namespace Assets.Scripts
 {
     public interface IMovementController
     {
-        void MoveToPosition(Vector3 pos);
+        public float GetCurrentMovementSpeed();
+
+        public Vector3? MoveToPosition(Vector3 pos);
     }
 }
