@@ -1,6 +1,8 @@
 using TMPro;
 using UnityEngine;
 
+namespace Assets.Scripts.UI
+{
 public class TimerPresenter : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _timerText;
@@ -16,4 +18,5 @@ public class TimerPresenter : MonoBehaviour
         _timerValue++;
         _timerText.text = _timerValue.ToString();
     }
+}
 }

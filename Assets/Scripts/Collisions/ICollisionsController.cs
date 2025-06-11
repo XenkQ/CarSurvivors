@@ -1,7 +1,7 @@
 ﻿using Assets.Scripts.Enemies;
 using System;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.Collisions
 {
     public interface ICollisionsController
     {

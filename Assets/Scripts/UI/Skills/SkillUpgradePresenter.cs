@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Skills;
+﻿using Assets.Scripts.Extensions;
+using Assets.Scripts.Skills;
 using Assets.Scripts.Skills.ObjectsImpactingSkills.Crate;
 using Assets.Scripts.UI.Level;
 using System.Collections.Generic;

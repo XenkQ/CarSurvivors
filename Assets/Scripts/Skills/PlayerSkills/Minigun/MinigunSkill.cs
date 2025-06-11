@@ -1,5 +1,6 @@
 ﻿using Assets.ScriptableObjects.Skills;
 using Assets.ScriptableObjects.Skills.PlayerSkills.MinigunSkill;
+using Assets.Scripts.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;

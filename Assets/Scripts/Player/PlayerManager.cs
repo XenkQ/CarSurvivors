@@ -1,8 +1,9 @@
 using Assets.Scripts.HealthSystem;
 using Assets.Scripts.LevelSystem;
+using Assets.Scripts.StatusAffectables;
 using UnityEngine;
 
-namespace Player
+namespace Assets.Scripts.Player
 {
     [RequireComponent(typeof(RegenativeHealth), typeof(LevelController))]
     public sealed class PlayerManager : MonoBehaviour, IHealthy, IDamageable

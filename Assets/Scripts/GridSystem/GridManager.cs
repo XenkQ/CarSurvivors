@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using Player;
+using Assets.Scripts.Player;
 using Assets.Scripts.FlowFieldSystem;
 
 namespace Assets.Scripts.GridSystem

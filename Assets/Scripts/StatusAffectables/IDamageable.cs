@@ -1,4 +1,4 @@
-﻿namespace Assets.Scripts.HealthSystem
+﻿namespace Assets.Scripts.StatusAffectables
 {
     public interface IDamageable
     {

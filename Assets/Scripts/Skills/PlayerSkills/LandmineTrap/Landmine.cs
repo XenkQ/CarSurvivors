@@ -1,6 +1,6 @@
 using Assets.ScriptableObjects.Skills.PlayerSkills.LandmineSkill;
-using Assets.Scripts.HealthSystem;
 using Assets.Scripts.LayerMasks;
+using Assets.Scripts.StatusAffectables;
 using UnityEngine;
 
 namespace Assets.Scripts.Skills.PlayerSkills.LandmineTrap

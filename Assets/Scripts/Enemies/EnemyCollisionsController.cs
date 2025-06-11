@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Extensions;
+﻿using Assets.Scripts.Collisions;
+using Assets.Scripts.Extensions;
 using Assets.Scripts.LayerMasks;
 using System;
 using System.Collections.Generic;

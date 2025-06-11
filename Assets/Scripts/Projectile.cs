@@ -1,6 +1,6 @@
 using Assets.ScriptableObjects;
-using Assets.Scripts.HealthSystem;
 using Assets.Scripts.LayerMasks;
+using Assets.Scripts.StatusAffectables;
 using DG.Tweening;
 using System;
 using UnityEngine;

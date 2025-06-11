@@ -1,6 +1,6 @@
 ﻿using Assets.Scripts.LevelSystem;
 using DG.Tweening;
-using Player;
+using Assets.Scripts.Player;
 using System;
 using System.Collections.Generic;
 using TMPro;

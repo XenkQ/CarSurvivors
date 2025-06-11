@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.Extensions
 {
     public static class LinquExtensions
     {

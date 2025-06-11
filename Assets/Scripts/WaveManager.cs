@@ -2,7 +2,7 @@ using Assets.Scripts.Enemies;
 using System.Linq;
 using UnityEngine;
 
-namespace Scripts
+namespace Assets.Scripts
 {
     public class WaveManager : MonoBehaviour
     {

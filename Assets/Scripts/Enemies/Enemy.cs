@@ -1,5 +1,6 @@
+using Assets.Scripts.Collisions;
 using Assets.Scripts.HealthSystem;
-using DG.Tweening;
+using Assets.Scripts.StatusAffectables;
 using UnityEngine;
 
 namespace Assets.Scripts.Enemies

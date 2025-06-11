@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Assets.Scripts.Enemies
+namespace Assets.Scripts.Collisions
 {
     public class CollisionEventArgs : EventArgs
     {

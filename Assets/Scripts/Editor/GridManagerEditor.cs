@@ -1,9 +1,10 @@
-﻿using UnityEditor;
+﻿using Assets.Scripts.GridSystem;
+using UnityEditor;
 
-namespace Assets.Scripts.GridSystem
+namespace Assets.Scripts.Editor
 {
     [CustomEditor(typeof(GridManager))]
-    public class GridManagerEditor : Editor
+    public class GridManagerEditor : UnityEditor.Editor
     {
         #region SerializedProperties
 

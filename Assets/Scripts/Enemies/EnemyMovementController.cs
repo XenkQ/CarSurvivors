@@ -1,4 +1,5 @@
 using Assets.Scripts.GridSystem;
+using Assets.Scripts.StatusAffectables;
 using UnityEngine;
 
 namespace Assets.Scripts.Enemies

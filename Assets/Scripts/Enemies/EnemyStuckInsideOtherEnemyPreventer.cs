@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Collisions;
+using UnityEngine;
 
 namespace Assets.Scripts.Enemies
 {
@@ -6,13 +7,13 @@ namespace Assets.Scripts.Enemies
     public class EnemyStuckInsideOtherEnemyPreventer : MonoBehaviour
     {
         private const float PUSH_FROM_COLLISION_POWER = 1f;
-        private EnemyMovementController _enemyMovement;
-        private EnemyCollisionsController _enemyCollisions;
+        private IMovementController _enemyMovement;
+        private ICollisionsController _enemyCollisions;
 
         private void Awake()
         {
-            _enemyMovement = GetComponent<EnemyMovementController>();
-            _enemyCollisions = GetComponent<EnemyCollisionsController>();
+            _enemyMovement = GetComponent<IMovementController>();
+            _enemyCollisions = GetComponent<ICollisionsController>();
         }
 
         private void OnEnable()
