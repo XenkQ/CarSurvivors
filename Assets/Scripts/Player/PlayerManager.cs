@@ -4,13 +4,13 @@ using UnityEngine;
 
 namespace Player
 {
-    [RequireComponent(typeof(Health), typeof(LevelController))]
-    public sealed class PlayerManager : MonoBehaviour, IDamageable
+    [RequireComponent(typeof(RegenativeHealth), typeof(LevelController))]
+    public sealed class PlayerManager : MonoBehaviour, IHealthy, IDamageable
     {
         public static PlayerManager Instance { get; private set; }
 
-        public Health Health { get; private set; }
-        public LevelController LevelController { get; private set; }
+        public IHealth Health { get; private set; }
+        public ILevelController LevelController { get; private set; }
 
         private readonly float _startDelayBetweenTakingDamage = 0.2f;
         private float _currentDelayBetweenTakingDamage;
@@ -30,8 +30,8 @@ namespace Player
                 Destroy(gameObject);
             }
 
-            Health = GetComponent<Health>();
-            LevelController = GetComponent<LevelController>();
+            Health = GetComponent<IHealth>();
+            LevelController = GetComponent<ILevelController>();
         }
 
         private void Start()

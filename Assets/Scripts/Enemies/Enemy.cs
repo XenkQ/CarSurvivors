@@ -1,39 +1,50 @@
-using Assets.Scripts.Extensions;
 using Assets.Scripts.HealthSystem;
 using DG.Tweening;
 using UnityEngine;
 
 namespace Assets.Scripts.Enemies
 {
-    public class Enemy : MonoBehaviour, IDamageable, IKnockable, IStunable
+    public class Enemy : MonoBehaviour, IHealthy, IDamageable, IKnockable, IStunable
     {
         [field: SerializeField] public EnemyConfigSO Config { get; private set; }
 
-        public Health Health { get; private set; }
+        public IHealth Health { get; private set; }
 
-        public StunController StunController { get; private set; }
+        public IStunController StunController { get; private set; }
 
-        private EnemyCollisions _enemyCollisions;
+        private ICollisionsController _enemyCollisions;
 
-        private EnemyStuckInsideOtherEnemyPreventer _enemyStuckInsideOtherEnemyPreventer;
+        private IMovementController _enemyMovement;
 
         private void Awake()
         {
-            Health = GetComponent<Health>();
-            _enemyCollisions = GetComponent<EnemyCollisions>();
-            _enemyStuckInsideOtherEnemyPreventer = GetComponent<EnemyStuckInsideOtherEnemyPreventer>();
-            StunController = GetComponent<StunController>();
+            Health = GetComponent<IHealth>();
+            StunController = GetComponent<IStunController>();
+            _enemyCollisions = GetComponent<ICollisionsController>();
+            _enemyMovement = GetComponent<IMovementController>();
         }
 
         private void OnEnable()
         {
             _enemyCollisions.OnCollisionWithPlayer += EnemyCollisions_OnCollisionWithPlayer;
-            _enemyCollisions.OnCollisionWithOtherEnemy += EnemyCollisions_OnCollisionWithOtherEnemy;
         }
 
         private void OnDisable()
         {
+            _enemyCollisions.OnCollisionWithPlayer -= EnemyCollisions_OnCollisionWithPlayer;
+
             Player.PlayerManager.Instance.LevelController.AddExp(Config.ExpForKill);
+        }
+
+        public void ApplyKnockBack(Vector3 locationAfterKnockBack, float timeToArriveAtLocation)
+        {
+            _enemyMovement.MoveToPosition(locationAfterKnockBack);
+        }
+
+        public void TakeDamage(float damage)
+        {
+            StunController.ApplyStun();
+            Health.DecreaseHealth(damage);
         }
 
         private void EnemyCollisions_OnCollisionWithPlayer(object sender, CollisionEventArgs e)
@@ -42,22 +53,6 @@ namespace Assets.Scripts.Enemies
             {
                 damageable.TakeDamage(Config.Damage);
             }
-        }
-
-        private void EnemyCollisions_OnCollisionWithOtherEnemy(object sender, CollisionEventArgs e)
-        {
-            _enemyStuckInsideOtherEnemyPreventer.PreventInterectingWithColliderByPush(e.Collider);
-        }
-
-        public void ApplyKnockBack(Vector3 locationAfterKnockBack, float timeToArriveAtLocation)
-        {
-            transform.DOMove(locationAfterKnockBack, timeToArriveAtLocation);
-        }
-
-        public void TakeDamage(float damage)
-        {
-            StunController.ApplyStun();
-            Health.DecreaseHealth(damage);
         }
     }
 }

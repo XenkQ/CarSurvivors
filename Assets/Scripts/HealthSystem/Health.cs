@@ -3,16 +3,34 @@ using UnityEngine;
 
 namespace Assets.Scripts.HealthSystem
 {
-    [Serializable]
-    public class Health : MonoBehaviour
+    public interface IHealthy
     {
-        [field: SerializeField] public float MaxHealth { get; private set; }
-        [field: SerializeField] public float MaxRegenerationAmount { get; private set; }
-        [field: SerializeField] public float StartRegenerationDelay { get; private set; }
+        public IHealth Health { get; }
+    }
 
-        public float CurrentHealth { get; private set; }
-        public float CurrentRegenerationAmount { get; private set; }
-        public float CurrentRegenerationDelay { get; private set; }
+    public interface IHealth
+    {
+        float CurrentHealth { get; }
+        float MaxHealth { get; }
+
+        event EventHandler OnHealthChange;
+
+        event EventHandler OnHealthDecreased;
+
+        event EventHandler OnHealthIncreased;
+
+        event EventHandler OnNoHealth;
+
+        void DecreaseHealth(float value);
+
+        void IncreaseHealth(float value);
+    }
+
+    [Serializable]
+    public class Health : MonoBehaviour, IHealth
+    {
+        [field: SerializeField] public float MaxHealth { get; protected set; }
+        public float CurrentHealth { get; protected set; }
 
         public event EventHandler OnNoHealth;
 
@@ -22,46 +40,20 @@ namespace Assets.Scripts.HealthSystem
 
         public event EventHandler OnHealthIncreased;
 
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             OnHealthDecreased += OnHealthChange;
             OnHealthIncreased += OnHealthChange;
             OnNoHealth += OnHealthChange;
 
             CurrentHealth = MaxHealth;
-            CurrentRegenerationAmount = MaxRegenerationAmount;
-            CurrentRegenerationDelay = StartRegenerationDelay;
         }
 
-        private void OnDisable()
+        protected virtual void OnDisable()
         {
             OnHealthDecreased -= OnHealthChange;
             OnHealthIncreased -= OnHealthChange;
             OnNoHealth -= OnHealthChange;
-        }
-
-        private void Update()
-        {
-            if (MaxRegenerationAmount > 0 && StartRegenerationDelay > 0)
-            {
-                RegenerationProcess();
-            }
-        }
-
-        private void RegenerationProcess()
-        {
-            if (CurrentRegenerationDelay > 0)
-            {
-                CurrentRegenerationDelay -= Time.deltaTime;
-            }
-            else
-            {
-                if (CurrentHealth > 0)
-                {
-                    IncreaseHealth(MaxRegenerationAmount);
-                    CurrentRegenerationDelay = StartRegenerationDelay;
-                }
-            }
         }
 
         public void DecreaseHealth(float value)

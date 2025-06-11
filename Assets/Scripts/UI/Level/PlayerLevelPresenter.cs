@@ -17,21 +17,21 @@ namespace Assets.Scripts.UI.Level
 
         private const float DELAY_BETWEEN_TWEENS_ANIMATION_CHECK = 0.05f;
 
+        [SerializeField] private TextMeshProUGUI _levelText;
+        [SerializeField] private Slider _expSlider;
+
         public event EventHandler OnExpSliderVisualEndValueReached;
 
         public static PlayerLevelPresenter Instance { get; private set; }
 
-        [SerializeField] private TextMeshProUGUI _levelText;
-        [SerializeField] private Slider _expSlider;
+        private ILevelController _playerLevelController;
 
-        private LevelData _expData;
-        private Queue<LevelData> _levelUpQueue = new();
-        private LevelData? _currentExpIncreaseData;
+        private LevelData _levelData;
+        private LevelData? _currentVisibleLevelData;
+        private readonly Queue<LevelData> _levelUpQueue = new();
 
         private Tween _expIncreaseTween;
-        private Tween _lvlUpTween;
-
-        private LevelController _playerLevelController;
+        private Tween _levelUpTween;
 
         private PlayerLevelPresenter()
         { }
@@ -52,32 +52,32 @@ namespace Assets.Scripts.UI.Level
         {
             _playerLevelController = PlayerManager.Instance.LevelController;
 
-            _expData = _playerLevelController.ExpData;
-            _expSlider.value = _expData.Exp;
-            _expSlider.maxValue = _expData.MaxExp;
+            _levelData = _playerLevelController.LevelData;
+            _expSlider.value = _levelData.Exp;
+            _expSlider.maxValue = _levelData.MaxExp;
 
-            _playerLevelController.OnExpChange += ExpManager_OnExpChange;
-            _playerLevelController.OnLvlUp += ExpManager_OnLvlChange;
+            _playerLevelController.OnExpChange += LevelController_OnExpChange;
+            _playerLevelController.OnLvlUp += LevelController_OnLvlChange;
 
             InvokeRepeating(nameof(HandleTweensAnimations), DELAY_BETWEEN_TWEENS_ANIMATION_CHECK, DELAY_BETWEEN_TWEENS_ANIMATION_CHECK);
         }
 
-        private void ExpManager_OnExpChange(object sender, ExpDataEventArgs e)
+        private void LevelController_OnExpChange(object sender, LevelDataEventArgs e)
         {
-            _currentExpIncreaseData = e.ExpData;
+            _currentVisibleLevelData = e.ExpData;
         }
 
-        private void ExpManager_OnLvlChange(object sender, ExpDataEventArgs e)
+        private void LevelController_OnLvlChange(object sender, LevelDataEventArgs e)
         {
             _levelUpQueue.Enqueue(e.ExpData);
         }
 
         private void HandleTweensAnimations()
         {
-            if (_levelUpQueue.Count > 0 && !IsPlayingLvlUpTween())
+            if (_levelUpQueue.Count > 0 && !IsPlayingLevelUpTween())
             {
                 KillExpIncreaseTweenIfPlaying();
-                PlayLvlUpTween();
+                PlayLevelUpTween();
             }
             else if (CanPlayLastExpIncreaseTween())
             {
@@ -86,9 +86,9 @@ namespace Assets.Scripts.UI.Level
             }
         }
 
-        private bool IsPlayingLvlUpTween()
+        private bool IsPlayingLevelUpTween()
         {
-            return _lvlUpTween != null && _lvlUpTween.IsPlaying();
+            return _levelUpTween != null && _levelUpTween.IsPlaying();
         }
 
         private void KillExpIncreaseTweenIfPlaying()
@@ -99,21 +99,21 @@ namespace Assets.Scripts.UI.Level
             }
         }
 
-        private void PlayLvlUpTween()
+        private void PlayLevelUpTween()
         {
-            _lvlUpTween = AnimateSliderExpGain(_expData.MaxExp).OnComplete(() =>
+            _levelUpTween = AnimateSliderExpGain(_levelData.MaxExp).OnComplete(() =>
             {
-                _expData = _levelUpQueue.Dequeue();
+                _levelData = _levelUpQueue.Dequeue();
                 _expSlider.value = 0;
-                _expSlider.maxValue = _expData.MaxExp;
+                _expSlider.maxValue = _levelData.MaxExp;
 
-                UpdateLvlText();
+                UpdateLevelText();
 
                 OnExpSliderVisualEndValueReached?.Invoke(this, EventArgs.Empty);
 
                 if (_levelUpQueue.Count == 0)
                 {
-                    if (_currentExpIncreaseData.Value.Exp > _expData.Exp && CanPlayLastExpIncreaseTween())
+                    if (_currentVisibleLevelData.Value.Exp > _levelData.Exp && CanPlayLastExpIncreaseTween())
                     {
                         KillExpIncreaseTweenIfPlaying();
                         PlayLastExpIncreaseTween();
@@ -121,7 +121,7 @@ namespace Assets.Scripts.UI.Level
                     else
                     {
                         KillExpIncreaseTweenIfPlaying();
-                        _expIncreaseTween = AnimateSliderExpGain(_expData.Exp);
+                        _expIncreaseTween = AnimateSliderExpGain(_levelData.Exp);
                     }
                 }
             });
@@ -129,14 +129,14 @@ namespace Assets.Scripts.UI.Level
 
         private void PlayLastExpIncreaseTween()
         {
-            _expIncreaseTween = AnimateSliderExpGain(_currentExpIncreaseData.Value.Exp);
+            _expIncreaseTween = AnimateSliderExpGain(_currentVisibleLevelData.Value.Exp);
         }
 
         private bool CanPlayLastExpIncreaseTween()
         {
-            return _currentExpIncreaseData != null
-                && !IsPlayingLvlUpTween()
-                && _currentExpIncreaseData.Value.Lvl == _expData.Lvl;
+            return _currentVisibleLevelData != null
+                && !IsPlayingLevelUpTween()
+                && _currentVisibleLevelData.Value.Lvl == _levelData.Lvl;
         }
 
         private Tween AnimateSliderExpGain(float exp)
@@ -147,7 +147,7 @@ namespace Assets.Scripts.UI.Level
 
         private float CalculateSliderExpGainAnimSpeed(float newExp)
         {
-            byte levelsDiff = (byte)(_playerLevelController.ExpData.Lvl - _expData.Lvl);
+            byte levelsDiff = (byte)(_playerLevelController.LevelData.Lvl - _levelData.Lvl);
             float speedBoost = levelsDiff * EXP_PERCENT_ANIM_SPEED_BOOST_BY_LVL_DIFF;
 
             float slowestSpeedPercent;
@@ -165,7 +165,7 @@ namespace Assets.Scripts.UI.Level
             return Mathf.Max(FASTEST_EXP_INCREASE_ANIM_SPEED, SLOWEST_EXP_INCREASE_ANIM_SPEED * slowestSpeedPercent);
         }
 
-        private void UpdateLvlText()
-            => _levelText.text = $"{_expData.Lvl} Lvl";
+        private void UpdateLevelText()
+            => _levelText.text = $"{_levelData.Lvl} Lvl";
     }
 }

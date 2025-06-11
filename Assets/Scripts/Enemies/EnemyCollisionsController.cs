@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Assets.Scripts.Enemies
 {
     [RequireComponent(typeof(Enemy))]
-    public class EnemyCollisions : MonoBehaviour
+    public class EnemyCollisionsController : MonoBehaviour, ICollisionsController
     {
         [SerializeField] private float _collisionCheckDelay = 0.05f;
         [SerializeField] private float _collisionRadius = 1f;

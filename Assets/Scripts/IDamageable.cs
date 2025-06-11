@@ -1,6 +1,6 @@
 ﻿namespace Assets.Scripts.HealthSystem
 {
-    public interface IDamageable : IHealthy
+    public interface IDamageable
     {
         public void TakeDamage(float damage);
     }

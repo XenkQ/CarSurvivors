@@ -25,7 +25,6 @@ namespace Assets.Scripts
         [Header("BulletTimeToArriveAtRangeEnd")]
         [SerializeField] private float _speed = 600f;
         [SerializeField] private float _maxAcceleration = 30.0f;
-        [SerializeField] private float _brakeAcceleration = 50.0f;
 
         [Header("Rotation")]
         [SerializeField] private float _turnSensitivity = 1.0f;

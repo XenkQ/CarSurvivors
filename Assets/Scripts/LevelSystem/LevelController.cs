@@ -29,34 +29,45 @@ namespace Assets.Scripts.LevelSystem
         }
     }
 
-    public class ExpDataEventArgs : EventArgs
+    public class LevelDataEventArgs : EventArgs
     {
         public LevelData ExpData { get; set; }
     }
 
-    public class LevelController : MonoBehaviour
+    public interface ILevelController
+    {
+        public LevelData LevelData { get; }
+
+        public event EventHandler<LevelDataEventArgs> OnExpChange;
+
+        public event EventHandler<LevelDataEventArgs> OnLvlUp;
+
+        public void AddExp(float value);
+    }
+
+    public class LevelController : MonoBehaviour, ILevelController
     {
         [SerializeField] private AnimationCurve _expCurve;
 
-        public LevelData ExpData { get; private set; } = new LevelData();
+        public LevelData LevelData { get; private set; } = new LevelData();
 
-        public event EventHandler<ExpDataEventArgs> OnLvlUp;
+        public event EventHandler<LevelDataEventArgs> OnLvlUp;
 
-        public event EventHandler<ExpDataEventArgs> OnExpChange;
+        public event EventHandler<LevelDataEventArgs> OnExpChange;
 
         private void Awake()
         {
-            ExpData = new LevelData(maxExp: CalculateMaxExp(ExpData.Lvl));
+            LevelData = new LevelData(maxExp: CalculateMaxExp(LevelData.Lvl));
         }
 
         public void AddExp(float value)
         {
-            if (ExpData.Lvl == byte.MaxValue)
+            if (LevelData.Lvl == byte.MaxValue)
             {
                 return;
             }
 
-            (byte lvl, float exp, float maxExp) = ExpData;
+            (byte lvl, float exp, float maxExp) = LevelData;
             byte prevLvl = lvl;
             exp += value;
 
@@ -66,17 +77,17 @@ namespace Assets.Scripts.LevelSystem
                 exp -= maxExp;
                 maxExp = CalculateMaxExp(lvl);
 
-                ExpData = new LevelData(lvl, exp, maxExp);
-                OnLvlUp?.Invoke(this, new ExpDataEventArgs()
+                LevelData = new LevelData(lvl, exp, maxExp);
+                OnLvlUp?.Invoke(this, new LevelDataEventArgs()
                 {
-                    ExpData = ExpData
+                    ExpData = LevelData
                 });
             }
 
-            ExpData = new LevelData(lvl, exp, maxExp);
-            OnExpChange?.Invoke(this, new ExpDataEventArgs()
+            LevelData = new LevelData(lvl, exp, maxExp);
+            OnExpChange?.Invoke(this, new LevelDataEventArgs()
             {
-                ExpData = ExpData
+                ExpData = LevelData
             });
         }
 

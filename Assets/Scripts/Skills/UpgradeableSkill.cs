@@ -11,8 +11,6 @@ namespace Assets.Scripts.Skills
         public bool CanBeUgraded();
 
         public ISkillUpgradeableStatsConfig Config { get; }
-
-        public event EventHandler OnUpgrade;
     }
 
     public abstract class UpgradeableSkill<TUpgradeableConfig> : MonoBehaviour, IUpgradeableSkill
@@ -21,8 +19,6 @@ namespace Assets.Scripts.Skills
         public abstract SkillInfoSO SkillInfo { get; protected set; }
         protected abstract TUpgradeableConfig _config { get; set; }
         public ISkillUpgradeableStatsConfig Config => _config;
-
-        public event EventHandler OnUpgrade;
 
         protected bool _isInitialized;
 

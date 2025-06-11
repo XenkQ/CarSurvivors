@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Assets.Scripts.Enemies
 {
     [RequireComponent(typeof(Enemy))]
-    public class EnemyMovement : MonoBehaviour
+    public class EnemyMovementController : MonoBehaviour, IMovementController
     {
         private const float MOVING_TO_POSITION_ACCURACY = 0.02f;
 

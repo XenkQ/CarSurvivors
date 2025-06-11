@@ -581,7 +581,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6257441156095345877}
   - component: {fileID: 3205813391929429011}
-  - component: {fileID: 732167794389132859}
+  - component: {fileID: 4300351418844164862}
   - component: {fileID: 4444538082891369474}
   - component: {fileID: 8489968326519551025}
   - component: {fileID: 5120778290738025250}
@@ -625,7 +625,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39c25c600f7b5f44f8ec305065c09adf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &732167794389132859
+--- !u!114 &4300351418844164862
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -634,12 +634,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6215313516695621011}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 373a56a05b64dd04baa3b64e409ac34c, type: 3}
+  m_Script: {fileID: 11500000, guid: 188787b669e6bd54aa02916d03c2e0b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <MaxHealth>k__BackingField: 100
-  <MaxRegenerationAmount>k__BackingField: 3
-  <StartRegenerationDelay>k__BackingField: 2
+  <MaxRegenerationAmount>k__BackingField: 2
+  <StartRegenerationDelay>k__BackingField: 1
 --- !u!114 &4444538082891369474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -654,7 +654,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 880
   _maxAcceleration: 30
-  _brakeAcceleration: 50
   _turnSensitivity: 1.2
   _maxSteerAngle: 30
   _centerOfMass: {x: 0, y: 0, z: 0}
@@ -1143,14 +1142,6 @@ PrefabInstance:
       propertyPath: m_Transition
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5742082694639862792, guid: 8dec117a41ce26d4282c7cfc833994ec, type: 3}
-      propertyPath: _health
-      value: 
-      objectReference: {fileID: 732167794389132859}
-    - target: {fileID: 6941146590113762250, guid: 8dec117a41ce26d4282c7cfc833994ec, type: 3}
-      propertyPath: _health
-      value: 
-      objectReference: {fileID: 732167794389132859}
     - target: {fileID: 8895422677561366378, guid: 8dec117a41ce26d4282c7cfc833994ec, type: 3}
       propertyPath: m_Name
       value: HealthBarCanvas

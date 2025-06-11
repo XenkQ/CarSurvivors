@@ -3,6 +3,11 @@ using UnityEngine;
 
 namespace Assets.Scripts
 {
+    public interface IStunable
+    {
+        public IStunController StunController { get; }
+    }
+
     public interface IStunController
     {
         public bool IsStunned { get; }
@@ -10,6 +15,8 @@ namespace Assets.Scripts
         public event EventHandler OnStunEnd;
 
         public event EventHandler OnStunStart;
+
+        public void ApplyStun();
     }
 
     public class StunController : MonoBehaviour, IStunController
@@ -43,7 +50,7 @@ namespace Assets.Scripts
             {
                 IsStunned = true;
                 _stunTimer = _stunDuration;
-                OnStunEnd?.Invoke(this, EventArgs.Empty);
+                OnStunStart?.Invoke(this, EventArgs.Empty);
             }
         }
     }
