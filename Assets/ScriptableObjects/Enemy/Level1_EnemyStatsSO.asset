@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MovementSpeed: 2.4
   RotationSpeed: 2
-  Damage: 2
+  Damage: 7
   DangerLevel: 1
   ExpForKill: 15
   IsMovingByCrawling: 0

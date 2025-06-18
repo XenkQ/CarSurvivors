@@ -34,8 +34,12 @@ namespace Assets.Scripts.Enemies
 
         private void EnemyCollisions_OnCollisionWithPlayer(object sender, CollisionEventArgs e)
         {
-            _enemy.EnemyAnimator.PlayAttackAnimation();
             _currentAttackedTarget = e.Collider;
+
+            if (CanAttackCurrentAttackTarget())
+            {
+                _enemy.EnemyAnimator.PlayAttackAnimation();
+            }
         }
 
         private void DamageCurrentlyAttackedTarget()

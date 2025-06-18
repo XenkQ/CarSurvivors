@@ -41,7 +41,6 @@ namespace Assets.Scripts.Enemies
 
         public void ApplyKnockBack(Vector3 direction, float power, float timeToArriveAtLocation)
         {
-            Debug.Log("KNOCKBACK");
             MovementController.MoveToPositionInTimeIgnoringSpeed(transform.position + (direction * power), timeToArriveAtLocation);
         }
 

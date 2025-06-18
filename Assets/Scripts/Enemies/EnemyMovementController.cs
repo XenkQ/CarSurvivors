@@ -131,8 +131,15 @@ namespace Assets.Scripts.Enemies
 
         private void RotateTowardsMovementDirection(Vector3 movement)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(movement.normalized);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _enemy.Config.RotationSpeed * Time.deltaTime);
+            if (GetCurrentMovementSpeed() > 0)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(movement.normalized);
+                transform.rotation = Quaternion.Slerp(
+                    transform.rotation,
+                    targetRotation,
+                    _enemy.Config.RotationSpeed * Time.deltaTime
+                );
+            }
         }
 
         private Vector3 MoveOnFlowFieldGrid()

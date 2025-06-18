@@ -67,7 +67,7 @@ MonoBehaviour:
       <Max>k__BackingField: 8
   _startBulletMaxPiercing:
     <IsSubstractModeOn>k__BackingField: 0
-    <Value>k__BackingField: 1
+    <Value>k__BackingField: 0
     _alwaysUseMinValueForUpgrade: 0
     _byteMinMaxRange:
       <Min>k__BackingField: 1

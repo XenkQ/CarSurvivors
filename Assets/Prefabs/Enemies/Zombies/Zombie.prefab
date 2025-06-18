@@ -104,7 +104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _collisionCheckDelay: 0.05
-  _collisionRadius: 1
+  _collisionRadius: 0.8
 --- !u!114 &347190357356235707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,6 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7015da4bf49f5d0438c4e6100d49f7d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _attackRange: 1
 --- !u!65 &4176904749440768749
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -65,10 +65,14 @@ namespace Assets.Scripts.Skills.PlayerSkills.Minigun
         }
 
         private IEnumerable<MinigunTurret> GetActiveInitializedTurrets()
-            => _turrets.Where(t => t.IsInitialized() && t.gameObject.activeSelf);
+        {
+            return _turrets.Where(t => t.IsInitialized() && t.gameObject.activeSelf);
+        }
 
-        private IEnumerable<MinigunTurret> GetActiveUninitializedTurrets() =>
-            _turrets.Where(t => !t.IsInitialized() && t.gameObject.activeSelf);
+        private IEnumerable<MinigunTurret> GetActiveUninitializedTurrets()
+        {
+            return _turrets.Where(t => !t.IsInitialized() && t.gameObject.activeSelf);
+        }
 
         private void Projectile_OnLifeEnd(object sender, EventArgs e)
         {
