@@ -1,5 +1,6 @@
 using Assets.Scripts.GridSystem;
 using Assets.Scripts.StatusAffectables;
+using DG.Tweening;
 using UnityEngine;
 
 namespace Assets.Scripts.Enemies
@@ -19,6 +20,8 @@ namespace Assets.Scripts.Enemies
         private bool _isMovingToPositionUnrelatedToGrid;
         private Vector3 _currentMovementPositionUnrelatedToGrid;
         private Vector3 _lastPos;
+
+        private Tween _movementUnrelatedToSpeedTween;
 
         private void Awake()
         {
@@ -98,6 +101,25 @@ namespace Assets.Scripts.Enemies
                 _isMovingToPositionUnrelatedToGrid = true;
                 return Move(pos);
             }
+        }
+
+        public Tween MoveToPositionInTimeIgnoringSpeed(Vector3 pos, float time)
+        {
+            if (_movementUnrelatedToSpeedTween != null)
+            {
+                _movementUnrelatedToSpeedTween.Kill();
+            }
+
+            _isMovingToPositionUnrelatedToGrid = true;
+
+            return _movementUnrelatedToSpeedTween = transform
+                .DOMove(pos, time)
+                .SetEase(Ease.OutSine)
+                .OnComplete(() =>
+                {
+                    _isMovingToPositionUnrelatedToGrid = false;
+                    _movementUnrelatedToSpeedTween = null;
+                });
         }
 
         private Vector3 Move(Vector3 pos)

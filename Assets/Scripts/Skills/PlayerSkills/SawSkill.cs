@@ -55,7 +55,8 @@ namespace Assets.Scripts.Skills.PlayerSkills
                 if (collisionObject.TryGetComponent(out IKnockable knockable))
                 {
                     knockable.ApplyKnockBack(
-                        other.transform.position + transform.forward * _config.KnockbackPower.Value,
+                        transform.forward,
+                        _config.KnockbackPower.Value,
                         _config.TimeToArriveAtKnockbackLocation);
                 }
             }

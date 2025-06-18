@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 
 namespace Assets.Scripts
 {
@@ -7,5 +8,7 @@ namespace Assets.Scripts
         public float GetCurrentMovementSpeed();
 
         public Vector3? MoveToPosition(Vector3 pos);
+
+        public Tween MoveToPositionInTimeIgnoringSpeed(Vector3 pos, float time);
     }
 }

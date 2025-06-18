@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4ed7d23dc37d50468b19db7f408bd36, type: 3}
   m_Name: SawSkillUpgradeableConfig
   m_EditorClassIdentifier: 
-  <TimeToArriveAtKnockbackLocation>k__BackingField: 1
+  <TimeToArriveAtKnockbackLocation>k__BackingField: 0.8
   <AttackCooldown>k__BackingField: 0.05
   _knockbackPower:
     <IsSubstractModeOn>k__BackingField: 0
-    <Value>k__BackingField: 8
+    <Value>k__BackingField: 4
     _alwaysUseMinValueForUpgrade: 0
     _floatMinMaxRange:
-      <Min>k__BackingField: 8
-      <Max>k__BackingField: 20
+      <Min>k__BackingField: 4
+      <Max>k__BackingField: 8
     _floatRangeOfPossibleValuesForUpgrade:
       <Min>k__BackingField: 1
       <Max>k__BackingField: 3

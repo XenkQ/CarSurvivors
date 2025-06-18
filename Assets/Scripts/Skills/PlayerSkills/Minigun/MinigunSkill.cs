@@ -25,7 +25,6 @@ namespace Assets.Scripts.Skills.PlayerSkills.Minigun
             InitializeActiveUninitializedTurrets();
 
             _config.NumberOfTurrets.OnUpgrade += (s, e) => ActiveRandomInactiveTurret()?.Initialize(_config.TurretConfig);
-            _config.NumberOfTurrets.OnUpgrade += (s, e) => Debug.Log("UPGRADE");
         }
 
         private System.Collections.IEnumerator SpawnBulletsProcess()
@@ -54,7 +53,7 @@ namespace Assets.Scripts.Skills.PlayerSkills.Minigun
         private MinigunTurret ActiveRandomInactiveTurret()
         {
             var inactiveTurrets = _turrets.Where(t => !t.gameObject.activeSelf);
-            Debug.Log(inactiveTurrets.Count());
+
             if (inactiveTurrets.Any())
             {
                 MinigunTurret turret = inactiveTurrets.Shuffle().First();
