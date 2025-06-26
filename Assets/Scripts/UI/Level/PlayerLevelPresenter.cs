@@ -13,6 +13,7 @@ namespace Assets.Scripts.UI.Level
     {
         private const float BASE_EXP_INCREASE_ANIM_SPEED = 1f;
         private const float FASTEST_EXP_INCREASE_ANIM_SPEED = 0.6f;
+        private const float DELAY_BETWEEN_TWEENS_ANIMATION_CHECK = 0.02f;
 
         [SerializeField] private TextMeshProUGUI _levelText;
         [SerializeField] private Slider _expSlider;
@@ -24,8 +25,8 @@ namespace Assets.Scripts.UI.Level
         private ILevelController _playerLevelController;
 
         private LevelData _currentlyVisibleLevelData;
-        private LevelData _newestLevelData;
-        private readonly Queue<LevelData> _levelDataToShowQueue = new();
+        private readonly Queue<ExpVisualEvent> _expVisualQueue = new();
+        private ExpVisualEvent? _lastQueuedExpInSameLevelIncreaseEvent = null;
 
         private Tween _expIncreaseTween;
         private Tween _levelUpTween;
