@@ -39,6 +39,10 @@ namespace Assets.Scripts
         private InputAction _moveAction;
         private Vector2 _moveInput;
 
+        private InputAction _brakeAction;
+        private bool _brakeInput;
+        private float _brakeTorqueMultiplier = 1000f;
+
         private void Awake()
         {
             _rb = GetComponent<Rigidbody>();
@@ -47,22 +51,25 @@ namespace Assets.Scripts
         private void Start()
         {
             _moveAction = InputSystem.actions.FindAction("Move");
+            _brakeAction = InputSystem.actions.FindAction("Brake");
             _rb.centerOfMass = _centerOfMass;
         }
 
         private void Update()
         {
             _moveInput = _moveAction.ReadValue<Vector2>().normalized;
+            _brakeInput = _brakeAction.IsPressed();
         }
 
         private void FixedUpdate()
         {
-            Move();
-            Steer();
+            HandleMove();
+            HandleSteer();
+            HandleBrake();
             AnimateWheels();
         }
 
-        private void Move()
+        private void HandleMove()
         {
             foreach (var wheel in _wheels)
             {
@@ -70,7 +77,7 @@ namespace Assets.Scripts
             }
         }
 
-        private void Steer()
+        private void HandleSteer()
         {
             foreach (var wheel in _wheels)
             {
@@ -79,6 +86,15 @@ namespace Assets.Scripts
                     float steerAngle = _moveInput.x * _turnSensitivity * _maxSteerAngle;
                     wheel.WheelCollider.steerAngle = Mathf.Lerp(wheel.WheelCollider.steerAngle, steerAngle, 0.6f);
                 }
+            }
+        }
+
+        private void HandleBrake()
+        {
+            float brakeTorque = _brakeInput ? _maxAcceleration * _brakeTorqueMultiplier : 0f;
+            foreach (var wheel in _wheels)
+            {
+                wheel.WheelCollider.brakeTorque = brakeTorque;
             }
         }
 
