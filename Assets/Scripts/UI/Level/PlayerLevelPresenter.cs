@@ -1,7 +1,7 @@
 ﻿using Assets.Scripts.LevelSystem;
-using DG.Tweening;
 using Assets.Scripts.Player;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -28,8 +28,8 @@ namespace Assets.Scripts.UI.Level
         private readonly Queue<ExpVisualEvent> _expVisualQueue = new();
         private ExpVisualEvent? _lastQueuedExpInSameLevelIncreaseEvent = null;
 
-        private Tween _expIncreaseTween;
-        private Tween _levelUpTween;
+        private Coroutine _expIncreaseCoroutine;
+        private Coroutine _levelUpCoroutine;
 
         private struct ExpVisualEvent
         {
@@ -87,34 +87,34 @@ namespace Assets.Scripts.UI.Level
 
         private void HandleTweensAnimations()
         {
-            if (_expVisualQueue.Count > 0 && !IsPlayingLevelUpTween())
+            if (_expVisualQueue.Count > 0 && !IsPlayingLevelUpCoroutine())
             {
-                KillExpIncreaseTweenIfPlaying();
-                PlayLevelUpTween();
+                KillExpIncreaseCoroutineIfPlaying();
+                PlayLevelUpCoroutine();
             }
-            else if (_lastQueuedExpInSameLevelIncreaseEvent.HasValue && CanPlayLastExpIncreaseTween())
+            else if (_lastQueuedExpInSameLevelIncreaseEvent.HasValue && CanPlayLastExpIncreaseCoroutine())
             {
-                KillExpIncreaseTweenIfPlaying();
-                PlayLastExpIncreaseTween();
+                KillExpIncreaseCoroutineIfPlaying();
+                PlayLastExpIncreaseCoroutine();
                 _lastQueuedExpInSameLevelIncreaseEvent = null;
             }
         }
 
-        private bool IsPlayingLevelUpTween()
+        private bool IsPlayingLevelUpCoroutine()
         {
-            return _levelUpTween?.IsPlaying() == true;
+            return _levelUpCoroutine != null;
         }
 
-        private void KillExpIncreaseTweenIfPlaying()
+        private void KillExpIncreaseCoroutineIfPlaying()
         {
-            if (_expIncreaseTween != null && _expIncreaseTween.IsPlaying())
+            if (_expIncreaseCoroutine != null)
             {
-                _expIncreaseTween.Kill();
-                _expIncreaseTween = null;
+                StopCoroutine(_expIncreaseCoroutine);
+                _expIncreaseCoroutine = null;
             }
         }
 
-        private void PlayLevelUpTween()
+        private void PlayLevelUpCoroutine()
         {
             ExpVisualEvent expEvent = _expVisualQueue.Dequeue();
             LevelData nextLevelData = expEvent.LevelData;
@@ -128,13 +128,12 @@ namespace Assets.Scripts.UI.Level
                 return;
             }
 
-            _levelUpTween = _expSlider.DOValue(endExp, CalculateSliderExpGainAnimSpeed(true))
-                .SetEase(Ease.OutQuad)
-                .SetUpdate(true)
-                .OnComplete(() =>
+            _levelUpCoroutine = StartCoroutine(AnimateSliderExpGainCoroutine(
+                startExp, endExp, CalculateSliderExpGainAnimSpeed(true), true, () =>
                 {
+                    _levelUpCoroutine = null;
                     HandleLevelUpTransition(nextLevelData);
-                });
+                }));
         }
 
         private void HandleLevelUpTransition(LevelData nextLevelData)
@@ -150,47 +149,59 @@ namespace Assets.Scripts.UI.Level
 
             if (_expVisualQueue.Count > 0 && _expVisualQueue.Peek().IsLevelUp)
             {
-                PlayLevelUpTween();
+                PlayLevelUpCoroutine();
             }
             else
             {
-                KillExpIncreaseTweenIfPlaying();
+                KillExpIncreaseCoroutineIfPlaying();
                 if (_lastQueuedExpInSameLevelIncreaseEvent.HasValue && _lastQueuedExpInSameLevelIncreaseEvent.Value.LevelData.Lvl == _currentlyVisibleLevelData.Lvl)
                 {
-                    PlayLastExpIncreaseTween();
+                    PlayLastExpIncreaseCoroutine();
                     _lastQueuedExpInSameLevelIncreaseEvent = null;
                 }
                 else if (_currentlyVisibleLevelData.Exp > 0)
                 {
-                    _expIncreaseTween = AnimateSliderExpGain(_currentlyVisibleLevelData.Exp, false);
+                    _expIncreaseCoroutine = StartCoroutine(AnimateSliderExpGainCoroutine(
+                        0, _currentlyVisibleLevelData.Exp, CalculateSliderExpGainAnimSpeed(false), false, null));
                 }
             }
         }
 
-        private void PlayLastExpIncreaseTween()
+        private void PlayLastExpIncreaseCoroutine()
         {
             if (_lastQueuedExpInSameLevelIncreaseEvent.HasValue)
             {
                 var expEvent = _lastQueuedExpInSameLevelIncreaseEvent.Value;
-                _expIncreaseTween = AnimateSliderExpGain(expEvent.LevelData.Exp, false);
+                _expIncreaseCoroutine = StartCoroutine(AnimateSliderExpGainCoroutine(
+                    _expSlider.value, expEvent.LevelData.Exp, CalculateSliderExpGainAnimSpeed(false), false, null));
                 _currentlyVisibleLevelData = expEvent.LevelData;
             }
         }
 
-        private bool CanPlayLastExpIncreaseTween()
+        private bool CanPlayLastExpIncreaseCoroutine()
         {
-            return !IsPlayingLevelUpTween()
+            return !IsPlayingLevelUpCoroutine()
                 && _lastQueuedExpInSameLevelIncreaseEvent.HasValue
                 && _lastQueuedExpInSameLevelIncreaseEvent.Value.LevelData.Lvl == _currentlyVisibleLevelData.Lvl;
         }
 
-        private Tween AnimateSliderExpGain(float exp, bool isLevelUp)
+        private IEnumerator AnimateSliderExpGainCoroutine(float from, float to, float duration, bool isLevelUp, Action onComplete)
         {
-            float duration = CalculateSliderExpGainAnimSpeed(isLevelUp);
-            return _expSlider
-                .DOValue(exp, duration)
-                .SetEase(Ease.OutQuad)
-                .SetUpdate(true);
+            float elapsed = 0f;
+            float startValue = from;
+            float endValue = to;
+
+            while (elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
+                float t = Mathf.Clamp01(elapsed / duration);
+                _expSlider.value = Mathf.Lerp(startValue, endValue, EaseOutQuad(t));
+                yield return null;
+            }
+
+            _expSlider.value = endValue;
+
+            onComplete?.Invoke();
         }
 
         private float CalculateSliderExpGainAnimSpeed(bool isLevelUp)
@@ -208,5 +219,10 @@ namespace Assets.Scripts.UI.Level
 
         private void UpdateLevelText()
             => _levelText.text = $"{_currentlyVisibleLevelData.Lvl} Lvl";
+
+        private float EaseOutQuad(float t)
+        {
+            return 1 - (1 - t) * (1 - t);
+        }
     }
 }
