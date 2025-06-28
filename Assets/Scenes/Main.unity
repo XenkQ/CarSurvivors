@@ -1627,22 +1627,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d02287d755432c439551ccb3d414ee3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spawnChanceDecreaseFactor:
+    <Min>k__BackingField: 2
+    <Max>k__BackingField: 5
   _poolEnemiesInfo:
-  - enemyPrefab: {fileID: 8544650596686725407, guid: 08b441f56ebe2754ab1e7d5eefb63ac5, type: 3}
-    maxAmount: 100
-    spawnChance: 70
-  - enemyPrefab: {fileID: 8544650596686725407, guid: 6868dd97df9ac574da868db1b133ad18, type: 3}
-    maxAmount: 70
-    spawnChance: 15
-  - enemyPrefab: {fileID: 8544650596686725407, guid: 5495300357b64ae4e9bc00aa9ec678b0, type: 3}
-    maxAmount: 50
-    spawnChance: 10
-  - enemyPrefab: {fileID: 8544650596686725407, guid: 1c4e953fc50e7444ab0e5f870c26a9ef, type: 3}
-    maxAmount: 30
-    spawnChance: 4
-  - enemyPrefab: {fileID: 8544650596686725407, guid: e1a12b239e4ee684cb99d952c862adf1, type: 3}
-    maxAmount: 25
-    spawnChance: 1
+  - EnemyPrefab: {fileID: 8544650596686725407, guid: 08b441f56ebe2754ab1e7d5eefb63ac5, type: 3}
+    MaxAmount: 100
+    SpawnChanceInfo:
+      SpawnChance: 100
+      TresholdToStartAddingSpawnChanceToOtherInfos: 0
+      SpawnChanceWillNotChange: 0
+      HasEverReachedThreshold: 0
+  - EnemyPrefab: {fileID: 8544650596686725407, guid: 6868dd97df9ac574da868db1b133ad18, type: 3}
+    MaxAmount: 80
+    SpawnChanceInfo:
+      SpawnChance: 0
+      TresholdToStartAddingSpawnChanceToOtherInfos: 30
+      SpawnChanceWillNotChange: 0
+      HasEverReachedThreshold: 0
+  - EnemyPrefab: {fileID: 8544650596686725407, guid: 5495300357b64ae4e9bc00aa9ec678b0, type: 3}
+    MaxAmount: 50
+    SpawnChanceInfo:
+      SpawnChance: 0
+      TresholdToStartAddingSpawnChanceToOtherInfos: 20
+      SpawnChanceWillNotChange: 0
+      HasEverReachedThreshold: 0
+  - EnemyPrefab: {fileID: 8544650596686725407, guid: 1c4e953fc50e7444ab0e5f870c26a9ef, type: 3}
+    MaxAmount: 10
+    SpawnChanceInfo:
+      SpawnChance: 0
+      TresholdToStartAddingSpawnChanceToOtherInfos: 10
+      SpawnChanceWillNotChange: 0
+      HasEverReachedThreshold: 0
+  - EnemyPrefab: {fileID: 8544650596686725407, guid: e1a12b239e4ee684cb99d952c862adf1, type: 3}
+    MaxAmount: 50
+    SpawnChanceInfo:
+      SpawnChance: 0
+      TresholdToStartAddingSpawnChanceToOtherInfos: 0
+      SpawnChanceWillNotChange: 0
+      HasEverReachedThreshold: 0
 --- !u!43 &467164918
 Mesh:
   m_ObjectHideFlags: 0

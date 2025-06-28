@@ -1,3 +1,4 @@
+using Assets.Scripts.CustomTypes;
 using Assets.Scripts.GridSystem;
 using Assets.Scripts.HealthSystem;
 using System;
@@ -10,16 +11,13 @@ namespace Assets.Scripts.Enemies
 {
     public sealed class EnemiesSpawner : MonoBehaviour, ISpawner
     {
-        [Serializable]
-        private class EnemyInfo
-        {
-            public Enemy enemyPrefab;
-            public ushort maxAmount;
-            public float spawnChance;
-        }
+        [Header("Spawn Chance Settings")]
+        [SerializeField] private FloatValueRange _spawnChanceDecreaseFactor;
+        private EnemiesSpawnChanceRedistributionSystem _enemiesSpawnChanceRedistributionSystem = new();
 
-        [SerializeField] private List<EnemyInfo> _poolEnemiesInfo;
-        private Dictionary<EnemyInfo, ObjectPool<Enemy>> _enemyPools = new();
+        [Header("Enemies Pool settings")]
+        [SerializeField] private List<EnemySpawnInfo> _poolEnemiesInfo;
+        private Dictionary<EnemySpawnInfo, ObjectPool<Enemy>> _enemyPools = new();
 
         public event EventHandler OnSpawnedEntityReleased;
 
@@ -45,15 +43,26 @@ namespace Assets.Scripts.Enemies
             PoolEnemies();
         }
 
+        private void Start()
+        {
+            EnemiesSpawnChanceRedistributionSystem.Configuration config = new()
+            {
+                EnemiesInfo = _poolEnemiesInfo,
+                SpawnChanceDecreaseFactor = _spawnChanceDecreaseFactor
+            };
+
+            _enemiesSpawnChanceRedistributionSystem.Initialize(config);
+        }
+
         private void PoolEnemies()
         {
-            foreach (EnemyInfo poolEnemyInfo in _poolEnemiesInfo)
+            foreach (EnemySpawnInfo poolEnemyInfo in _poolEnemiesInfo)
             {
-                ObjectPool<Enemy> currentEnemyPool = new(createFunc: () => Instantiate(poolEnemyInfo.enemyPrefab, transform),
+                ObjectPool<Enemy> currentEnemyPool = new(createFunc: () => Instantiate(poolEnemyInfo.EnemyPrefab, transform),
                                                          actionOnGet: OnEnemyGet,
                                                          actionOnRelease: OnEnemyRelease,
-                                                         defaultCapacity: poolEnemyInfo.maxAmount,
-                                                         maxSize: poolEnemyInfo.maxAmount);
+                                                         defaultCapacity: poolEnemyInfo.MaxAmount,
+                                                         maxSize: poolEnemyInfo.MaxAmount);
 
                 _enemyPools.Add(poolEnemyInfo, currentEnemyPool);
             }
@@ -95,26 +104,28 @@ namespace Assets.Scripts.Enemies
         {
             for (int i = 0; i < count; i++)
             {
-                EnemyInfo currentEnemyToSpawnInfo = RandomEnemyInfoBasedOnSpawnChance();
+                EnemySpawnInfo currentEnemyToSpawnInfo = RandomEnemyInfoBasedOnSpawnChance();
                 if (currentEnemyToSpawnInfo != null)
                 {
                     _enemyPools[currentEnemyToSpawnInfo].Get();
                 }
             }
+
+            _enemiesSpawnChanceRedistributionSystem.RedistributeSpawnChance();
         }
 
-        private EnemyInfo RandomEnemyInfoBasedOnSpawnChance()
+        private EnemySpawnInfo RandomEnemyInfoBasedOnSpawnChance()
         {
-            float totalChance = _poolEnemiesInfo.Sum(info => info.spawnChance);
+            float totalChance = _poolEnemiesInfo.Sum(info => info.SpawnChanceInfo.SpawnChance);
             float randomPoint = UnityEngine.Random.value * totalChance;
 
             float currentSum = 0;
-            foreach (EnemyInfo enemyInfo in _poolEnemiesInfo)
+            foreach (EnemySpawnInfo enemySpawnInfo in _poolEnemiesInfo)
             {
-                currentSum += enemyInfo.spawnChance;
+                currentSum += enemySpawnInfo.SpawnChanceInfo.SpawnChance;
                 if (currentSum >= randomPoint)
                 {
-                    return enemyInfo;
+                    return enemySpawnInfo;
                 }
             }
 
