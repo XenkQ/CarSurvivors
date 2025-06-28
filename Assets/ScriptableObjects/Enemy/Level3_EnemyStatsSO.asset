@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 076a553c77658ca4d909724cdba5d9dd, type: 3}
   m_Name: Level3_EnemyStatsSO
   m_EditorClassIdentifier: 
-  MovementSpeed: 3
-  RotationSpeed: 3
+  MaxHealth: 40
+  MovementSpeed: 6
+  RotationSpeed: 6
   Damage: 14
   DangerLevel: 3
-  ExpForKill: 38
+  ExpForKill: 50
   IsMovingByCrawling: 0

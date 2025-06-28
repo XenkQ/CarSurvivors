@@ -11,7 +11,7 @@ namespace Assets.Scripts.HealthSystem
     public interface IHealth
     {
         float CurrentHealth { get; }
-        float MaxHealth { get; }
+        float MaxHealth { get; set; }
 
         event EventHandler OnHealthChange;
 
@@ -29,7 +29,7 @@ namespace Assets.Scripts.HealthSystem
     [Serializable]
     public class Health : MonoBehaviour, IHealth
     {
-        [field: SerializeField] public float MaxHealth { get; protected set; }
+        [field: SerializeField] public float MaxHealth { get; set; }
         public float CurrentHealth { get; protected set; }
 
         public event EventHandler OnNoHealth;

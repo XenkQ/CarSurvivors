@@ -29,6 +29,11 @@ namespace Assets.Scripts.Enemies
             EnemyAnimator = GetComponentInChildren<EnemyAnimator>();
         }
 
+        private void Start()
+        {
+            Health.MaxHealth = Config.MaxHealth;
+        }
+
         private void OnEnable()
         {
             EnemyAnimator.IsMovingByCrawling = Config.IsMovingByCrawling;
