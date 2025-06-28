@@ -12,7 +12,7 @@ namespace Assets.ScriptableObjects.Skills.PlayerSkills.MinigunSkill
         [SerializeField] private TurretConfigSO _turretConfig;
         [SerializeField] private FloatUpgradeableStat _delayBetweenShootingBullets;
         [SerializeField] private ByteUpgradeableStat _numberOfTurrets;
-        public TurretConfigSO TurretConfig { get; private set; }
+        public TurretConfigSO TurretConfig => _turretConfig;
         public FloatUpgradeableStat DelayBetweenSpawningBullets { get; private set; }
         public ByteUpgradeableStat NumberOfTurrets { get; private set; }
 
@@ -31,8 +31,6 @@ namespace Assets.ScriptableObjects.Skills.PlayerSkills.MinigunSkill
         private void OnEnable()
         {
             NumberOfTurrets = DeepCopyUtility.DeepCopy(_numberOfTurrets);
-
-            TurretConfig = _turretConfig;
 
             DelayBetweenSpawningBullets = DeepCopyUtility.DeepCopy(_delayBetweenShootingBullets);
             BulletDamage = DeepCopyUtility.DeepCopy(_startBulletDamage);

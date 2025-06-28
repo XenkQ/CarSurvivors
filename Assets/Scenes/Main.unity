@@ -2204,10 +2204,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1088291492}
-  - {fileID: 1353509552}
   - {fileID: 832575519}
   - {fileID: 410087041}
   - {fileID: 583109475}
+  - {fileID: 1353509552}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &556906910
@@ -12716,22 +12716,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1549669939771682502, guid: cb84583e0c2818e42b12a0baeb2f6f1b, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1721377312614150865, guid: cb84583e0c2818e42b12a0baeb2f6f1b, type: 3}
       propertyPath: _landminesParent
       value: 
       objectReference: {fileID: 1938938823}
-    - target: {fileID: 2875079507805114353, guid: cb84583e0c2818e42b12a0baeb2f6f1b, type: 3}
-      propertyPath: m_Value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3359123731951645094, guid: cb84583e0c2818e42b12a0baeb2f6f1b, type: 3}
-      propertyPath: m_EffectColor.a
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6215313516695621011, guid: cb84583e0c2818e42b12a0baeb2f6f1b, type: 3}
       propertyPath: m_Name
       value: PlayerCar
@@ -12780,22 +12768,6 @@ PrefabInstance:
       propertyPath: _projectilesParent
       value: 
       objectReference: {fileID: 1169998850}
-    - target: {fileID: 9028775140830565906, guid: cb84583e0c2818e42b12a0baeb2f6f1b, type: 3}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9028775140830565906, guid: cb84583e0c2818e42b12a0baeb2f6f1b, type: 3}
-      propertyPath: m_Color.b
-      value: 0.07058824
-      objectReference: {fileID: 0}
-    - target: {fileID: 9028775140830565906, guid: cb84583e0c2818e42b12a0baeb2f6f1b, type: 3}
-      propertyPath: m_Color.g
-      value: 0.07058824
-      objectReference: {fileID: 0}
-    - target: {fileID: 9028775140830565906, guid: cb84583e0c2818e42b12a0baeb2f6f1b, type: 3}
-      propertyPath: m_Color.r
-      value: 0.07058824
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

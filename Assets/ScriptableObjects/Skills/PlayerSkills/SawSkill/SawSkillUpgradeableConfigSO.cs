@@ -12,17 +12,17 @@ namespace Assets.ScriptableObjects.Skills.PlayerSkills.SawSkill
         [field: SerializeField] public float AttackCooldown { get; private set; } = 0.05f;
         [SerializeField] private FloatUpgradeableStat _knockbackPower;
         [SerializeField] private FloatUpgradeableStat _damage;
-        [SerializeField] private FloatUpgradeableStat _size;
+        [SerializeField] private ByteUpgradeableStat _numberOfSaws;
 
         public FloatUpgradeableStat KnockbackPower { get; private set; }
         public FloatUpgradeableStat Damage { get; private set; }
-        public FloatUpgradeableStat Size { get; private set; }
+        public ByteUpgradeableStat NuberOfSaws { get; private set; }
 
         private void OnEnable()
         {
             KnockbackPower = DeepCopyUtility.DeepCopy(_knockbackPower);
             Damage = DeepCopyUtility.DeepCopy(_damage);
-            Size = DeepCopyUtility.DeepCopy(_size);
+            NuberOfSaws = DeepCopyUtility.DeepCopy(_numberOfSaws);
         }
     }
 }

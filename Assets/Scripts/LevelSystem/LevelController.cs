@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Assets.Scripts.LevelSystem
 {
@@ -58,6 +59,19 @@ namespace Assets.Scripts.LevelSystem
         private void Awake()
         {
             LevelData = new LevelData(maxExp: CalculateMaxExp(LevelData.Lvl));
+        }
+
+        private void Update()
+        {
+            if (Keyboard.current.eKey.wasPressedThisFrame)
+            {
+                AddExp(20f);
+            }
+
+            if (Keyboard.current.rKey.wasPressedThisFrame)
+            {
+                AddExp(220f);
+            }
         }
 
         public void AddExp(float value)

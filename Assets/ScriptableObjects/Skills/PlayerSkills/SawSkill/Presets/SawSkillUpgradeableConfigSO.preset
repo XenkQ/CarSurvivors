@@ -89,32 +89,32 @@ Preset:
     value: 7.2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: _size.<IsSubstractModeOn>k__BackingField
+    propertyPath: _numberOfSaws.<IsSubstractModeOn>k__BackingField
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: _size.<Value>k__BackingField
+    propertyPath: _numberOfSaws.<Value>k__BackingField
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: _size._alwaysUseMinValueForUpgrade
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: _size._floatMinMaxRange.<Min>k__BackingField
+    propertyPath: _numberOfSaws._alwaysUseMinValueForUpgrade
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: _size._floatMinMaxRange.<Max>k__BackingField
-    value: 1.4
+    propertyPath: _numberOfSaws._byteMinMaxRange.<Min>k__BackingField
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: _size._floatRangeOfPossibleValuesForUpgrade.<Min>k__BackingField
-    value: 0.1
+    propertyPath: _numberOfSaws._byteMinMaxRange.<Max>k__BackingField
+    value: 3
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: _size._floatRangeOfPossibleValuesForUpgrade.<Max>k__BackingField
-    value: 0.24
+    propertyPath: _numberOfSaws._byteRangeOfPossibleValuesForUpgrade.<Min>k__BackingField
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _numberOfSaws._byteRangeOfPossibleValuesForUpgrade.<Max>k__BackingField
+    value: 1
     objectReference: {fileID: 0}
   m_ExcludedProperties: []
   m_CoupledType:

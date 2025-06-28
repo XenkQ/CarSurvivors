@@ -6,9 +6,8 @@ namespace Assets.Scripts.Skills
 {
     public sealed class SkillsRegistry : MonoBehaviour
     {
-        public IEnumerable<ISkillBase> Skills { get; private set; }
+        public IReadOnlyList<ISkillBase> Skills { get; private set; }
         public static SkillsRegistry Instance { get; private set; }
-
         public byte UninitializedSkillsCount { get; private set; }
 
         private SkillsRegistry()
@@ -31,6 +30,8 @@ namespace Assets.Scripts.Skills
         public void Start()
         {
             UninitializedSkillsCount = (byte)GetUninitializedSkills().Count();
+
+            InitializeSkill(Skills[0]);
         }
 
         private void RegisterAllSkills()

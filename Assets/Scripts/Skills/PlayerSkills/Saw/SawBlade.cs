@@ -1,16 +1,15 @@
-using Assets.ScriptableObjects.Skills;
-using Assets.ScriptableObjects.Skills.PlayerSkills.SawSkill;
+﻿using Assets.ScriptableObjects.Skills.PlayerSkills.SawSkill;
 using Assets.Scripts.LayerMasks;
 using Assets.Scripts.StatusAffectables;
 using UnityEngine;
 
-namespace Assets.Scripts.Skills.PlayerSkills
+namespace Assets.Scripts.Skills.PlayerSkills.Saw
 {
-    public class SawSkill : UpgradeableSkill<SawSkillUpgradeableConfigSO>
+    public class SawBlade : MonoBehaviour, IInitializableWithScriptableConfig<SawSkillUpgradeableConfigSO>
     {
-        [field: SerializeField] public override SkillInfoSO SkillInfo { get; protected set; }
-        [field: SerializeField] protected override SawSkillUpgradeableConfigSO _config { get; set; }
-        [SerializeField] private BoxCollider _boxCollider;
+        private SawSkillUpgradeableConfigSO _config;
+        private BoxCollider _boxCollider;
+        private bool _isInitialized;
 
         private void Awake()
         {
@@ -22,11 +21,20 @@ namespace Assets.Scripts.Skills.PlayerSkills
             AttackCollidingEntity(other);
         }
 
-        public override void Initialize()
+        public void Initialize(SawSkillUpgradeableConfigSO config)
         {
-            base.Initialize();
+            _config = config;
+
+            gameObject.SetActive(true);
+
+            _isInitialized = true;
 
             InvokeRepeating(nameof(AtackAllEnemiesInsideCollider), 0.05f, 0.05f);
+        }
+
+        public bool IsInitialized()
+        {
+            return _isInitialized;
         }
 
         private void AtackAllEnemiesInsideCollider()
@@ -36,6 +44,7 @@ namespace Assets.Scripts.Skills.PlayerSkills
                 _boxCollider.size,
                 transform.rotation,
                 EntityLayers.All);
+
             foreach (Collider collider in colliders)
             {
                 AttackCollidingEntity(collider);

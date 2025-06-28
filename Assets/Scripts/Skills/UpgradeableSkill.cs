@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Assets.ScriptableObjects.Player.Skills;
 using Assets.ScriptableObjects.Skills;
 using System.Linq;
@@ -37,8 +36,8 @@ namespace Assets.Scripts.Skills
 
         public virtual void Initialize()
         {
-            _isInitialized = true;
             gameObject.SetActive(true);
+            _isInitialized = true;
         }
 
         public virtual bool IsInitialized()
