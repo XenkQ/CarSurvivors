@@ -40,7 +40,7 @@ MonoBehaviour:
     _alwaysUseMinValueForUpgrade: 1
     _byteMinMaxRange:
       <Min>k__BackingField: 1
-      <Max>k__BackingField: 3
+      <Max>k__BackingField: 2
     _byteRangeOfPossibleValuesForUpgrade:
       <Min>k__BackingField: 1
       <Max>k__BackingField: 1

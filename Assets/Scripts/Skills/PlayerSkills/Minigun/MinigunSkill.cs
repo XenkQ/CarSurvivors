@@ -22,6 +22,8 @@ namespace Assets.Scripts.Skills.PlayerSkills.Minigun
             _turretsActivator =
                 new ItemsWithScriptableConfigsActivator<MinigunTurret, TurretConfigSO>(_turrets);
 
+            _turretsActivator.InitializeRandom(_config.TurretConfig);
+
             _config.NumberOfTurrets.OnUpgrade += (s, e) =>
                 _turretsActivator.InitializeRandom(_config.TurretConfig);
 
