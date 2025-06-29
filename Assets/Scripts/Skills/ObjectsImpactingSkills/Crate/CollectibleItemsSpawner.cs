@@ -17,6 +17,7 @@ namespace Assets.Scripts.Skills.ObjectsImpactingSkills.Crate
         }
 
         private const byte MAX_SPAWN_COUNT = 6;
+        [SerializeField] private Transform _collectibleItemsParent;
         [SerializeField] private float _spawnDelay = 8f;
         [SerializeField] private CollectibleItemSpawnData[] _collectibleItemsSpawnData;
         private List<ICollectible> _spawnedCollectibleItems = new List<ICollectible>(MAX_SPAWN_COUNT);
@@ -65,7 +66,7 @@ namespace Assets.Scripts.Skills.ObjectsImpactingSkills.Crate
                         collectibleItemSpawnData.Value.Prefab,
                         new Vector3(drawnCell.WorldPos.x, collectibleItemSpawnData.Value.SpawnYOffset, drawnCell.WorldPos.z),
                         Quaternion.identity,
-                        transform
+                        _collectibleItemsParent
                     );
 
                     if (collectibleObject.TryGetComponent(out ICollectible collectible))

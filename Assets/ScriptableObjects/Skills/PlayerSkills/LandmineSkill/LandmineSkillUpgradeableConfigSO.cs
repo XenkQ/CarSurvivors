@@ -8,6 +8,8 @@ namespace Assets.ScriptableObjects.Skills.PlayerSkills.LandmineSkill
     [CreateAssetMenu(fileName = "LandmineSkillSO", menuName = "Scriptable Objects/Skills/LandmineSkillSO")]
     public class LandmineSkillUpgradeableConfigSO : SkillUpgradeableStatsConfig
     {
+        [field: SerializeField] public float ThrowLandmineRange { get; private set; }
+        [field: SerializeField] public float TimeToReachThrowRangeEnd { get; private set; }
         [SerializeField] private FloatUpgradeableStat _spawnCooldown;
         [SerializeField] private FloatUpgradeableStat _explosionRadius;
         [SerializeField] private FloatUpgradeableStat _damage;
