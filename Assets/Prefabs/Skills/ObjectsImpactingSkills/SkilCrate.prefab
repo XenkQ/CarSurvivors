@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7219567721460505566}
   - component: {fileID: 2752937453561489778}
   - component: {fileID: 2590883899213531858}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SkilCrate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60,6 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tweenIterationTime: 2.5
+  _unscaleWithTime: 0
 --- !u!65 &2590883899213531858
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -132,6 +133,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d218cd217a2756f42ade26069382e1b1, type: 3}
       propertyPath: m_Name
       value: Crate_Visual
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d218cd217a2756f42ade26069382e1b1, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

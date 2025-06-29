@@ -25,6 +25,14 @@ Preset:
     value: 
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: <ThrowLandmineRange>k__BackingField
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: <TimeToReachThrowRangeEnd>k__BackingField
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: _spawnCooldown.<IsSubstractModeOn>k__BackingField
     value: 1
     objectReference: {fileID: 0}

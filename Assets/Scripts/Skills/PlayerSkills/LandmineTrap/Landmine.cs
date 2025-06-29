@@ -17,6 +17,17 @@ namespace Assets.Scripts.Skills.PlayerSkills.LandmineTrap
                 return;
             }
 
+            DamageAllEnemiesInExplosionRadius();
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, _config.ExplosionRadius.Value);
+        }
+
+        private void DamageAllEnemiesInExplosionRadius()
+        {
             Collider[] colliders = Physics.OverlapSphere(transform.position, _config.ExplosionRadius.Value, EntityLayers.Enemy, QueryTriggerInteraction.Collide);
             foreach (Collider collider in colliders)
             {
@@ -26,12 +37,6 @@ namespace Assets.Scripts.Skills.PlayerSkills.LandmineTrap
                     Destroy(gameObject);
                 }
             }
-        }
-
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, _config.ExplosionRadius.Value);
         }
 
         public void Initialize(LandmineSkillUpgradeableConfigSO config)
