@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7891212252477054699}
   - component: {fileID: 6048307613972475818}
   - component: {fileID: 3698693471160965914}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Landmine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,9 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b70cd5ffeb655fc4293b4aedff9d7e79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _explosionRadius: 0.5
-  _damage: 10
-  _size: 1
+  _config: {fileID: 0}
 --- !u!65 &3698693471160965914
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -133,6 +131,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d5ef57171558dcd4c835280f366c89dc, type: 3}
       propertyPath: m_Name
       value: Landmine_Visual
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d5ef57171558dcd4c835280f366c89dc, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

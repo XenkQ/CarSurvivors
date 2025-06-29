@@ -54,15 +54,6 @@ namespace Assets.Scripts.Skills.PlayerSkills.Saw
             }
         }
 
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.cyan;
-
-            Gizmos.DrawCube(
-                transform.position + _boxCollider.center,
-                _boxCollider.size);
-        }
-
         private void AttackCollidingEntity(Collider other)
         {
             GameObject collisionObject = other.transform.gameObject;

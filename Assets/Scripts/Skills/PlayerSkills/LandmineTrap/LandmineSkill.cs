@@ -1,6 +1,5 @@
 using Assets.ScriptableObjects.Skills;
 using Assets.ScriptableObjects.Skills.PlayerSkills.LandmineSkill;
-using DG.Tweening;
 using UnityEngine;
 
 namespace Assets.Scripts.Skills.PlayerSkills.LandmineTrap
@@ -26,10 +25,6 @@ namespace Assets.Scripts.Skills.PlayerSkills.LandmineTrap
             Landmine landmine = Instantiate(_landminePrefab, transform.position, Quaternion.identity, _landminesParent);
 
             landmine.Initialize(_config);
-
-            landmine.transform
-                .DOMove(_config.ThrowLandmineRange * -transform.forward, _config.TimeToReachThrowRangeEnd)
-                .SetEase(Ease.OutSine);
         }
     }
 }

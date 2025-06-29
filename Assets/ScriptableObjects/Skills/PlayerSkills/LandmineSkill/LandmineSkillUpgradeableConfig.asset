@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deadad81ccf1bf44dafb9148b836e2c0, type: 3}
   m_Name: LandmineSkillUpgradeableConfig
   m_EditorClassIdentifier: 
+  <ThrowLandmineRange>k__BackingField: 3
+  <TimeToReachThrowRangeEnd>k__BackingField: 1
   _spawnCooldown:
     <IsSubstractModeOn>k__BackingField: 1
     <Value>k__BackingField: 8
@@ -31,7 +33,7 @@ MonoBehaviour:
       <Max>k__BackingField: 8
     _floatRangeOfPossibleValuesForUpgrade:
       <Min>k__BackingField: 1.4
-      <Max>k__BackingField: 3
+      <Max>k__BackingField: 3.2
   _damage:
     <IsSubstractModeOn>k__BackingField: 0
     <Value>k__BackingField: 5
@@ -40,8 +42,8 @@ MonoBehaviour:
       <Min>k__BackingField: 5
       <Max>k__BackingField: 18
     _floatRangeOfPossibleValuesForUpgrade:
-      <Min>k__BackingField: 2
-      <Max>k__BackingField: 5
+      <Min>k__BackingField: 4
+      <Max>k__BackingField: 6
   _size:
     <IsSubstractModeOn>k__BackingField: 0
     <Value>k__BackingField: 1
@@ -50,5 +52,5 @@ MonoBehaviour:
       <Min>k__BackingField: 1
       <Max>k__BackingField: 3
     _floatRangeOfPossibleValuesForUpgrade:
-      <Min>k__BackingField: 0.5
-      <Max>k__BackingField: 1
+      <Min>k__BackingField: 1
+      <Max>k__BackingField: 1.5

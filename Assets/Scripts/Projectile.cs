@@ -47,6 +47,8 @@ namespace Assets.Scripts
 
             StartMovingBulletForward();
 
+            transform.localScale = new Vector3(_config.Size, transform.localScale.y, _config.Size);
+
             _isInitialized = true;
         }
 

@@ -22,8 +22,11 @@ namespace Assets.Scripts.Skills.PlayerSkills.LandmineTrap
 
         private void OnDrawGizmos()
         {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, _config.ExplosionRadius.Value);
+            if (_config is not null)
+            {
+                Gizmos.color = Color.red;
+                Gizmos.DrawWireSphere(transform.position, _config.ExplosionRadius.Value);
+            }
         }
 
         private void DamageAllEnemiesInExplosionRadius()
@@ -42,6 +45,10 @@ namespace Assets.Scripts.Skills.PlayerSkills.LandmineTrap
         public void Initialize(LandmineSkillUpgradeableConfigSO config)
         {
             _config = config;
+
+            transform.localScale = new Vector3(_config.Size.Value, transform.localScale.y, _config.Size.Value);
+
+            gameObject.SetActive(true);
         }
 
         public bool IsInitialized() => _isInitialized;

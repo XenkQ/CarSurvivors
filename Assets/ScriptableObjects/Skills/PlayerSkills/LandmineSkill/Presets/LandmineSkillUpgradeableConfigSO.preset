@@ -86,7 +86,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _explosionRadius._floatRangeOfPossibleValuesForUpgrade.<Max>k__BackingField
-    value: 3
+    value: 3.2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _damage.<IsSubstractModeOn>k__BackingField
@@ -110,11 +110,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _damage._floatRangeOfPossibleValuesForUpgrade.<Min>k__BackingField
-    value: 2
+    value: 4
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _damage._floatRangeOfPossibleValuesForUpgrade.<Max>k__BackingField
-    value: 5
+    value: 6
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _size.<IsSubstractModeOn>k__BackingField
@@ -138,11 +138,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _size._floatRangeOfPossibleValuesForUpgrade.<Min>k__BackingField
-    value: 0.5
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _size._floatRangeOfPossibleValuesForUpgrade.<Max>k__BackingField
-    value: 1
+    value: 1.5
     objectReference: {fileID: 0}
   m_ExcludedProperties: []
   m_CoupledType:
