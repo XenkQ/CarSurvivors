@@ -17,7 +17,13 @@ namespace Assets.Scripts.Skills.PlayerSkills.Minigun
         public void Initialize(TurretConfigSO config)
         {
             _config = config;
+
+            gameObject.SetActive(true);
+
+            _visual.localRotation = Quaternion.Euler(0, (_inverseRotation ? _config.RotationAngle : -_config.RotationAngle) * 0.5f, 0);
+
             _isInitialized = true;
+
             StartInYAngleRotation();
         }
 
