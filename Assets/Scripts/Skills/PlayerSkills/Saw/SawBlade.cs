@@ -7,6 +7,7 @@ namespace Assets.Scripts.Skills.PlayerSkills.Saw
 {
     public class SawBlade : MonoBehaviour, IInitializableWithScriptableConfig<SawSkillUpgradeableConfigSO>
     {
+        private const float COLLISION_CHECK_INTERVAL = 0.1f;
         private SawSkillUpgradeableConfigSO _config;
         private BoxCollider _boxCollider;
         private bool _isInitialized;
@@ -29,7 +30,7 @@ namespace Assets.Scripts.Skills.PlayerSkills.Saw
 
             _isInitialized = true;
 
-            InvokeRepeating(nameof(AtackAllEnemiesInsideCollider), 0.05f, 0.05f);
+            InvokeRepeating(nameof(AtackAllEnemiesInsideCollider), 0, COLLISION_CHECK_INTERVAL);
         }
 
         public bool IsInitialized()
@@ -39,9 +40,11 @@ namespace Assets.Scripts.Skills.PlayerSkills.Saw
 
         private void AtackAllEnemiesInsideCollider()
         {
+            Vector3 boxWorldCenter = transform.TransformPoint(_boxCollider.center);
+
             Collider[] colliders = Physics.OverlapBox(
-                transform.position + _boxCollider.center,
-                _boxCollider.size,
+                boxWorldCenter,
+                _boxCollider.size * 0.5f,
                 transform.rotation,
                 EntityLayers.All);
 
@@ -49,6 +52,15 @@ namespace Assets.Scripts.Skills.PlayerSkills.Saw
             {
                 AttackCollidingEntity(collider);
             }
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.cyan;
+
+            Gizmos.DrawCube(
+                transform.position + _boxCollider.center,
+                _boxCollider.size);
         }
 
         private void AttackCollidingEntity(Collider other)
