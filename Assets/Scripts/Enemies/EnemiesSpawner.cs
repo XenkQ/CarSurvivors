@@ -16,6 +16,7 @@ namespace Assets.Scripts.Enemies
         private EnemiesSpawnChanceRedistributionSystem _enemiesSpawnChanceRedistributionSystem = new();
 
         [Header("Enemies Pool settings")]
+        [SerializeField] private Transform _enemiesParent;
         [SerializeField] private List<EnemySpawnInfo> _poolEnemiesInfo;
         private Dictionary<EnemySpawnInfo, ObjectPool<Enemy>> _enemyPools = new();
 
@@ -58,7 +59,7 @@ namespace Assets.Scripts.Enemies
         {
             foreach (EnemySpawnInfo poolEnemyInfo in _poolEnemiesInfo)
             {
-                ObjectPool<Enemy> currentEnemyPool = new(createFunc: () => Instantiate(poolEnemyInfo.EnemyPrefab, transform),
+                ObjectPool<Enemy> currentEnemyPool = new(createFunc: () => Instantiate(poolEnemyInfo.EnemyPrefab, _enemiesParent),
                                                          actionOnGet: OnEnemyGet,
                                                          actionOnRelease: OnEnemyRelease,
                                                          defaultCapacity: poolEnemyInfo.MaxAmount,
