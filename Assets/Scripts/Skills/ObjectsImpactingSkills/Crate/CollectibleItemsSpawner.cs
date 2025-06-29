@@ -50,8 +50,8 @@ namespace Assets.Scripts.Skills.ObjectsImpactingSkills.Crate
         {
             if (_spawnedCollectibleItems.Count < MAX_SPAWN_COUNT)
             {
-                Cell drawnCell = RandomGridCellWithConditionFinder
-                    .FindRandomWalkableCellWithoutCollectibleOrNull(GridManager.Instance.WorldGrid);
+                Cell drawnCell = RandomWalkableCellsFinder
+                    .FindCellWithoutCollectible(GridManager.Instance.WorldGrid);
 
                 if (drawnCell == null)
                 {

@@ -71,19 +71,33 @@ namespace Assets.Scripts.Enemies
 
         private void OnEnemyGet(Enemy enemy)
         {
-            enemy.transform.position = RandomGridCellWithConditionFinder
-                .GetRandomWalkableEdgeCellOrNull(GridManager.Instance.GridPlayerChunk)
-                .WorldPos;
+            Cell cell = GridCellsNotVisibleByMainCamera
+                .GetRandomWalkableCells(GridManager.Instance.GridPlayerChunk, 1)
+                .FirstOrDefault();
+
+            if (cell == null)
+            {
+                Debug.LogWarning("No walkable cells found for enemy spawn.");
+                return;
+            }
+
+            enemy.transform.position = cell.WorldPos;
+
             enemy.Health.OnNoHealth += Health_OnNoHealth;
+
             enemy.gameObject.SetActive(true);
+
             SpawnedEnemiesCounter++;
         }
 
         private void OnEnemyRelease(Enemy enemy)
         {
             enemy.Health.OnNoHealth -= Health_OnNoHealth;
+
             OnSpawnedEntityReleased?.Invoke(enemy, EventArgs.Empty);
+
             enemy.gameObject.SetActive(false);
+
             SpawnedEnemiesCounter--;
         }
 

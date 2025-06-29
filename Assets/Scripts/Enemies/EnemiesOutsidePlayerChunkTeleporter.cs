@@ -1,5 +1,7 @@
+using Assets.Scripts.Extensions;
 using Assets.Scripts.GridSystem;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Assets.Scripts.Enemies
@@ -19,11 +21,32 @@ namespace Assets.Scripts.Enemies
 
         public void TeleportEnemiesFromOutsideToInsidePlayerChunk()
         {
-            foreach (Enemy enemy in GetEnemiesOutsidePlayerChunk())
+            Enemy[] enemiesOutsidePlayerChunk = GetEnemiesOutsidePlayerChunk();
+
+            if (enemiesOutsidePlayerChunk.Length == 0)
             {
-                enemy.transform.position = RandomGridCellWithConditionFinder
-                    .GetRandomWalkableEdgeCellOrNull(GridManager.Instance.GridPlayerChunk)
-                    .WorldPos;
+                return;
+            }
+
+            List<Cell> cells = GridCellsNotVisibleByMainCamera
+                .GetWalkableCells(GridManager.Instance.GridPlayerChunk)
+                .Shuffle()
+                .ToList();
+
+            if (cells.Count == 0)
+            {
+                return;
+            }
+
+            int cellIndex = 0;
+
+            foreach (Enemy enemy in enemiesOutsidePlayerChunk)
+            {
+                Cell randomCell = cells[cellIndex];
+
+                enemy.transform.position = randomCell.WorldPos;
+
+                cellIndex = (cellIndex + 1) % cells.Count;
             }
         }
 
