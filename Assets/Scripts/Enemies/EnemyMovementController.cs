@@ -25,6 +25,9 @@ namespace Assets.Scripts.Enemies
 
         private Vector3 _externalSeparation = Vector3.zero;
 
+        private float _movementDelayAfterAttack = 0.2f;
+        private float _currentMovementDelayAfterAttack;
+
         private void Awake()
         {
             _enemy = GetComponent<Enemy>();
@@ -37,11 +40,17 @@ namespace Assets.Scripts.Enemies
 
         private void OnEnable()
         {
+            _enemy.EnemyAnimator.OnAttackAnimationEnd += EnemyAnimator_OnAttackAnimationEnd;
+
             _verticalPosOffset = transform.position.y;
+
+            _currentMovementDelayAfterAttack = 0;
         }
 
         private void OnDisable()
         {
+            _enemy.EnemyAnimator.OnAttackAnimationEnd -= EnemyAnimator_OnAttackAnimationEnd;
+
             transform.position = new Vector3(0, _verticalPosOffset, 0);
         }
 
@@ -59,7 +68,8 @@ namespace Assets.Scripts.Enemies
 
             bool canMoveOnGrid = _movementUnrelatedToSpeedTween is null
                 && !isStunned
-                && !_enemy.EnemyAnimator.IsPlayingAttackAnimation;
+                && !_enemy.EnemyAnimator.IsPlayingAttackAnimation
+                && _currentMovementDelayAfterAttack <= 0;
 
             if (canMoveOnGrid)
             {
@@ -79,6 +89,10 @@ namespace Assets.Scripts.Enemies
                 {
                     RotateTowardsMovementDirection(movement.Value);
                 }
+            }
+            else if (_currentMovementDelayAfterAttack > 0)
+            {
+                _currentMovementDelayAfterAttack -= Time.deltaTime;
             }
         }
 
@@ -110,6 +124,11 @@ namespace Assets.Scripts.Enemies
                     _movementUnrelatedToSpeedTween = null;
                     _externalSeparation = Vector3.zero;
                 });
+        }
+
+        private void EnemyAnimator_OnAttackAnimationEnd(object sender, System.EventArgs e)
+        {
+            _currentMovementDelayAfterAttack = _movementDelayAfterAttack;
         }
 
         private Vector3? MoveToPosition(Vector3 pos)
