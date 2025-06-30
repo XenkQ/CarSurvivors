@@ -15,6 +15,7 @@ MonoBehaviour:
   _turretConfig: {fileID: 11400000, guid: 09a2094f8392219419795ba6f67d3425, type: 2}
   _delayBetweenShootingBullets:
     <IsSubstractModeOn>k__BackingField: 1
+    <Unit>k__BackingField: 2
     <Value>k__BackingField: 1.2
     _alwaysUseMinValueForUpgrade: 0
     _floatMinMaxRange:
@@ -25,6 +26,7 @@ MonoBehaviour:
       <Max>k__BackingField: 0.3
   _numberOfTurrets:
     <IsSubstractModeOn>k__BackingField: 0
+    <Unit>k__BackingField: 0
     <Value>k__BackingField: 1
     _alwaysUseMinValueForUpgrade: 1
     _byteMinMaxRange:
@@ -37,6 +39,7 @@ MonoBehaviour:
   _projectileConfig: {fileID: 11400000, guid: b196fd0c1c6051341865604dd4fa9534, type: 2}
   _startBulletDamage:
     <IsSubstractModeOn>k__BackingField: 0
+    <Unit>k__BackingField: 0
     <Value>k__BackingField: 4.5
     _alwaysUseMinValueForUpgrade: 0
     _floatMinMaxRange:
@@ -47,6 +50,7 @@ MonoBehaviour:
       <Max>k__BackingField: 6.8
   _startBulletSize:
     <IsSubstractModeOn>k__BackingField: 0
+    <Unit>k__BackingField: 1
     <Value>k__BackingField: 1
     _alwaysUseMinValueForUpgrade: 0
     _floatMinMaxRange:
@@ -57,6 +61,7 @@ MonoBehaviour:
       <Max>k__BackingField: 0.4
   _startShootingRange:
     <IsSubstractModeOn>k__BackingField: 0
+    <Unit>k__BackingField: 3
     <Value>k__BackingField: 8
     _alwaysUseMinValueForUpgrade: 0
     _floatMinMaxRange:
@@ -67,6 +72,7 @@ MonoBehaviour:
       <Max>k__BackingField: 8
   _startBulletMaxPiercing:
     <IsSubstractModeOn>k__BackingField: 0
+    <Unit>k__BackingField: 0
     <Value>k__BackingField: 0
     _alwaysUseMinValueForUpgrade: 0
     _byteMinMaxRange:

@@ -16,6 +16,7 @@ MonoBehaviour:
   <TimeToReachThrowRangeEnd>k__BackingField: 1
   _spawnCooldown:
     <IsSubstractModeOn>k__BackingField: 1
+    <Unit>k__BackingField: 2
     <Value>k__BackingField: 8
     _alwaysUseMinValueForUpgrade: 0
     _floatMinMaxRange:
@@ -26,6 +27,7 @@ MonoBehaviour:
       <Max>k__BackingField: 4
   _explosionRadius:
     <IsSubstractModeOn>k__BackingField: 0
+    <Unit>k__BackingField: 3
     <Value>k__BackingField: 2
     _alwaysUseMinValueForUpgrade: 0
     _floatMinMaxRange:
@@ -36,6 +38,7 @@ MonoBehaviour:
       <Max>k__BackingField: 3.2
   _damage:
     <IsSubstractModeOn>k__BackingField: 0
+    <Unit>k__BackingField: 0
     <Value>k__BackingField: 5
     _alwaysUseMinValueForUpgrade: 0
     _floatMinMaxRange:
@@ -46,6 +49,7 @@ MonoBehaviour:
       <Max>k__BackingField: 6
   _size:
     <IsSubstractModeOn>k__BackingField: 0
+    <Unit>k__BackingField: 1
     <Value>k__BackingField: 1
     _alwaysUseMinValueForUpgrade: 0
     _floatMinMaxRange:

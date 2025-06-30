@@ -105,10 +105,15 @@ namespace Assets.Scripts.UI.Skills
             foreach (var nameUpgradeableStatPair in upgradeableStats.Config.GetUpgradeableStatsThatCanBeUpgraded())
             {
                 float upgradeValue = nameUpgradeableStatPair.UpgradeableStat.GetUpgradeValueBasedOnUpdateRange();
+                IUpgradeableStat upgradeableStat = nameUpgradeableStatPair.UpgradeableStat;
+
                 skillStatsUpgradeButtonsData.Add(new ClickableButtonData
                 {
-                    Text = (nameUpgradeableStatPair.UpgradeableStat.IsSubstractModeOn ? "Decrease" : "Increase")
-                        + $" {nameUpgradeableStatPair.Name.PascalCaseToWords()} by {upgradeValue}",
+                    Text = (upgradeableStat.IsSubstractModeOn ? "Decrease" : "Increase")
+                        + $" {nameUpgradeableStatPair.Name.PascalCaseToWords()} by "
+                        + (upgradeableStat.Unit == StatsUnits.Percentage ?
+                            upgradeableStat.GetWhatPercentOfValueIsUpgradeValue(upgradeValue) : upgradeValue)
+                        + upgradeableStat.Unit.ToDisplayString(),
 
                     OnClick = () =>
                     {

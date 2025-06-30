@@ -37,6 +37,10 @@ Preset:
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: _spawnCooldown.<Unit>k__BackingField
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: _spawnCooldown.<Value>k__BackingField
     value: 8
     objectReference: {fileID: 0}
@@ -63,6 +67,10 @@ Preset:
   - target: {fileID: 0}
     propertyPath: _explosionRadius.<IsSubstractModeOn>k__BackingField
     value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _explosionRadius.<Unit>k__BackingField
+    value: 3
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _explosionRadius.<Value>k__BackingField
@@ -93,6 +101,10 @@ Preset:
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: _damage.<Unit>k__BackingField
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: _damage.<Value>k__BackingField
     value: 5
     objectReference: {fileID: 0}
@@ -119,6 +131,10 @@ Preset:
   - target: {fileID: 0}
     propertyPath: _size.<IsSubstractModeOn>k__BackingField
     value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _size.<Unit>k__BackingField
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _size.<Value>k__BackingField

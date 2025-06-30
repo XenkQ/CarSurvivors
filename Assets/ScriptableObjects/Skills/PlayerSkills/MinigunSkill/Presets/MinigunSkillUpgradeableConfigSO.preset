@@ -33,8 +33,12 @@ Preset:
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: _delayBetweenShootingBullets.<Unit>k__BackingField
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: _delayBetweenShootingBullets.<Value>k__BackingField
-    value: 1.4
+    value: 1.2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _delayBetweenShootingBullets._alwaysUseMinValueForUpgrade
@@ -42,7 +46,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _delayBetweenShootingBullets._floatMinMaxRange.<Min>k__BackingField
-    value: 1.4
+    value: 1.2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _delayBetweenShootingBullets._floatMinMaxRange.<Max>k__BackingField
@@ -58,6 +62,10 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _numberOfTurrets.<IsSubstractModeOn>k__BackingField
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _numberOfTurrets.<Unit>k__BackingField
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
@@ -86,7 +94,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _bulletTimeToArriveAtEndRangeMultiplier
-    value: 0.2
+    value: 0.1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _projectileConfig
@@ -94,6 +102,10 @@ Preset:
     objectReference: {fileID: 11400000, guid: b196fd0c1c6051341865604dd4fa9534, type: 2}
   - target: {fileID: 0}
     propertyPath: _startBulletDamage.<IsSubstractModeOn>k__BackingField
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startBulletDamage.<Unit>k__BackingField
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
@@ -125,6 +137,10 @@ Preset:
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: _startBulletSize.<Unit>k__BackingField
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: _startBulletSize.<Value>k__BackingField
     value: 1
     objectReference: {fileID: 0}
@@ -151,6 +167,10 @@ Preset:
   - target: {fileID: 0}
     propertyPath: _startShootingRange.<IsSubstractModeOn>k__BackingField
     value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startShootingRange.<Unit>k__BackingField
+    value: 3
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _startShootingRange.<Value>k__BackingField
@@ -181,8 +201,12 @@ Preset:
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: _startBulletMaxPiercing.<Unit>k__BackingField
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: _startBulletMaxPiercing.<Value>k__BackingField
-    value: 1
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _startBulletMaxPiercing._alwaysUseMinValueForUpgrade

@@ -1,6 +1,6 @@
 using Assets.ScriptableObjects.Player.Skills;
 using Assets.Scripts;
-using Assets.Scripts.CustomTypes;
+using Assets.Scripts.Skills;
 using UnityEngine;
 
 namespace Assets.ScriptableObjects.Skills.PlayerSkills.MinigunSkill

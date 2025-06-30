@@ -1,7 +1,8 @@
-﻿using System;
+﻿using Assets.Scripts.CustomTypes;
+using System;
 using UnityEngine;
 
-namespace Assets.Scripts.CustomTypes
+namespace Assets.Scripts.Skills
 {
     public interface IUpgradeableStat
     {
@@ -9,9 +10,13 @@ namespace Assets.Scripts.CustomTypes
 
         public bool IsSubstractModeOn { get; }
 
+        public StatsUnits Unit { get; }
+
         public void Upgrade(float upgradeValue);
 
         public float GetUpgradeValueBasedOnUpdateRange();
+
+        public float GetWhatPercentOfValueIsUpgradeValue(float upgradeValue);
 
         public event EventHandler OnUpgrade;
     }
@@ -21,6 +26,7 @@ namespace Assets.Scripts.CustomTypes
         where T : struct, IComparable<T>, IConvertible
     {
         [field: SerializeField] public bool IsSubstractModeOn { get; protected set; }
+        [field: SerializeField] public StatsUnits Unit { get; protected set; }
         [field: SerializeField] public T Value { get; protected set; }
         [SerializeField] protected bool _alwaysUseMinValueForUpgrade;
         public bool CanBeUpgraded { get; protected set; } = true;
@@ -63,8 +69,8 @@ namespace Assets.Scripts.CustomTypes
 
             float newValue = value + delta;
 
-            if ((IsSubstractModeOn && newValue <= maxValue)
-                || (!IsSubstractModeOn && newValue >= maxValue))
+            if (IsSubstractModeOn && newValue <= maxValue
+                || !IsSubstractModeOn && newValue >= maxValue)
             {
                 newValue = maxValue;
                 CanBeUpgraded = false;
@@ -80,14 +86,19 @@ namespace Assets.Scripts.CustomTypes
             return Convert.ToSingle(_rangeOfPossibleValuesForUpgrade.GetRandomValueInRange());
         }
 
-        private T FromFloatToType(float value)
+        public float GetWhatPercentOfValueIsUpgradeValue(float upgradeValue)
         {
-            return (T)Convert.ChangeType(value, typeof(T));
+            return (Convert.ToSingle(upgradeValue) / Convert.ToSingle(Value)) * 100f;
         }
 
         public abstract void OnBeforeSerialize();
 
         public abstract void OnAfterDeserialize();
+
+        private T FromFloatToType(float value)
+        {
+            return (T)Convert.ChangeType(value, typeof(T));
+        }
     }
 
     // For unity serialization we need to use nongeneric class.
