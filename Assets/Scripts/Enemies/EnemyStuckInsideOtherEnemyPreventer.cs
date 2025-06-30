@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Collisions;
+﻿using Assets.Scripts.LayerMasks;
+using Assets.Scripts.StatusAffectables;
 using UnityEngine;
 
 namespace Assets.Scripts.Enemies
@@ -6,38 +7,53 @@ namespace Assets.Scripts.Enemies
     [RequireComponent(typeof(EnemyMovementController), typeof(EnemyCollisionsController))]
     public class EnemyStuckInsideOtherEnemyPreventer : MonoBehaviour
     {
-        private const float PUSH_FROM_COLLISION_POWER = 1f;
+        [SerializeField] private float separationRadius = 1.2f;
+        [SerializeField] private float separationStrength = 0.5f;
+
         private IMovementController _enemyMovement;
-        private ICollisionsController _enemyCollisions;
+
+        private Collider _selfCollider;
 
         private void Awake()
         {
             _enemyMovement = GetComponent<IMovementController>();
-            _enemyCollisions = GetComponent<ICollisionsController>();
+            _selfCollider = GetComponent<Collider>();
         }
 
-        private void OnEnable()
+        private void Update()
         {
-            _enemyCollisions.OnCollisionWithOtherEnemy += EnemyCollisions_OnCollisionWithOtherEnemy; ;
-        }
+            Vector3 separation = Vector3.zero;
+            int neighborCount = 0;
 
-        private void OnDisable()
-        {
-            _enemyCollisions.OnCollisionWithOtherEnemy -= EnemyCollisions_OnCollisionWithOtherEnemy;
-        }
+            Collider[] hits = Physics.OverlapSphere(transform.position, separationRadius, EntityLayers.Enemy);
+            foreach (var hit in hits)
+            {
+                if (hit == _selfCollider) continue;
 
-        private void EnemyCollisions_OnCollisionWithOtherEnemy(object sender, CollisionEventArgs e)
-        {
-            PreventInterectingWithColliderByPush(e.Collider);
-        }
+                Vector3 away = transform.position - hit.transform.position;
+                away.y = 0f;
 
-        private void PreventInterectingWithColliderByPush(Collider collider)
-        {
-            float verticalPos = transform.position.y;
-            Vector3 otherEnemyDirection = (collider.transform.position - transform.position).normalized;
-            Vector3 pushDestination = transform.position + -otherEnemyDirection * PUSH_FROM_COLLISION_POWER;
-            pushDestination.y = verticalPos;
-            _enemyMovement.MoveToPosition(pushDestination);
+                float distance = away.magnitude;
+                if (distance > 0)
+                {
+                    separation += away.normalized / distance;
+                    neighborCount++;
+                }
+            }
+
+            if (neighborCount > 0)
+            {
+                separation /= neighborCount;
+                separation = separation.normalized * separationStrength;
+            }
+            else
+            {
+                separation = Vector3.zero;
+            }
+
+            separation.y = 0f;
+
+            _enemyMovement.SetSeparationVector(separation);
         }
     }
 }
