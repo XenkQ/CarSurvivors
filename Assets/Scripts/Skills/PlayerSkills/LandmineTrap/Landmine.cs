@@ -8,11 +8,14 @@ namespace Assets.Scripts.Skills.PlayerSkills.LandmineTrap
     public class Landmine : MonoBehaviour, IInitializableWithScriptableConfig<LandmineSkillUpgradeableConfigSO>
     {
         [SerializeField] private LandmineSkillUpgradeableConfigSO _config;
+        [SerializeField] private GameObject _landmineVisual;
+        [SerializeField] private VFXPlayer _deathVfxPlayer;
+        private bool _exploded;
         private bool _isInitialized;
 
         private void OnTriggerEnter(Collider other)
         {
-            if (1 << other.gameObject.layer != EntityLayers.Enemy)
+            if (_exploded || 1 << other.gameObject.layer != EntityLayers.Enemy)
             {
                 return;
             }
@@ -29,17 +32,43 @@ namespace Assets.Scripts.Skills.PlayerSkills.LandmineTrap
             }
         }
 
+        private void OnEnable()
+        {
+            _exploded = false;
+            _deathVfxPlayer.OnVFXFinished += DeathVfxPlayer_OnVFXFinished;
+        }
+
+        private void OnDisable()
+        {
+            _deathVfxPlayer.OnVFXFinished -= DeathVfxPlayer_OnVFXFinished;
+        }
+
+        private void DeathVfxPlayer_OnVFXFinished(object sender, System.EventArgs e)
+        {
+            Destroy(gameObject);
+        }
+
         private void DamageAllEnemiesInExplosionRadius()
         {
             Collider[] colliders = Physics.OverlapSphere(transform.position, _config.ExplosionRadius.Value, EntityLayers.Enemy, QueryTriggerInteraction.Collide);
+
+            if (colliders.Length == 0)
+            {
+                return;
+            }
+
+            _deathVfxPlayer.Play();
+
             foreach (Collider collider in colliders)
             {
                 if (collider.TryGetComponent(out IDamageable damageable))
                 {
                     damageable.TakeDamage(_config.Damage.Value);
-                    Destroy(gameObject);
                 }
             }
+
+            _exploded = true;
+            _landmineVisual.SetActive(false);
         }
 
         public void Initialize(LandmineSkillUpgradeableConfigSO config)
