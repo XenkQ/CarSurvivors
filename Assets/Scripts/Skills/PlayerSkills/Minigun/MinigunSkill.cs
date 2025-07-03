@@ -2,6 +2,7 @@
 using Assets.ScriptableObjects.Skills;
 using Assets.ScriptableObjects.Skills.PlayerSkills.MinigunSkill;
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Assets.Scripts.Skills.PlayerSkills.Minigun
@@ -10,7 +11,6 @@ namespace Assets.Scripts.Skills.PlayerSkills.Minigun
     {
         [field: SerializeField] public override SkillInfoSO SkillInfo { get; protected set; }
         [field: SerializeField] protected override MinigunSkillUpgradeableConfigSO _config { get; set; }
-        [SerializeField] private Projectile _turretsProejctile;
         [SerializeField] private Transform _projectilesParent;
         [SerializeField] private MinigunTurret[] _turrets;
         private IItemsWithScriptableConfigsActivator<MinigunTurret, TurretConfigSO> _turretsActivator;
@@ -30,18 +30,16 @@ namespace Assets.Scripts.Skills.PlayerSkills.Minigun
             StartCoroutine(SpawnBulletsProcess());
         }
 
-        private System.Collections.IEnumerator SpawnBulletsProcess()
+        private IEnumerator SpawnBulletsProcess()
         {
             while (true)
             {
                 foreach (MinigunTurret turret in _turretsActivator.GetInitialized())
                 {
-                    Projectile projectile = Instantiate(_turretsProejctile, turret.GunTip.position, turret.GunTip.rotation, _projectilesParent);
-                    projectile.OnLifeEnd += Projectile_OnLifeEnd;
-                    projectile.Initialize(_config.TurretConfig.ProjectileStatsSO);
+                    turret.Shoot();
                 }
 
-                yield return new WaitForSeconds(_config.DelayBetweenSpawningBullets.Value);
+                yield return new WaitForSeconds(_config.DelayBetweenShoots.Value);
             }
         }
 

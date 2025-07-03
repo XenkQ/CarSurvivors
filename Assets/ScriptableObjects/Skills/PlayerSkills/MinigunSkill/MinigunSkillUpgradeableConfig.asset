@@ -24,6 +24,17 @@ MonoBehaviour:
     _floatRangeOfPossibleValuesForUpgrade:
       <Min>k__BackingField: 0.2
       <Max>k__BackingField: 0.3
+  _range:
+    <IsSubstractModeOn>k__BackingField: 0
+    <Unit>k__BackingField: 3
+    <Value>k__BackingField: 6
+    _alwaysUseMinValueForUpgrade: 0
+    _floatMinMaxRange:
+      <Min>k__BackingField: 6
+      <Max>k__BackingField: 25
+    _floatRangeOfPossibleValuesForUpgrade:
+      <Min>k__BackingField: 6
+      <Max>k__BackingField: 9
   _numberOfTurrets:
     <IsSubstractModeOn>k__BackingField: 0
     <Unit>k__BackingField: 0
@@ -59,17 +70,6 @@ MonoBehaviour:
     _floatRangeOfPossibleValuesForUpgrade:
       <Min>k__BackingField: 0.2
       <Max>k__BackingField: 0.4
-  _startShootingRange:
-    <IsSubstractModeOn>k__BackingField: 0
-    <Unit>k__BackingField: 3
-    <Value>k__BackingField: 8
-    _alwaysUseMinValueForUpgrade: 0
-    _floatMinMaxRange:
-      <Min>k__BackingField: 8
-      <Max>k__BackingField: 22
-    _floatRangeOfPossibleValuesForUpgrade:
-      <Min>k__BackingField: 3
-      <Max>k__BackingField: 8
   _startBulletMaxPiercing:
     <IsSubstractModeOn>k__BackingField: 0
     <Unit>k__BackingField: 0

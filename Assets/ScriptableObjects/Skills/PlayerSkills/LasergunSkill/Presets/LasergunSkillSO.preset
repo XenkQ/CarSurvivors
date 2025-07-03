@@ -1,0 +1,168 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!181963792 &2655988077585873504
+Preset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: LasergunSkillSO
+  m_TargetType:
+    m_NativeTypeID: 114
+    m_ManagedTypePPtr: {fileID: 11500000, guid: 53767149079a13340ade9f7456f8c7dd, type: 3}
+    m_ManagedTypeFallback: 
+  m_Properties:
+  - target: {fileID: 0}
+    propertyPath: m_Enabled
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorHideFlags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorClassIdentifier
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _turretConfig
+    value: 
+    objectReference: {fileID: 11400000, guid: 9d39e915a695cd04eb9bcafa43aa53b4, type: 2}
+  - target: {fileID: 0}
+    propertyPath: _delayBetweenShoots.<IsSubstractModeOn>k__BackingField
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _delayBetweenShoots.<Unit>k__BackingField
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _delayBetweenShoots.<Value>k__BackingField
+    value: 8
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _delayBetweenShoots._alwaysUseMinValueForUpgrade
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _delayBetweenShoots._floatMinMaxRange.<Min>k__BackingField
+    value: 0.5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _delayBetweenShoots._floatMinMaxRange.<Max>k__BackingField
+    value: 8
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _delayBetweenShoots._floatRangeOfPossibleValuesForUpgrade.<Min>k__BackingField
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _delayBetweenShoots._floatRangeOfPossibleValuesForUpgrade.<Max>k__BackingField
+    value: 3.5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _numberOfTurrets.<IsSubstractModeOn>k__BackingField
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _numberOfTurrets.<Unit>k__BackingField
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _numberOfTurrets.<Value>k__BackingField
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _numberOfTurrets._alwaysUseMinValueForUpgrade
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _numberOfTurrets._byteMinMaxRange.<Min>k__BackingField
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _numberOfTurrets._byteMinMaxRange.<Max>k__BackingField
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _numberOfTurrets._byteRangeOfPossibleValuesForUpgrade.<Min>k__BackingField
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _numberOfTurrets._byteRangeOfPossibleValuesForUpgrade.<Max>k__BackingField
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _projectileConfig
+    value: 
+    objectReference: {fileID: 11400000, guid: 0f507d3152e570f49b1726235df06312, type: 2}
+  - target: {fileID: 0}
+    propertyPath: _startDamage.<IsSubstractModeOn>k__BackingField
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startDamage.<Unit>k__BackingField
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startDamage.<Value>k__BackingField
+    value: 6
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startDamage._alwaysUseMinValueForUpgrade
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startDamage._floatMinMaxRange.<Min>k__BackingField
+    value: 6
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startDamage._floatMinMaxRange.<Max>k__BackingField
+    value: 20
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startDamage._floatRangeOfPossibleValuesForUpgrade.<Min>k__BackingField
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startDamage._floatRangeOfPossibleValuesForUpgrade.<Max>k__BackingField
+    value: 6.5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startRange.<IsSubstractModeOn>k__BackingField
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startRange.<Unit>k__BackingField
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startRange.<Value>k__BackingField
+    value: 8
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startRange._alwaysUseMinValueForUpgrade
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startRange._floatMinMaxRange.<Min>k__BackingField
+    value: 6
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startRange._floatMinMaxRange.<Max>k__BackingField
+    value: 18
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startRange._floatRangeOfPossibleValuesForUpgrade.<Min>k__BackingField
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startRange._floatRangeOfPossibleValuesForUpgrade.<Max>k__BackingField
+    value: 7
+    objectReference: {fileID: 0}
+  m_ExcludedProperties: []
+  m_CoupledType:
+    m_NativeTypeID: 0
+    m_ManagedTypePPtr: {fileID: 0}
+    m_ManagedTypeFallback: 
+  m_CoupledProperties: []

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1537cd552ad35c24a93579aba40d47e2, type: 3}
-  m_Name: MinigunTurretSO
+  m_Name: LasergunTurretStats
   m_EditorClassIdentifier: 
-  _startRange: 6
-  <ProjectileStatsSO>k__BackingField: {fileID: 11400000, guid: b196fd0c1c6051341865604dd4fa9534, type: 2}
-  <RotationAngle>k__BackingField: 120
-  <RotationDuration>k__BackingField: 1.9
-  <SearchForTargetInterval>k__BackingField: 0
+  _startRange: 8
+  <ProjectileStatsSO>k__BackingField: {fileID: 11400000, guid: 0f507d3152e570f49b1726235df06312, type: 2}
+  <RotationAngle>k__BackingField: 360
+  <RotationDuration>k__BackingField: 0
+  <SearchForTargetInterval>k__BackingField: 0.5

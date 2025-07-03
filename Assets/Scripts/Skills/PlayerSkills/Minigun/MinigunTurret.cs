@@ -5,31 +5,18 @@ using DG.Tweening;
 
 namespace Assets.Scripts.Skills.PlayerSkills.Minigun
 {
-    public class MinigunTurret : MonoBehaviour, IInitializableWithScriptableConfig<TurretConfigSO>
+    public class MinigunTurret : Turret<TurretConfigSO>
     {
-        [field: SerializeField] public Transform GunTip { get; private set; }
-        [SerializeField] private Transform _visual;
         [SerializeField] private bool _inverseRotation;
-        private TurretConfigSO _config;
         private Tween _rotationTween;
-        private bool _isInitialized;
 
-        public void Initialize(TurretConfigSO config)
+        public override void Initialize(TurretConfigSO config)
         {
-            _config = config;
-
-            gameObject.SetActive(true);
+            base.Initialize(config);
 
             _visual.localRotation = Quaternion.Euler(0, (_inverseRotation ? _config.RotationAngle : -_config.RotationAngle) * 0.5f, 0);
 
-            _isInitialized = true;
-
             StartInYAngleRotation();
-        }
-
-        public bool IsInitialized()
-        {
-            return _isInitialized;
         }
 
         private void StartInYAngleRotation()
@@ -40,6 +27,23 @@ namespace Assets.Scripts.Skills.PlayerSkills.Minigun
             }
 
             _rotationTween = _visual.StartYAngleLocalRotationLoopTween(_config.RotationAngle, _config.RotationDuration, _inverseRotation);
+        }
+
+        public override void Shoot()
+        {
+            Projectile projectile = Instantiate(_turretsProejctile, _gunTip.position, _gunTip.rotation, _projectilesParent);
+            projectile.OnLifeEnd += Projectile_OnLifeEnd;
+            projectile.Initialize(_config.ProjectileStatsSO);
+        }
+
+        private void Projectile_OnLifeEnd(object sender, System.EventArgs e)
+        {
+            Projectile projectile = sender as Projectile;
+            if (projectile != null)
+            {
+                projectile.OnLifeEnd -= Projectile_OnLifeEnd;
+                Destroy(projectile.gameObject);
+            }
         }
     }
 }

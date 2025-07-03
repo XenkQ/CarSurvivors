@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53767149079a13340ade9f7456f8c7dd, type: 3}
+  m_Name: LasergunUpgradeableSkillConfig
+  m_EditorClassIdentifier: 
+  _turretConfig: {fileID: 11400000, guid: 9d39e915a695cd04eb9bcafa43aa53b4, type: 2}
+  _delayBetweenShoots:
+    <IsSubstractModeOn>k__BackingField: 1
+    <Unit>k__BackingField: 2
+    <Value>k__BackingField: 3
+    _alwaysUseMinValueForUpgrade: 0
+    _floatMinMaxRange:
+      <Min>k__BackingField: 0.5
+      <Max>k__BackingField: 3
+    _floatRangeOfPossibleValuesForUpgrade:
+      <Min>k__BackingField: 0.8
+      <Max>k__BackingField: 1.2
+  _numberOfTurrets:
+    <IsSubstractModeOn>k__BackingField: 0
+    <Unit>k__BackingField: 0
+    <Value>k__BackingField: 1
+    _alwaysUseMinValueForUpgrade: 1
+    _byteMinMaxRange:
+      <Min>k__BackingField: 1
+      <Max>k__BackingField: 2
+    _byteRangeOfPossibleValuesForUpgrade:
+      <Min>k__BackingField: 1
+      <Max>k__BackingField: 1
+  _projectileConfig: {fileID: 11400000, guid: 0f507d3152e570f49b1726235df06312, type: 2}
+  _startDamage:
+    <IsSubstractModeOn>k__BackingField: 0
+    <Unit>k__BackingField: 0
+    <Value>k__BackingField: 6
+    _alwaysUseMinValueForUpgrade: 0
+    _floatMinMaxRange:
+      <Min>k__BackingField: 6
+      <Max>k__BackingField: 20
+    _floatRangeOfPossibleValuesForUpgrade:
+      <Min>k__BackingField: 4
+      <Max>k__BackingField: 6.5
+  _startRange:
+    <IsSubstractModeOn>k__BackingField: 0
+    <Unit>k__BackingField: 3
+    <Value>k__BackingField: 8
+    _alwaysUseMinValueForUpgrade: 0
+    _floatMinMaxRange:
+      <Min>k__BackingField: 6
+      <Max>k__BackingField: 18
+    _floatRangeOfPossibleValuesForUpgrade:
+      <Min>k__BackingField: 4
+      <Max>k__BackingField: 7

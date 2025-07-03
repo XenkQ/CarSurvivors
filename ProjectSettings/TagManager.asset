@@ -7,6 +7,7 @@ TagManager:
   - TilesContainer
   - SkillsVisualPresenter
   - OtherCamera
+  - ProjectilesHolder
   layers:
   - Default
   - TransparentFX

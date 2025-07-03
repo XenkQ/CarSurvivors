@@ -19,28 +19,24 @@ namespace Assets.Scripts.Skills
         protected abstract TUpgradeableConfig _config { get; set; }
         public ISkillUpgradeableStatsConfig Config => _config;
 
-        protected bool _isInitialized;
-
-        protected virtual void OnEnable()
-        {
-            if (gameObject.activeSelf)
-            {
-                _isInitialized = true;
-            }
-        }
-
         public virtual bool CanBeUgraded()
         {
-            return _config != null && _config.GetUpgradeableStatsThatCanBeUpgraded().Count() > 0;
+            return _config is not null && _config.GetUpgradeableStatsThatCanBeUpgraded().Count() > 0;
         }
 
         public virtual void Initialize()
         {
-            gameObject.SetActive(true);
-            _isInitialized = true;
+            if (_config is not null)
+            {
+                gameObject.SetActive(true);
+            }
+            else
+            {
+                Debug.LogWarning($"Skill {SkillInfo?.name} is not initialized. Please assign a valid config.", this);
+            }
         }
 
         public virtual bool IsInitialized()
-            => _isInitialized;
+            => gameObject.activeSelf && _config is not null;
     }
 }

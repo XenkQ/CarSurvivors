@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3513241825416687479}
   - component: {fileID: 2714479283582284822}
   m_Layer: 0
-  m_Name: Turret
+  m_Name: MinigunTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,9 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b146d5e5715e00a45b6af1b43cc4abd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <GunTip>k__BackingField: {fileID: 6387729289892807497}
+  <_config>k__BackingField: {fileID: 11400000, guid: 09a2094f8392219419795ba6f67d3425, type: 2}
+  _gunTip: {fileID: 6387729289892807497}
   _visual: {fileID: 8980045539191705095}
-  _stats: {fileID: 0}
+  _turretsProejctile: {fileID: 4901841786317894366, guid: 19270b55571e60c4489d44d93aa14239, type: 3}
   _inverseRotation: 0
 --- !u!1 &2839812882640289078
 GameObject:
