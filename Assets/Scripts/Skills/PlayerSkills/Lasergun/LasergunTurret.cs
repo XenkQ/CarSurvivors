@@ -95,7 +95,7 @@ public class LasergunTurret : Turret<TurretConfigSO>
             {
                 bool isBehindObstacle = Physics.Linecast(
                     _gunTip.position,
-                    target.ClosestPoint(_gunTip.position),
+                    target.ClosestPoint(_gunTip.transform.position),
                     TerrainLayers.All
                 );
 
@@ -133,8 +133,10 @@ public class LasergunTurret : Turret<TurretConfigSO>
 
     private void HandleRotation()
     {
-        if (_currentTarget == null)
+        if (_currentTarget is null)
+        {
             return;
+        }
 
         Vector3 targetPosition = _currentTarget.transform.position;
         Vector3 turretPosition = transform.position;
@@ -145,14 +147,14 @@ public class LasergunTurret : Turret<TurretConfigSO>
         );
 
         if (direction.sqrMagnitude < 0.0001f)
+        {
             return;
+        }
 
         Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
 
-        // Calculate rotation speed in degrees per second
-        float rotationSpeed = 360f / Mathf.Max(_config.RotationDuration, 0.0001f);
+        float rotationSpeed = 1f / Mathf.Max(_config.RotationDuration, 0.0001f);
 
-        // Smoothly rotate towards the target
         transform.rotation = Quaternion.RotateTowards(
             transform.rotation,
             targetRotation,
