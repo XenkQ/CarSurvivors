@@ -79,6 +79,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8313d9e6a9e7bf24ba0df699a35ec0d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  separationRadius: 1.2
+  separationStrength: 0.6
 --- !u!114 &5328113168761846994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,7 +106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _collisionCheckDelay: 0.05
-  _collisionRadius: 0.8
+  _collisionRadius: 0.6
 --- !u!114 &347190357356235707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,7 +132,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7015da4bf49f5d0438c4e6100d49f7d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackRange: 1
+  _attackArcAngle: 83
+  _attackRange: 0.75
 --- !u!65 &4176904749440768749
 BoxCollider:
   m_ObjectHideFlags: 0

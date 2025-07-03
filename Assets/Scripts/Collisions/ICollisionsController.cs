@@ -1,12 +1,11 @@
-﻿using Assets.Scripts.Enemies;
-using System;
+﻿using System;
 
 namespace Assets.Scripts.Collisions
 {
     public interface ICollisionsController
     {
-        event EventHandler<CollisionEventArgs> OnCollisionWithOtherEnemy;
+        public event EventHandler<CollisionEventArgs> OnCollisionWithOtherEnemy;
 
-        event EventHandler<CollisionEventArgs> OnCollisionWithPlayer;
+        public event EventHandler<CollisionEventArgs> OnCollisionWithPlayer;
     }
 }

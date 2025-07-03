@@ -23,6 +23,11 @@ namespace Assets.Scripts.Enemies
 
         private Tween _movementUnrelatedToSpeedTween;
 
+        private Vector3 _externalSeparation = Vector3.zero;
+
+        private float _movementDelayAfterAttack = 0.2f;
+        private float _currentMovementDelayAfterAttack;
+
         private void Awake()
         {
             _enemy = GetComponent<Enemy>();
@@ -35,11 +40,17 @@ namespace Assets.Scripts.Enemies
 
         private void OnEnable()
         {
+            _enemy.EnemyAnimator.OnAttackAnimationEnd += EnemyAnimator_OnAttackAnimationEnd;
+
             _verticalPosOffset = transform.position.y;
+
+            _currentMovementDelayAfterAttack = 0;
         }
 
         private void OnDisable()
         {
+            _enemy.EnemyAnimator.OnAttackAnimationEnd -= EnemyAnimator_OnAttackAnimationEnd;
+
             transform.position = new Vector3(0, _verticalPosOffset, 0);
         }
 
@@ -54,17 +65,20 @@ namespace Assets.Scripts.Enemies
         private void Update()
         {
             bool isStunned = _isStunable && _stunableSelf.StunController.IsStunned;
-            if (!isStunned && !_enemy.EnemyAnimator.IsPlayingAttackAnimation)
+
+            bool canMoveOnGrid = _movementUnrelatedToSpeedTween is null
+                && !isStunned
+                && !_enemy.EnemyAnimator.IsPlayingAttackAnimation
+                && _currentMovementDelayAfterAttack <= 0;
+
+            if (canMoveOnGrid)
             {
                 _lastPos = transform.position;
+
                 Vector3? movement;
                 if (_isMovingToPositionUnrelatedToGrid)
                 {
                     movement = MoveToPosition(_currentMovementPositionUnrelatedToGrid);
-                    if (movement.HasValue)
-                    {
-                        RotateTowardsMovementDirection(movement.Value);
-                    }
                 }
                 else
                 {
@@ -76,31 +90,20 @@ namespace Assets.Scripts.Enemies
                     RotateTowardsMovementDirection(movement.Value);
                 }
             }
+            else if (_currentMovementDelayAfterAttack > 0)
+            {
+                _currentMovementDelayAfterAttack -= Time.deltaTime;
+            }
+        }
+
+        public void SetSeparationVector(Vector3 separation)
+        {
+            _externalSeparation = separation;
         }
 
         public float GetCurrentMovementSpeed()
         {
             return Vector3.Distance(transform.position, _lastPos) / Time.deltaTime;
-        }
-
-        public Vector3? MoveToPosition(Vector3 pos)
-        {
-            bool isOnPosition = Vector3.Distance(transform.position, pos) <= MOVING_TO_POSITION_ACCURACY;
-            if (_isMovingToPositionUnrelatedToGrid && !isOnPosition)
-            {
-                return Move(pos);
-            }
-            else if (isOnPosition)
-            {
-                _isMovingToPositionUnrelatedToGrid = false;
-                return null;
-            }
-            else
-            {
-                _currentMovementPositionUnrelatedToGrid = pos;
-                _isMovingToPositionUnrelatedToGrid = true;
-                return Move(pos);
-            }
         }
 
         public Tween MoveToPositionInTimeIgnoringSpeed(Vector3 pos, float time)
@@ -119,7 +122,33 @@ namespace Assets.Scripts.Enemies
                 {
                     _isMovingToPositionUnrelatedToGrid = false;
                     _movementUnrelatedToSpeedTween = null;
+                    _externalSeparation = Vector3.zero;
                 });
+        }
+
+        private void EnemyAnimator_OnAttackAnimationEnd(object sender, System.EventArgs e)
+        {
+            _currentMovementDelayAfterAttack = _movementDelayAfterAttack;
+        }
+
+        private Vector3? MoveToPosition(Vector3 pos)
+        {
+            bool isOnPosition = Vector3.Distance(transform.position, pos) <= MOVING_TO_POSITION_ACCURACY;
+            if (_isMovingToPositionUnrelatedToGrid && !isOnPosition)
+            {
+                return Move(pos);
+            }
+            else if (isOnPosition)
+            {
+                _isMovingToPositionUnrelatedToGrid = false;
+                return null;
+            }
+            else
+            {
+                _currentMovementPositionUnrelatedToGrid = pos;
+                _isMovingToPositionUnrelatedToGrid = true;
+                return Move(pos);
+            }
         }
 
         private Vector3 Move(Vector3 pos)
@@ -145,8 +174,12 @@ namespace Assets.Scripts.Enemies
         private Vector3 MoveOnFlowFieldGrid()
         {
             Vector3 gridDir = GetMoveDirectionBasedOnCurrentCell();
-            Vector3 movement = _enemy.Config.MovementSpeed * Time.deltaTime * gridDir;
+            Vector3 moveDir = (gridDir + _externalSeparation).normalized;
+            Vector3 movement = _enemy.Config.MovementSpeed * Time.deltaTime * moveDir;
             transform.position += movement;
+
+            _externalSeparation = Vector3.zero;
+
             return movement;
         }
 
