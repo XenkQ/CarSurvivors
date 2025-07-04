@@ -1,6 +1,6 @@
 using Assets.ScriptableObjects.Player.Skills;
-using Assets.Scripts;
-using Assets.Scripts.Skills;
+using Assets.Scripts.Stats;
+using Assets.Scripts.Utils;
 using UnityEngine;
 
 namespace Assets.ScriptableObjects.Skills.PlayerSkills.LandmineSkill
@@ -14,11 +14,13 @@ namespace Assets.ScriptableObjects.Skills.PlayerSkills.LandmineSkill
         [SerializeField] private FloatUpgradeableStat _explosionRadius;
         [SerializeField] private FloatUpgradeableStat _damage;
         [SerializeField] private FloatUpgradeableStat _size;
+        [SerializeField] private FloatUpgradeableStat _knockback;
 
         public FloatUpgradeableStat SpawnCooldown { get; private set; }
         public FloatUpgradeableStat ExplosionRadius { get; private set; }
         public FloatUpgradeableStat Damage { get; private set; }
         public FloatUpgradeableStat Size { get; private set; }
+        public FloatUpgradeableStat Knockback { get; private set; }
 
         private void OnEnable()
         {
@@ -26,6 +28,7 @@ namespace Assets.ScriptableObjects.Skills.PlayerSkills.LandmineSkill
             ExplosionRadius = DeepCopyUtility.DeepCopy(_explosionRadius);
             Damage = DeepCopyUtility.DeepCopy(_damage);
             Size = DeepCopyUtility.DeepCopy(_size);
+            Knockback = DeepCopyUtility.DeepCopy(_knockback);
         }
     }
 }

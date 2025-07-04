@@ -1,4 +1,5 @@
 ﻿using Assets.ScriptableObjects.Skills;
+using Assets.Scripts.Initializers;
 
 namespace Assets.Scripts.Skills
 {

@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.Utils
 {
     public static class DeepCopyUtility
     {

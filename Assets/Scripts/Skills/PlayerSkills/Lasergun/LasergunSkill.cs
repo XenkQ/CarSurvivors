@@ -1,6 +1,6 @@
 using Assets.ScriptableObjects;
 using Assets.ScriptableObjects.Skills;
-using Assets.Scripts;
+using Assets.Scripts.Activators;
 using Assets.Scripts.Skills;
 using UnityEngine;
 

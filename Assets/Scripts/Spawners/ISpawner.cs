@@ -1,6 +1,6 @@
 using System;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.Spawners
 {
     public interface ISpawner
     {

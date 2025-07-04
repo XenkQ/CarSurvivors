@@ -1,6 +1,7 @@
 ﻿using Assets.ScriptableObjects;
 using Assets.ScriptableObjects.Skills;
 using Assets.ScriptableObjects.Skills.PlayerSkills.MinigunSkill;
+using Assets.Scripts.Activators;
 using System;
 using System.Collections;
 using UnityEngine;

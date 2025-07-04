@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.Providers;
+using System;
 
 namespace Assets.Scripts
 {
