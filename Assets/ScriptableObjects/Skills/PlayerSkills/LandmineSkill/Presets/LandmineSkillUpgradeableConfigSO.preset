@@ -50,11 +50,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _spawnCooldown._floatMinMaxRange.<Min>k__BackingField
-    value: 8
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _spawnCooldown._floatMinMaxRange.<Max>k__BackingField
-    value: 1
+    value: 8
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _spawnCooldown._floatRangeOfPossibleValuesForUpgrade.<Min>k__BackingField
@@ -159,6 +159,38 @@ Preset:
   - target: {fileID: 0}
     propertyPath: _size._floatRangeOfPossibleValuesForUpgrade.<Max>k__BackingField
     value: 1.5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _knockback.<IsSubstractModeOn>k__BackingField
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _knockback.<Unit>k__BackingField
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _knockback.<Value>k__BackingField
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _knockback._alwaysUseMinValueForUpgrade
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _knockback._floatMinMaxRange.<Min>k__BackingField
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _knockback._floatMinMaxRange.<Max>k__BackingField
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _knockback._floatRangeOfPossibleValuesForUpgrade.<Min>k__BackingField
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _knockback._floatRangeOfPossibleValuesForUpgrade.<Max>k__BackingField
+    value: 0
     objectReference: {fileID: 0}
   m_ExcludedProperties: []
   m_CoupledType:

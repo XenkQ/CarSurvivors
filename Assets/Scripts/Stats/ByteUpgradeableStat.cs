@@ -30,7 +30,6 @@ namespace Assets.Scripts.Stats
 
             MinMaxRange = _byteMinMaxRange;
             _rangeOfPossibleValuesForUpgrade = _byteRangeOfPossibleValuesForUpgrade;
-            CanBeUpgraded = true;
         }
     }
 }

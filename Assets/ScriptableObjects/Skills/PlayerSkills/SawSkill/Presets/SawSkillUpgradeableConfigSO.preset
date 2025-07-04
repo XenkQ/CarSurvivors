@@ -37,12 +37,20 @@ Preset:
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: _knockbackPower.<Unit>k__BackingField
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: _knockbackPower.<Value>k__BackingField
     value: 4
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _knockbackPower._alwaysUseMinValueForUpgrade
     value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _knockbackPower.<CanBeUpgraded>k__BackingField
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _knockbackPower._floatMinMaxRange.<Min>k__BackingField
@@ -65,12 +73,20 @@ Preset:
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: _damage.<Unit>k__BackingField
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: _damage.<Value>k__BackingField
     value: 8
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _damage._alwaysUseMinValueForUpgrade
     value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _damage.<CanBeUpgraded>k__BackingField
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _damage._floatMinMaxRange.<Min>k__BackingField
@@ -93,11 +109,19 @@ Preset:
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: _numberOfSaws.<Unit>k__BackingField
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: _numberOfSaws.<Value>k__BackingField
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _numberOfSaws._alwaysUseMinValueForUpgrade
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _numberOfSaws.<CanBeUpgraded>k__BackingField
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}

@@ -72,6 +72,11 @@ namespace Assets.Scripts.LevelSystem
             {
                 AddExp(220f);
             }
+
+            if (Keyboard.current.tKey.wasPressedThisFrame)
+            {
+                AddExp(22000000000f);
+            }
         }
 
         public void AddExp(float value)

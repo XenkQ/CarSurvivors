@@ -16,19 +16,21 @@ MonoBehaviour:
   _delayBetweenShoots:
     <IsSubstractModeOn>k__BackingField: 1
     <Unit>k__BackingField: 2
-    <Value>k__BackingField: 3
+    <Value>k__BackingField: 2
     _alwaysUseMinValueForUpgrade: 0
+    <CanBeUpgraded>k__BackingField: 1
     _floatMinMaxRange:
-      <Min>k__BackingField: 0.5
-      <Max>k__BackingField: 3
+      <Min>k__BackingField: 2
+      <Max>k__BackingField: 0.2
     _floatRangeOfPossibleValuesForUpgrade:
-      <Min>k__BackingField: 0.8
-      <Max>k__BackingField: 1.2
+      <Min>k__BackingField: 0.2
+      <Max>k__BackingField: 0.6
   _numberOfTurrets:
     <IsSubstractModeOn>k__BackingField: 0
     <Unit>k__BackingField: 0
     <Value>k__BackingField: 1
     _alwaysUseMinValueForUpgrade: 1
+    <CanBeUpgraded>k__BackingField: 1
     _byteMinMaxRange:
       <Min>k__BackingField: 1
       <Max>k__BackingField: 2
@@ -41,6 +43,7 @@ MonoBehaviour:
     <Unit>k__BackingField: 0
     <Value>k__BackingField: 6
     _alwaysUseMinValueForUpgrade: 0
+    <CanBeUpgraded>k__BackingField: 1
     _floatMinMaxRange:
       <Min>k__BackingField: 6
       <Max>k__BackingField: 20
@@ -52,8 +55,9 @@ MonoBehaviour:
     <Unit>k__BackingField: 3
     <Value>k__BackingField: 8
     _alwaysUseMinValueForUpgrade: 0
+    <CanBeUpgraded>k__BackingField: 1
     _floatMinMaxRange:
-      <Min>k__BackingField: 6
+      <Min>k__BackingField: 8
       <Max>k__BackingField: 18
     _floatRangeOfPossibleValuesForUpgrade:
       <Min>k__BackingField: 4

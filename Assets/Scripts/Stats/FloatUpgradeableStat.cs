@@ -30,7 +30,6 @@ namespace Assets.Scripts.Stats
 
             MinMaxRange = _floatMinMaxRange;
             _rangeOfPossibleValuesForUpgrade = _floatRangeOfPossibleValuesForUpgrade;
-            CanBeUpgraded = true;
         }
     }
 }

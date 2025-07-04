@@ -30,7 +30,7 @@ namespace Assets.Scripts.Stats
         [field: SerializeField] public StatsUnits Unit { get; protected set; }
         [field: SerializeField] public T Value { get; protected set; }
         [SerializeField] protected bool _alwaysUseMinValueForUpgrade;
-        public bool CanBeUpgraded { get; protected set; } = true;
+        [field: SerializeField, HideInInspector] public bool CanBeUpgraded { get; protected set; } = true;
         public ValueRange<T> MinMaxRange { get; protected set; }
         protected ValueRange<T> _rangeOfPossibleValuesForUpgrade;
 
@@ -97,44 +97,38 @@ namespace Assets.Scripts.Stats
 
         public virtual void OnAfterDeserialize()
         {
-            if (IsValueBelowMinValue(Value, MinMaxRange.Min))
+            float valueFloat = Convert.ToSingle(Value);
+            float maxValueFloat = Convert.ToSingle(MinMaxRange.Max);
+            float minValueFloat = Convert.ToSingle(MinMaxRange.Min);
+
+            if (IsValueExceedingMaxValue(valueFloat, maxValueFloat))
+            {
+                Value = MinMaxRange.Max;
+            }
+
+            if (IsValueExceedingMinValue(valueFloat, minValueFloat))
             {
                 Value = MinMaxRange.Min;
             }
 
-            if (IsValueExceedingOrEqualMaxValue(Value, MinMaxRange.Max))
-            {
-                Value = MinMaxRange.Max;
-                CanBeUpgraded = false;
-            }
-        }
-
-        private bool IsValueExceedingOrEqualMaxValue(T value, T maxValue)
-        {
-            float valueFloat = Convert.ToSingle(value);
-            float maxValueFloat = Convert.ToSingle(maxValue);
-
-            return IsValueExceedingOrEqualMaxValue(valueFloat, maxValueFloat);
+            CanBeUpgraded = !Mathf.Approximately(minValueFloat, maxValueFloat);
         }
 
         private bool IsValueExceedingOrEqualMaxValue(float value, float maxValue)
         {
-            return IsSubstractModeOn && value <= maxValue
-                || !IsSubstractModeOn && value >= maxValue;
+            return IsValueExceedingMaxValue(value, maxValue) || Mathf.Approximately(value, maxValue);
         }
 
-        private bool IsValueBelowMinValue(T value, T minValue)
+        private bool IsValueExceedingMaxValue(float value, float maxValue)
         {
-            float valueFloat = Convert.ToSingle(value);
-            float minValueFloat = Convert.ToSingle(minValue);
-
-            return IsValueBelowMinValue(valueFloat, minValueFloat);
+            return IsSubstractModeOn && value < maxValue
+                || !IsSubstractModeOn && value > maxValue;
         }
 
-        private bool IsValueBelowMinValue(float value, float minValue)
+        private bool IsValueExceedingMinValue(float value, float minValue)
         {
-            return IsSubstractModeOn && value >= minValue
-                || !IsSubstractModeOn && value <= minValue;
+            return IsSubstractModeOn && value > minValue
+                || !IsSubstractModeOn && value < minValue;
         }
 
         private T FromFloatToType(float value)
