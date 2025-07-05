@@ -69,7 +69,7 @@ namespace Assets.Scripts.Skills.PlayerSkills.Saw
                 {
                     knockable.ApplyKnockBack(
                         transform.forward,
-                        _config.KnockbackPower.Value,
+                        _config.KnockbackRange.Value,
                         _config.TimeToArriveAtKnockbackLocation);
                 }
             }

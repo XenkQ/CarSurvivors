@@ -12,17 +12,16 @@ namespace Assets.Scripts.Skills.PlayerSkills.LandmineTrap
         [SerializeField] private LandmineSkillUpgradeableConfigSO _config;
         [SerializeField] private GameObject _landmineVisual;
         [SerializeField] private VFXPlayer _deathVfxPlayer;
-        private bool _exploded;
         private bool _isInitialized;
 
         private void OnTriggerEnter(Collider other)
         {
-            if (_exploded || 1 << other.gameObject.layer != EntityLayers.Enemy)
+            if (!_landmineVisual.activeSelf || 1 << other.gameObject.layer != EntityLayers.Enemy)
             {
                 return;
             }
 
-            DamageAllEnemiesInExplosionRadius();
+            Explode();
         }
 
         private void OnDrawGizmos()
@@ -36,8 +35,8 @@ namespace Assets.Scripts.Skills.PlayerSkills.LandmineTrap
 
         private void OnEnable()
         {
-            _exploded = false;
             _deathVfxPlayer.OnVFXFinished += DeathVfxPlayer_OnVFXFinished;
+            _landmineVisual.SetActive(true);
         }
 
         private void OnDisable()
@@ -50,7 +49,7 @@ namespace Assets.Scripts.Skills.PlayerSkills.LandmineTrap
             Destroy(gameObject);
         }
 
-        private void DamageAllEnemiesInExplosionRadius()
+        private void Explode()
         {
             Collider[] colliders = Physics.OverlapSphere(transform.position, _config.ExplosionRadius.Value, EntityLayers.Enemy, QueryTriggerInteraction.Collide);
 
@@ -63,14 +62,31 @@ namespace Assets.Scripts.Skills.PlayerSkills.LandmineTrap
 
             foreach (Collider collider in colliders)
             {
-                if (collider.TryGetComponent(out IDamageable damageable))
-                {
-                    damageable.TakeDamage(_config.Damage.Value);
-                }
+                ApplyDamageOnDamageableEntity(collider);
+
+                ApplyExplosionKnockbackOnKnockableEntity(collider);
             }
 
-            _exploded = true;
             _landmineVisual.SetActive(false);
+        }
+
+        private void ApplyDamageOnDamageableEntity(Collider collider)
+        {
+            if (collider.TryGetComponent(out IDamageable damageable))
+            {
+                damageable.TakeDamage(_config.Damage.Value);
+            }
+        }
+
+        private void ApplyExplosionKnockbackOnKnockableEntity(Collider collider)
+        {
+            if (collider.TryGetComponent(out IKnockable knockable))
+            {
+                Vector3 dir = (collider.transform.position - transform.position).normalized;
+                float timeToArriveAtLocation = 1f / _config.KnockbackRange.Value;
+
+                knockable.ApplyKnockBack(dir, _config.KnockbackRange.Value, timeToArriveAtLocation);
+            }
         }
 
         public void Initialize(LandmineSkillUpgradeableConfigSO config)

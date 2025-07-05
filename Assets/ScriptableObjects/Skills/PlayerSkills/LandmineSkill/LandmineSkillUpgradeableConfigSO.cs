@@ -8,19 +8,17 @@ namespace Assets.ScriptableObjects.Skills.PlayerSkills.LandmineSkill
     [CreateAssetMenu(fileName = "LandmineSkillSO", menuName = "Scriptable Objects/Skills/LandmineSkillSO")]
     public class LandmineSkillUpgradeableConfigSO : SkillUpgradeableStatsConfig
     {
-        [field: SerializeField] public float ThrowLandmineRange { get; private set; }
-        [field: SerializeField] public float TimeToReachThrowRangeEnd { get; private set; }
         [SerializeField] private FloatUpgradeableStat _spawnCooldown;
         [SerializeField] private FloatUpgradeableStat _explosionRadius;
         [SerializeField] private FloatUpgradeableStat _damage;
         [SerializeField] private FloatUpgradeableStat _size;
-        [SerializeField] private FloatUpgradeableStat _knockback;
+        [SerializeField] private FloatUpgradeableStat _knockbackRange;
 
         public FloatUpgradeableStat SpawnCooldown { get; private set; }
         public FloatUpgradeableStat ExplosionRadius { get; private set; }
         public FloatUpgradeableStat Damage { get; private set; }
         public FloatUpgradeableStat Size { get; private set; }
-        public FloatUpgradeableStat Knockback { get; private set; }
+        public FloatUpgradeableStat KnockbackRange { get; private set; }
 
         private void OnEnable()
         {
@@ -28,7 +26,7 @@ namespace Assets.ScriptableObjects.Skills.PlayerSkills.LandmineSkill
             ExplosionRadius = DeepCopyUtility.DeepCopy(_explosionRadius);
             Damage = DeepCopyUtility.DeepCopy(_damage);
             Size = DeepCopyUtility.DeepCopy(_size);
-            Knockback = DeepCopyUtility.DeepCopy(_knockback);
+            KnockbackRange = DeepCopyUtility.DeepCopy(_knockbackRange);
         }
     }
 }
