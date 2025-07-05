@@ -5,49 +5,31 @@ using UnityEngine;
 
 namespace Assets.Scripts.Skills
 {
-    public sealed class SkillsRegistry : MonoBehaviour
+    public interface ISkillsRegistry
+    {
+        public IReadOnlyList<ISkillBase> Skills { get; }
+        public byte UninitializedSkillsCount { get; }
+
+        public IEnumerable<ISkillBase> GetUninitializedSkills();
+
+        public ISkillBase InitializeSkill(ISkillBase skill);
+    }
+
+    public class SkillsRegistry : MonoBehaviour, ISkillsRegistry
     {
         public IReadOnlyList<ISkillBase> Skills { get; private set; }
-        public static SkillsRegistry Instance { get; private set; }
         public byte UninitializedSkillsCount { get; private set; }
-
-        private SkillsRegistry()
-        { }
 
         private void Awake()
         {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-
             RegisterAllSkills();
         }
 
-        public void Start()
+        private void Start()
         {
             UninitializedSkillsCount = (byte)GetUninitializedSkills().Count();
 
             InitializeSkill(Skills[0]);
-        }
-
-        private void RegisterAllSkills()
-        {
-            var skills = new List<ISkillBase>();
-
-            foreach (Transform skillChild in transform)
-            {
-                if (skillChild.gameObject.TryGetComponent(out ISkillBase skill))
-                {
-                    skills.Add(skill);
-                }
-            }
-
-            Skills = skills;
         }
 
         public IEnumerable<ISkillBase> GetUninitializedSkills()
@@ -74,6 +56,21 @@ namespace Assets.Scripts.Skills
             }
 
             return null;
+        }
+
+        private void RegisterAllSkills()
+        {
+            var skills = new List<ISkillBase>();
+
+            foreach (Transform skillChild in transform)
+            {
+                if (skillChild.gameObject.TryGetComponent(out ISkillBase skill))
+                {
+                    skills.Add(skill);
+                }
+            }
+
+            Skills = skills;
         }
     }
 }

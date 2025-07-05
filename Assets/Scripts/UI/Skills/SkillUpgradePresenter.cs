@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Extensions;
+using Assets.Scripts.Player;
 using Assets.Scripts.Skills;
 using Assets.Scripts.Skills.ObjectsImpactingSkills.Crate;
 using Assets.Scripts.Stats;
@@ -46,13 +47,22 @@ namespace Assets.Scripts.UI.Skills
 
         private void ShowRandomSkillInInitializationOrUpgradeSection_OnEvent(object sender, System.EventArgs e)
         {
-            if (_skillsQueuedForInitialization.Count < SkillsRegistry.Instance.UninitializedSkillsCount)
+            ISkillsRegistry skillsRegistry = PlayerManager.Instance.SkillsRegistry;
+            if (_skillsQueuedForInitialization.Count < skillsRegistry.UninitializedSkillsCount)
             {
-                _skillsQueuedForInitialization.Enqueue(RandomUninitializedSkillsInitializator.Initialize());
+                ISkillBase skill = RandomUninitializedSkillsInitializator.Initialize(skillsRegistry);
+                if (skill is not null)
+                {
+                    _skillsQueuedForInitialization.Enqueue(skill);
+                }
             }
             else
             {
-                _skillsQueuedForUpgrade.Enqueue(RandomUpgradeableSkillFinder.Find());
+                IUpgradeableSkill upgradeableSkill = RandomUpgradeableSkillFinder.Find(skillsRegistry);
+                if (upgradeableSkill is not null)
+                {
+                    _skillsQueuedForUpgrade.Enqueue(RandomUpgradeableSkillFinder.Find(skillsRegistry));
+                }
             }
 
             if (!_isShowingAnySection)
@@ -71,15 +81,19 @@ namespace Assets.Scripts.UI.Skills
             if (_skillsQueuedForInitialization.Count > 0)
             {
                 ISkillBase skill = _skillsQueuedForInitialization.Dequeue();
-                SkillsRegistry.Instance.InitializeSkill(skill);
+                PlayerManager.Instance.SkillsRegistry.InitializeSkill(skill);
                 ShowNewSkillSection(skill);
                 GameTime.PauseTime();
             }
             else if (_skillsQueuedForUpgrade.Count > 0)
             {
-                IUpgradeableSkill skill = _skillsQueuedForUpgrade.Dequeue();
-                ShowStatsUpgradeSection(skill);
-                GameTime.PauseTime();
+                IUpgradeableSkill skill = GetQueuedUpgradeableSkillThatIsStillReadyForUpgrade();
+
+                if (skill is not null)
+                {
+                    ShowStatsUpgradeSection(skill);
+                    GameTime.PauseTime();
+                }
             }
             else
             {
@@ -99,6 +113,22 @@ namespace Assets.Scripts.UI.Skills
             _newSkillSection.SetActive(true);
         }
 
+        private IUpgradeableSkill GetQueuedUpgradeableSkillThatIsStillReadyForUpgrade()
+        {
+            IUpgradeableSkill skill = null;
+
+            while (_skillsQueuedForUpgrade.Count > 0)
+            {
+                skill = _skillsQueuedForUpgrade.Dequeue();
+                if (skill.CanBeUgraded())
+                {
+                    break;
+                }
+            }
+
+            return skill;
+        }
+
         private void ShowStatsUpgradeSection(IUpgradeableSkill upgradeableStats)
         {
             List<ClickableButtonData> skillStatsUpgradeButtonsData = new List<ClickableButtonData>();
@@ -108,13 +138,16 @@ namespace Assets.Scripts.UI.Skills
                 float upgradeValue = nameUpgradeableStatPair.UpgradeableStat.GetUpgradeValueBasedOnUpdateRange();
                 IUpgradeableStat upgradeableStat = nameUpgradeableStatPair.UpgradeableStat;
 
+                string changeInfo = upgradeableStat.IsSubstractModeOn ? "Decrease" : "Increase";
+                string statName = nameUpgradeableStatPair.Name.PascalCaseToWords();
+                string statUnit = upgradeableStat.Unit.ToDisplayString();
+                float statValue = upgradeableStat.Unit == StatsUnits.Percentage
+                    ? upgradeableStat.GetWhatPercentOfValueIsUpgradeValue(upgradeValue)
+                    : upgradeValue;
+
                 skillStatsUpgradeButtonsData.Add(new ClickableButtonData
                 {
-                    Text = (upgradeableStat.IsSubstractModeOn ? "Decrease" : "Increase")
-                        + $" {nameUpgradeableStatPair.Name.PascalCaseToWords()} by "
-                        + (upgradeableStat.Unit == StatsUnits.Percentage ?
-                            upgradeableStat.GetWhatPercentOfValueIsUpgradeValue(upgradeValue) : upgradeValue)
-                        + upgradeableStat.Unit.ToDisplayString(),
+                    Text = $"{changeInfo} {statName} by {statValue}{statUnit}",
 
                     OnClick = () =>
                     {

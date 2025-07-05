@@ -21,7 +21,7 @@ namespace Assets.Scripts.Skills
 
         public virtual bool CanBeUgraded()
         {
-            return _config is not null && _config.GetUpgradeableStatsThatCanBeUpgraded().Count() > 0;
+            return _config is not null && _config.GetUpgradeableStatsThatCanBeUpgraded().Any();
         }
 
         public virtual void Initialize()

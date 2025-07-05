@@ -27,17 +27,18 @@ namespace Assets.ScriptableObjects.Player.Skills
     {
         public IEnumerable<NameUpgradableStatPair> GetUpgradeableStatsThatCanBeUpgraded()
         {
-            List<NameUpgradableStatPair> upgradeableStats = new List<NameUpgradableStatPair>();
-            PropertyInfo[] upgradeableStatsProperties = GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance)
+            List<NameUpgradableStatPair> upgradeableStats = new();
+
+            PropertyInfo[] upgradeableStatsPropertyInfos = GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance)
                                           .Where(f => typeof(IUpgradeableStat).IsAssignableFrom(f.PropertyType))
                                           .ToArray();
 
-            foreach (PropertyInfo property in upgradeableStatsProperties)
+            foreach (PropertyInfo propertyInfo in upgradeableStatsPropertyInfos)
             {
-                IUpgradeableStat upgradeableStat = (IUpgradeableStat)property.GetValue(this);
-                if (upgradeableStat != null && upgradeableStat.CanBeUpgraded)
+                if (propertyInfo.GetValue(this) is IUpgradeableStat upgradeableStat
+                    && upgradeableStat.CanBeUpgraded)
                 {
-                    upgradeableStats.Add(new NameUpgradableStatPair(property.Name, upgradeableStat));
+                    upgradeableStats.Add(new NameUpgradableStatPair(propertyInfo.Name, upgradeableStat));
                 }
             }
 

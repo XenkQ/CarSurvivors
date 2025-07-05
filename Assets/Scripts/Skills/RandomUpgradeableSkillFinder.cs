@@ -4,10 +4,9 @@ namespace Assets.Scripts.Skills
 {
     public static class RandomUpgradeableSkillFinder
     {
-        public static IUpgradeableSkill Find()
+        public static IUpgradeableSkill Find(ISkillsRegistry skillsRegistry)
         {
-            var upgradeableSkills = SkillsRegistry
-                .Instance
+            var upgradeableSkills = skillsRegistry
                 .Skills
                 .Select(skill => skill as IUpgradeableSkill)
                 .Where(skill => skill.CanBeUgraded());
