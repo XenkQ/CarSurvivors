@@ -28,10 +28,10 @@ namespace Assets.Scripts.Stats
     {
         [field: SerializeField] public bool IsSubstractModeOn { get; protected set; }
         [field: SerializeField] public StatsUnits Unit { get; protected set; }
-        [field: SerializeField] public T Value { get; protected set; }
         [SerializeField] protected bool _alwaysUseMinValueForUpgrade;
         [field: SerializeField, HideInInspector] public bool CanBeUpgraded { get; protected set; } = true;
         public ValueRange<T> MinMaxRange { get; protected set; }
+        [field: SerializeField, HideInInspector] public T Value { get; protected set; }
         protected ValueRange<T> _rangeOfPossibleValuesForUpgrade;
 
         public event EventHandler OnUpgrade;
@@ -88,7 +88,7 @@ namespace Assets.Scripts.Stats
 
         public float GetWhatPercentOfValueIsUpgradeValue(float upgradeValue)
         {
-            return Convert.ToSingle(upgradeValue) / Convert.ToSingle(Value) * 100f;
+            return Convert.ToSingle(Math.Round(upgradeValue / Convert.ToSingle(Value) * 100f, 2));
         }
 
         public virtual void OnBeforeSerialize()
@@ -101,15 +101,7 @@ namespace Assets.Scripts.Stats
             float maxValueFloat = Convert.ToSingle(MinMaxRange.Max);
             float minValueFloat = Convert.ToSingle(MinMaxRange.Min);
 
-            if (IsValueExceedingMaxValue(valueFloat, maxValueFloat))
-            {
-                Value = MinMaxRange.Max;
-            }
-
-            if (IsValueExceedingMinValue(valueFloat, minValueFloat))
-            {
-                Value = MinMaxRange.Min;
-            }
+            Value = MinMaxRange.Min;
 
             CanBeUpgraded = !Mathf.Approximately(minValueFloat, maxValueFloat);
         }
@@ -123,12 +115,6 @@ namespace Assets.Scripts.Stats
         {
             return IsSubstractModeOn && value < maxValue
                 || !IsSubstractModeOn && value > maxValue;
-        }
-
-        private bool IsValueExceedingMinValue(float value, float minValue)
-        {
-            return IsSubstractModeOn && value > minValue
-                || !IsSubstractModeOn && value < minValue;
         }
 
         private T FromFloatToType(float value)
