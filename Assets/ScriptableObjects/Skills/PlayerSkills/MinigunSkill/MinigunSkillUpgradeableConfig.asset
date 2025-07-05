@@ -16,21 +16,21 @@ MonoBehaviour:
   _delayBetweenShootingBullets:
     <IsSubstractModeOn>k__BackingField: 1
     <Unit>k__BackingField: 2
-    <Value>k__BackingField: 1.2
     _alwaysUseMinValueForUpgrade: 0
     <CanBeUpgraded>k__BackingField: 1
+    <Value>k__BackingField: 1.2
     _floatMinMaxRange:
       <Min>k__BackingField: 1.2
-      <Max>k__BackingField: 0.1
+      <Max>k__BackingField: 0.2
     _floatRangeOfPossibleValuesForUpgrade:
       <Min>k__BackingField: 0.2
       <Max>k__BackingField: 0.3
   _range:
     <IsSubstractModeOn>k__BackingField: 0
     <Unit>k__BackingField: 3
-    <Value>k__BackingField: 6
     _alwaysUseMinValueForUpgrade: 0
     <CanBeUpgraded>k__BackingField: 1
+    <Value>k__BackingField: 6
     _floatMinMaxRange:
       <Min>k__BackingField: 6
       <Max>k__BackingField: 25
@@ -40,9 +40,9 @@ MonoBehaviour:
   _numberOfTurrets:
     <IsSubstractModeOn>k__BackingField: 0
     <Unit>k__BackingField: 0
-    <Value>k__BackingField: 1
     _alwaysUseMinValueForUpgrade: 1
     <CanBeUpgraded>k__BackingField: 1
+    <Value>k__BackingField: 1
     _byteMinMaxRange:
       <Min>k__BackingField: 1
       <Max>k__BackingField: 4
@@ -54,9 +54,9 @@ MonoBehaviour:
   _startBulletDamage:
     <IsSubstractModeOn>k__BackingField: 0
     <Unit>k__BackingField: 0
-    <Value>k__BackingField: 4.5
     _alwaysUseMinValueForUpgrade: 0
     <CanBeUpgraded>k__BackingField: 1
+    <Value>k__BackingField: 4.5
     _floatMinMaxRange:
       <Min>k__BackingField: 4.5
       <Max>k__BackingField: 18
@@ -66,9 +66,9 @@ MonoBehaviour:
   _startBulletSize:
     <IsSubstractModeOn>k__BackingField: 0
     <Unit>k__BackingField: 1
-    <Value>k__BackingField: 1
     _alwaysUseMinValueForUpgrade: 0
     <CanBeUpgraded>k__BackingField: 1
+    <Value>k__BackingField: 1
     _floatMinMaxRange:
       <Min>k__BackingField: 1
       <Max>k__BackingField: 2
@@ -78,11 +78,11 @@ MonoBehaviour:
   _startBulletMaxPiercing:
     <IsSubstractModeOn>k__BackingField: 0
     <Unit>k__BackingField: 0
-    <Value>k__BackingField: 1
     _alwaysUseMinValueForUpgrade: 0
     <CanBeUpgraded>k__BackingField: 1
+    <Value>k__BackingField: 0
     _byteMinMaxRange:
-      <Min>k__BackingField: 1
+      <Min>k__BackingField: 0
       <Max>k__BackingField: 10
     _byteRangeOfPossibleValuesForUpgrade:
       <Min>k__BackingField: 1

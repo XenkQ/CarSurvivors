@@ -25,14 +25,6 @@ Preset:
     value: 
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: <ThrowLandmineRange>k__BackingField
-    value: 3
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: <TimeToReachThrowRangeEnd>k__BackingField
-    value: 1
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
     propertyPath: _spawnCooldown.<IsSubstractModeOn>k__BackingField
     value: 1
     objectReference: {fileID: 0}
@@ -41,20 +33,24 @@ Preset:
     value: 2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: _spawnCooldown.<Value>k__BackingField
-    value: 8
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
     propertyPath: _spawnCooldown._alwaysUseMinValueForUpgrade
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: _spawnCooldown._floatMinMaxRange.<Min>k__BackingField
+    propertyPath: _spawnCooldown.<CanBeUpgraded>k__BackingField
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: _spawnCooldown._floatMinMaxRange.<Max>k__BackingField
+    propertyPath: _spawnCooldown.<Value>k__BackingField
     value: 8
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _spawnCooldown._floatMinMaxRange.<Min>k__BackingField
+    value: 8
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _spawnCooldown._floatMinMaxRange.<Max>k__BackingField
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _spawnCooldown._floatRangeOfPossibleValuesForUpgrade.<Min>k__BackingField
@@ -73,12 +69,16 @@ Preset:
     value: 3
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: _explosionRadius.<Value>k__BackingField
-    value: 2
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
     propertyPath: _explosionRadius._alwaysUseMinValueForUpgrade
     value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _explosionRadius.<CanBeUpgraded>k__BackingField
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _explosionRadius.<Value>k__BackingField
+    value: 2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _explosionRadius._floatMinMaxRange.<Min>k__BackingField
@@ -105,12 +105,16 @@ Preset:
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: _damage.<Value>k__BackingField
-    value: 5
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
     propertyPath: _damage._alwaysUseMinValueForUpgrade
     value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _damage.<CanBeUpgraded>k__BackingField
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _damage.<Value>k__BackingField
+    value: 5
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _damage._floatMinMaxRange.<Min>k__BackingField
@@ -137,12 +141,16 @@ Preset:
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: _size.<Value>k__BackingField
+    propertyPath: _size._alwaysUseMinValueForUpgrade
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _size.<CanBeUpgraded>k__BackingField
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: _size._alwaysUseMinValueForUpgrade
-    value: 0
+    propertyPath: _size.<Value>k__BackingField
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _size._floatMinMaxRange.<Min>k__BackingField
@@ -161,36 +169,40 @@ Preset:
     value: 1.5
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: _knockback.<IsSubstractModeOn>k__BackingField
+    propertyPath: _knockbackRange.<IsSubstractModeOn>k__BackingField
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: _knockback.<Unit>k__BackingField
+    propertyPath: _knockbackRange.<Unit>k__BackingField
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: _knockback.<Value>k__BackingField
+    propertyPath: _knockbackRange._alwaysUseMinValueForUpgrade
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: _knockback._alwaysUseMinValueForUpgrade
+    propertyPath: _knockbackRange.<CanBeUpgraded>k__BackingField
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: _knockback._floatMinMaxRange.<Min>k__BackingField
+    propertyPath: _knockbackRange.<Value>k__BackingField
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: _knockback._floatMinMaxRange.<Max>k__BackingField
-    value: 0
+    propertyPath: _knockbackRange._floatMinMaxRange.<Min>k__BackingField
+    value: 4
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: _knockback._floatRangeOfPossibleValuesForUpgrade.<Min>k__BackingField
-    value: 0
+    propertyPath: _knockbackRange._floatMinMaxRange.<Max>k__BackingField
+    value: 10
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: _knockback._floatRangeOfPossibleValuesForUpgrade.<Max>k__BackingField
-    value: 0
+    propertyPath: _knockbackRange._floatRangeOfPossibleValuesForUpgrade.<Min>k__BackingField
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _knockbackRange._floatRangeOfPossibleValuesForUpgrade.<Max>k__BackingField
+    value: 4
     objectReference: {fileID: 0}
   m_ExcludedProperties: []
   m_CoupledType:

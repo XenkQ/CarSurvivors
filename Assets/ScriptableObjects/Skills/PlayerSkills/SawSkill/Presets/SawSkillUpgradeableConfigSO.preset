@@ -33,39 +33,39 @@ Preset:
     value: 0.14
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: _knockbackPower.<IsSubstractModeOn>k__BackingField
+    propertyPath: _knockbackRange.<IsSubstractModeOn>k__BackingField
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: _knockbackPower.<Unit>k__BackingField
+    propertyPath: _knockbackRange.<Unit>k__BackingField
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _knockbackRange._alwaysUseMinValueForUpgrade
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: _knockbackPower.<Value>k__BackingField
+    propertyPath: _knockbackRange.<CanBeUpgraded>k__BackingField
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _knockbackRange.<Value>k__BackingField
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _knockbackRange._floatMinMaxRange.<Min>k__BackingField
     value: 4
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: _knockbackPower._alwaysUseMinValueForUpgrade
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: _knockbackPower.<CanBeUpgraded>k__BackingField
-    value: 1
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: _knockbackPower._floatMinMaxRange.<Min>k__BackingField
-    value: 4
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: _knockbackPower._floatMinMaxRange.<Max>k__BackingField
+    propertyPath: _knockbackRange._floatMinMaxRange.<Max>k__BackingField
     value: 9
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: _knockbackPower._floatRangeOfPossibleValuesForUpgrade.<Min>k__BackingField
+    propertyPath: _knockbackRange._floatRangeOfPossibleValuesForUpgrade.<Min>k__BackingField
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: _knockbackPower._floatRangeOfPossibleValuesForUpgrade.<Max>k__BackingField
+    propertyPath: _knockbackRange._floatRangeOfPossibleValuesForUpgrade.<Max>k__BackingField
     value: 3
     objectReference: {fileID: 0}
   - target: {fileID: 0}
@@ -77,16 +77,16 @@ Preset:
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: _damage.<Value>k__BackingField
-    value: 8
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
     propertyPath: _damage._alwaysUseMinValueForUpgrade
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _damage.<CanBeUpgraded>k__BackingField
     value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _damage.<Value>k__BackingField
+    value: 8
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _damage._floatMinMaxRange.<Min>k__BackingField
@@ -113,15 +113,15 @@ Preset:
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: _numberOfSaws.<Value>k__BackingField
-    value: 1
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
     propertyPath: _numberOfSaws._alwaysUseMinValueForUpgrade
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _numberOfSaws.<CanBeUpgraded>k__BackingField
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _numberOfSaws.<Value>k__BackingField
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}

@@ -37,10 +37,6 @@ Preset:
     value: 2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: _delayBetweenShoots.<Value>k__BackingField
-    value: 2
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
     propertyPath: _delayBetweenShoots._alwaysUseMinValueForUpgrade
     value: 0
     objectReference: {fileID: 0}
@@ -49,12 +45,16 @@ Preset:
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: _delayBetweenShoots.<Value>k__BackingField
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: _delayBetweenShoots._floatMinMaxRange.<Min>k__BackingField
     value: 2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _delayBetweenShoots._floatMinMaxRange.<Max>k__BackingField
-    value: 0.2
+    value: 0.4
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _delayBetweenShoots._floatRangeOfPossibleValuesForUpgrade.<Min>k__BackingField
@@ -73,15 +73,15 @@ Preset:
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: _numberOfTurrets.<Value>k__BackingField
-    value: 1
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
     propertyPath: _numberOfTurrets._alwaysUseMinValueForUpgrade
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _numberOfTurrets.<CanBeUpgraded>k__BackingField
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _numberOfTurrets.<Value>k__BackingField
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
@@ -113,16 +113,16 @@ Preset:
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: _startDamage.<Value>k__BackingField
-    value: 6
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
     propertyPath: _startDamage._alwaysUseMinValueForUpgrade
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _startDamage.<CanBeUpgraded>k__BackingField
     value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startDamage.<Value>k__BackingField
+    value: 6
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _startDamage._floatMinMaxRange.<Min>k__BackingField
@@ -149,16 +149,16 @@ Preset:
     value: 3
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: _startRange.<Value>k__BackingField
-    value: 8
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
     propertyPath: _startRange._alwaysUseMinValueForUpgrade
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _startRange.<CanBeUpgraded>k__BackingField
     value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startRange.<Value>k__BackingField
+    value: 8
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _startRange._floatMinMaxRange.<Min>k__BackingField
