@@ -60,12 +60,24 @@ MonoBehaviour:
     _floatRangeOfPossibleValuesForUpgrade:
       <Min>k__BackingField: 1
       <Max>k__BackingField: 1.5
+  _StunDuration:
+    <IsSubstractModeOn>k__BackingField: 0
+    <Unit>k__BackingField: 2
+    _alwaysUseMinValueForUpgrade: 0
+    <CanBeUpgraded>k__BackingField: 1
+    <Value>k__BackingField: 0.12
+    _floatMinMaxRange:
+      <Min>k__BackingField: 0.12
+      <Max>k__BackingField: 0.35
+    _floatRangeOfPossibleValuesForUpgrade:
+      <Min>k__BackingField: 0.1
+      <Max>k__BackingField: 0.6
   _knockbackRange:
     <IsSubstractModeOn>k__BackingField: 0
-    <Unit>k__BackingField: 0
+    <Unit>k__BackingField: 3
     _alwaysUseMinValueForUpgrade: 0
-    <CanBeUpgraded>k__BackingField: 0
-    <Value>k__BackingField: 0
+    <CanBeUpgraded>k__BackingField: 1
+    <Value>k__BackingField: 4
     _floatMinMaxRange:
       <Min>k__BackingField: 4
       <Max>k__BackingField: 10

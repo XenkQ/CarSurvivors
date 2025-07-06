@@ -18,8 +18,8 @@ MonoBehaviour:
     <IsSubstractModeOn>k__BackingField: 0
     <Unit>k__BackingField: 3
     _alwaysUseMinValueForUpgrade: 0
-    <CanBeUpgraded>k__BackingField: 0
-    <Value>k__BackingField: 0
+    <CanBeUpgraded>k__BackingField: 1
+    <Value>k__BackingField: 4
     _floatMinMaxRange:
       <Min>k__BackingField: 4
       <Max>k__BackingField: 9
@@ -38,6 +38,18 @@ MonoBehaviour:
     _floatRangeOfPossibleValuesForUpgrade:
       <Min>k__BackingField: 3
       <Max>k__BackingField: 7.2
+  _stunDuration:
+    <IsSubstractModeOn>k__BackingField: 0
+    <Unit>k__BackingField: 2
+    _alwaysUseMinValueForUpgrade: 0
+    <CanBeUpgraded>k__BackingField: 1
+    <Value>k__BackingField: 0.1
+    _floatMinMaxRange:
+      <Min>k__BackingField: 0.1
+      <Max>k__BackingField: 1
+    _floatRangeOfPossibleValuesForUpgrade:
+      <Min>k__BackingField: 0.3
+      <Max>k__BackingField: 0.6
   _numberOfSaws:
     <IsSubstractModeOn>k__BackingField: 0
     <Unit>k__BackingField: 0

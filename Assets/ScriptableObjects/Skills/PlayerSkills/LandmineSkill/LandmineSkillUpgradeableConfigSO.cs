@@ -12,6 +12,7 @@ namespace Assets.ScriptableObjects.Skills.PlayerSkills.LandmineSkill
         [SerializeField] private FloatUpgradeableStat _explosionRadius;
         [SerializeField] private FloatUpgradeableStat _damage;
         [SerializeField] private FloatUpgradeableStat _size;
+        [SerializeField] private FloatUpgradeableStat _StunDuration;
         [SerializeField] private FloatUpgradeableStat _knockbackRange;
 
         public FloatUpgradeableStat SpawnCooldown { get; private set; }
@@ -19,6 +20,7 @@ namespace Assets.ScriptableObjects.Skills.PlayerSkills.LandmineSkill
         public FloatUpgradeableStat Damage { get; private set; }
         public FloatUpgradeableStat Size { get; private set; }
         public FloatUpgradeableStat KnockbackRange { get; private set; }
+        public FloatUpgradeableStat StunDuration { get; private set; }
 
         private void OnEnable()
         {
@@ -26,6 +28,7 @@ namespace Assets.ScriptableObjects.Skills.PlayerSkills.LandmineSkill
             ExplosionRadius = DeepCopyUtility.DeepCopy(_explosionRadius);
             Damage = DeepCopyUtility.DeepCopy(_damage);
             Size = DeepCopyUtility.DeepCopy(_size);
+            StunDuration = DeepCopyUtility.DeepCopy(_StunDuration);
             KnockbackRange = DeepCopyUtility.DeepCopy(_knockbackRange);
         }
     }

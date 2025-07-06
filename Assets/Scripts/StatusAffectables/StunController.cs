@@ -3,11 +3,6 @@ using UnityEngine;
 
 namespace Assets.Scripts.StatusAffectables
 {
-    public interface IStunable
-    {
-        public IStunController StunController { get; }
-    }
-
     public interface IStunController
     {
         public bool IsStunned { get; }
@@ -16,18 +11,20 @@ namespace Assets.Scripts.StatusAffectables
 
         public event EventHandler OnStunStart;
 
-        public void ApplyStun();
+        public event EventHandler OnStunExtended;
+
+        public void PerformStun(float duration);
     }
 
     public class StunController : MonoBehaviour, IStunController
     {
-        [SerializeField] private float _stunDuration = 0.5f;
-
         public bool IsStunned { get; private set; }
 
         public event EventHandler OnStunEnd;
 
         public event EventHandler OnStunStart;
+
+        public event EventHandler OnStunExtended;
 
         private float _stunTimer;
 
@@ -44,13 +41,18 @@ namespace Assets.Scripts.StatusAffectables
             }
         }
 
-        public void ApplyStun()
+        public void PerformStun(float duration)
         {
             if (!IsStunned)
             {
                 IsStunned = true;
-                _stunTimer = _stunDuration;
+                _stunTimer = duration;
                 OnStunStart?.Invoke(this, EventArgs.Empty);
+            }
+            else if (_stunTimer < duration)
+            {
+                _stunTimer = duration;
+                OnStunExtended?.Invoke(this, EventArgs.Empty);
             }
         }
     }

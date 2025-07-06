@@ -45,10 +45,10 @@ public class LasergunTurret : Turret<TurretConfigSO>
 
         StartCoroutine(ShootingLaserEffect());
 
-        if (_currentTarget.TryGetComponent(out IDamageable damageable))
-        {
-            damageable.TakeDamage(_config.ProjectileStatsSO.Damage);
-        }
+        EntityManipulationHelper.Damage(
+            _currentTarget,
+            _config.ProjectileStatsSO.Damage
+        );
     }
 
     private bool CanShoot()

@@ -1,0 +1,31 @@
+﻿using UnityEngine;
+
+namespace Assets.Scripts.StatusAffectables
+{
+    public static class EntityManipulationHelper
+    {
+        public static void Damage(Collider target, float damage)
+        {
+            if (target.TryGetComponent(out IDamageable damageable))
+            {
+                damageable.TakeDamage(damage);
+            }
+        }
+
+        public static void Knockback(Collider target, Vector3 dir, float range, float timeToArriveAtLocation)
+        {
+            if (target.TryGetComponent(out IKnockable knockable))
+            {
+                knockable.ApplyKnockBack(dir, range, timeToArriveAtLocation);
+            }
+        }
+
+        public static void Stun(Collider target, float duration)
+        {
+            if (target.TryGetComponent(out IStunnable stunnable))
+            {
+                stunnable.ApplyStun(duration);
+            }
+        }
+    }
+}

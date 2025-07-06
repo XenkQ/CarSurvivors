@@ -62,31 +62,21 @@ namespace Assets.Scripts.Skills.PlayerSkills.LandmineTrap
 
             foreach (Collider collider in colliders)
             {
-                ApplyDamageOnDamageableEntity(collider);
+                EntityManipulationHelper.Damage(collider, _config.Damage.Value);
 
                 ApplyExplosionKnockbackOnKnockableEntity(collider);
+
+                EntityManipulationHelper.Stun(collider, _config.StunDuration.Value);
             }
 
             _landmineVisual.SetActive(false);
         }
 
-        private void ApplyDamageOnDamageableEntity(Collider collider)
-        {
-            if (collider.TryGetComponent(out IDamageable damageable))
-            {
-                damageable.TakeDamage(_config.Damage.Value);
-            }
-        }
-
         private void ApplyExplosionKnockbackOnKnockableEntity(Collider collider)
         {
-            if (collider.TryGetComponent(out IKnockable knockable))
-            {
-                Vector3 dir = (collider.transform.position - transform.position).normalized;
-                float timeToArriveAtLocation = 1f / _config.KnockbackRange.Value;
-
-                knockable.ApplyKnockBack(dir, _config.KnockbackRange.Value, timeToArriveAtLocation);
-            }
+            Vector3 dir = (collider.transform.position - transform.position).normalized;
+            float timeToArriveAtLocation = 1f / _config.KnockbackRange.Value;
+            EntityManipulationHelper.Knockback(collider, dir, _config.KnockbackRange.Value, timeToArriveAtLocation);
         }
 
         public void Initialize(LandmineSkillUpgradeableConfigSO config)

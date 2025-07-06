@@ -46,11 +46,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _knockbackRange.<CanBeUpgraded>k__BackingField
-    value: 0
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _knockbackRange.<Value>k__BackingField
-    value: 0
+    value: 4
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _knockbackRange._floatMinMaxRange.<Min>k__BackingField
@@ -103,6 +103,42 @@ Preset:
   - target: {fileID: 0}
     propertyPath: _damage._floatRangeOfPossibleValuesForUpgrade.<Max>k__BackingField
     value: 7.2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _stunDuration.<IsSubstractModeOn>k__BackingField
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _stunDuration.<Unit>k__BackingField
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _stunDuration._alwaysUseMinValueForUpgrade
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _stunDuration.<CanBeUpgraded>k__BackingField
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _stunDuration.<Value>k__BackingField
+    value: 0.1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _stunDuration._floatMinMaxRange.<Min>k__BackingField
+    value: 0.1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _stunDuration._floatMinMaxRange.<Max>k__BackingField
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _stunDuration._floatRangeOfPossibleValuesForUpgrade.<Min>k__BackingField
+    value: 0.3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _stunDuration._floatRangeOfPossibleValuesForUpgrade.<Max>k__BackingField
+    value: 0.6
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _numberOfSaws.<IsSubstractModeOn>k__BackingField
