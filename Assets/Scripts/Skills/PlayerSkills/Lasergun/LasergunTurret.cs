@@ -2,6 +2,7 @@ using Assets.ScriptableObjects;
 using Assets.Scripts.LayerMasks;
 using Assets.Scripts.Skills;
 using Assets.Scripts.StatusAffectables;
+using System.Collections;
 using UnityEngine;
 
 public class LasergunTurret : Turret<TurretConfigSO>
@@ -9,8 +10,13 @@ public class LasergunTurret : Turret<TurretConfigSO>
     [SerializeField] private LineRenderer _laserLineRenderer;
     [SerializeField] private float _startShowLaserShootDuration = 0.1f;
     private float _currentShowLaserShootDuration;
-    private bool _isShooting;
+    private bool _isShowingLaser;
+
     private Collider _currentTarget;
+    private Vector3 _lastTargetClosestPoint;
+
+    private const float SMALLEST_ANGLE_QUALIFIING_AS_LOOKING_AT_TARGET = 2f;
+    private bool _isLookingAtTarget;
 
     public override void Initialize(TurretConfigSO config)
     {
@@ -28,47 +34,53 @@ public class LasergunTurret : Turret<TurretConfigSO>
         HandleRotation();
     }
 
-    private void Update()
-    {
-        if (_isShooting)
-        {
-            if (_currentShowLaserShootDuration <= 0)
-            {
-                _isShooting = false;
-                _laserLineRenderer.positionCount = 0;
-                _currentShowLaserShootDuration = _startShowLaserShootDuration;
-            }
-            else
-            {
-                if (_currentTarget is not null)
-                {
-                    _laserLineRenderer.SetPosition(0, _gunTip.position);
-                    _laserLineRenderer.SetPosition(1, _currentTarget.ClosestPoint(_gunTip.position));
-                    _currentShowLaserShootDuration -= Time.deltaTime;
-                }
-                else
-                {
-                    _currentShowLaserShootDuration = 0;
-                }
-            }
-        }
-    }
-
     public override void Shoot()
     {
-        if (_currentTarget is null || _isShooting)
+        if (!CanShoot())
         {
             return;
         }
 
-        _isShooting = true;
-
         _laserLineRenderer.positionCount = 2;
+
+        StartCoroutine(ShootingLaserEffect());
 
         if (_currentTarget.TryGetComponent(out IDamageable damageable))
         {
             damageable.TakeDamage(_config.ProjectileStatsSO.Damage);
         }
+    }
+
+    private bool CanShoot()
+    {
+        return _currentTarget is not null
+               && _isShowingLaser == false
+               && _isLookingAtTarget
+               && IsCurrentTargetInRange();
+    }
+
+    private IEnumerator ShootingLaserEffect()
+    {
+        _isShowingLaser = true;
+
+        while (_currentShowLaserShootDuration > 0)
+        {
+            if (_currentTarget is not null)
+            {
+                _lastTargetClosestPoint = _currentTarget.ClosestPoint(_gunTip.position);
+            }
+
+            _laserLineRenderer.SetPosition(0, _gunTip.position);
+            _laserLineRenderer.SetPosition(1, _lastTargetClosestPoint);
+
+            _currentShowLaserShootDuration -= Time.deltaTime;
+
+            yield return new WaitForEndOfFrame();
+        }
+
+        _isShowingLaser = false;
+        _laserLineRenderer.positionCount = 0;
+        _currentShowLaserShootDuration = _startShowLaserShootDuration;
     }
 
     private void HandleTargetAssigment()
@@ -117,12 +129,11 @@ public class LasergunTurret : Turret<TurretConfigSO>
             if (anyFound)
             {
                 _currentTarget = closestTarget;
+                return;
             }
         }
-        else
-        {
-            _currentTarget = null;
-        }
+
+        _currentTarget = null;
     }
 
     private bool IsCurrentTargetInRange()
@@ -153,12 +164,16 @@ public class LasergunTurret : Turret<TurretConfigSO>
 
         Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
 
-        float rotationSpeed = 1f / Mathf.Max(_config.RotationDuration, 0.0001f);
+        float angle = Quaternion.Angle(transform.rotation, targetRotation);
+
+        _isLookingAtTarget = angle <= SMALLEST_ANGLE_QUALIFIING_AS_LOOKING_AT_TARGET;
+
+        float angleThisFrame = _config.RotationSpeed * Time.fixedDeltaTime;
 
         transform.rotation = Quaternion.RotateTowards(
             transform.rotation,
             targetRotation,
-            rotationSpeed * Time.fixedDeltaTime
+            angleThisFrame
         );
     }
 }

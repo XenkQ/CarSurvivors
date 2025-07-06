@@ -10,6 +10,7 @@ namespace Assets.ScriptableObjects
         [field: SerializeField] public ProjectileConfigSO ProjectileStatsSO { get; set; }
         [field: SerializeField, Range(0, 360f)] public float RotationAngle { get; private set; }
         [field: SerializeField] public float RotationDuration { get; private set; }
+        [field: SerializeField] public float RotationSpeed { get; private set; }
         [field: SerializeField] public float SearchForTargetInterval { get; private set; }
         public float Range { get; set; }
 
