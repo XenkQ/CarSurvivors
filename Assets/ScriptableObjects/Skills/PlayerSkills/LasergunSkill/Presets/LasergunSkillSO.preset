@@ -90,7 +90,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _numberOfTurrets._byteMinMaxRange.<Max>k__BackingField
-    value: 2
+    value: 3
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _numberOfTurrets._byteRangeOfPossibleValuesForUpgrade.<Min>k__BackingField
