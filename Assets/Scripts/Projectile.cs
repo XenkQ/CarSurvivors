@@ -30,10 +30,7 @@ namespace Assets.Scripts
                         return;
                     }
 
-                    if (collider.transform.gameObject.TryGetComponent(out IDamageable damageable))
-                    {
-                        damageable.TakeDamage(_config.Damage);
-                    }
+                    EntityManipulationHelper.Damage(collider, _config.Damage);
 
                     DecreasePiercing();
                 }

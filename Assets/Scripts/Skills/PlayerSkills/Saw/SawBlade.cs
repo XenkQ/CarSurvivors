@@ -60,18 +60,15 @@ namespace Assets.Scripts.Skills.PlayerSkills.Saw
             GameObject collisionObject = other.transform.gameObject;
             if (1 << collisionObject.layer == EntityLayers.Enemy)
             {
-                if (collisionObject.TryGetComponent(out IDamageable damageable))
-                {
-                    damageable.TakeDamage(_config.Damage.Value);
-                }
+                EntityManipulationHelper.Damage(other, _config.Damage.Value);
 
-                if (collisionObject.TryGetComponent(out IKnockable knockable))
-                {
-                    knockable.ApplyKnockBack(
-                        transform.forward,
-                        _config.KnockbackRange.Value,
-                        _config.TimeToArriveAtKnockbackLocation);
-                }
+                EntityManipulationHelper.Knockback(
+                    other,
+                    transform.forward,
+                    _config.KnockbackRange.Value,
+                    _config.TimeToArriveAtKnockbackLocation);
+
+                EntityManipulationHelper.Stun(other, _config.StunDuration.Value);
             }
         }
     }
