@@ -1785,14 +1785,14 @@ MonoBehaviour:
       TresholdToStartAddingSpawnChanceToOtherInfos: 0
       SpawnChanceWillNotChange: 0
       HasEverReachedThreshold: 0
-  - EnemyPrefab: {fileID: 8544650596686725407, guid: 6868dd97df9ac574da868db1b133ad18, type: 3}
+  - EnemyPrefab: {fileID: 6539511401407038030, guid: ad4b105b525d63e48b2389383719ba24, type: 3}
     MaxAmount: 90
     SpawnChanceInfo:
       SpawnChance: 0
       TresholdToStartAddingSpawnChanceToOtherInfos: 40
       SpawnChanceWillNotChange: 0
       HasEverReachedThreshold: 0
-  - EnemyPrefab: {fileID: 8544650596686725407, guid: 5495300357b64ae4e9bc00aa9ec678b0, type: 3}
+  - EnemyPrefab: {fileID: 7936440336419562411, guid: 846aec665bedb4c41930147cc80be84e, type: 3}
     MaxAmount: 80
     SpawnChanceInfo:
       SpawnChance: 0
