@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Enemies
 {
-    public class Enemy : MonoBehaviour, IHealthy, IDamageable, IKnockable, IStunable
+    public class Enemy : MonoBehaviour, IHealthy, IDamageable, IKnockable, IStunnable
     {
         [field: SerializeField] public EnemyConfigSO Config { get; private set; }
 
@@ -51,8 +51,12 @@ namespace Assets.Scripts.Enemies
 
         public void TakeDamage(float damage)
         {
-            StunController.ApplyStun();
             Health.DecreaseHealth(damage);
+        }
+
+        public void ApplyStun(float duration)
+        {
+            StunController.PerformStun(duration);
         }
     }
 }

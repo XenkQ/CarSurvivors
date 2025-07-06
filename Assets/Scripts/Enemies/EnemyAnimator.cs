@@ -19,6 +19,9 @@ namespace Assets.Scripts.Enemies
 
         public event EventHandler OnAttackHitFrame;
 
+        private int _walingLayerIndex = 0;
+        private int _crawlingLayerIndex = 1;
+
         private void Awake()
         {
             _animator = GetComponent<Animator>();
@@ -26,7 +29,17 @@ namespace Assets.Scripts.Enemies
 
         private void OnEnable()
         {
-            _animator.SetBool("IsMovingByCrawling", IsMovingByCrawling);
+            if (IsMovingByCrawling)
+            {
+                _animator.SetLayerWeight(_walingLayerIndex, 0);
+                _animator.SetLayerWeight(_crawlingLayerIndex, 1);
+            }
+            else
+            {
+                _animator.SetLayerWeight(_walingLayerIndex, 1);
+                _animator.SetLayerWeight(_crawlingLayerIndex, 0);
+            }
+
             InvokeRepeating(nameof(HandleTransitionPropertiesChanges), 0, _animationResponseSpeed);
         }
 

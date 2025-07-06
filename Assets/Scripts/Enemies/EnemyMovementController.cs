@@ -14,7 +14,6 @@ namespace Assets.Scripts.Enemies
 
         private float _verticalPosOffset;
 
-        private IStunable _stunableSelf;
         private bool _isStunable;
 
         private bool _isMovingToPositionUnrelatedToGrid;
@@ -31,11 +30,6 @@ namespace Assets.Scripts.Enemies
         private void Awake()
         {
             _enemy = GetComponent<Enemy>();
-
-            if (gameObject.TryGetComponent(out IStunable stunable))
-            {
-                _stunableSelf = stunable;
-            }
         }
 
         private void OnEnable()
@@ -54,17 +48,9 @@ namespace Assets.Scripts.Enemies
             transform.position = new Vector3(0, _verticalPosOffset, 0);
         }
 
-        private void Start()
-        {
-            if (_stunableSelf != null)
-            {
-                _isStunable = true;
-            }
-        }
-
         private void Update()
         {
-            bool isStunned = _isStunable && _stunableSelf.StunController.IsStunned;
+            bool isStunned = _isStunable && _enemy.StunController.IsStunned;
 
             bool canMoveOnGrid = _movementUnrelatedToSpeedTween is null
                 && !isStunned
