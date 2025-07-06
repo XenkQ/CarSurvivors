@@ -41,6 +41,10 @@ Preset:
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: <RotationSpeed>k__BackingField
+    value: 92
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: <SearchForTargetInterval>k__BackingField
     value: 0.5
     objectReference: {fileID: 0}
