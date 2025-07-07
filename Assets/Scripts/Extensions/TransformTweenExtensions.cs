@@ -12,10 +12,18 @@ namespace Assets.Scripts.Extensions
                 .SetLoops(-1, LoopType.Yoyo);
         }
 
-        public static Tween StartXY360RotateLoopTween(this Transform transform, Vector3 maxRotation, float firstIterationTime = 1f)
+        public static Tween StartRotateLoopTween(this Transform transform, Vector3 maxRotation, float firstIterationTime = 1f)
         {
             return transform
                 .DORotate(maxRotation, firstIterationTime, RotateMode.FastBeyond360)
+                .SetLoops(-1, LoopType.Restart)
+                .SetEase(Ease.Linear);
+        }
+
+        public static Tween StartLocalRotateLoopTween(this Transform transform, Vector3 maxRotation, float firstIterationTime = 1f)
+        {
+            return transform
+                .DOLocalRotate(maxRotation, firstIterationTime, RotateMode.FastBeyond360)
                 .SetLoops(-1, LoopType.Restart)
                 .SetEase(Ease.Linear);
         }

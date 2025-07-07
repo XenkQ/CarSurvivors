@@ -59,6 +59,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8a1f55baf35762458b2cfc127f37352, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotateX: 1
+  rotateY: 1
+  rotateZ: 0
+  _maxRotationOnAxis: 360
   _tweenIterationTime: 2.5
   _unscaleWithTime: 0
 --- !u!65 &2590883899213531858
