@@ -3,7 +3,32 @@ guid: 135308da80dc14f44940a11d37c1e7a9
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: black_
+    second: {fileID: 2100000, guid: d0ef4e76136abdd42b4764b654ca9a54, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: front light
+    second: {fileID: 2100000, guid: 49d2cf214f7e3054daa75616a85d09cb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: glass
+    second: {fileID: 2100000, guid: 353ffccf4100b784097ba6cd9e7df263, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: red car
+    second: {fileID: 2100000, guid: d81ae01e777930b4faa5d7d89d2de712, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tail lights
+    second: {fileID: 2100000, guid: 49d2cf214f7e3054daa75616a85d09cb, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
