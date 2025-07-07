@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 076a553c77658ca4d909724cdba5d9dd, type: 3}
   m_Name: Standing_Zombie_3_Config
   m_EditorClassIdentifier: 
-  MaxHealth: 40
-  MovementSpeed: 6
-  RotationSpeed: 6
-  Damage: 14
-  DangerLevel: 3
-  ExpForKill: 50
+  MaxHealth: 280
+  MovementSpeed: 2
+  RotationSpeed: 2
+  Damage: 60
+  DangerLevel: 5
+  ExpForKill: 300
   IsMovingByCrawling: 0

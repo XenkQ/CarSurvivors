@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3261852426992956232, guid: 51bbe108060737f41995dc41eaef8a82, type: 3}
       propertyPath: m_Name
-      value: Crawling_Zombie_Level2 1
+      value: Crawling_Zombie_Level2
       objectReference: {fileID: 0}
     - target: {fileID: 3402772935746238773, guid: 51bbe108060737f41995dc41eaef8a82, type: 3}
       propertyPath: _enemy
@@ -76,6 +76,14 @@ PrefabInstance:
       propertyPath: <Config>k__BackingField
       value: 
       objectReference: {fileID: 11400000, guid: e8a2efd860640e54594ee96aa730616c, type: 2}
+    - target: {fileID: 6756397437299039757, guid: 51bbe108060737f41995dc41eaef8a82, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e786230d93c144e4b8dfe830cc9035c0, type: 2}
+    - target: {fileID: 6756397437299039757, guid: 51bbe108060737f41995dc41eaef8a82, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e09f9a9cb65891f45a0861bebd53b092, type: 2}
     - target: {fileID: 7972600806242769793, guid: 51bbe108060737f41995dc41eaef8a82, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.08
