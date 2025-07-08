@@ -71,8 +71,6 @@ public class LasergunTurret : Turret<TurretConfigSO>
 
     private void FireLaserBeam()
     {
-        _laserLineRenderer.positionCount = 2;
-
         StartCoroutine(ShootingLaserEffect());
 
         EntityManipulationHelper.Damage(
@@ -92,6 +90,7 @@ public class LasergunTurret : Turret<TurretConfigSO>
                 _lastTargetClosestPoint = _currentTarget.ClosestPoint(_gunTip.position);
             }
 
+            _laserLineRenderer.positionCount = 2;
             _laserLineRenderer.SetPosition(0, _gunTip.position);
             _laserLineRenderer.SetPosition(1, _lastTargetClosestPoint);
 
