@@ -45,7 +45,7 @@ namespace Assets.Scripts
 
             StartMovingBulletForward();
 
-            transform.localScale = new Vector3(_config.Size, transform.localScale.y, _config.Size);
+            transform.localScale = new Vector3(_config.Size, _config.Size, transform.localScale.y);
 
             _isInitialized = true;
         }
@@ -59,6 +59,17 @@ namespace Assets.Scripts
             transform
                 .DOMove(targetPos, _config.TimeToArriveAtEndRangeMultiplier * _config.Range)
                 .SetEase(Ease.Linear)
+                .OnComplete(EndLifeWithShrinkingToZero);
+        }
+
+        private void EndLifeWithShrinkingToZero()
+        {
+            const float disapearingShrinkDuration = 0.1f;
+
+            DOTween.Kill(transform);
+
+            transform.DOScale(Vector3.zero, disapearingShrinkDuration)
+                .SetEase(Ease.Flash)
                 .OnComplete(EndLife);
         }
 

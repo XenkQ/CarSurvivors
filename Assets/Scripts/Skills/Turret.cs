@@ -12,7 +12,7 @@ namespace Assets.Scripts.Skills
         [SerializeField] protected Projectile _turretsProejctile;
         protected Transform _projectilesParent;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             _projectilesParent = GameObject.FindGameObjectWithTag("ProjectilesHolder")?.transform;
         }

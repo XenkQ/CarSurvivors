@@ -81,6 +81,80 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8980045539191705095}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &3206591696216870455
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8980045539191705095}
+    m_Modifications:
+    - target: {fileID: 4795040787218675037, guid: 63fd57ae6a98c69409d80e87ff389b10, type: 3}
+      propertyPath: m_Name
+      value: Vfx_MuzzleFlesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 8407855173194895092, guid: 63fd57ae6a98c69409d80e87ff389b10, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8562377
+      objectReference: {fileID: 0}
+    - target: {fileID: 8407855173194895092, guid: 63fd57ae6a98c69409d80e87ff389b10, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.85623777
+      objectReference: {fileID: 0}
+    - target: {fileID: 8407855173194895092, guid: 63fd57ae6a98c69409d80e87ff389b10, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.85623777
+      objectReference: {fileID: 0}
+    - target: {fileID: 8407855173194895092, guid: 63fd57ae6a98c69409d80e87ff389b10, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8407855173194895092, guid: 63fd57ae6a98c69409d80e87ff389b10, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.19779092
+      objectReference: {fileID: 0}
+    - target: {fileID: 8407855173194895092, guid: 63fd57ae6a98c69409d80e87ff389b10, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.6782259
+      objectReference: {fileID: 0}
+    - target: {fileID: 8407855173194895092, guid: 63fd57ae6a98c69409d80e87ff389b10, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8407855173194895092, guid: 63fd57ae6a98c69409d80e87ff389b10, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8407855173194895092, guid: 63fd57ae6a98c69409d80e87ff389b10, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8407855173194895092, guid: 63fd57ae6a98c69409d80e87ff389b10, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8407855173194895092, guid: 63fd57ae6a98c69409d80e87ff389b10, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8407855173194895092, guid: 63fd57ae6a98c69409d80e87ff389b10, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8407855173194895092, guid: 63fd57ae6a98c69409d80e87ff389b10, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 63fd57ae6a98c69409d80e87ff389b10, type: 3}
+--- !u!4 &6354202573788872899 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8407855173194895092, guid: 63fd57ae6a98c69409d80e87ff389b10, type: 3}
+  m_PrefabInstance: {fileID: 3206591696216870455}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8869063947767458284
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -151,6 +225,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6d43305601edcae468e72f5fca18513b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6387729289892807497}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6d43305601edcae468e72f5fca18513b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6354202573788872899}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d43305601edcae468e72f5fca18513b, type: 3}
 --- !u!4 &8980045539191705095 stripped

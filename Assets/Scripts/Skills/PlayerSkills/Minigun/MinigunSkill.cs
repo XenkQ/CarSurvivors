@@ -12,7 +12,6 @@ namespace Assets.Scripts.Skills.PlayerSkills.Minigun
     {
         [field: SerializeField] public override SkillInfoSO SkillInfo { get; protected set; }
         [field: SerializeField] protected override MinigunSkillUpgradeableConfigSO _config { get; set; }
-        [SerializeField] private Transform _projectilesParent;
         [SerializeField] private MinigunTurret[] _turrets;
         private IItemsWithScriptableConfigsActivator<MinigunTurret, TurretConfigSO> _turretsActivator;
 
