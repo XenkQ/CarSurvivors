@@ -38,7 +38,7 @@ namespace Assets.Scripts.Skills.PlayerSkills.Minigun
             _rotationTween = _visual.StartYAngleLocalRotationLoopTween(_config.RotationAngle, _config.RotationDuration, _inverseRotation);
         }
 
-        public override void Shoot()
+        public override void Shoot(float shootPreparingAnimationSpeed = 1f)
         {
             Projectile projectile = Instantiate(_turretsProejctile, _gunTip.position, _gunTip.rotation, _projectilesParent);
             projectile.OnLifeEnd += Projectile_OnLifeEnd;

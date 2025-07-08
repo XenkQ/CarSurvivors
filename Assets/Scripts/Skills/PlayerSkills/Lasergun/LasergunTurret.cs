@@ -4,11 +4,13 @@ using Assets.Scripts.Skills;
 using Assets.Scripts.StatusAffectables;
 using System.Collections;
 using UnityEngine;
+using VFX;
 
 public class LasergunTurret : Turret<TurretConfigSO>
 {
     [SerializeField] private LineRenderer _laserLineRenderer;
     [SerializeField] private float _startShowLaserShootDuration = 0.1f;
+    [SerializeField] private VFXPlayer _laserCumulatingVFX;
     private float _currentShowLaserShootDuration;
     private bool _isShowingLaser;
 
@@ -34,21 +36,29 @@ public class LasergunTurret : Turret<TurretConfigSO>
         HandleRotation();
     }
 
-    public override void Shoot()
+    private void OnEnable()
+    {
+        _laserCumulatingVFX.OnVFXFinished += LaserCumulatingVFX_OnVFXFinished;
+    }
+
+    private void OnDisable()
+    {
+        _laserCumulatingVFX.OnVFXFinished -= LaserCumulatingVFX_OnVFXFinished;
+    }
+
+    public override void Shoot(float shootPreparingAnimationSpeed = 1f)
     {
         if (!CanShoot())
         {
             return;
         }
 
-        _laserLineRenderer.positionCount = 2;
+        _laserCumulatingVFX.Play(shootPreparingAnimationSpeed);
+    }
 
-        StartCoroutine(ShootingLaserEffect());
-
-        EntityManipulationHelper.Damage(
-            _currentTarget,
-            _config.ProjectileStatsSO.Damage
-        );
+    private void LaserCumulatingVFX_OnVFXFinished(object sender, System.EventArgs e)
+    {
+        FireLaserBeam();
     }
 
     private bool CanShoot()
@@ -57,6 +67,18 @@ public class LasergunTurret : Turret<TurretConfigSO>
                && _isShowingLaser == false
                && _isLookingAtTarget
                && IsCurrentTargetInRange();
+    }
+
+    private void FireLaserBeam()
+    {
+        _laserLineRenderer.positionCount = 2;
+
+        StartCoroutine(ShootingLaserEffect());
+
+        EntityManipulationHelper.Damage(
+            _currentTarget,
+            _config.ProjectileStatsSO.Damage
+        );
     }
 
     private IEnumerator ShootingLaserEffect()

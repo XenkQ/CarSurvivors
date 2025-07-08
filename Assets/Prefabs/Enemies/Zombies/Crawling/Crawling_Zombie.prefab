@@ -152,8 +152,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.27223295, y: 0.39138615, z: 1.1138629}
-  m_Center: {x: -0.0064992905, y: 0.20769304, z: -0.18489476}
+  m_Size: {x: 0.27223295, y: 0.52603376, z: 1.1138629}
+  m_Center: {x: -0.0064992905, y: 0.27501684, z: -0.18489474}
 --- !u!54 &7128695265574407790
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -227,6 +227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animationScaleMultiplier: 1
+  _iterationDuration: 1
 --- !u!1001 &8104675823056986214
 PrefabInstance:
   m_ObjectHideFlags: 0

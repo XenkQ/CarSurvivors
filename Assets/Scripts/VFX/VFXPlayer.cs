@@ -65,5 +65,19 @@ namespace VFX
 
             _particlesStartedPlaying = true;
         }
+
+        public void Play(float simulationSpeed)
+        {
+            foreach (var particleSystem in _particleSystems)
+            {
+                if (particleSystem != null)
+                {
+                    var main = particleSystem.main;
+                    main.simulationSpeed = simulationSpeed;
+                }
+            }
+
+            Play();
+        }
     }
 }

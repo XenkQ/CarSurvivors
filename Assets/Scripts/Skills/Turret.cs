@@ -17,7 +17,7 @@ namespace Assets.Scripts.Skills
             _projectilesParent = GameObject.FindGameObjectWithTag("ProjectilesHolder")?.transform;
         }
 
-        public abstract void Shoot();
+        public abstract void Shoot(float shootPreparingAnimationSpeed = 1f);
 
         public virtual void Initialize(ConfigSO config)
         {

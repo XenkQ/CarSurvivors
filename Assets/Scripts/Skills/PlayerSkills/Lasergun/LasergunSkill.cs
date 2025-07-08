@@ -30,7 +30,7 @@ public class LasergunSkill : UpgradeableSkill<LasergunSkillSO>
     {
         foreach (var turret in _turrets)
         {
-            turret.Shoot();
+            turret.Shoot(_config.DelayBetweenShoots.MinMaxRange.Min / _config.DelayBetweenShoots.Value);
         }
     }
 }
