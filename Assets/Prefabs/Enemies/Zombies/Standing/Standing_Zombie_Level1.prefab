@@ -89,6 +89,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 4e8b1a02391449a448426a1f5f179709, type: 2}
     - target: {fileID: 5137694293864681286, guid: 04e28f7e31f150146acd7ba9f4db9b56, type: 3}
+      propertyPath: _deathVfxPlayer
+      value: 
+      objectReference: {fileID: 1633092592158408719, guid: b61a97e5baf8bd04ca35d8187771fb90, type: 3}
+    - target: {fileID: 5137694293864681286, guid: 04e28f7e31f150146acd7ba9f4db9b56, type: 3}
       propertyPath: <Config>k__BackingField
       value: 
       objectReference: {fileID: 11400000, guid: cc3a1213a2b8f67458f771b38157ec39, type: 2}
@@ -97,7 +101,8 @@ PrefabInstance:
       value: 1.05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4347239227876819486, guid: 04e28f7e31f150146acd7ba9f4db9b56, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04e28f7e31f150146acd7ba9f4db9b56, type: 3}

@@ -73,9 +73,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: e786230d93c144e4b8dfe830cc9035c0, type: 2}
     - target: {fileID: 5137694293864681286, guid: 51bbe108060737f41995dc41eaef8a82, type: 3}
+      propertyPath: _deathVfxPlayer
+      value: 
+      objectReference: {fileID: 6537075312909327198, guid: 59fead826094dbc4eae2042da4f8df4d, type: 3}
+    - target: {fileID: 5137694293864681286, guid: 51bbe108060737f41995dc41eaef8a82, type: 3}
       propertyPath: <Config>k__BackingField
       value: 
       objectReference: {fileID: 11400000, guid: e8a2efd860640e54594ee96aa730616c, type: 2}
+    - target: {fileID: 5137694293864681286, guid: 51bbe108060737f41995dc41eaef8a82, type: 3}
+      propertyPath: _deathEffectCenterOffset.y
+      value: 0.216
+      objectReference: {fileID: 0}
     - target: {fileID: 6756397437299039757, guid: 51bbe108060737f41995dc41eaef8a82, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -84,6 +92,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[1]'
       value: 
       objectReference: {fileID: 2100000, guid: 4e8b1a02391449a448426a1f5f179709, type: 2}
+    - target: {fileID: 6828818130047420938, guid: 51bbe108060737f41995dc41eaef8a82, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e786230d93c144e4b8dfe830cc9035c0, type: 2}
     - target: {fileID: 7972600806242769793, guid: 51bbe108060737f41995dc41eaef8a82, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.08

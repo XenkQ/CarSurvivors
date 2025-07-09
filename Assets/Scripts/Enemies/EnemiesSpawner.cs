@@ -82,11 +82,11 @@ namespace Assets.Scripts.Enemies
                 return;
             }
 
-            enemy.transform.position = cell.WorldPos;
-
             enemy.Health.OnNoHealth += Health_OnNoHealth;
 
-            enemy.gameObject.SetActive(true);
+            enemy.transform.position = cell.WorldPos;
+
+            enemy.OnGet();
 
             SpawnedEnemiesCounter++;
         }
@@ -97,7 +97,7 @@ namespace Assets.Scripts.Enemies
 
             OnSpawnedEntityReleased?.Invoke(enemy, EventArgs.Empty);
 
-            enemy.gameObject.SetActive(false);
+            enemy.OnRelease();
 
             SpawnedEnemiesCounter--;
         }

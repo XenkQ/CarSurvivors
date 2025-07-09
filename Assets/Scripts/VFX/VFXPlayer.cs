@@ -5,68 +5,74 @@ namespace VFX
 {
     public interface IVFXPlayer
     {
-        public void Play();
+        public void Play(bool destroyOnEnd = false);
+
+        public void Play(float simulationSpeed = 1f, bool destroyOnEnd = false);
+
+        public float GetLongestParticleDuration();
 
         public event EventHandler OnVFXFinished;
     }
 
     public class VFXPlayer : MonoBehaviour, IVFXPlayer
     {
-        [SerializeField] private float _delayBetweenParticlesFinishedPlayingChecks = 0.1f;
-
         public event EventHandler OnVFXFinished;
 
         private ParticleSystem[] _particleSystems;
 
         private bool _particlesStartedPlaying;
 
+        private float _longestParticleDuration;
+
+        private bool _destroyOnEnd;
+
         private void Awake()
         {
             _particleSystems = GetComponentsInChildren<ParticleSystem>(includeInactive: true);
         }
 
-        private void OnEnable()
+        public float GetLongestParticleDuration()
         {
-            InvokeRepeating(nameof(AllParticlesFinished), _delayBetweenParticlesFinishedPlayingChecks, _delayBetweenParticlesFinishedPlayingChecks);
+            return _longestParticleDuration;
         }
 
-        private void OnDisable()
+        public void Play(bool destroyOnEnd = false)
         {
-            CancelInvoke(nameof(AllParticlesFinished));
-        }
-
-        private void AllParticlesFinished()
-        {
-            if (!_particlesStartedPlaying)
-            {
-                return;
-            }
-
+            _longestParticleDuration = 0;
             foreach (var particleSystem in _particleSystems)
             {
-                if (particleSystem != null && !particleSystem.isPlaying)
+                if (particleSystem is null)
                 {
-                    OnVFXFinished?.Invoke(this, EventArgs.Empty);
-                    _particlesStartedPlaying = false;
-                    return;
+                    continue;
                 }
-            }
-        }
 
-        public void Play()
-        {
-            foreach (var particleSystem in _particleSystems)
+                float currentDuration = particleSystem.main.duration;
+                if (particleSystem.main.duration > _longestParticleDuration)
+                {
+                    _longestParticleDuration = currentDuration;
+                }
+
+                _particlesStartedPlaying = true;
+                particleSystem.Play();
+            }
+
+            _destroyOnEnd = destroyOnEnd;
+            if (_particlesStartedPlaying)
             {
-                if (particleSystem != null)
+                if (IsInvoking(nameof(OnAllParticlesFinished)))
                 {
-                    particleSystem.Play();
+                    CancelInvoke(nameof(OnAllParticlesFinished));
                 }
-            }
 
-            _particlesStartedPlaying = true;
+                InvokeRepeating(nameof(OnAllParticlesFinished), _longestParticleDuration, _longestParticleDuration);
+            }
+            else
+            {
+                OnAllParticlesFinished();
+            }
         }
 
-        public void Play(float simulationSpeed)
+        public void Play(float simulationSpeed, bool destroyOnEnd = false)
         {
             foreach (var particleSystem in _particleSystems)
             {
@@ -77,7 +83,23 @@ namespace VFX
                 }
             }
 
-            Play();
+            Play(destroyOnEnd);
+        }
+
+        private void OnAllParticlesFinished()
+        {
+            if (!_particlesStartedPlaying)
+            {
+                return;
+            }
+
+            OnVFXFinished?.Invoke(this, EventArgs.Empty);
+            _particlesStartedPlaying = false;
+
+            if (_destroyOnEnd)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

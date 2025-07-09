@@ -54,6 +54,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Config>k__BackingField: {fileID: 0}
+  _deathEffect: {fileID: 0}
+  _deathEffectCenterOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &1025450493727768952
 MonoBehaviour:
   m_ObjectHideFlags: 0

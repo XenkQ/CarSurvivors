@@ -64,6 +64,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Standing_Zombie_Level4
       objectReference: {fileID: 0}
+    - target: {fileID: 3466813591613636861, guid: 04e28f7e31f150146acd7ba9f4db9b56, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3466813591613636861, guid: 04e28f7e31f150146acd7ba9f4db9b56, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.643
+      objectReference: {fileID: 0}
+    - target: {fileID: 3466813591613636861, guid: 04e28f7e31f150146acd7ba9f4db9b56, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3688238668444586915, guid: 04e28f7e31f150146acd7ba9f4db9b56, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -137,13 +149,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 4e8b1a02391449a448426a1f5f179709, type: 2}
     - target: {fileID: 5137694293864681286, guid: 04e28f7e31f150146acd7ba9f4db9b56, type: 3}
+      propertyPath: _deathVfxPlayer
+      value: 
+      objectReference: {fileID: 838681863528052643, guid: ac876a6df63e6c943b06ce25d709d2e9, type: 3}
+    - target: {fileID: 5137694293864681286, guid: 04e28f7e31f150146acd7ba9f4db9b56, type: 3}
       propertyPath: <Config>k__BackingField
       value: 
       objectReference: {fileID: 11400000, guid: 9c84cc889e2f90b4d9a61426090f9d99, type: 2}
+    - target: {fileID: 5137694293864681286, guid: 04e28f7e31f150146acd7ba9f4db9b56, type: 3}
+      propertyPath: _deathEffectCenterOffset.y
+      value: 1.643
+      objectReference: {fileID: 0}
     - target: {fileID: 7089495505635615785, guid: 04e28f7e31f150146acd7ba9f4db9b56, type: 3}
       propertyPath: _animationScaleMultiplier
       value: 1.42
       objectReference: {fileID: 0}
+    - target: {fileID: 7149136355949885253, guid: 04e28f7e31f150146acd7ba9f4db9b56, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d0ef4e76136abdd42b4764b654ca9a54, type: 2}
     - target: {fileID: 7972600806242769793, guid: 04e28f7e31f150146acd7ba9f4db9b56, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.8
@@ -157,7 +181,8 @@ PrefabInstance:
       value: 1.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4347239227876819486, guid: 04e28f7e31f150146acd7ba9f4db9b56, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04e28f7e31f150146acd7ba9f4db9b56, type: 3}
