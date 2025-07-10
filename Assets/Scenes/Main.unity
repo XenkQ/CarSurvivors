@@ -1709,14 +1709,14 @@ MonoBehaviour:
       TresholdToStartAddingSpawnChanceToOtherInfos: 40
       SpawnChanceWillNotChange: 0
       HasEverReachedThreshold: 0
-  - EnemyPrefab: {fileID: 7936440336419562411, guid: 846aec665bedb4c41930147cc80be84e, type: 3}
+  - EnemyPrefab: {fileID: 8544650596686725407, guid: d5bb0f9692c21d340823d0058bfb4042, type: 3}
     MaxAmount: 80
     SpawnChanceInfo:
       SpawnChance: 0
       TresholdToStartAddingSpawnChanceToOtherInfos: 30
       SpawnChanceWillNotChange: 0
       HasEverReachedThreshold: 0
-  - EnemyPrefab: {fileID: 8544650596686725407, guid: 1c4e953fc50e7444ab0e5f870c26a9ef, type: 3}
+  - EnemyPrefab: {fileID: 7936440336419562411, guid: 846aec665bedb4c41930147cc80be84e, type: 3}
     MaxAmount: 80
     SpawnChanceInfo:
       SpawnChance: 0
@@ -1730,7 +1730,7 @@ MonoBehaviour:
       TresholdToStartAddingSpawnChanceToOtherInfos: 14
       SpawnChanceWillNotChange: 0
       HasEverReachedThreshold: 0
-  - EnemyPrefab: {fileID: 8544650596686725407, guid: e1a12b239e4ee684cb99d952c862adf1, type: 3}
+  - EnemyPrefab: {fileID: 8544650596686725407, guid: ae3b807fbe809ea4c8c6fe09bd085225, type: 3}
     MaxAmount: 70
     SpawnChanceInfo:
       SpawnChance: 0

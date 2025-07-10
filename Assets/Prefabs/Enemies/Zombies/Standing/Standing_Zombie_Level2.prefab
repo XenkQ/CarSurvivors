@@ -123,7 +123,7 @@ PrefabInstance:
     - target: {fileID: 5137694293864681286, guid: 04e28f7e31f150146acd7ba9f4db9b56, type: 3}
       propertyPath: <Config>k__BackingField
       value: 
-      objectReference: {fileID: 11400000, guid: 778350b9774106f46945e67d8bf4d3e0, type: 2}
+      objectReference: {fileID: 11400000, guid: 1690343bc4e65f94eb5fc05d3c5bf366, type: 2}
     - target: {fileID: 5137694293864681286, guid: 04e28f7e31f150146acd7ba9f4db9b56, type: 3}
       propertyPath: _deathEffectCenterOffset.y
       value: 0.975

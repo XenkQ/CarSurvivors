@@ -6,6 +6,11 @@ namespace Assets.Scripts.StatusAffectables
     {
         public static void Damage(Collider target, float damage)
         {
+            if (target is null)
+            {
+                return;
+            }
+
             if (target.TryGetComponent(out IDamageable damageable))
             {
                 damageable.TakeDamage(damage);
@@ -14,6 +19,11 @@ namespace Assets.Scripts.StatusAffectables
 
         public static void Knockback(Collider target, Vector3 dir, float range, float timeToArriveAtLocation)
         {
+            if (target is null)
+            {
+                return;
+            }
+
             if (target.TryGetComponent(out IKnockable knockable))
             {
                 knockable.ApplyKnockBack(dir, range, timeToArriveAtLocation);
@@ -22,6 +32,11 @@ namespace Assets.Scripts.StatusAffectables
 
         public static void Stun(Collider target, float duration)
         {
+            if (target is null)
+            {
+                return;
+            }
+
             if (target.TryGetComponent(out IStunnable stunnable))
             {
                 stunnable.ApplyStun(duration);
