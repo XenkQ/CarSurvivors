@@ -7,8 +7,6 @@ namespace Assets.Scripts
     {
         public float GetCurrentMovementSpeed();
 
-        public void SetSeparationVector(Vector3 separation);
-
         public Tween MoveToPositionInTimeIgnoringSpeed(Vector3 pos, float time);
     }
 }

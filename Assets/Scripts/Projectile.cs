@@ -1,4 +1,5 @@
 using Assets.ScriptableObjects;
+using Assets.Scripts.Extensions;
 using Assets.Scripts.Initializers;
 using Assets.Scripts.LayerMasks;
 using Assets.Scripts.StatusAffectables;
@@ -43,7 +44,7 @@ namespace Assets.Scripts
 
             _piercedCounter = _config.MaxPiercing;
 
-            StartMovingBulletForward();
+            StartMovingProjectileForward();
 
             transform.localScale = new Vector3(_config.Size, _config.Size, transform.localScale.y);
 
@@ -52,25 +53,20 @@ namespace Assets.Scripts
 
         public bool IsInitialized() => _isInitialized;
 
-        private void StartMovingBulletForward()
+        private void StartMovingProjectileForward()
         {
             Vector3 targetPos = transform.position + transform.forward * _config.Range;
             targetPos.y = transform.position.y;
             transform
                 .DOMove(targetPos, _config.TimeToArriveAtEndRangeMultiplier * _config.Range)
                 .SetEase(Ease.Linear)
-                .OnComplete(EndLifeWithShrinkingToZero);
+                .OnComplete(OnProjectileReachedDestination);
         }
 
-        private void EndLifeWithShrinkingToZero()
+        private void OnProjectileReachedDestination()
         {
             const float disapearingShrinkDuration = 0.1f;
-
-            DOTween.Kill(transform);
-
-            transform.DOScale(Vector3.zero, disapearingShrinkDuration)
-                .SetEase(Ease.Flash)
-                .OnComplete(EndLife);
+            transform.LifeEndingShrinkToZeroTween(disapearingShrinkDuration, EndLife);
         }
 
         private void EndLife()

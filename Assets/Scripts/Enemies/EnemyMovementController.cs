@@ -1,11 +1,10 @@
-using Assets.Scripts.GridSystem;
-using Assets.Scripts.StatusAffectables;
+using Assets.Scripts.FlowFieldSystem;
 using DG.Tweening;
 using UnityEngine;
 
 namespace Assets.Scripts.Enemies
 {
-    [RequireComponent(typeof(Enemy))]
+    [RequireComponent(typeof(Enemy), typeof(FlowFieldMovementController))]
     public class EnemyMovementController : MonoBehaviour, IMovementController
     {
         private const float MOVING_TO_POSITION_ACCURACY = 0.02f;
@@ -22,14 +21,15 @@ namespace Assets.Scripts.Enemies
 
         private Tween _movementUnrelatedToSpeedTween;
 
-        private Vector3 _externalSeparation = Vector3.zero;
-
         private float _movementDelayAfterAttack = 0.2f;
         private float _currentMovementDelayAfterAttack;
+
+        private IFlowFieldMovementController _flowFieldMovementController;
 
         private void Awake()
         {
             _enemy = GetComponent<Enemy>();
+            _flowFieldMovementController = GetComponent<IFlowFieldMovementController>();
         }
 
         private void OnEnable()
@@ -68,7 +68,7 @@ namespace Assets.Scripts.Enemies
                 }
                 else
                 {
-                    movement = MoveOnFlowFieldGrid();
+                    movement = _flowFieldMovementController.MoveOnFlowFieldGrid(_enemy.Config.MovementSpeed);
                 }
 
                 if (movement.HasValue)
@@ -80,11 +80,6 @@ namespace Assets.Scripts.Enemies
             {
                 _currentMovementDelayAfterAttack -= Time.deltaTime;
             }
-        }
-
-        public void SetSeparationVector(Vector3 separation)
-        {
-            _externalSeparation = separation;
         }
 
         public float GetCurrentMovementSpeed()
@@ -108,7 +103,6 @@ namespace Assets.Scripts.Enemies
                 {
                     _isMovingToPositionUnrelatedToGrid = false;
                     _movementUnrelatedToSpeedTween = null;
-                    _externalSeparation = Vector3.zero;
                 });
         }
 
@@ -155,31 +149,6 @@ namespace Assets.Scripts.Enemies
                     _enemy.Config.RotationSpeed * Time.deltaTime
                 );
             }
-        }
-
-        private Vector3 MoveOnFlowFieldGrid()
-        {
-            Vector3 gridDir = GetMoveDirectionBasedOnCurrentCell();
-            Vector3 moveDir = (gridDir + _externalSeparation).normalized;
-            Vector3 movement = _enemy.Config.MovementSpeed * Time.deltaTime * moveDir;
-            transform.position += movement;
-
-            _externalSeparation = Vector3.zero;
-
-            return movement;
-        }
-
-        private Vector3 GetMoveDirectionBasedOnCurrentCell()
-        {
-            GridSystem.Grid grid = GridManager.Instance.WorldGrid;
-            Cell currentCell = WorldPosToCellConverter.GetCellFromGridByWorldPos(grid, transform.position);
-            if (currentCell != null && currentCell.BestDirection != null)
-            {
-                Vector2Int gridDirection = currentCell.BestDirection.Vector;
-                return new Vector3(gridDirection.x, 0, gridDirection.y);
-            }
-
-            return Vector3.zero;
         }
     }
 }

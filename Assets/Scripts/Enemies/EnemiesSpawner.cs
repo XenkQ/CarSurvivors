@@ -12,7 +12,7 @@ namespace Assets.Scripts.Enemies
 {
     public sealed class EnemiesSpawner : MonoBehaviour, ISpawner
     {
-        [Header("Spawn Chance Settings")]
+        [Header("SpawnExpParticle Chance Settings")]
         [SerializeField] private FloatValueRange _spawnChanceDecreaseFactor;
         private EnemiesSpawnChanceRedistributionSystem _enemiesSpawnChanceRedistributionSystem = new();
 

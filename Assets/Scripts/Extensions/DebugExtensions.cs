@@ -8,7 +8,7 @@ namespace Assets.Scripts.Extensions
             this Debug debug,
             Vector3 center,
             float radius,
-            int segments = 32,
+            int segments = 16,
             Color? color = null,
             float duration = 0f)
         {
@@ -33,7 +33,7 @@ namespace Assets.Scripts.Extensions
             Vector3 forward,
             float arcAngle,
             float range,
-            int segments = 32,
+            int segments = 16,
             Color? color = null)
         {
             color ??= Color.white;

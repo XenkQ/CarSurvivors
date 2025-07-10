@@ -1,8 +1,8 @@
 using Assets.Scripts.Collisions;
 using Assets.Scripts.HealthSystem;
+using Assets.Scripts.LevelSystem.Exp;
 using Assets.Scripts.Player;
 using Assets.Scripts.StatusAffectables;
-using System.Xml.Serialization;
 using UnityEngine;
 using VFX;
 
@@ -11,6 +11,7 @@ namespace Assets.Scripts.Enemies
     public class Enemy : MonoBehaviour, IHealthy, IDamageable, IKnockable, IStunnable, IPoolable
     {
         [field: SerializeField] public EnemyConfigSO Config { get; private set; }
+        [SerializeField] private VFXPlayer _bloodVfxPlayer;
         [SerializeField] private VFXPlayer _deathVfxPlayer;
         [SerializeField] private Vector3 _deathEffectCenterOffset;
 
@@ -42,9 +43,9 @@ namespace Assets.Scripts.Enemies
 
         private void OnDisable()
         {
-            PlayerManager.Instance.LevelController.AddExp(Config.ExpForKill);
-
             SpawnDeathParticles();
+
+            SpawnExp();
         }
 
         public void OnGet()
@@ -65,6 +66,11 @@ namespace Assets.Scripts.Enemies
         public void TakeDamage(float damage)
         {
             Health.DecreaseHealth(damage);
+
+            if (Health.IsAlive())
+            {
+                _bloodVfxPlayer.Play();
+            }
         }
 
         public void ApplyStun(float duration)
@@ -77,6 +83,16 @@ namespace Assets.Scripts.Enemies
             var deathVfxPlayer = Instantiate(_deathVfxPlayer, transform.position + _deathEffectCenterOffset, Quaternion.identity);
 
             deathVfxPlayer.Play(true);
+        }
+
+        private void SpawnExp()
+        {
+            ExpParticleSpawner.Instance.SpawnExpParticle(
+                new ExpParticleSpawner.ExpParticleSpawnData(
+                    transform.position + _deathEffectCenterOffset,
+                    Config.ExpForKill
+                )
+            );
         }
     }
 }

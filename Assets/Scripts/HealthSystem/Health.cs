@@ -10,20 +10,22 @@ namespace Assets.Scripts.HealthSystem
 
     public interface IHealth
     {
-        float CurrentHealth { get; }
-        float MaxHealth { get; set; }
+        public float CurrentHealth { get; }
+        public float MaxHealth { get; set; }
 
-        event EventHandler OnHealthChange;
+        public event EventHandler OnHealthChange;
 
-        event EventHandler OnHealthDecreased;
+        public event EventHandler OnHealthDecreased;
 
-        event EventHandler OnHealthIncreased;
+        public event EventHandler OnHealthIncreased;
 
-        event EventHandler OnNoHealth;
+        public event EventHandler OnNoHealth;
 
-        void DecreaseHealth(float value);
+        public void DecreaseHealth(float value);
 
-        void IncreaseHealth(float value);
+        public void IncreaseHealth(float value);
+
+        public bool IsAlive();
     }
 
     [Serializable]
@@ -81,6 +83,11 @@ namespace Assets.Scripts.HealthSystem
             {
                 CurrentHealth = MaxHealth;
             }
+        }
+
+        public bool IsAlive()
+        {
+            return CurrentHealth > 0;
         }
 
         private void InvokeOnHealthChange(object sender, EventArgs e)

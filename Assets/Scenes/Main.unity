@@ -2136,6 +2136,7 @@ Transform:
   - {fileID: 36651506}
   - {fileID: 172225608}
   - {fileID: 449990456}
+  - {fileID: 1416325776}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &521650945
@@ -10152,6 +10153,59 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1416325775
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1416325776}
+  - component: {fileID: 1416325777}
+  m_Layer: 0
+  m_Name: ExpParticlesSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1416325776
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1416325775}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 517296375}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1416325777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1416325775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d97bba37f4106fb47a29d53d52dc8900, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _expParticlePrefab: {fileID: 2432047573316968158, guid: e3766f3b3f9025548927256069c08ace, type: 3}
+  _expTresholdDeviders:
+  - Treshold: 0
+    Divider: 1
+  - Treshold: 100
+    Divider: 2
+  - Treshold: 200
+    Divider: 3
+  _spawningCircleRadius: 1
 --- !u!1001 &1441219646
 PrefabInstance:
   m_ObjectHideFlags: 0

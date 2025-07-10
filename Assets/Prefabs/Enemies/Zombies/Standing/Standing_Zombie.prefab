@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 3688238668444586915}
   - component: {fileID: 5137694293864681286}
   - component: {fileID: 1025450493727768952}
-  - component: {fileID: 2860446493264396698}
   - component: {fileID: 5328113168761846994}
   - component: {fileID: 6626357694038879756}
   - component: {fileID: 347190357356235707}
   - component: {fileID: 2035910355702977201}
+  - component: {fileID: 4599289953647572422}
   - component: {fileID: 4176904749440768749}
   - component: {fileID: 7128695265574407790}
   m_Layer: 7
@@ -39,7 +39,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7972600806242769793}
-  - {fileID: 3466813591613636861}
+  - {fileID: 323885298071574372}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5137694293864681286
@@ -55,7 +55,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Config>k__BackingField: {fileID: 0}
-  _deathEffect: {fileID: 0}
+  _bloodVfxPlayer: {fileID: 6579929326629268662}
+  _deathVfxPlayer: {fileID: 0}
   _deathEffectCenterOffset: {x: 0, y: 0.823, z: 0}
 --- !u!114 &1025450493727768952
 MonoBehaviour:
@@ -70,20 +71,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <MaxHealth>k__BackingField: 100
---- !u!114 &2860446493264396698
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3261852426992956232}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8313d9e6a9e7bf24ba0df699a35ec0d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  separationRadius: 1.2
-  separationStrength: 0.6
 --- !u!114 &5328113168761846994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,6 +123,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _attackArcAngle: 83
   _attackRange: 0.75
+--- !u!114 &4599289953647572422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3261852426992956232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e6a945254f7014a8a9a2f6700ad6b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  separationRadius: 1.2
+  separationStrength: 0.5
 --- !u!65 &4176904749440768749
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -231,7 +232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animationScaleMultiplier: 1
   _iterationDuration: 1
---- !u!1001 &353295749892667973
+--- !u!1001 &6046367096723449789
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -239,65 +240,71 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3688238668444586915}
     m_Modifications:
-    - target: {fileID: -1053057390088994018, guid: b61a97e5baf8bd04ca35d8187771fb90, type: 3}
-      propertyPath: _delayBetweenParticlesFinishedPlayingChecks
-      value: 1.1
+    - target: {fileID: 3158098128590308274, guid: 7f46968b7008bf746a9ce3f380da528e, type: 3}
+      propertyPath: m_Name
+      value: Vfx_BloodHit
       objectReference: {fileID: 0}
-    - target: {fileID: 3817838671216868024, guid: b61a97e5baf8bd04ca35d8187771fb90, type: 3}
+    - target: {fileID: 6311699360074215641, guid: 7f46968b7008bf746a9ce3f380da528e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3817838671216868024, guid: b61a97e5baf8bd04ca35d8187771fb90, type: 3}
+    - target: {fileID: 6311699360074215641, guid: 7f46968b7008bf746a9ce3f380da528e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.823
+      value: 0.75
       objectReference: {fileID: 0}
-    - target: {fileID: 3817838671216868024, guid: b61a97e5baf8bd04ca35d8187771fb90, type: 3}
+    - target: {fileID: 6311699360074215641, guid: 7f46968b7008bf746a9ce3f380da528e, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3817838671216868024, guid: b61a97e5baf8bd04ca35d8187771fb90, type: 3}
+    - target: {fileID: 6311699360074215641, guid: 7f46968b7008bf746a9ce3f380da528e, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3817838671216868024, guid: b61a97e5baf8bd04ca35d8187771fb90, type: 3}
+    - target: {fileID: 6311699360074215641, guid: 7f46968b7008bf746a9ce3f380da528e, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 3817838671216868024, guid: b61a97e5baf8bd04ca35d8187771fb90, type: 3}
+    - target: {fileID: 6311699360074215641, guid: 7f46968b7008bf746a9ce3f380da528e, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 3817838671216868024, guid: b61a97e5baf8bd04ca35d8187771fb90, type: 3}
+    - target: {fileID: 6311699360074215641, guid: 7f46968b7008bf746a9ce3f380da528e, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 3817838671216868024, guid: b61a97e5baf8bd04ca35d8187771fb90, type: 3}
+    - target: {fileID: 6311699360074215641, guid: 7f46968b7008bf746a9ce3f380da528e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3817838671216868024, guid: b61a97e5baf8bd04ca35d8187771fb90, type: 3}
+    - target: {fileID: 6311699360074215641, guid: 7f46968b7008bf746a9ce3f380da528e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3817838671216868024, guid: b61a97e5baf8bd04ca35d8187771fb90, type: 3}
+    - target: {fileID: 6311699360074215641, guid: 7f46968b7008bf746a9ce3f380da528e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4085705594386528347, guid: b61a97e5baf8bd04ca35d8187771fb90, type: 3}
-      propertyPath: m_Name
-      value: Vfx_Zombie_Cells_Explosion
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: -1053057390088994018, guid: b61a97e5baf8bd04ca35d8187771fb90, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: b61a97e5baf8bd04ca35d8187771fb90, type: 3}
---- !u!4 &3466813591613636861 stripped
+  m_SourcePrefab: {fileID: 100100000, guid: 7f46968b7008bf746a9ce3f380da528e, type: 3}
+--- !u!4 &323885298071574372 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 3817838671216868024, guid: b61a97e5baf8bd04ca35d8187771fb90, type: 3}
-  m_PrefabInstance: {fileID: 353295749892667973}
+  m_CorrespondingSourceObject: {fileID: 6311699360074215641, guid: 7f46968b7008bf746a9ce3f380da528e, type: 3}
+  m_PrefabInstance: {fileID: 6046367096723449789}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6579929326629268662 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 628700794751159051, guid: 7f46968b7008bf746a9ce3f380da528e, type: 3}
+  m_PrefabInstance: {fileID: 6046367096723449789}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48afc82f05876db4b943d6f0503cc3a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7609856897060529175
 PrefabInstance:
   m_ObjectHideFlags: 0
