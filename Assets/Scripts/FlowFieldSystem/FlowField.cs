@@ -20,7 +20,13 @@ namespace Assets.Scripts.FlowFieldSystem
                     Cell cell = grid.Cells[i, j];
                     float edgesOffset = -0.05f;
                     Vector3 halfExtents = Vector3.one * (grid.CellSize / 2 + edgesOffset);
-                    Collider[] obstacles = Physics.OverlapBox(cell.WorldPos, halfExtents, Quaternion.identity, TerrainLayers.All);
+
+                    Collider[] obstacles = Physics.OverlapBox(
+                        cell.WorldPos,
+                        halfExtents,
+                        Quaternion.identity,
+                        TerrainLayers.All);
+
                     cell.ResetCosts();
 
                     int maxCost = 0;
@@ -29,11 +35,13 @@ namespace Assets.Scripts.FlowFieldSystem
                         foreach (Collider obstacle in obstacles)
                         {
                             int layerValue = 1 << obstacle.gameObject.layer;
-                            if (maxCost < IMPASSABLE_COST && (layerValue & TerrainLayers.Impassable.value) == TerrainLayers.Impassable.value)
+                            if (maxCost < IMPASSABLE_COST
+                                && (layerValue & TerrainLayers.Impassable.value) == TerrainLayers.Impassable.value)
                             {
                                 maxCost = IMPASSABLE_COST;
                             }
-                            else if (maxCost < ROUGH_TERRAIN_COST && (layerValue & TerrainLayers.Rough.value) == TerrainLayers.Rough.value)
+                            else if (maxCost < ROUGH_TERRAIN_COST
+                                && (layerValue & TerrainLayers.Rough.value) == TerrainLayers.Rough.value)
                             {
                                 maxCost = ROUGH_TERRAIN_COST;
                             }
@@ -65,11 +73,7 @@ namespace Assets.Scripts.FlowFieldSystem
                 List<Cell> currentNeighbours = GetNeighbourCells(grid, currentCell, GridDirection.CardinalDirections);
                 foreach (Cell currentNeighbour in currentNeighbours)
                 {
-                    if (currentNeighbour.Cost == byte.MaxValue)
-                    {
-                        continue;
-                    }
-                    else if (currentNeighbour.Cost + currentCell.BestCost < currentNeighbour.BestCost)
+                    if (currentNeighbour.Cost + currentCell.BestCost < currentNeighbour.BestCost)
                     {
                         currentNeighbour.BestCost = (ushort)(currentNeighbour.Cost + currentCell.BestCost);
                         cellsToCheck.Enqueue(currentNeighbour);
@@ -95,7 +99,8 @@ namespace Assets.Scripts.FlowFieldSystem
 
                 if (bestCostCell != currentCell)
                 {
-                    currentCell.BestDirection = GridDirection.GetDirectionFromV2I(bestCostCell.WorldGridPos - currentCell.WorldGridPos);
+                    currentCell.BestDirection =
+                        GridDirection.GetDirectionFromV2I(bestCostCell.WorldGridPos - currentCell.WorldGridPos);
                 }
             }
         }

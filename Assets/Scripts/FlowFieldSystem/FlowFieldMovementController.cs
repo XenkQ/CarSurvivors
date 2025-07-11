@@ -35,8 +35,6 @@ namespace Assets.Scripts.FlowFieldSystem
             Vector3 movement = movementSpeed * Time.deltaTime * moveDir;
             transform.position += movement;
 
-            _separationVector = Vector3.zero;
-
             return movement;
         }
 

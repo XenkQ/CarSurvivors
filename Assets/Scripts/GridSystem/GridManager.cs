@@ -30,6 +30,10 @@ namespace Assets.Scripts.GridSystem
 
         public static GridManager Instance { get; private set; }
 
+        public Cell DestinationCell { get; private set; }
+
+        private PlayerManager _playerManager;
+
         private GridManager()
         { }
 
@@ -47,32 +51,35 @@ namespace Assets.Scripts.GridSystem
             WorldGrid = new Grid(_worldGridConfiguration);
             _flowField = new FlowField();
             _flowFieldDebugConfiguration.Grid = WorldGrid;
-            UpdateFlowFieldBasedOnPlayerInWorldGridPos(WorldGrid);
-            UpdatePlayerChunkGrid();
 
-            //Calling debug world gridPerformingUpdate to prevent lag caused by creating a lot of tmpro objects
 #if DEBUG
-            DebugWorldGrid();
+            UpdateFlowField(WorldGrid, WorldGrid.Cells[WorldGrid.Width / 2, WorldGrid.Height / 2].WorldPos);
 #endif
+        }
+
+        private void OnEnable()
+        {
+            _playerManager = PlayerManager.Instance;
+
+            InvokeRepeating(nameof(UpdateFlowFieldWithNewPlayerChunkGrid), 0, _delayBetweenPlayerChunkGridUpdate);
         }
 
         public void Start()
         {
-            InvokeRepeating(nameof(UpdatePlayerChunkGrid), _delayBetweenWorldGridUpdate, _delayBetweenPlayerChunkGridUpdate);
 #if DEBUG
             if (_debugGrid)
             {
                 float drawTimeOffset = 0.02f;
-                InvokeRepeating(nameof(DebugWorldGrid), _delayBetweenWorldGridUpdate, _delayBetweenWorldGridUpdate + drawTimeOffset);
-                InvokeRepeating(nameof(DebugPlayerChunkGrid), _delayBetweenPlayerChunkGridUpdate, _delayBetweenPlayerChunkGridUpdate + drawTimeOffset);
+                InvokeRepeating(nameof(DebugWorldGrid), 0, _delayBetweenWorldGridUpdate + drawTimeOffset);
+                InvokeRepeating(nameof(DebugPlayerChunkGrid), 0, _delayBetweenPlayerChunkGridUpdate + drawTimeOffset);
             }
 #endif
         }
 
-        private void UpdatePlayerChunkGrid()
+        private void UpdateFlowFieldWithNewPlayerChunkGrid()
         {
             GridPlayerChunk = CreatePlayerChunkBasedOnPlayerPositionInWorldGrid();
-            UpdateFlowFieldBasedOnPlayerInWorldGridPos(GridPlayerChunk);
+            UpdateFlowField(GridPlayerChunk, _playerManager.transform.position);
         }
 
         private void DebugPlayerChunkGrid()
@@ -101,8 +108,11 @@ namespace Assets.Scripts.GridSystem
             int chunkWidth = _playerGridConfiguration.Width;
             int chunkHeight = _playerGridConfiguration.Height;
             Cell[,] chunkCells = new Cell[chunkWidth, chunkHeight];
-            Cell cellClosestToPlayer = WorldPosToCellConverter.GetCellFromGridByWorldPos(WorldGrid,
-                (PlayerManager.Instance.transform.position));
+
+            Cell cellClosestToPlayer = WorldPosToCellConverter.GetCellFromGridByWorldPos(
+                WorldGrid,
+                _playerManager.transform.position
+            );
 
             int halfWidth = chunkWidth >> 1;
             int maxGridX = cellClosestToPlayer.WorldGridPos.x + halfWidth;
@@ -139,11 +149,16 @@ namespace Assets.Scripts.GridSystem
             return new Grid(_playerGridConfiguration, chunkCells);
         }
 
-        private void UpdateFlowFieldBasedOnPlayerInWorldGridPos(Grid gridPerformingUpdate)
+        private void UpdateFlowField(Grid gridPerformingUpdate, Vector3 destination)
         {
             _flowField.CreateCostField(gridPerformingUpdate);
-            Cell cellClosestToPlayer = WorldPosToCellConverter.GetCellFromGridByWorldPos(WorldGrid, PlayerManager.Instance.transform.position);
-            _flowField.CreateIntegrationField(gridPerformingUpdate, cellClosestToPlayer);
+
+            DestinationCell = WorldPosToCellConverter.GetCellFromGridByWorldPos(
+                WorldGrid,
+                destination
+            );
+
+            _flowField.CreateIntegrationField(gridPerformingUpdate, DestinationCell);
             _flowField.CreateFlowField(gridPerformingUpdate);
         }
     }
