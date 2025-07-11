@@ -1,7 +1,6 @@
 using Assets.Scripts.Collisions;
 using Assets.Scripts.HealthSystem;
 using Assets.Scripts.LevelSystem.Exp;
-using Assets.Scripts.Player;
 using Assets.Scripts.StatusAffectables;
 using UnityEngine;
 using VFX;
@@ -61,6 +60,11 @@ namespace Assets.Scripts.Enemies
         public void ApplyKnockBack(Vector3 direction, float power, float timeToArriveAtLocation)
         {
             MovementController.MoveToPositionInTimeIgnoringSpeed(transform.position + (direction * power), timeToArriveAtLocation);
+        }
+
+        public void InstantKill()
+        {
+            Health.DecreaseHealth(Health.MaxHealth);
         }
 
         public void TakeDamage(float damage)
