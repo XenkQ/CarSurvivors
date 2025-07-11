@@ -41,7 +41,6 @@ namespace Assets.Scripts.Player
         private void Start()
         {
             _currentDelayBetweenTakingDamage = _startDelayBetweenTakingDamage;
-            Health.OnHealthDecreased += Health_OnHealthDecreased;
             Health.OnNoHealth += Health_OnNoHealth;
         }
 
@@ -67,9 +66,9 @@ namespace Assets.Scripts.Player
             }
         }
 
-        private void Health_OnHealthDecreased(object sender, System.EventArgs e)
+        public void InstantKill()
         {
-            Debug.Log("DAMAGED");
+            Health.DecreaseHealth(Health.MaxHealth);
         }
 
         private void Health_OnNoHealth(object sender, System.EventArgs e)
