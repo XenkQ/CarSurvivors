@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 8283919156244841688}
   - component: {fileID: 5741653628920434165}
   - component: {fileID: 5670474245223251586}
-  - component: {fileID: 7675899436594110558}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,28 +86,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &7675899436594110558
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2497718662250730421}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &3531891143532923326
 GameObject:
   m_ObjectHideFlags: 0
@@ -122,7 +99,8 @@ GameObject:
   - component: {fileID: 3206386065100887514}
   - component: {fileID: 8397447550922609711}
   - component: {fileID: 173282884818906446}
-  m_Layer: 0
+  - component: {fileID: 9071597717056110045}
+  m_Layer: 12
   m_Name: ExpParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157,22 +135,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5de08d9a20f99324795dfd1638919701, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movementSpeed: 3
-  _rangeToChannelExp: 0
-  _inChannelRangeCheckDelay: 0
+  _movementSpeed: 8.8
+  _inChannelRangeCheckDelay: 0.2
   _disapearingDuration: 0.1
   _visual: {fileID: 2497718662250730421}
   _particleApearanceByTreshold:
   - Treshold: 0
     Material: {fileID: 2100000, guid: 631904919c02cf24d83d3202baddf0a1, type: 2}
     ScaleValueRange:
-      <Min>k__BackingField: 0.4
-      <Max>k__BackingField: 0.5
-  - Treshold: 200
+      <Min>k__BackingField: 0.3
+      <Max>k__BackingField: 0.4
+  - Treshold: 100
     Material: {fileID: 2100000, guid: 819ee156c29ce2a40ace21eed08932bf, type: 2}
     ScaleValueRange:
-      <Min>k__BackingField: 0.7
-      <Max>k__BackingField: 0.8
+      <Min>k__BackingField: 0.5
+      <Max>k__BackingField: 0.6
 --- !u!114 &3206386065100887514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,4 +189,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animationScaleMultiplier: 1.2
-  _iterationDuration: 0.6
+  _iterationDuration: 0.5
+--- !u!135 &9071597717056110045
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3531891143532923326}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.3857098
+  m_Center: {x: 0, y: 0, z: 0}

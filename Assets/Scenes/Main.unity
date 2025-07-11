@@ -1691,8 +1691,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawnChanceDecreaseFactor:
-    <Min>k__BackingField: 2
-    <Max>k__BackingField: 5
+    <Min>k__BackingField: 22
+    <Max>k__BackingField: 33
   _enemiesParent: {fileID: 361168572}
   _poolEnemiesInfo:
   - EnemyPrefab: {fileID: 8544650596686725407, guid: 08b441f56ebe2754ab1e7d5eefb63ac5, type: 3}
@@ -10197,15 +10197,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d97bba37f4106fb47a29d53d52dc8900, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particlesYOffset: 1
   _expParticlePrefab: {fileID: 2432047573316968158, guid: e3766f3b3f9025548927256069c08ace, type: 3}
   _expTresholdDeviders:
   - Treshold: 0
     Divider: 1
-  - Treshold: 100
+  - Treshold: 50
     Divider: 2
-  - Treshold: 200
+  - Treshold: 100
     Divider: 3
-  _spawningCircleRadius: 1
+  _spawningCircleRadius: 1.2
 --- !u!1001 &1441219646
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13358,6 +13359,14 @@ PrefabInstance:
     - target: {fileID: 6373074002699430553, guid: cb84583e0c2818e42b12a0baeb2f6f1b, type: 3}
       propertyPath: m_LocalPosition.z
       value: 1.5540009
+      objectReference: {fileID: 0}
+    - target: {fileID: 7480640710395550981, guid: cb84583e0c2818e42b12a0baeb2f6f1b, type: 3}
+      propertyPath: m_Size.y
+      value: 0.76671255
+      objectReference: {fileID: 0}
+    - target: {fileID: 7480640710395550981, guid: cb84583e0c2818e42b12a0baeb2f6f1b, type: 3}
+      propertyPath: m_Center.y
+      value: 0.028424084
       objectReference: {fileID: 0}
     - target: {fileID: 7553181569663816529, guid: cb84583e0c2818e42b12a0baeb2f6f1b, type: 3}
       propertyPath: _projectilesParent

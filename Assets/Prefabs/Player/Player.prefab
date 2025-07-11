@@ -50,7 +50,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <SkillInfo>k__BackingField: {fileID: 11400000, guid: b817fac1bbb5b6f41b1438125b575d7c, type: 2}
   <_config>k__BackingField: {fileID: 11400000, guid: 941f5411a5b567d47a096e0811f75fc3, type: 2}
-  _projectilesParent: {fileID: 0}
   _turrets:
   - {fileID: 941515347815423511}
   - {fileID: 8759251485031666997}
@@ -925,8 +924,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.8660431, y: 0.55, z: 3.3272393}
-  m_Center: {x: -0.0030059814, y: -0.07993215, z: -0.0036159754}
+  m_Size: {x: 0.8660431, y: 0.979808, z: 3.3272393}
+  m_Center: {x: -0.0030059814, y: 0.1349718, z: -0.0036159754}
 --- !u!1 &6626529676155445083
 GameObject:
   m_ObjectHideFlags: 0

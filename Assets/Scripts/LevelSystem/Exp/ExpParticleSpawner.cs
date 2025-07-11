@@ -1,5 +1,4 @@
 ﻿using Assets.Scripts.Utils;
-using DG.Tweening;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +28,7 @@ namespace Assets.Scripts.LevelSystem.Exp
             public float Divider;
         }
 
+        [SerializeField] private float _particlesYOffset;
         [SerializeField] private ExpParticle _expParticlePrefab;
         [SerializeField] private ExpTresholdDevider[] _expTresholdDeviders;
         [SerializeField, Range(0, 30f)] private float _spawningCircleRadius;
@@ -70,8 +70,15 @@ namespace Assets.Scripts.LevelSystem.Exp
         {
             if (_expTresholdDeviders.Length == 0)
             {
-                Debug.LogError("Exp treshold deviders not set");
+                Debug.LogError("Exp treshold deviders not set for: " + transform.name);
             }
+
+            if (_queuedExpSpawns.Count == 0)
+            {
+                return;
+            }
+
+            ExpTresholdDevider[] reversedExpTresholdDeviders = _expTresholdDeviders.Reverse().ToArray();
 
             while (_queuedExpSpawns.Count > 0)
             {
@@ -79,14 +86,15 @@ namespace Assets.Scripts.LevelSystem.Exp
                 float exp = expParticleSpawnData.Exp;
                 Vector3 pos = expParticleSpawnData.Pos;
 
-                ExpTresholdDevider expTresholdDevider = _expTresholdDeviders
-                    .Reverse()
-                    .FirstOrDefault(etd => etd.Treshold <= exp);
+                ExpTresholdDevider expTresholdDevider =
+                    reversedExpTresholdDeviders.FirstOrDefault(etd => etd.Treshold <= exp);
 
                 float expPart = exp / expTresholdDevider.Divider;
                 for (int i = 0; i < expTresholdDevider.Divider; i++)
                 {
                     Vector3 randomPos = RandomUtility.GetRandomPositionFromCircle(pos, _spawningCircleRadius);
+                    randomPos.y = _particlesYOffset;
+
                     IExpParticle expParticle = Instantiate(_expParticlePrefab, randomPos, Quaternion.identity);
                     expParticle.SetSizeAndMaterialBasedOnExpAmount(exp);
                     expParticle.OnExpReachedTarget += ExpParticle_OnExpReachedTarget;
@@ -96,10 +104,10 @@ namespace Assets.Scripts.LevelSystem.Exp
 
         private void ExpParticle_OnExpReachedTarget(object sender, EventArgs e)
         {
-            if (sender is GameObject particleObject
-                && particleObject.TryGetComponent(out IExpParticle expParticle))
+            if (sender is IExpParticle expParticle)
             {
-                expParticle.PlayDisapearingAnimation(() => { });
+                expParticle.PlayDisapearingAnimation(() => Destroy(expParticle.GameObject));
+                expParticle.OnExpReachedTarget -= ExpParticle_OnExpReachedTarget;
             }
         }
     }

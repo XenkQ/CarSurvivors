@@ -1,7 +1,9 @@
 ﻿using Assets.Scripts.CustomTypes;
 using Assets.Scripts.Extensions;
 using Assets.Scripts.FlowFieldSystem;
+using Assets.Scripts.LayerMasks;
 using Assets.Scripts.Player;
+using Assets.Scripts.Providers;
 using DG.Tweening;
 using System;
 using System.Collections.Generic;
@@ -9,7 +11,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.LevelSystem.Exp
 {
-    public interface IExpParticle
+    public interface IExpParticle : IGameObjectProvider
     {
         public event EventHandler OnExpReachedTarget;
 
@@ -30,12 +32,13 @@ namespace Assets.Scripts.LevelSystem.Exp
         }
 
         [SerializeField] private float _movementSpeed;
-        [SerializeField] private float _rangeToChannelExp;
         [SerializeField] private float _inChannelRangeCheckDelay = 0.2f;
         [SerializeField] private float _disapearingDuration = 0.1f;
 
         [SerializeField] private GameObject _visual;
         [SerializeField] private ExpParticleApearanceByTreshold[] _particleApearanceByTreshold;
+
+        public GameObject GameObject => gameObject;
 
         public event EventHandler OnExpReachedTarget;
 
@@ -43,28 +46,16 @@ namespace Assets.Scripts.LevelSystem.Exp
         private bool _expChanneled;
 
         private IFlowFieldMovementController _flowFieldMovementController;
-        private PlayerManager _playerManager;
 
         private void Awake()
         {
             _flowFieldMovementController = GetComponent<IFlowFieldMovementController>();
         }
 
-        private void Start()
-        {
-            _playerManager = PlayerManager.Instance;
-        }
-
         private void OnEnable()
         {
             _expChanneled = false;
             _expAmount = 0;
-            InvokeRepeating(nameof(ChannelExpToPlayerWhenInChannelRange), 0, _inChannelRangeCheckDelay);
-        }
-
-        private void OnDisable()
-        {
-            CancelInvoke(nameof(ChannelExpToPlayerWhenInChannelRange));
         }
 
         private void FixedUpdate()
@@ -72,22 +63,36 @@ namespace Assets.Scripts.LevelSystem.Exp
             _flowFieldMovementController.MoveOnFlowFieldGrid(_movementSpeed);
         }
 
-        private void OnDrawGizmos()
+        private void OnTriggerEnter(Collider other)
         {
-            new Debug().DrawCircle(transform.position, _rangeToChannelExp);
+            if (!_expChanneled && (1 << other.gameObject.layer) == EntityLayers.Player)
+            {
+                PlayerManager.Instance.LevelController.AddExp(_expAmount);
+                _expChanneled = true;
+                OnExpReachedTarget.Invoke(this, EventArgs.Empty);
+            }
         }
 
         public void SetSizeAndMaterialBasedOnExpAmount(float exp)
         {
+            if (_particleApearanceByTreshold.Length == 0)
+            {
+                Debug.LogError("Particle apearance by treshold is not set set for: " + transform.name);
+            }
+
             _expAmount = exp;
 
-            foreach (var expTresholdMaterial in _particleApearanceByTreshold)
+            for (int i = _particleApearanceByTreshold.Length - 1; i >= 0; i--)
             {
-                if (exp < expTresholdMaterial.Treshold)
+                if (_particleApearanceByTreshold[i].Treshold <= exp)
                 {
                     MeshRenderer meshRenderer = _visual.GetComponent<MeshRenderer>();
-                    meshRenderer.SetMaterials(new List<Material>() { expTresholdMaterial.Material });
-                    _visual.transform.localScale = Vector3.one * expTresholdMaterial.ScaleValueRange.GetRandomValueInRange();
+                    meshRenderer.SetMaterials(new List<Material>() { _particleApearanceByTreshold[i].Material });
+                    transform.localScale =
+                        Vector3.one * _particleApearanceByTreshold[i].ScaleValueRange.GetRandomValueInRange();
+
+                    Debug.Log(Vector3.one * _particleApearanceByTreshold[i].ScaleValueRange.GetRandomValueInRange());
+
                     break;
                 }
             }
@@ -96,17 +101,6 @@ namespace Assets.Scripts.LevelSystem.Exp
         public void PlayDisapearingAnimation(TweenCallback callback)
         {
             transform.LifeEndingShrinkToZeroTween(_disapearingDuration, callback);
-        }
-
-        private void ChannelExpToPlayerWhenInChannelRange()
-        {
-            if (!_expChanneled
-                && Vector3.Distance(_playerManager.transform.position, transform.position) <= _rangeToChannelExp)
-            {
-                _playerManager.LevelController.AddExp(_expAmount);
-                _expChanneled = true;
-                OnExpReachedTarget.Invoke(this, EventArgs.Empty);
-            }
         }
     }
 }
