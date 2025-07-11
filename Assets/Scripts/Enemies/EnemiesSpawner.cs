@@ -27,6 +27,8 @@ namespace Assets.Scripts.Enemies
 
         public static EnemiesSpawner Instance { get; private set; }
 
+        private GridManager _gridManager;
+
         private EnemiesSpawner()
         {
         }
@@ -47,6 +49,8 @@ namespace Assets.Scripts.Enemies
 
         private void Start()
         {
+            _gridManager = GridManager.Instance;
+
             EnemiesSpawnChanceRedistributionSystem.Configuration config = new()
             {
                 EnemiesInfo = _poolEnemiesInfo,
@@ -73,7 +77,7 @@ namespace Assets.Scripts.Enemies
         private void OnEnemyGet(Enemy enemy)
         {
             Cell cell = GridCellsNotVisibleByMainCamera
-                .GetRandomWalkableCells(GridManager.Instance.GridPlayerChunk, 1)
+                .GetRandomWalkableCells(_gridManager.GridPlayerChunk, 1)
                 .FirstOrDefault();
 
             if (cell == null)

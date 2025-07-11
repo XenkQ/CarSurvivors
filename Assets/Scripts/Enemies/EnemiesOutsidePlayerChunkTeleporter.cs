@@ -10,9 +10,12 @@ namespace Assets.Scripts.Enemies
     {
         [SerializeField] private Transform _enemiesHolder;
         [SerializeField] private float _checkForEnemiesOutsidePlayerChunkDelay = 2f;
+        private GridManager _gridManager;
 
         private void Start()
         {
+            _gridManager = GridManager.Instance;
+
             InvokeRepeating(
                 nameof(TeleportEnemiesFromOutsideToInsidePlayerChunk),
                 _checkForEnemiesOutsidePlayerChunkDelay,
@@ -29,7 +32,7 @@ namespace Assets.Scripts.Enemies
             }
 
             List<Cell> cells = GridCellsNotVisibleByMainCamera
-                .GetWalkableCells(GridManager.Instance.GridPlayerChunk)
+                .GetWalkableCells(_gridManager.GridPlayerChunk)
                 .Shuffle()
                 .ToList();
 
@@ -54,7 +57,7 @@ namespace Assets.Scripts.Enemies
         {
             List<Enemy> enemies = new List<Enemy>();
 
-            GridSystem.Grid playerChunk = GridManager.Instance.GridPlayerChunk;
+            GridSystem.Grid playerChunk = _gridManager.GridPlayerChunk;
             Cell centerCell = playerChunk.Cells[playerChunk.Width / 2, playerChunk.Height / 2];
             Vector3 center = centerCell.WorldPos;
 

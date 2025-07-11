@@ -91,8 +91,6 @@ namespace Assets.Scripts.LevelSystem.Exp
                     transform.localScale =
                         Vector3.one * _particleApearanceByTreshold[i].ScaleValueRange.GetRandomValueInRange();
 
-                    Debug.Log(Vector3.one * _particleApearanceByTreshold[i].ScaleValueRange.GetRandomValueInRange());
-
                     break;
                 }
             }
