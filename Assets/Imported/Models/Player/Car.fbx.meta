@@ -28,7 +28,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: tail lights
-    second: {fileID: 2100000, guid: 49d2cf214f7e3054daa75616a85d09cb, type: 2}
+    second: {fileID: 2100000, guid: 5b118d7fd9f5b994c8b9b5f20fcb1e65, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

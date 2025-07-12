@@ -1,3 +1,4 @@
+using Assets.Scripts.Car;
 using Assets.Scripts.HealthSystem;
 using Assets.Scripts.LevelSystem;
 using Assets.Scripts.Skills;
@@ -14,6 +15,7 @@ namespace Assets.Scripts.Player
         public IHealth Health { get; private set; }
         public ILevelController LevelController { get; private set; }
         public ISkillsRegistry SkillsRegistry { get; private set; }
+        public ICarController CarController { get; private set; }
 
         private readonly float _startDelayBetweenTakingDamage = 0.2f;
         private float _currentDelayBetweenTakingDamage;
@@ -36,6 +38,7 @@ namespace Assets.Scripts.Player
             Health = GetComponent<IHealth>();
             LevelController = GetComponent<ILevelController>();
             SkillsRegistry = GetComponentInChildren<ISkillsRegistry>();
+            CarController = GetComponent<ICarController>();
         }
 
         private void Start()

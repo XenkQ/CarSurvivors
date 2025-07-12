@@ -3,10 +3,19 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.Car
 {
+    public interface ICarController
+    {
+        event EventHandler OnBrakePress;
+
+        event EventHandler OnBrakeRelease;
+
+        float GetMovementSpeed();
+    }
+
     [RequireComponent(typeof(Rigidbody))]
-    public class CarController : MonoBehaviour
+    public class CarController : MonoBehaviour, ICarController
     {
         private enum Axel
         {
@@ -36,6 +45,10 @@ namespace Assets.Scripts
 
         [SerializeField] private List<Wheel> _wheels;
 
+        public event EventHandler OnBrakePress;
+
+        public event EventHandler OnBrakeRelease;
+
         private InputAction _moveAction;
         private Vector2 _moveInput;
 
@@ -53,6 +66,9 @@ namespace Assets.Scripts
             _moveAction = InputSystem.actions.FindAction("Move");
             _brakeAction = InputSystem.actions.FindAction("Brake");
             _rb.centerOfMass = _centerOfMass;
+
+            _brakeAction.started += (ctx) => OnBrakePress.Invoke(this, EventArgs.Empty);
+            _brakeAction.canceled += (ctx) => OnBrakeRelease.Invoke(this, EventArgs.Empty);
         }
 
         private void Update()
@@ -67,6 +83,11 @@ namespace Assets.Scripts
             HandleSteer();
             HandleBrake();
             AnimateWheels();
+        }
+
+        public float GetMovementSpeed()
+        {
+            return _rb.linearVelocity.magnitude;
         }
 
         private void HandleMove()

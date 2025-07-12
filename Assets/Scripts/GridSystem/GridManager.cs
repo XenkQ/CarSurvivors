@@ -51,15 +51,13 @@ namespace Assets.Scripts.GridSystem
             WorldGrid = new Grid(_worldGridConfiguration);
             _flowField = new FlowField();
             _flowFieldDebugConfiguration.Grid = WorldGrid;
-
-#if DEBUG
-            UpdateFlowField(WorldGrid, WorldGrid.Cells[WorldGrid.Width / 2, WorldGrid.Height / 2].WorldPos);
-#endif
         }
 
         private void OnEnable()
         {
             _playerManager = PlayerManager.Instance;
+
+            UpdateFlowField(WorldGrid, WorldGrid.Cells[WorldGrid.Width / 2, WorldGrid.Height / 2].WorldPos);
 
             InvokeRepeating(nameof(UpdateFlowFieldWithNewPlayerChunkGrid), 0, _delayBetweenPlayerChunkGridUpdate);
         }
