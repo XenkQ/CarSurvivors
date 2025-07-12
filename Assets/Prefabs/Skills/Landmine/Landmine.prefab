@@ -83,6 +83,10 @@ PrefabInstance:
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2797558608727904856, guid: 0438d4a12b4ce154289791b56a656754, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 3739046373126177835, guid: 0438d4a12b4ce154289791b56a656754, type: 3}
       propertyPath: playOnAwake
       value: 0
@@ -91,13 +95,25 @@ PrefabInstance:
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5985993385445495889, guid: 0438d4a12b4ce154289791b56a656754, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 6373324073798076848, guid: 0438d4a12b4ce154289791b56a656754, type: 3}
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6530912906684751436, guid: 0438d4a12b4ce154289791b56a656754, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 6621885659275979708, guid: 0438d4a12b4ce154289791b56a656754, type: 3}
       propertyPath: m_Name
       value: Vfx_Explosion
+      objectReference: {fileID: 0}
+    - target: {fileID: 6621885659275979708, guid: 0438d4a12b4ce154289791b56a656754, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 6621885659275979708, guid: 0438d4a12b4ce154289791b56a656754, type: 3}
       propertyPath: m_IsActive
@@ -142,6 +158,10 @@ PrefabInstance:
     - target: {fileID: 7908446733124636693, guid: 0438d4a12b4ce154289791b56a656754, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8169010749292251035, guid: 0438d4a12b4ce154289791b56a656754, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

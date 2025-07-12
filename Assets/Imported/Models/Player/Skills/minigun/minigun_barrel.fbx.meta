@@ -1,9 +1,19 @@
 fileFormatVersion: 2
-guid: 60f52a3f37c045a4f917214371803d49
+guid: 3e7c4a552893be74f9e6b0b04f810f35
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: minigun_dark_silver
+    second: {fileID: 2100000, guid: 9c6e77fe95ae2a84eaa4dfab835602de, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: minigun_light_silver
+    second: {fileID: 2100000, guid: ed78b09e73f32dc45bc6253d9e6a597e, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

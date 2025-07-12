@@ -1,6 +1,7 @@
 ﻿using Assets.ScriptableObjects.Skills.PlayerSkills.SawSkill;
 using Assets.Scripts.Initializers;
 using Assets.Scripts.LayerMasks;
+using Assets.Scripts.Player;
 using Assets.Scripts.StatusAffectables;
 using UnityEngine;
 
@@ -8,19 +9,24 @@ namespace Assets.Scripts.Skills.PlayerSkills.Saw
 {
     public class SawBlade : MonoBehaviour, IInitializableWithScriptableConfig<SawSkillUpgradeableConfigSO>
     {
-        private const float COLLISION_CHECK_INTERVAL = 0.1f;
         private SawSkillUpgradeableConfigSO _config;
         private BoxCollider _boxCollider;
         private bool _isInitialized;
+        private PlayerManager _playerManager;
 
         private void Awake()
         {
             _boxCollider = GetComponent<BoxCollider>();
         }
 
-        public void OnTriggerEnter(Collider other)
+        private void Start()
         {
-            AttackCollidingEntity(other);
+            _playerManager = PlayerManager.Instance;
+        }
+
+        public void FixedUpdate()
+        {
+            AtackAllEnemiesInsideCollider();
         }
 
         public void Initialize(SawSkillUpgradeableConfigSO config)
@@ -30,8 +36,6 @@ namespace Assets.Scripts.Skills.PlayerSkills.Saw
             gameObject.SetActive(true);
 
             _isInitialized = true;
-
-            InvokeRepeating(nameof(AtackAllEnemiesInsideCollider), 0, COLLISION_CHECK_INTERVAL);
         }
 
         public bool IsInitialized()
@@ -65,7 +69,7 @@ namespace Assets.Scripts.Skills.PlayerSkills.Saw
                 EntityManipulationHelper.Knockback(
                     other,
                     transform.forward,
-                    _config.KnockbackRange.Value,
+                    _config.KnockbackRange.Value * _playerManager.CarController.GetMovementSpeed(),
                     _config.TimeToArriveAtKnockbackLocation);
 
                 EntityManipulationHelper.Stun(other, _config.StunDuration.Value);

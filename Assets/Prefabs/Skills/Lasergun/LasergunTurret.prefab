@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3513241825416687479}
   - component: {fileID: 5866641457349615270}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LasergunTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,7 +61,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3522167964729353356}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GunTip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3356108656992770576}
   - component: {fileID: 4430527635744969526}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LaserRenderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -229,9 +229,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 958798805785663652}
     m_Modifications:
+    - target: {fileID: 5379996574741947279, guid: 6e2d5bb2a0b485844a029bc987e96b2f, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6548994112964805360, guid: 6e2d5bb2a0b485844a029bc987e96b2f, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 6671095511208885821, guid: 6e2d5bb2a0b485844a029bc987e96b2f, type: 3}
       propertyPath: playOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6680475554725048348, guid: 6e2d5bb2a0b485844a029bc987e96b2f, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 7203298469507407860, guid: 6e2d5bb2a0b485844a029bc987e96b2f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -285,6 +297,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vfx_LaserCumulating
       objectReference: {fileID: 0}
+    - target: {fileID: 8288383578893910373, guid: 6e2d5bb2a0b485844a029bc987e96b2f, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8528989957576983180, guid: 6e2d5bb2a0b485844a029bc987e96b2f, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 8693008489059037037, guid: 6e2d5bb2a0b485844a029bc987e96b2f, type: 3}
       propertyPath: playOnAwake
       value: 0
@@ -318,9 +338,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3513241825416687479}
     m_Modifications:
+    - target: {fileID: 1659187259866385948, guid: 1ddbc4048b550d3409c30707fef3c991, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 5817587152870781559, guid: 1ddbc4048b550d3409c30707fef3c991, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 7888137906252494091, guid: 1ddbc4048b550d3409c30707fef3c991, type: 3}
       propertyPath: m_Name
       value: Lasergun_Visual
+      objectReference: {fileID: 0}
+    - target: {fileID: 7888137906252494091, guid: 1ddbc4048b550d3409c30707fef3c991, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8795229656458169167, guid: 1ddbc4048b550d3409c30707fef3c991, type: 3}
       propertyPath: m_LocalPosition.x

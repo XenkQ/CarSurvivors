@@ -1,0 +1,194 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8918966798154977024
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4712942066486215187}
+  m_Layer: 11
+  m_Name: Minigun
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4712942066486215187
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8918966798154977024}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 835401987097579965}
+  - {fileID: 8495543164788330591}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!1001 &872933974444750422
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4712942066486215187}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 3e7c4a552893be74f9e6b0b04f810f35, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.002
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3e7c4a552893be74f9e6b0b04f810f35, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.186
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3e7c4a552893be74f9e6b0b04f810f35, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.38
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3e7c4a552893be74f9e6b0b04f810f35, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3e7c4a552893be74f9e6b0b04f810f35, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3e7c4a552893be74f9e6b0b04f810f35, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3e7c4a552893be74f9e6b0b04f810f35, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3e7c4a552893be74f9e6b0b04f810f35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3e7c4a552893be74f9e6b0b04f810f35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3e7c4a552893be74f9e6b0b04f810f35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3e7c4a552893be74f9e6b0b04f810f35, type: 3}
+      propertyPath: m_Name
+      value: minigun_barrel
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3e7c4a552893be74f9e6b0b04f810f35, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3e7c4a552893be74f9e6b0b04f810f35, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6380918095140330932}
+  m_SourcePrefab: {fileID: 100100000, guid: 3e7c4a552893be74f9e6b0b04f810f35, type: 3}
+--- !u!1 &61960790691482375 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 3e7c4a552893be74f9e6b0b04f810f35, type: 3}
+  m_PrefabInstance: {fileID: 872933974444750422}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6380918095140330932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61960790691482375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8a1f55baf35762458b2cfc127f37352, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateX: 0
+  rotateY: 0
+  rotateZ: 1
+  _maxRotationOnAxis: 360
+  _useLocalRotation: 1
+  _tweenIterationTime: 0.3
+  _unscaleWithTime: 0
+--- !u!4 &835401987097579965 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3e7c4a552893be74f9e6b0b04f810f35, type: 3}
+  m_PrefabInstance: {fileID: 872933974444750422}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8245107964009625524
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4712942066486215187}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 1eda3f353881744459fde8a8ddf794eb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.00026607886
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1eda3f353881744459fde8a8ddf794eb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.01883912
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1eda3f353881744459fde8a8ddf794eb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.0047580004
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1eda3f353881744459fde8a8ddf794eb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1eda3f353881744459fde8a8ddf794eb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1eda3f353881744459fde8a8ddf794eb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1eda3f353881744459fde8a8ddf794eb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1eda3f353881744459fde8a8ddf794eb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1eda3f353881744459fde8a8ddf794eb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1eda3f353881744459fde8a8ddf794eb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1eda3f353881744459fde8a8ddf794eb, type: 3}
+      propertyPath: m_Name
+      value: minigun_base
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1eda3f353881744459fde8a8ddf794eb, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1eda3f353881744459fde8a8ddf794eb, type: 3}
+--- !u!4 &8495543164788330591 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1eda3f353881744459fde8a8ddf794eb, type: 3}
+  m_PrefabInstance: {fileID: 8245107964009625524}
+  m_PrefabAsset: {fileID: 0}
