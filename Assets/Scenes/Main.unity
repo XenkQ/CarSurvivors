@@ -1691,8 +1691,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawnChanceDecreaseFactor:
-    <Min>k__BackingField: 3
-    <Max>k__BackingField: 5
+    <Min>k__BackingField: 33
+    <Max>k__BackingField: 44
   _enemiesParent: {fileID: 361168572}
   _poolEnemiesInfo:
   - EnemyPrefab: {fileID: 8544650596686725407, guid: 08b441f56ebe2754ab1e7d5eefb63ac5, type: 3}

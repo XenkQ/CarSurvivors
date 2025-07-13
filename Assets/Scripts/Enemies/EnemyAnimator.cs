@@ -73,6 +73,7 @@ namespace Assets.Scripts.Enemies
         private void HandleTransitionPropertiesChanges()
         {
             _animator.SetFloat("Speed", _enemy.MovementController.GetCurrentMovementSpeed());
+            _animator.SetBool("IsOnGround", _enemy.MovementController.IsOnGround());
         }
     }
 }

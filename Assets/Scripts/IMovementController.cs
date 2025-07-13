@@ -7,6 +7,8 @@ namespace Assets.Scripts
     {
         public float GetCurrentMovementSpeed();
 
+        public bool IsOnGround();
+
         public Tween MoveToPositionInTimeIgnoringSpeed(Vector3 pos, float time);
     }
 }

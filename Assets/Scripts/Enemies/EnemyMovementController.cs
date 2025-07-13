@@ -1,5 +1,7 @@
 using Assets.Scripts.FlowFieldSystem;
+using Assets.Scripts.LayerMasks;
 using DG.Tweening;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace Assets.Scripts.Enemies
@@ -7,6 +9,9 @@ namespace Assets.Scripts.Enemies
     [RequireComponent(typeof(Enemy), typeof(FlowFieldMovementController))]
     public class EnemyMovementController : MonoBehaviour, IMovementController
     {
+        private const float GROUND_CHECK_DISTANCE = 0.4f;
+        private Vector3 _groundCheckOffset = new(0, 0.1f, 0);
+
         private const float MOVING_TO_POSITION_ACCURACY = 0.02f;
 
         private Enemy _enemy;
@@ -48,8 +53,69 @@ namespace Assets.Scripts.Enemies
             transform.position = new Vector3(0, _verticalPosOffset, 0);
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
+            MovementHandler();
+        }
+
+        private void OnDrawGizmos()
+        {
+            Vector3 endPos = transform.position + _groundCheckOffset - Vector3.up * GROUND_CHECK_DISTANCE;
+            if (IsOnGround())
+            {
+                Debug.DrawLine(transform.position, endPos, Color.green);
+            }
+            else
+            {
+                Debug.DrawLine(transform.position, endPos, Color.red);
+            }
+        }
+
+        public float GetCurrentMovementSpeed()
+        {
+            return Vector3.Distance(transform.position, _lastPos) / Time.deltaTime;
+        }
+
+        public Tween MoveToPositionInTimeIgnoringSpeed(Vector3 pos, float time)
+        {
+            if (_movementUnrelatedToSpeedTween != null)
+            {
+                _movementUnrelatedToSpeedTween.Kill();
+            }
+
+            _isMovingToPositionUnrelatedToGrid = true;
+
+            return _movementUnrelatedToSpeedTween = transform
+                .DOMove(pos, time)
+                .SetEase(Ease.OutSine)
+                .OnComplete(() =>
+                {
+                    _isMovingToPositionUnrelatedToGrid = false;
+                    _movementUnrelatedToSpeedTween = null;
+                });
+        }
+
+        public bool IsOnGround()
+        {
+            RaycastHit hitInfo;
+
+            Physics.Raycast(
+                transform.position + _groundCheckOffset,
+                -Vector3.up,
+                out hitInfo,
+                GROUND_CHECK_DISTANCE,
+                TerrainLayers.Ground);
+
+            return hitInfo.collider is not null;
+        }
+
+        private void MovementHandler()
+        {
+            if (!IsOnGround())
+            {
+                return;
+            }
+
             bool isStunned = _isStunable && _enemy.StunController.IsStunned;
 
             bool canMoveOnGrid = _movementUnrelatedToSpeedTween is null
@@ -82,30 +148,6 @@ namespace Assets.Scripts.Enemies
             }
         }
 
-        public float GetCurrentMovementSpeed()
-        {
-            return Vector3.Distance(transform.position, _lastPos) / Time.deltaTime;
-        }
-
-        public Tween MoveToPositionInTimeIgnoringSpeed(Vector3 pos, float time)
-        {
-            if (_movementUnrelatedToSpeedTween != null)
-            {
-                _movementUnrelatedToSpeedTween.Kill();
-            }
-
-            _isMovingToPositionUnrelatedToGrid = true;
-
-            return _movementUnrelatedToSpeedTween = transform
-                .DOMove(pos, time)
-                .SetEase(Ease.OutSine)
-                .OnComplete(() =>
-                {
-                    _isMovingToPositionUnrelatedToGrid = false;
-                    _movementUnrelatedToSpeedTween = null;
-                });
-        }
-
         private void EnemyAnimator_OnAttackAnimationEnd(object sender, System.EventArgs e)
         {
             _currentMovementDelayAfterAttack = _movementDelayAfterAttack;
@@ -114,6 +156,7 @@ namespace Assets.Scripts.Enemies
         private Vector3? MoveToPosition(Vector3 pos)
         {
             bool isOnPosition = Vector3.Distance(transform.position, pos) <= MOVING_TO_POSITION_ACCURACY;
+
             if (_isMovingToPositionUnrelatedToGrid && !isOnPosition)
             {
                 return Move(pos);
