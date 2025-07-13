@@ -97,6 +97,11 @@ namespace Assets.Scripts.Stats
 
         public virtual void OnAfterDeserialize()
         {
+            if (MinMaxRange is null)
+            {
+                return;
+            }
+
             float valueFloat = Convert.ToSingle(Value);
             float maxValueFloat = Convert.ToSingle(MinMaxRange.Max);
             float minValueFloat = Convert.ToSingle(MinMaxRange.Min);
