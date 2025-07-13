@@ -26,6 +26,7 @@ namespace Assets.Scripts.StatusAffectables
 
             if (target.TryGetComponent(out IKnockable knockable))
             {
+                dir.y = 0;
                 knockable.ApplyKnockBack(dir, range, timeToArriveAtLocation);
             }
         }

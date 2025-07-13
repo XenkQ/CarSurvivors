@@ -13,6 +13,7 @@ namespace Assets.Scripts.Skills.PlayerSkills.Saw
         private BoxCollider _boxCollider;
         private bool _isInitialized;
         private PlayerManager _playerManager;
+        private const float _defaultCollisionKnockback = 2f;
 
         private void Awake()
         {
@@ -66,10 +67,15 @@ namespace Assets.Scripts.Skills.PlayerSkills.Saw
             {
                 EntityManipulationHelper.Damage(other, _config.Damage.Value);
 
+                float knockback = Mathf.Max(
+                    _defaultCollisionKnockback,
+                    _config.KnockbackRange.Value * _playerManager.CarController.GetMovementSpeed()
+                );
+
                 EntityManipulationHelper.Knockback(
                     other,
                     transform.forward,
-                    _config.KnockbackRange.Value * _playerManager.CarController.GetMovementSpeed(),
+                    knockback,
                     _config.TimeToArriveAtKnockbackLocation);
 
                 EntityManipulationHelper.Stun(other, _config.StunDuration.Value);
