@@ -53,7 +53,7 @@ public class LasergunTurret : Turret<TurretConfigSO>
             return;
         }
 
-        _laserCumulatingVFX.Play(shootPreparingAnimationSpeed);
+        _laserCumulatingVFX.Play(new VFXPlayConfig(simulationSpeed: shootPreparingAnimationSpeed));
     }
 
     private void LaserCumulatingVFX_OnVFXFinished(object sender, System.EventArgs e)

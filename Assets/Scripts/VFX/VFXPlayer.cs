@@ -3,11 +3,23 @@ using UnityEngine;
 
 namespace VFX
 {
+    public struct VFXPlayConfig
+    {
+        public bool DestroyOnEnd;
+        public float Scale;
+        public float SimulationSpeed;
+
+        public VFXPlayConfig(float scale = 1f, float simulationSpeed = 1f, bool destroyOnEnd = false)
+        {
+            Scale = scale;
+            SimulationSpeed = simulationSpeed;
+            DestroyOnEnd = destroyOnEnd;
+        }
+    }
+
     public interface IVFXPlayer
     {
-        public void Play(bool destroyOnEnd = false);
-
-        public void Play(float simulationSpeed = 1f, bool destroyOnEnd = false);
+        public void Play(VFXPlayConfig config);
 
         public float GetLongestParticleDuration();
 
@@ -24,7 +36,7 @@ namespace VFX
 
         private float _longestParticleDuration;
 
-        private bool _destroyOnEnd;
+        private VFXPlayConfig _vfxPlayConfig;
 
         private void Awake()
         {
@@ -36,8 +48,10 @@ namespace VFX
             return _longestParticleDuration;
         }
 
-        public void Play(bool destroyOnEnd = false)
+        public void Play(VFXPlayConfig config = new())
         {
+            _vfxPlayConfig = config;
+
             _longestParticleDuration = 0;
             foreach (var particleSystem in _particleSystems)
             {
@@ -46,8 +60,13 @@ namespace VFX
                     continue;
                 }
 
-                float currentDuration = particleSystem.main.duration;
-                if (particleSystem.main.duration > _longestParticleDuration)
+                particleSystem.transform.localScale = Vector3.one * config.Scale;
+
+                var main = particleSystem.main;
+                main.simulationSpeed = config.SimulationSpeed;
+
+                float currentDuration = main.duration;
+                if (main.duration > _longestParticleDuration)
                 {
                     _longestParticleDuration = currentDuration;
                 }
@@ -56,7 +75,11 @@ namespace VFX
                 particleSystem.Play();
             }
 
-            _destroyOnEnd = destroyOnEnd;
+            CallParticlesFinishAfterDelayOrWithout();
+        }
+
+        private void CallParticlesFinishAfterDelayOrWithout()
+        {
             if (_particlesStartedPlaying)
             {
                 if (IsInvoking(nameof(OnAllParticlesFinished)))
@@ -72,20 +95,6 @@ namespace VFX
             }
         }
 
-        public void Play(float simulationSpeed, bool destroyOnEnd = false)
-        {
-            foreach (var particleSystem in _particleSystems)
-            {
-                if (particleSystem != null)
-                {
-                    var main = particleSystem.main;
-                    main.simulationSpeed = simulationSpeed;
-                }
-            }
-
-            Play(destroyOnEnd);
-        }
-
         private void OnAllParticlesFinished()
         {
             if (!_particlesStartedPlaying)
@@ -96,7 +105,7 @@ namespace VFX
             OnVFXFinished?.Invoke(this, EventArgs.Empty);
             _particlesStartedPlaying = false;
 
-            if (_destroyOnEnd)
+            if (_vfxPlayConfig.DestroyOnEnd)
             {
                 Destroy(gameObject);
             }

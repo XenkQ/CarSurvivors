@@ -58,7 +58,7 @@ namespace Assets.Scripts.Skills.PlayerSkills.LandmineTrap
                 return;
             }
 
-            _deathVfxPlayer.Play();
+            _deathVfxPlayer.Play(new VFXPlayConfig(scale: _config.ExplosionRadius.Value));
 
             foreach (Collider collider in colliders)
             {

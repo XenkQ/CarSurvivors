@@ -100,7 +100,7 @@ namespace Assets.Scripts.Enemies
         {
             var deathVfxPlayer = Instantiate(_deathVfxPlayer, transform.position + _deathEffectCenterOffset, Quaternion.identity);
 
-            deathVfxPlayer.Play(true);
+            deathVfxPlayer.Play(new VFXPlayConfig(destroyOnEnd: true));
         }
 
         private void SpawnExp()
