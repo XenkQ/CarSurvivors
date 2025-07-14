@@ -1,4 +1,5 @@
 using Assets.Scripts.Collisions;
+using Assets.Scripts.DamagePopups;
 using Assets.Scripts.HealthSystem;
 using Assets.Scripts.LevelSystem.Exp;
 using Assets.Scripts.StatusAffectables;
@@ -24,6 +25,8 @@ namespace Assets.Scripts.Enemies
 
         public EnemyAnimator EnemyAnimator { get; private set; }
 
+        private IDamagePopupsSpawner _damagePopupsSpawner;
+
         private void Awake()
         {
             Health = GetComponent<IHealth>();
@@ -45,6 +48,11 @@ namespace Assets.Scripts.Enemies
             SpawnDeathParticles();
 
             SpawnExp();
+        }
+
+        private void Start()
+        {
+            _damagePopupsSpawner = DamagePopupsSpawner.Instance;
         }
 
         public void OnGet()
@@ -69,6 +77,12 @@ namespace Assets.Scripts.Enemies
 
         public void TakeDamage(float damage)
         {
+            _damagePopupsSpawner.SpawnDamagePopup(
+                transform.position + _deathEffectCenterOffset,
+                damage,
+                SpawnShapeModes.Hemisphere
+            );
+
             Health.DecreaseHealth(damage);
 
             if (Health.IsAlive())

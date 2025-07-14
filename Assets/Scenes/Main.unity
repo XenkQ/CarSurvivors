@@ -534,6 +534,7 @@ Transform:
   - {fileID: 172225608}
   - {fileID: 449990456}
   - {fileID: 1416325776}
+  - {fileID: 1185825514}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &549734345
@@ -1209,6 +1210,77 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1764545858}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1185825513
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1185825514}
+  - component: {fileID: 1185825515}
+  m_Layer: 0
+  m_Name: DamagePopupsSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1185825514
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1185825513}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 517296375}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1185825515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1185825513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e2f6487900575f4693749263b9f07be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damagePopupVisibilityDuration: 0.8
+  _damagePopupPrefab: {fileID: 7497925829226097017, guid: 575dc7fec0ebc45438aa1bd12267a8d6, type: 3}
+  visualApearanceByDamageTresholds:
+  - Treshold: 0
+    FontSizesRanges:
+      <Min>k__BackingField: 1.5
+      <Max>k__BackingField: 2
+    Color: {r: 1, g: 1, b: 1, a: 1}
+  - Treshold: 11
+    FontSizesRanges:
+      <Min>k__BackingField: 2
+      <Max>k__BackingField: 2.4
+    Color: {r: 1, g: 0.717804, b: 0.3726415, a: 1}
+  - Treshold: 22
+    FontSizesRanges:
+      <Min>k__BackingField: 2.4
+      <Max>k__BackingField: 3.2
+    Color: {r: 0.8962264, g: 0.3520763, b: 0.1986917, a: 1}
+  - Treshold: 30
+    FontSizesRanges:
+      <Min>k__BackingField: 3.2
+      <Max>k__BackingField: 4
+    Color: {r: 0.7490196, g: 0.16470589, b: 0, a: 1}
+  _popupsSpeedRange:
+    <Min>k__BackingField: 4
+    <Max>k__BackingField: 4.3
+  _popupsMovementRange: 2
 --- !u!1001 &1218487848
 PrefabInstance:
   m_ObjectHideFlags: 0

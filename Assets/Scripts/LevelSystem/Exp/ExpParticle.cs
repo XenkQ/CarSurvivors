@@ -32,7 +32,6 @@ namespace Assets.Scripts.LevelSystem.Exp
         }
 
         [SerializeField] private float _movementSpeed;
-        [SerializeField] private float _inChannelRangeCheckDelay = 0.2f;
         [SerializeField] private float _disapearingDuration = 0.1f;
 
         [SerializeField] private GameObject _visual;

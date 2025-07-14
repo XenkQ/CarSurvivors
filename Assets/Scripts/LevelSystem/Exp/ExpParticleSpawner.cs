@@ -92,7 +92,7 @@ namespace Assets.Scripts.LevelSystem.Exp
                 float expPart = exp / expTresholdDevider.Divider;
                 for (int i = 0; i < expTresholdDevider.Divider; i++)
                 {
-                    Vector3 randomPos = RandomUtility.GetRandomPositionFromCircle(pos, _spawningCircleRadius);
+                    Vector3 randomPos = RandomUtility.GetRandomPointInSphere(pos, _spawningCircleRadius);
                     randomPos.y = _particlesYOffset;
 
                     IExpParticle expParticle = Instantiate(_expParticlePrefab, randomPos, Quaternion.identity);

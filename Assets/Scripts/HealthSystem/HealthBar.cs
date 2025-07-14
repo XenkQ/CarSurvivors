@@ -11,7 +11,6 @@ namespace Assets.Scripts.HealthSystem
         [SerializeField] private Health _health;
         [SerializeField] private Image _fillImage;
         [SerializeField] private bool _shakeOnHealthDecrease;
-        [SerializeField] private float _shakeDuration = 0.1f;
         private Slider _slider;
 
         private void Awake()

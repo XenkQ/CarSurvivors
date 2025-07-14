@@ -43,13 +43,13 @@ MonoBehaviour:
     <Unit>k__BackingField: 0
     _alwaysUseMinValueForUpgrade: 0
     <CanBeUpgraded>k__BackingField: 1
-    <Value>k__BackingField: 6
+    <Value>k__BackingField: 5
     _floatMinMaxRange:
-      <Min>k__BackingField: 6
-      <Max>k__BackingField: 20
+      <Min>k__BackingField: 5
+      <Max>k__BackingField: 25
     _floatRangeOfPossibleValuesForUpgrade:
-      <Min>k__BackingField: 4
-      <Max>k__BackingField: 6.5
+      <Min>k__BackingField: 5
+      <Max>k__BackingField: 8
   _startRange:
     <IsSubstractModeOn>k__BackingField: 0
     <Unit>k__BackingField: 3
