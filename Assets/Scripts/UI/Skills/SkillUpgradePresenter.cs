@@ -147,7 +147,7 @@ namespace Assets.Scripts.UI.Skills
 
                 skillStatsUpgradeButtonsData.Add(new ClickableButtonData
                 {
-                    Text = $"{changeInfo} <b>{statName}</b> by <color=#F8D61C>{statValue}{statUnit}</color>",
+                    Text = $"{changeInfo} <b>{statName}</b> by <Color=#F8D61C>{statValue}{statUnit}</Color>",
 
                     OnClick = () =>
                     {
