@@ -145,42 +145,6 @@ Preset:
     value: 
     objectReference: {fileID: 11400000, guid: b196fd0c1c6051341865604dd4fa9534, type: 2}
   - target: {fileID: 0}
-    propertyPath: _startBulletDamage.<IsSubstractModeOn>k__BackingField
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: _startBulletDamage.<Unit>k__BackingField
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: _startBulletDamage._alwaysUseMinValueForUpgrade
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: _startBulletDamage.<CanBeUpgraded>k__BackingField
-    value: 1
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: _startBulletDamage.<Value>k__BackingField
-    value: 4.5
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: _startBulletDamage._floatMinMaxRange.<Min>k__BackingField
-    value: 4.5
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: _startBulletDamage._floatMinMaxRange.<Max>k__BackingField
-    value: 18
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: _startBulletDamage._floatRangeOfPossibleValuesForUpgrade.<Min>k__BackingField
-    value: 4
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: _startBulletDamage._floatRangeOfPossibleValuesForUpgrade.<Max>k__BackingField
-    value: 6.8
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
     propertyPath: _startBulletSize.<IsSubstractModeOn>k__BackingField
     value: 0
     objectReference: {fileID: 0}
@@ -215,6 +179,42 @@ Preset:
   - target: {fileID: 0}
     propertyPath: _startBulletSize._floatRangeOfPossibleValuesForUpgrade.<Max>k__BackingField
     value: 0.4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startBulletDamage.<IsSubstractModeOn>k__BackingField
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startBulletDamage.<Unit>k__BackingField
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startBulletDamage._alwaysUseMinValueForUpgrade
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startBulletDamage.<CanBeUpgraded>k__BackingField
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startBulletDamage.<Value>k__BackingField
+    value: 5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startBulletDamage._byteMinMaxRange.<Min>k__BackingField
+    value: 5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startBulletDamage._byteMinMaxRange.<Max>k__BackingField
+    value: 18
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startBulletDamage._byteRangeOfPossibleValuesForUpgrade.<Min>k__BackingField
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _startBulletDamage._byteRangeOfPossibleValuesForUpgrade.<Max>k__BackingField
+    value: 7
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _startBulletMaxPiercing.<IsSubstractModeOn>k__BackingField

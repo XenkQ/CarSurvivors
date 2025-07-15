@@ -19,10 +19,10 @@ public class LasergunSkillSO : SkillUpgradeableStatsConfig
 
     [Header("Laser Stats")]
     [SerializeField] private ProjectileConfigSO _projectileConfig;
-    [SerializeField] private FloatUpgradeableStat _startDamage;
     [SerializeField] private FloatUpgradeableStat _startRange;
-    public FloatUpgradeableStat Damage { get; private set; }
+    [SerializeField] private ByteUpgradeableStat _startDamage;
     public FloatUpgradeableStat Range { get; private set; }
+    public ByteUpgradeableStat Damage { get; private set; }
 
     private void OnEnable()
     {

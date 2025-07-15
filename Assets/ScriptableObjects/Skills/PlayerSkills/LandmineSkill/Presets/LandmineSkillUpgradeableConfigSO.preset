@@ -97,42 +97,6 @@ Preset:
     value: 2.2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: _damage.<IsSubstractModeOn>k__BackingField
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: _damage.<Unit>k__BackingField
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: _damage._alwaysUseMinValueForUpgrade
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: _damage.<CanBeUpgraded>k__BackingField
-    value: 1
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: _damage.<Value>k__BackingField
-    value: 5
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: _damage._floatMinMaxRange.<Min>k__BackingField
-    value: 5
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: _damage._floatMinMaxRange.<Max>k__BackingField
-    value: 18
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: _damage._floatRangeOfPossibleValuesForUpgrade.<Min>k__BackingField
-    value: 4
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: _damage._floatRangeOfPossibleValuesForUpgrade.<Max>k__BackingField
-    value: 6
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
     propertyPath: _size.<IsSubstractModeOn>k__BackingField
     value: 0
     objectReference: {fileID: 0}
@@ -169,42 +133,6 @@ Preset:
     value: 1.2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: _StunDuration.<IsSubstractModeOn>k__BackingField
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: _StunDuration.<Unit>k__BackingField
-    value: 2
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: _StunDuration._alwaysUseMinValueForUpgrade
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: _StunDuration.<CanBeUpgraded>k__BackingField
-    value: 1
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: _StunDuration.<Value>k__BackingField
-    value: 0.12
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: _StunDuration._floatMinMaxRange.<Min>k__BackingField
-    value: 0.12
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: _StunDuration._floatMinMaxRange.<Max>k__BackingField
-    value: 0.35
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: _StunDuration._floatRangeOfPossibleValuesForUpgrade.<Min>k__BackingField
-    value: 0.1
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: _StunDuration._floatRangeOfPossibleValuesForUpgrade.<Max>k__BackingField
-    value: 0.6
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
     propertyPath: _knockbackRange.<IsSubstractModeOn>k__BackingField
     value: 0
     objectReference: {fileID: 0}
@@ -239,6 +167,42 @@ Preset:
   - target: {fileID: 0}
     propertyPath: _knockbackRange._floatRangeOfPossibleValuesForUpgrade.<Max>k__BackingField
     value: 2.8
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _damage.<IsSubstractModeOn>k__BackingField
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _damage.<Unit>k__BackingField
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _damage._alwaysUseMinValueForUpgrade
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _damage.<CanBeUpgraded>k__BackingField
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _damage.<Value>k__BackingField
+    value: 5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _damage._byteMinMaxRange.<Min>k__BackingField
+    value: 5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _damage._byteMinMaxRange.<Max>k__BackingField
+    value: 18
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _damage._byteRangeOfPossibleValuesForUpgrade.<Min>k__BackingField
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _damage._byteRangeOfPossibleValuesForUpgrade.<Max>k__BackingField
+    value: 6
     objectReference: {fileID: 0}
   m_ExcludedProperties: []
   m_CoupledType:

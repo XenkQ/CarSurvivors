@@ -21,11 +21,11 @@ namespace Assets.ScriptableObjects.Skills.PlayerSkills.MinigunSkill
         [Header("Bullets Stats")]
         [SerializeField] private float _bulletTimeToArriveAtEndRangeMultiplier;
         [SerializeField] private ProjectileConfigSO _projectileConfig;
-        [SerializeField] private FloatUpgradeableStat _startBulletDamage;
         [SerializeField] private FloatUpgradeableStat _startBulletSize;
+        [SerializeField] private ByteUpgradeableStat _startBulletDamage;
         [SerializeField] private ByteUpgradeableStat _startBulletMaxPiercing;
-        public FloatUpgradeableStat BulletDamage { get; private set; }
         public FloatUpgradeableStat BulletSize { get; private set; }
+        public ByteUpgradeableStat BulletDamage { get; private set; }
         public ByteUpgradeableStat BulletMaxPiercing { get; private set; }
 
         private void OnEnable()

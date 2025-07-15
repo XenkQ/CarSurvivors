@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06b2e9cf0d4ac354286ec0c582dfbb76, type: 3}
   m_Name: LaserProjectileStats
   m_EditorClassIdentifier: 
-  _startDamage: 6
+  _startDamage: 5
   _startSize: 0.2
   _timeToArriveAtEndRangeMultiplier: 1
   _startTimeToArriveAtRangeEnd: 1
