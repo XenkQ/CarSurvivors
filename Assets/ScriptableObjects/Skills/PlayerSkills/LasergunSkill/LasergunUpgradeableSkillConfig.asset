@@ -38,18 +38,6 @@ MonoBehaviour:
       <Min>k__BackingField: 1
       <Max>k__BackingField: 1
   _projectileConfig: {fileID: 11400000, guid: 0f507d3152e570f49b1726235df06312, type: 2}
-  _startDamage:
-    <IsSubstractModeOn>k__BackingField: 0
-    <Unit>k__BackingField: 0
-    _alwaysUseMinValueForUpgrade: 0
-    <CanBeUpgraded>k__BackingField: 1
-    <Value>k__BackingField: 5
-    _floatMinMaxRange:
-      <Min>k__BackingField: 5
-      <Max>k__BackingField: 25
-    _floatRangeOfPossibleValuesForUpgrade:
-      <Min>k__BackingField: 5
-      <Max>k__BackingField: 8
   _startRange:
     <IsSubstractModeOn>k__BackingField: 0
     <Unit>k__BackingField: 3
@@ -62,3 +50,15 @@ MonoBehaviour:
     _floatRangeOfPossibleValuesForUpgrade:
       <Min>k__BackingField: 4
       <Max>k__BackingField: 7
+  _startDamage:
+    <IsSubstractModeOn>k__BackingField: 0
+    <Unit>k__BackingField: 0
+    _alwaysUseMinValueForUpgrade: 0
+    <CanBeUpgraded>k__BackingField: 1
+    <Value>k__BackingField: 5
+    _byteMinMaxRange:
+      <Min>k__BackingField: 5
+      <Max>k__BackingField: 25
+    _byteRangeOfPossibleValuesForUpgrade:
+      <Min>k__BackingField: 5
+      <Max>k__BackingField: 8
