@@ -2,6 +2,7 @@ using Assets.ScriptableObjects.Skills.PlayerSkills.LandmineSkill;
 using Assets.Scripts.Initializers;
 using Assets.Scripts.LayerMasks;
 using Assets.Scripts.StatusAffectables;
+using Unity.VisualScripting;
 using UnityEngine;
 using VFX;
 
@@ -74,8 +75,10 @@ namespace Assets.Scripts.Skills.PlayerSkills.LandmineTrap
 
         private void ApplyExplosionKnockbackOnKnockableEntity(Collider collider)
         {
+            const float timeToArriveAtLocationMultiplier = 0.2f;
+            float timeToArriveAtLocation = _config.KnockbackRange.Value * timeToArriveAtLocationMultiplier;
+
             Vector3 dir = (collider.transform.position - transform.position).normalized;
-            float timeToArriveAtLocation = 1f / _config.KnockbackRange.Value;
             EntityManipulationHelper.Knockback(collider, dir, _config.KnockbackRange.Value, timeToArriveAtLocation);
         }
 

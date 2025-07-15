@@ -222,15 +222,15 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _knockbackRange.<Value>k__BackingField
-    value: 4
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _knockbackRange._floatMinMaxRange.<Min>k__BackingField
-    value: 4
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _knockbackRange._floatMinMaxRange.<Max>k__BackingField
-    value: 10
+    value: 5
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _knockbackRange._floatRangeOfPossibleValuesForUpgrade.<Min>k__BackingField
@@ -238,7 +238,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _knockbackRange._floatRangeOfPossibleValuesForUpgrade.<Max>k__BackingField
-    value: 4
+    value: 2.8
     objectReference: {fileID: 0}
   m_ExcludedProperties: []
   m_CoupledType:

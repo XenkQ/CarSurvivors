@@ -77,10 +77,10 @@ MonoBehaviour:
     <Unit>k__BackingField: 3
     _alwaysUseMinValueForUpgrade: 0
     <CanBeUpgraded>k__BackingField: 1
-    <Value>k__BackingField: 4
+    <Value>k__BackingField: 1
     _floatMinMaxRange:
-      <Min>k__BackingField: 4
-      <Max>k__BackingField: 10
+      <Min>k__BackingField: 1
+      <Max>k__BackingField: 5
     _floatRangeOfPossibleValuesForUpgrade:
       <Min>k__BackingField: 2
-      <Max>k__BackingField: 4
+      <Max>k__BackingField: 2.8
