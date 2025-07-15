@@ -65,19 +65,19 @@ namespace Assets.Scripts.Skills.PlayerSkills.LandmineTrap
             {
                 EntityManipulationHelper.Damage(collider, _config.Damage.Value);
 
-                ApplyExplosionKnockbackOnKnockableEntity(collider);
+                const float timeToArriveAtLocationMultiplier = 0.2f;
+                float timeToArriveAtLocation = _config.KnockbackRange.Value * timeToArriveAtLocationMultiplier;
 
-                EntityManipulationHelper.Stun(collider, _config.StunDuration.Value);
+                ApplyExplosionKnockbackOnKnockableEntity(collider, timeToArriveAtLocation);
+
+                EntityManipulationHelper.Stun(collider, timeToArriveAtLocation);
             }
 
             _landmineVisual.SetActive(false);
         }
 
-        private void ApplyExplosionKnockbackOnKnockableEntity(Collider collider)
+        private void ApplyExplosionKnockbackOnKnockableEntity(Collider collider, float timeToArriveAtLocation)
         {
-            const float timeToArriveAtLocationMultiplier = 0.2f;
-            float timeToArriveAtLocation = _config.KnockbackRange.Value * timeToArriveAtLocationMultiplier;
-
             Vector3 dir = (collider.transform.position - transform.position).normalized;
             EntityManipulationHelper.Knockback(collider, dir, _config.KnockbackRange.Value, timeToArriveAtLocation);
         }

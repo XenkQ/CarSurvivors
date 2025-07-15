@@ -56,7 +56,7 @@ namespace Assets.Scripts.Skills.PlayerSkills.Saw
                 knockback,
                 _config.TimeToArriveAtKnockbackLocation);
 
-            EntityManipulationHelper.Stun(other, _config.StunDuration.Value);
+            EntityManipulationHelper.Stun(other, _config.TimeToArriveAtKnockbackLocation);
         }
     }
 }
