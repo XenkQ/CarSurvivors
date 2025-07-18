@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace VFX
 {
-    public struct VFXPlayConfig
+    public class VFXPlayConfig
     {
         public bool DestroyOnEnd;
         public float Scale;
@@ -48,7 +48,7 @@ namespace VFX
             return _longestParticleDuration;
         }
 
-        public void Play(VFXPlayConfig config = new())
+        public void Play(VFXPlayConfig config)
         {
             _vfxPlayConfig = config;
 

@@ -87,7 +87,7 @@ namespace Assets.Scripts.Enemies
 
             if (Health.IsAlive())
             {
-                _bloodVfxPlayer.Play();
+                _bloodVfxPlayer.Play(new VFXPlayConfig());
             }
         }
 

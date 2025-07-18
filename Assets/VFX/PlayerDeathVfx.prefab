@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5673834779972695825}
   - component: {fileID: 6381234346279740114}
   - component: {fileID: 2180845960626609856}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: MaskParts
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -4901,7 +4901,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5216191994849410396}
   - component: {fileID: 2153005420916137295}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PlayerDeathVfx
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4949,7 +4949,7 @@ GameObject:
   - component: {fileID: 6561385788685984382}
   - component: {fileID: 8396844589063372673}
   - component: {fileID: 7019934545582937721}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: GlassParts
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5044,7 +5044,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -9840,7 +9840,7 @@ GameObject:
   - component: {fileID: 7989924511924297996}
   - component: {fileID: 5768656374786813417}
   - component: {fileID: 4173290890897917626}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Wheels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9935,7 +9935,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
