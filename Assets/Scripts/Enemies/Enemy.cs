@@ -43,13 +43,6 @@ namespace Assets.Scripts.Enemies
             EnemyAnimator.IsMovingByCrawling = Config.IsMovingByCrawling;
         }
 
-        private void OnDisable()
-        {
-            SpawnDeathParticles();
-
-            SpawnExp();
-        }
-
         private void Start()
         {
             _damagePopupsSpawner = DamagePopupsSpawner.Instance;
@@ -62,6 +55,10 @@ namespace Assets.Scripts.Enemies
 
         public void OnRelease()
         {
+            SpawnDeathParticles();
+
+            SpawnExp();
+
             gameObject.SetActive(false);
         }
 
