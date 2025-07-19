@@ -34,7 +34,6 @@ namespace Assets.Scripts.Player
         private void Health_OnNoHealth(object sender, EventArgs e)
         {
             _visual.SetActive(false);
-            Debug.Log("ON NO HEALTH");
 
             DisableNotWheelColliders();
 
@@ -43,7 +42,6 @@ namespace Assets.Scripts.Player
 
         private void DeathVfxPlayer_OnVFXFinished(object sender, EventArgs e)
         {
-            Debug.Log("VFX FINISHED");
             PlayerDeathPresenter.Instace.EnableDeathScreen();
         }
 
