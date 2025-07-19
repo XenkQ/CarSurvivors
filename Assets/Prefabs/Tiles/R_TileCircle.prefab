@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 988577f340cb85d49a073f3ad7d3d845, type: 2}
+  - {fileID: 2100000, guid: a1aedc9be7421c441bc733a35dfcee96, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -279,6 +279,22 @@ PrefabInstance:
     - target: {fileID: 4180908834960403037, guid: bf2c6c76cc39f35418b83d34b6c3d719, type: 3}
       propertyPath: m_Name
       value: Lamp (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4844432959760519880, guid: bf2c6c76cc39f35418b83d34b6c3d719, type: 3}
+      propertyPath: m_Size.z
+      value: 1.2585573
+      objectReference: {fileID: 0}
+    - target: {fileID: 4844432959760519880, guid: bf2c6c76cc39f35418b83d34b6c3d719, type: 3}
+      propertyPath: m_Center.x
+      value: -0.08297432
+      objectReference: {fileID: 0}
+    - target: {fileID: 4844432959760519880, guid: bf2c6c76cc39f35418b83d34b6c3d719, type: 3}
+      propertyPath: m_Center.y
+      value: -0.12590422
+      objectReference: {fileID: 0}
+    - target: {fileID: 4844432959760519880, guid: bf2c6c76cc39f35418b83d34b6c3d719, type: 3}
+      propertyPath: m_Center.z
+      value: 0.5000006
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
