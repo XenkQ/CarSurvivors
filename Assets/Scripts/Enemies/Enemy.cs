@@ -1,8 +1,8 @@
 using Assets.Scripts.Collisions;
 using Assets.Scripts.DamagePopups;
 using Assets.Scripts.HealthSystem;
-using Assets.Scripts.LevelSystem.Exp;
 using Assets.Scripts.StatusAffectables;
+using System;
 using UnityEngine;
 using VFX;
 
@@ -12,20 +12,18 @@ namespace Assets.Scripts.Enemies
     {
         [field: SerializeField] public EnemyConfigSO Config { get; private set; }
         [SerializeField] private VFXPlayer _bloodVfxPlayer;
-        [SerializeField] private VFXPlayer _deathVfxPlayer;
-        [SerializeField] private Vector3 _deathEffectCenterOffset;
+        [SerializeField] private GameObject _visual;
 
         public IHealth Health { get; private set; }
-
         public IStunController StunController { get; private set; }
-
         public ICollisionsController CollisionsController { get; private set; }
-
         public IMovementController MovementController { get; private set; }
-
         public EnemyAnimator EnemyAnimator { get; private set; }
 
+        public event EventHandler OnCanBeReleased;
+
         private IDamagePopupsSpawner _damagePopupsSpawner;
+        private INeedToCompleteBeforeDisable _enemyDeathSequence;
 
         private void Awake()
         {
@@ -33,21 +31,8 @@ namespace Assets.Scripts.Enemies
             StunController = GetComponent<IStunController>();
             CollisionsController = GetComponent<ICollisionsController>();
             MovementController = GetComponent<IMovementController>();
+            _enemyDeathSequence = GetComponent<INeedToCompleteBeforeDisable>();
             EnemyAnimator = GetComponentInChildren<EnemyAnimator>();
-        }
-
-        private void OnEnable()
-        {
-            Health.MaxHealth = Config.MaxHealth;
-
-            EnemyAnimator.IsMovingByCrawling = Config.IsMovingByCrawling;
-        }
-
-        private void OnDisable()
-        {
-            SpawnDeathParticles();
-
-            SpawnExp();
         }
 
         private void Start()
@@ -57,12 +42,16 @@ namespace Assets.Scripts.Enemies
 
         public void OnGet()
         {
-            gameObject.SetActive(true);
+            _enemyDeathSequence.OnCompleted += EnemyDeathSequence_OnCompleted;
+
+            _visual.SetActive(true);
+
+            Health.MaxHealth = Config.MaxHealth;
         }
 
         public void OnRelease()
         {
-            gameObject.SetActive(false);
+            _enemyDeathSequence.OnCompleted -= EnemyDeathSequence_OnCompleted;
         }
 
         public void ApplyKnockBack(Vector3 direction, float power, float timeToArriveAtLocation)
@@ -78,7 +67,7 @@ namespace Assets.Scripts.Enemies
         public void TakeDamage(float damage)
         {
             _damagePopupsSpawner.SpawnDamagePopup(
-                transform.position + _deathEffectCenterOffset,
+                _bloodVfxPlayer.transform.position,
                 damage,
                 SpawnShapeModes.Hemisphere
             );
@@ -96,21 +85,9 @@ namespace Assets.Scripts.Enemies
             StunController.PerformStun(duration);
         }
 
-        private void SpawnDeathParticles()
+        private void EnemyDeathSequence_OnCompleted(object sender, EventArgs e)
         {
-            var deathVfxPlayer = Instantiate(_deathVfxPlayer, transform.position + _deathEffectCenterOffset, Quaternion.identity);
-
-            deathVfxPlayer.Play(new VFXPlayConfig(destroyOnEnd: true));
-        }
-
-        private void SpawnExp()
-        {
-            ExpParticleSpawner.Instance.SpawnExpParticle(
-                new ExpParticleSpawner.ExpParticleSpawnData(
-                    transform.position + _deathEffectCenterOffset,
-                    Config.ExpForKill
-                )
-            );
+            OnCanBeReleased?.Invoke(this, EventArgs.Empty);
         }
     }
 }
