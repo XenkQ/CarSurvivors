@@ -29,17 +29,7 @@ namespace Assets.Scripts.Enemies
 
         private void OnEnable()
         {
-            if (IsMovingByCrawling)
-            {
-                _animator.SetLayerWeight(_walingLayerIndex, 0);
-                _animator.SetLayerWeight(_crawlingLayerIndex, 1);
-            }
-            else
-            {
-                _animator.SetLayerWeight(_walingLayerIndex, 1);
-                _animator.SetLayerWeight(_crawlingLayerIndex, 0);
-            }
-
+            IsMovingByCrawling = _enemy.Config.IsMovingByCrawling;
             InvokeRepeating(nameof(HandleTransitionPropertiesChanges), 0, _animationResponseSpeed);
         }
 
@@ -72,6 +62,17 @@ namespace Assets.Scripts.Enemies
 
         private void HandleTransitionPropertiesChanges()
         {
+            if (IsMovingByCrawling)
+            {
+                _animator.SetLayerWeight(_walingLayerIndex, 0);
+                _animator.SetLayerWeight(_crawlingLayerIndex, 1);
+            }
+            else
+            {
+                _animator.SetLayerWeight(_walingLayerIndex, 1);
+                _animator.SetLayerWeight(_crawlingLayerIndex, 0);
+            }
+
             _animator.SetFloat("Speed", _enemy.MovementController.GetCurrentMovementSpeed());
             _animator.SetBool("IsOnGround", _enemy.MovementController.IsOnGround());
         }
