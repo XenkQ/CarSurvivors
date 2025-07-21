@@ -10,16 +10,16 @@ namespace Assets.Scripts.Skills.PlayerSkills.Minigun
     public class MinigunTurret : Turret<TurretConfigSO>
     {
         [SerializeField] private bool _inverseRotation;
-        private VFXPlayer _muzzleFleshVFXPlayer;
         private Tween _rotationTween;
-        private AudioClipPlayer _audioClipPlayer;
+        private IVFXPlayer _muzzleFleshVFXPlayer;
+        private IAudioClipPlayer _audioClipPlayer;
 
         protected override void Awake()
         {
             base.Awake();
 
-            _muzzleFleshVFXPlayer = GetComponentInChildren<VFXPlayer>();
-            _audioClipPlayer = GetComponentInChildren<AudioClipPlayer>();
+            _muzzleFleshVFXPlayer = GetComponentInChildren<IVFXPlayer>();
+            _audioClipPlayer = GetComponentInChildren<IAudioClipPlayer>();
         }
 
         public override void Initialize(TurretConfigSO config)

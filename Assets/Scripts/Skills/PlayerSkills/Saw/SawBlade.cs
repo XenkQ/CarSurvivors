@@ -14,11 +14,11 @@ namespace Assets.Scripts.Skills.PlayerSkills.Saw
         private bool _isInitialized;
         private PlayerManager _playerManager;
         private const float _defaultCollisionKnockback = 2f;
-        private AudioClipPlayer _audioClipPlayer;
+        private IAudioClipPlayer _audioClipPlayer;
 
         private void Awake()
         {
-            _audioClipPlayer = GetComponentInChildren<AudioClipPlayer>();
+            _audioClipPlayer = GetComponentInChildren<IAudioClipPlayer>();
         }
 
         private void Start()

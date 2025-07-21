@@ -106,7 +106,7 @@ namespace Assets.Scripts.LevelSystem.Exp
         {
             if (sender is IExpParticle expParticle)
             {
-                expParticle.PlayDisapearingAnimation(() => Destroy(expParticle.GameObject));
+                expParticle.CollectExp(() => Destroy(expParticle.GameObject));
                 expParticle.OnExpReachedTarget -= ExpParticle_OnExpReachedTarget;
             }
         }

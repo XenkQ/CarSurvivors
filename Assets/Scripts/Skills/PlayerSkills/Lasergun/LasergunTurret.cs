@@ -21,13 +21,13 @@ public class LasergunTurret : Turret<TurretConfigSO>
     private const float SMALLEST_ANGLE_QUALIFIING_AS_LOOKING_AT_TARGET = 2f;
     private bool _isLookingAtTarget;
 
-    private AudioClipPlayer _audioClipPlayer;
+    private IAudioClipPlayer _audioClipPlayer;
 
     protected override void Awake()
     {
         base.Awake();
 
-        _audioClipPlayer = GetComponentInChildren<AudioClipPlayer>();
+        _audioClipPlayer = GetComponentInChildren<IAudioClipPlayer>();
     }
 
     public override void Initialize(TurretConfigSO config)

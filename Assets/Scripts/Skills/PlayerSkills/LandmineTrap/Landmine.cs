@@ -13,12 +13,12 @@ namespace Assets.Scripts.Skills.PlayerSkills.LandmineTrap
         [SerializeField] private LandmineSkillUpgradeableConfigSO _config;
         [SerializeField] private GameObject _landmineVisual;
         [SerializeField] private VFXPlayer _deathVfxPlayer;
-        private AudioClipPlayer _audioClipPlayer;
+        private IAudioClipPlayer _audioClipPlayer;
         private bool _isInitialized;
 
         private void Awake()
         {
-            _audioClipPlayer = GetComponentInChildren<AudioClipPlayer>();
+            _audioClipPlayer = GetComponentInChildren<IAudioClipPlayer>();
         }
 
         private void OnTriggerEnter(Collider other)
