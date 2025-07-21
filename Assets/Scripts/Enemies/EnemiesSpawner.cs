@@ -1,6 +1,5 @@
 using Assets.Scripts.CustomTypes;
 using Assets.Scripts.GridSystem;
-using Assets.Scripts.HealthSystem;
 using Assets.Scripts.Spawners;
 using System;
 using System.Collections.Generic;
@@ -76,6 +75,8 @@ namespace Assets.Scripts.Enemies
 
         private void OnEnemyGet(Enemy enemy)
         {
+            enemy.OnCanBeReleased += Enemy_OnRelease;
+
             Cell cell = GridCellsNotVisibleByMainCamera
                 .GetRandomWalkableCells(_gridManager.GridPlayerChunk, 1)
                 .FirstOrDefault();
@@ -86,38 +87,38 @@ namespace Assets.Scripts.Enemies
                 return;
             }
 
-            enemy.Health.OnNoHealth += Health_OnNoHealth;
-
             enemy.transform.position = cell.WorldPos;
 
             enemy.OnGet();
+
+            enemy.gameObject.SetActive(true);
 
             SpawnedEnemiesCounter++;
         }
 
         private void OnEnemyRelease(Enemy enemy)
         {
-            enemy.Health.OnNoHealth -= Health_OnNoHealth;
-
-            OnSpawnedEntityReleased?.Invoke(enemy, EventArgs.Empty);
+            enemy.OnCanBeReleased -= Enemy_OnRelease;
 
             enemy.OnRelease();
+
+            enemy.gameObject.SetActive(false);
+
+            OnSpawnedEntityReleased?.Invoke(enemy, EventArgs.Empty);
 
             SpawnedEnemiesCounter--;
         }
 
-        private void Health_OnNoHealth(object sender, EventArgs e)
+        private void Enemy_OnRelease(object sender, EventArgs e)
         {
-            Health healthComponent = sender as Health;
-            if (healthComponent == null)
+            Enemy enemy = sender as Enemy;
+
+            if (enemy is null)
             {
                 return;
             }
 
-            if (healthComponent.gameObject.TryGetComponent(out Enemy enemy))
-            {
-                OnEnemyRelease(enemy);
-            }
+            OnEnemyRelease(enemy);
         }
 
         public void SpawnRandomEnemiesBasedOnSpawnChance(int count)

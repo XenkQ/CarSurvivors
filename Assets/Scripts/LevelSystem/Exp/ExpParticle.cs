@@ -1,10 +1,10 @@
-﻿using Assets.Scripts.CustomTypes;
+﻿using Assets.Scripts.Audio;
+using Assets.Scripts.CustomTypes;
 using Assets.Scripts.Extensions;
 using Assets.Scripts.FlowFieldSystem;
 using Assets.Scripts.LayerMasks;
 using Assets.Scripts.Player;
 using Assets.Scripts.Providers;
-using DG.Tweening;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,7 +17,7 @@ namespace Assets.Scripts.LevelSystem.Exp
 
         public void SetSizeAndMaterialBasedOnExpAmount(float exp);
 
-        public void PlayDisapearingAnimation(TweenCallback callback);
+        public void CollectExp(Action callback);
     }
 
     [RequireComponent(typeof(FlowFieldMovementController))]
@@ -42,18 +42,21 @@ namespace Assets.Scripts.LevelSystem.Exp
         public event EventHandler OnExpReachedTarget;
 
         private float _expAmount;
-        private bool _expChanneled;
+        private bool _expCollected;
 
         private IFlowFieldMovementController _flowFieldMovementController;
+
+        private IAudioClipPlayer _audoClipPlayer;
 
         private void Awake()
         {
             _flowFieldMovementController = GetComponent<IFlowFieldMovementController>();
+            _audoClipPlayer = GetComponentInChildren<IAudioClipPlayer>();
         }
 
         private void OnEnable()
         {
-            _expChanneled = false;
+            _expCollected = false;
             _expAmount = 0;
         }
 
@@ -64,11 +67,9 @@ namespace Assets.Scripts.LevelSystem.Exp
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!_expChanneled && (1 << other.gameObject.layer) == EntityLayers.Player)
+            if (!_expCollected && (1 << other.gameObject.layer) == EntityLayers.Player)
             {
-                PlayerManager.Instance.LevelController.AddExp(_expAmount);
-                _expChanneled = true;
-                OnExpReachedTarget.Invoke(this, EventArgs.Empty);
+                OnExpReachedTarget?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -95,9 +96,26 @@ namespace Assets.Scripts.LevelSystem.Exp
             }
         }
 
-        public void PlayDisapearingAnimation(TweenCallback callback)
+        public void CollectExp(Action callback = null)
         {
-            transform.LifeEndingShrinkToZeroTween(_disapearingDuration, callback);
+            bool audioClipPlayFinished = false;
+            _audoClipPlayer.Play("ExpCollected");
+
+            _audoClipPlayer.OnAudioClipFinished += (s, e) => audioClipPlayFinished = true;
+
+            transform.LifeEndingShrinkToZeroTween(_disapearingDuration, () =>
+            {
+                PlayerManager.Instance.LevelController.AddExp(_expAmount);
+
+                if (audioClipPlayFinished)
+                {
+                    callback?.Invoke();
+                }
+                else
+                {
+                    _audoClipPlayer.OnAudioClipFinished += (s, e) => callback?.Invoke();
+                }
+            });
         }
     }
 }

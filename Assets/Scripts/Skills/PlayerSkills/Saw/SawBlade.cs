@@ -1,4 +1,5 @@
 ﻿using Assets.ScriptableObjects.Skills.PlayerSkills.SawSkill;
+using Assets.Scripts.Audio;
 using Assets.Scripts.Initializers;
 using Assets.Scripts.LayerMasks;
 using Assets.Scripts.Player;
@@ -10,14 +11,14 @@ namespace Assets.Scripts.Skills.PlayerSkills.Saw
     public class SawBlade : MonoBehaviour, IInitializableWithScriptableConfig<SawSkillUpgradeableConfigSO>
     {
         private SawSkillUpgradeableConfigSO _config;
-        private BoxCollider _boxCollider;
         private bool _isInitialized;
         private PlayerManager _playerManager;
         private const float _defaultCollisionKnockback = 2f;
+        private IAudioClipPlayer _audioClipPlayer;
 
         private void Awake()
         {
-            _boxCollider = GetComponent<BoxCollider>();
+            _audioClipPlayer = GetComponentInChildren<IAudioClipPlayer>();
         }
 
         private void Start()
@@ -25,9 +26,12 @@ namespace Assets.Scripts.Skills.PlayerSkills.Saw
             _playerManager = PlayerManager.Instance;
         }
 
-        public void FixedUpdate()
+        private void OnTriggerEnter(Collider other)
         {
-            AtackAllEnemiesInsideCollider();
+            if ((1 << other.gameObject.layer) == EntityLayers.Enemy)
+            {
+                AttackCollidingEnemy(other);
+            }
         }
 
         public void Initialize(SawSkillUpgradeableConfigSO config)
@@ -44,42 +48,24 @@ namespace Assets.Scripts.Skills.PlayerSkills.Saw
             return _isInitialized;
         }
 
-        private void AtackAllEnemiesInsideCollider()
+        private void AttackCollidingEnemy(Collider other)
         {
-            Vector3 boxWorldCenter = transform.TransformPoint(_boxCollider.center);
+            _audioClipPlayer.Play("Attack");
 
-            Collider[] colliders = Physics.OverlapBox(
-                boxWorldCenter,
-                _boxCollider.size * 0.5f,
-                transform.rotation,
-                EntityLayers.All);
+            EntityManipulationHelper.Damage(other, _config.Damage.Value);
 
-            foreach (Collider collider in colliders)
-            {
-                AttackCollidingEntity(collider);
-            }
-        }
+            float knockback = Mathf.Max(
+                _defaultCollisionKnockback,
+                _config.KnockbackRange.Value * _playerManager.CarController.GetMovementSpeed()
+            );
 
-        private void AttackCollidingEntity(Collider other)
-        {
-            GameObject collisionObject = other.transform.gameObject;
-            if (1 << collisionObject.layer == EntityLayers.Enemy)
-            {
-                EntityManipulationHelper.Damage(other, _config.Damage.Value);
+            EntityManipulationHelper.Knockback(
+                other,
+                transform.forward,
+                knockback,
+                _config.TimeToArriveAtKnockbackLocation);
 
-                float knockback = Mathf.Max(
-                    _defaultCollisionKnockback,
-                    _config.KnockbackRange.Value * _playerManager.CarController.GetMovementSpeed()
-                );
-
-                EntityManipulationHelper.Knockback(
-                    other,
-                    transform.forward,
-                    knockback,
-                    _config.TimeToArriveAtKnockbackLocation);
-
-                EntityManipulationHelper.Stun(other, _config.StunDuration.Value);
-            }
+            EntityManipulationHelper.Stun(other, _config.TimeToArriveAtKnockbackLocation);
         }
     }
 }

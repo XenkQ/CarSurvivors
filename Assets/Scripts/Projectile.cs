@@ -15,27 +15,18 @@ namespace Assets.Scripts
         [SerializeField] private SphereCollider _sphereCollider;
         private byte _piercedCounter;
         private bool _isInitialized;
+        private bool _isAlive = true;
 
         public event EventHandler OnLifeEnd;
 
         private void FixedUpdate()
         {
-            if (_isInitialized)
+            if (!_isAlive || !_isInitialized)
             {
-                Collider[] colliders = Physics.OverlapSphere(transform.position + _sphereCollider.center, _sphereCollider.radius,
-                                             EntityLayers.Enemy | TerrainLayers.Impassable);
-                foreach (Collider collider in colliders)
-                {
-                    if (collider == null)
-                    {
-                        return;
-                    }
-
-                    EntityManipulationHelper.Damage(collider, _config.Damage);
-
-                    DecreasePiercing();
-                }
+                return;
             }
+
+            HandleCollisions();
         }
 
         public void Initialize(ProjectileConfigSO config)
@@ -53,6 +44,32 @@ namespace Assets.Scripts
 
         public bool IsInitialized() => _isInitialized;
 
+        private void HandleCollisions()
+        {
+            Collider[] colliders = Physics.OverlapSphere(transform.position + _sphereCollider.center, _sphereCollider.radius,
+                                         EntityLayers.Enemy | TerrainLayers.Impassable);
+            foreach (Collider collider in colliders)
+            {
+                if (collider == null)
+                {
+                    continue;
+                }
+
+                EntityManipulationHelper.Damage(collider, _config.Damage);
+
+                if (_piercedCounter > 0)
+                {
+                    _piercedCounter--;
+                }
+                else
+                {
+                    _isAlive = false;
+                    DOTween.Kill(transform);
+                    OnLifeEnd?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+
         private void StartMovingProjectileForward()
         {
             Vector3 targetPos = transform.position + transform.forward * _config.Range;
@@ -65,25 +82,10 @@ namespace Assets.Scripts
 
         private void OnProjectileReachedDestination()
         {
-            const float disapearingShrinkDuration = 0.1f;
-            transform.LifeEndingShrinkToZeroTween(disapearingShrinkDuration, EndLife);
-        }
-
-        private void EndLife()
-        {
-            OnLifeEnd?.Invoke(this, EventArgs.Empty);
-        }
-
-        private void DecreasePiercing()
-        {
-            if (_piercedCounter > 0)
-            {
-                _piercedCounter--;
-            }
-            else
-            {
-                EndLife();
-            }
+            transform.LifeEndingShrinkToZeroTween(
+                _config.DisapearingDuration,
+                () => OnLifeEnd?.Invoke(this, EventArgs.Empty)
+            );
         }
     }
 }

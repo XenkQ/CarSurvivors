@@ -1,4 +1,5 @@
 using Assets.ScriptableObjects.Skills.PlayerSkills.LandmineSkill;
+using Assets.Scripts.Audio;
 using Assets.Scripts.Initializers;
 using Assets.Scripts.LayerMasks;
 using Assets.Scripts.StatusAffectables;
@@ -12,7 +13,13 @@ namespace Assets.Scripts.Skills.PlayerSkills.LandmineTrap
         [SerializeField] private LandmineSkillUpgradeableConfigSO _config;
         [SerializeField] private GameObject _landmineVisual;
         [SerializeField] private VFXPlayer _deathVfxPlayer;
+        private IAudioClipPlayer _audioClipPlayer;
         private bool _isInitialized;
+
+        private void Awake()
+        {
+            _audioClipPlayer = GetComponentInChildren<IAudioClipPlayer>();
+        }
 
         private void OnTriggerEnter(Collider other)
         {
@@ -22,6 +29,8 @@ namespace Assets.Scripts.Skills.PlayerSkills.LandmineTrap
             }
 
             Explode();
+
+            _audioClipPlayer.Play("Explosion");
         }
 
         private void OnDrawGizmos()
@@ -58,24 +67,26 @@ namespace Assets.Scripts.Skills.PlayerSkills.LandmineTrap
                 return;
             }
 
-            _deathVfxPlayer.Play();
+            _deathVfxPlayer.Play(new VFXPlayConfig(scale: _config.ExplosionRadius.Value));
 
             foreach (Collider collider in colliders)
             {
                 EntityManipulationHelper.Damage(collider, _config.Damage.Value);
 
-                ApplyExplosionKnockbackOnKnockableEntity(collider);
+                const float timeToArriveAtLocationMultiplier = 0.2f;
+                float timeToArriveAtLocation = _config.KnockbackRange.Value * timeToArriveAtLocationMultiplier;
 
-                EntityManipulationHelper.Stun(collider, _config.StunDuration.Value);
+                ApplyExplosionKnockbackOnKnockableEntity(collider, timeToArriveAtLocation);
+
+                EntityManipulationHelper.Stun(collider, timeToArriveAtLocation);
             }
 
             _landmineVisual.SetActive(false);
         }
 
-        private void ApplyExplosionKnockbackOnKnockableEntity(Collider collider)
+        private void ApplyExplosionKnockbackOnKnockableEntity(Collider collider, float timeToArriveAtLocation)
         {
             Vector3 dir = (collider.transform.position - transform.position).normalized;
-            float timeToArriveAtLocation = 1f / _config.KnockbackRange.Value;
             EntityManipulationHelper.Knockback(collider, dir, _config.KnockbackRange.Value, timeToArriveAtLocation);
         }
 

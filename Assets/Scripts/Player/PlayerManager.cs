@@ -4,6 +4,7 @@ using Assets.Scripts.LevelSystem;
 using Assets.Scripts.Skills;
 using Assets.Scripts.StatusAffectables;
 using UnityEngine;
+using VFX;
 
 namespace Assets.Scripts.Player
 {
@@ -44,7 +45,6 @@ namespace Assets.Scripts.Player
         private void Start()
         {
             _currentDelayBetweenTakingDamage = _startDelayBetweenTakingDamage;
-            Health.OnNoHealth += Health_OnNoHealth;
         }
 
         private void Update()
@@ -72,11 +72,6 @@ namespace Assets.Scripts.Player
         public void InstantKill()
         {
             Health.DecreaseHealth(Health.MaxHealth);
-        }
-
-        private void Health_OnNoHealth(object sender, System.EventArgs e)
-        {
-            Debug.Log("You are dead");
         }
     }
 }

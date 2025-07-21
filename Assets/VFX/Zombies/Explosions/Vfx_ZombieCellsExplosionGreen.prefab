@@ -4903,7 +4903,7 @@ GameObject:
   - component: {fileID: 3817838671216868024}
   - component: {fileID: 1633092592158408719}
   m_Layer: 0
-  m_Name: Vfx_ZombieCellsExplosionGreen
+  m_Name: Vfx_ZombieCellsExplosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -5,14 +5,15 @@ namespace Assets.ScriptableObjects
     [CreateAssetMenu(fileName = "ProjectileStatsSO", menuName = "Scriptable Objects/ProjectileStatsSO")]
     public class ProjectileConfigSO : ScriptableObject
     {
-        [SerializeField] private float _startDamage;
+        [field: SerializeField] public float DisapearingDuration { get; private set; } = 0.1f;
+        [SerializeField] private byte _startDamage;
         [SerializeField] private float _startSize;
         [SerializeField] private float _timeToArriveAtEndRangeMultiplier;
         [SerializeField] private float _startTimeToArriveAtRangeEnd;
         [SerializeField] private float _startRange;
         [SerializeField] private byte _startMaxPiercing;
 
-        public float Damage { get; set; }
+        public byte Damage { get; set; }
         public float TimeToArriveAtEndRangeMultiplier { get; set; }
         public float Size { get; set; }
         public float Range { get; set; }

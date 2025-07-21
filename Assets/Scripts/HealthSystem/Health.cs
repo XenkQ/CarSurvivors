@@ -42,12 +42,15 @@ namespace Assets.Scripts.HealthSystem
 
         public event EventHandler OnHealthIncreased;
 
+        private bool _isAlive;
+
         protected virtual void OnEnable()
         {
             OnHealthDecreased += InvokeOnHealthChange;
             OnHealthIncreased += InvokeOnHealthChange;
             OnNoHealth += InvokeOnHealthChange;
 
+            _isAlive = true;
             CurrentHealth = MaxHealth;
         }
 
@@ -60,6 +63,11 @@ namespace Assets.Scripts.HealthSystem
 
         public void DecreaseHealth(float value)
         {
+            if (!_isAlive)
+            {
+                return;
+            }
+
             if (CurrentHealth > value)
             {
                 CurrentHealth -= value;
@@ -68,12 +76,18 @@ namespace Assets.Scripts.HealthSystem
             else
             {
                 CurrentHealth = 0;
+                _isAlive = false;
                 OnNoHealth?.Invoke(this, EventArgs.Empty);
             }
         }
 
         public void IncreaseHealth(float value)
         {
+            if (!_isAlive)
+            {
+                return;
+            }
+
             if (CurrentHealth + value < MaxHealth)
             {
                 CurrentHealth += value;
@@ -87,7 +101,7 @@ namespace Assets.Scripts.HealthSystem
 
         public bool IsAlive()
         {
-            return CurrentHealth > 0;
+            return _isAlive;
         }
 
         private void InvokeOnHealthChange(object sender, EventArgs e)
