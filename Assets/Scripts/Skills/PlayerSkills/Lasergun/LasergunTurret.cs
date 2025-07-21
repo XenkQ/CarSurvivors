@@ -1,4 +1,5 @@
 using Assets.ScriptableObjects;
+using Assets.Scripts.Audio;
 using Assets.Scripts.LayerMasks;
 using Assets.Scripts.Skills;
 using Assets.Scripts.StatusAffectables;
@@ -19,6 +20,15 @@ public class LasergunTurret : Turret<TurretConfigSO>
 
     private const float SMALLEST_ANGLE_QUALIFIING_AS_LOOKING_AT_TARGET = 2f;
     private bool _isLookingAtTarget;
+
+    private AudioClipPlayer _audioClipPlayer;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        _audioClipPlayer = GetComponentInChildren<AudioClipPlayer>();
+    }
 
     public override void Initialize(TurretConfigSO config)
     {
@@ -72,6 +82,8 @@ public class LasergunTurret : Turret<TurretConfigSO>
     private void FireLaserBeam()
     {
         StartCoroutine(ShootingLaserEffect());
+
+        _audioClipPlayer.Play("Shoot");
 
         EntityManipulationHelper.Damage(
             _currentTarget,

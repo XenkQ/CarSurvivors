@@ -1,4 +1,5 @@
 ﻿using Assets.ScriptableObjects.Skills.PlayerSkills.SawSkill;
+using Assets.Scripts.Audio;
 using Assets.Scripts.Initializers;
 using Assets.Scripts.LayerMasks;
 using Assets.Scripts.Player;
@@ -13,6 +14,12 @@ namespace Assets.Scripts.Skills.PlayerSkills.Saw
         private bool _isInitialized;
         private PlayerManager _playerManager;
         private const float _defaultCollisionKnockback = 2f;
+        private AudioClipPlayer _audioClipPlayer;
+
+        private void Awake()
+        {
+            _audioClipPlayer = GetComponentInChildren<AudioClipPlayer>();
+        }
 
         private void Start()
         {
@@ -43,6 +50,8 @@ namespace Assets.Scripts.Skills.PlayerSkills.Saw
 
         private void AttackCollidingEnemy(Collider other)
         {
+            _audioClipPlayer.Play("Attack");
+
             EntityManipulationHelper.Damage(other, _config.Damage.Value);
 
             float knockback = Mathf.Max(

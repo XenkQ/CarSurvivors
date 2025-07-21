@@ -1,8 +1,8 @@
 using Assets.ScriptableObjects.Skills.PlayerSkills.LandmineSkill;
+using Assets.Scripts.Audio;
 using Assets.Scripts.Initializers;
 using Assets.Scripts.LayerMasks;
 using Assets.Scripts.StatusAffectables;
-using Unity.VisualScripting;
 using UnityEngine;
 using VFX;
 
@@ -13,7 +13,13 @@ namespace Assets.Scripts.Skills.PlayerSkills.LandmineTrap
         [SerializeField] private LandmineSkillUpgradeableConfigSO _config;
         [SerializeField] private GameObject _landmineVisual;
         [SerializeField] private VFXPlayer _deathVfxPlayer;
+        private AudioClipPlayer _audioClipPlayer;
         private bool _isInitialized;
+
+        private void Awake()
+        {
+            _audioClipPlayer = GetComponentInChildren<AudioClipPlayer>();
+        }
 
         private void OnTriggerEnter(Collider other)
         {
@@ -23,6 +29,8 @@ namespace Assets.Scripts.Skills.PlayerSkills.LandmineTrap
             }
 
             Explode();
+
+            _audioClipPlayer.Play("Explosion");
         }
 
         private void OnDrawGizmos()

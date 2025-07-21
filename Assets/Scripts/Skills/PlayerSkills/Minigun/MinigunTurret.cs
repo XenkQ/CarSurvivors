@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿using Assets.ScriptableObjects;
+using Assets.Scripts.Audio;
 using Assets.Scripts.Extensions;
-using Assets.ScriptableObjects;
 using DG.Tweening;
+using UnityEngine;
 using VFX;
 
 namespace Assets.Scripts.Skills.PlayerSkills.Minigun
@@ -11,12 +12,14 @@ namespace Assets.Scripts.Skills.PlayerSkills.Minigun
         [SerializeField] private bool _inverseRotation;
         private VFXPlayer _muzzleFleshVFXPlayer;
         private Tween _rotationTween;
+        private AudioClipPlayer _audioClipPlayer;
 
         protected override void Awake()
         {
             base.Awake();
 
             _muzzleFleshVFXPlayer = GetComponentInChildren<VFXPlayer>();
+            _audioClipPlayer = GetComponentInChildren<AudioClipPlayer>();
         }
 
         public override void Initialize(TurretConfigSO config)
@@ -44,6 +47,7 @@ namespace Assets.Scripts.Skills.PlayerSkills.Minigun
             projectile.OnLifeEnd += Projectile_OnLifeEnd;
             projectile.Initialize(_config.ProjectileStatsSO);
             _muzzleFleshVFXPlayer.Play(new VFXPlayConfig());
+            _audioClipPlayer.Play("Shoot");
         }
 
         private void Projectile_OnLifeEnd(object sender, System.EventArgs e)

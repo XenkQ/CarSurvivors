@@ -448,8 +448,8 @@ MonoBehaviour:
       Loop: 1
     Scene: 1
   - ClipConfig:
-      AudioClip: {fileID: 8300000, guid: d7dba2b3f2a62e44f8675caa32a0510e, type: 3}
-      Volume: 0.12
+      AudioClip: {fileID: 8300000, guid: a5462f9177ff91f46a0a774efa1c0e24, type: 3}
+      Volume: 0.061
       Pitch: 1
       Loop: 1
     Scene: 0
