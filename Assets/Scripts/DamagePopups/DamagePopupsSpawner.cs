@@ -1,4 +1,5 @@
 using Assets.Scripts.CustomTypes;
+using Assets.Scripts.Extensions;
 using Assets.Scripts.Utils;
 using DG.Tweening;
 using System;
@@ -17,8 +18,13 @@ namespace Assets.Scripts.DamagePopups
         private struct VisualApearanceByDamageTreshold
         {
             [SerializeField] public float Treshold;
-            [SerializeField] public FloatValueRange FontSizesRanges;
-            [SerializeField] public Color Color;
+            [SerializeField] public DamagePopupApearance DamagePopupApearance;
+
+            public VisualApearanceByDamageTreshold(float treshold, DamagePopupApearance damagePopupApearance)
+            {
+                Treshold = treshold;
+                DamagePopupApearance = damagePopupApearance;
+            }
         }
 
         public static DamagePopupsSpawner Instance;
@@ -63,17 +69,15 @@ namespace Assets.Scripts.DamagePopups
                 return;
             }
 
-            float fontSize = CalculateCorrectFontSize(visualApearanceByDamageTreshold.Value, damage);
-            damagePopup.Initialize(new DamagePopupConfig(damage, fontSize, visualApearanceByDamageTreshold.Value.Color));
+            damagePopup.Initialize(new DamagePopupConfig(damage, visualApearanceByDamageTreshold.Value.DamagePopupApearance));
+
+            damagePopup.OnLifeEnd += (sender, args) => Destroy(damagePopup.gameObject);
 
             Vector3 dest = GetDestinationBasedOnSpawnShapeMode(center, spawnShapeMode);
-
             damagePopup
                 .transform
                 .DOMove(dest, _damagePopupVisibilityDuration)
                 .SetEase(Ease.InOutSine);
-
-            Destroy(damagePopup.gameObject, _damagePopupVisibilityDuration);
         }
 
         private Vector3 GetDestinationBasedOnSpawnShapeMode(Vector3 startPos, SpawnShapeModes spawnShapeMode)
@@ -97,25 +101,6 @@ namespace Assets.Scripts.DamagePopups
             }
 
             return null;
-        }
-
-        private float CalculateCorrectFontSize(VisualApearanceByDamageTreshold visualApearanceByDamageTreshold, float damage)
-        {
-            float minSize = visualApearanceByDamageTreshold.FontSizesRanges.Min;
-            float maxSize = visualApearanceByDamageTreshold.FontSizesRanges.Max;
-            float calculatedSize = damage / maxSize;
-
-            if (calculatedSize < minSize)
-            {
-                calculatedSize = minSize;
-            }
-
-            if (calculatedSize > maxSize)
-            {
-                calculatedSize = maxSize;
-            }
-
-            return calculatedSize;
         }
     }
 }
