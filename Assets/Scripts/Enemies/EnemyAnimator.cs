@@ -9,7 +9,6 @@ namespace Assets.Scripts.Enemies
     {
         [SerializeField] private Enemy _enemy;
         [SerializeField] private float _animationResponseSpeed = 0.05f;
-        public bool IsMovingByCrawling { get; set; }
         public bool IsPlayingAttackAnimation { get; private set; }
         private Animator _animator;
 
@@ -29,7 +28,6 @@ namespace Assets.Scripts.Enemies
 
         private void OnEnable()
         {
-            IsMovingByCrawling = _enemy.Config.IsMovingByCrawling;
             InvokeRepeating(nameof(HandleTransitionPropertiesChanges), 0, _animationResponseSpeed);
         }
 
@@ -62,7 +60,17 @@ namespace Assets.Scripts.Enemies
 
         private void HandleTransitionPropertiesChanges()
         {
-            if (IsMovingByCrawling)
+            SetCrawlingTransitionProperties();
+
+            _animator.SetFloat("Speed", _enemy.MovementController.GetCurrentMovementSpeed());
+
+            _animator.SetBool("IsOnGround", _enemy.MovementController.IsOnGround());
+        }
+
+        private void SetCrawlingTransitionProperties()
+        {
+            bool isMovingByCrawling = _enemy.Config.IsMovingByCrawling;
+            if (isMovingByCrawling)
             {
                 _animator.SetLayerWeight(_walingLayerIndex, 0);
                 _animator.SetLayerWeight(_crawlingLayerIndex, 1);
@@ -73,8 +81,7 @@ namespace Assets.Scripts.Enemies
                 _animator.SetLayerWeight(_crawlingLayerIndex, 0);
             }
 
-            _animator.SetFloat("Speed", _enemy.MovementController.GetCurrentMovementSpeed());
-            _animator.SetBool("IsOnGround", _enemy.MovementController.IsOnGround());
+            _animator.SetBool("IsMovingByCrawling", isMovingByCrawling);
         }
     }
 }
