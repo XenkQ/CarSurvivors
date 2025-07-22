@@ -1,10 +1,10 @@
+using Assets.Scripts.Audio;
 using Assets.Scripts.Car;
 using Assets.Scripts.HealthSystem;
 using Assets.Scripts.LevelSystem;
 using Assets.Scripts.Skills;
 using Assets.Scripts.StatusAffectables;
 using UnityEngine;
-using VFX;
 
 namespace Assets.Scripts.Player
 {
@@ -17,10 +17,7 @@ namespace Assets.Scripts.Player
         public ILevelController LevelController { get; private set; }
         public ISkillsRegistry SkillsRegistry { get; private set; }
         public ICarController CarController { get; private set; }
-
-        private readonly float _startDelayBetweenTakingDamage = 0.2f;
-        private float _currentDelayBetweenTakingDamage;
-        private bool _canTakeDamage = true;
+        public IAudioClipPlayer AudioClipPlayer { get; private set; }
 
         private PlayerManager()
         { }
@@ -40,33 +37,13 @@ namespace Assets.Scripts.Player
             LevelController = GetComponent<ILevelController>();
             SkillsRegistry = GetComponentInChildren<ISkillsRegistry>();
             CarController = GetComponent<ICarController>();
-        }
-
-        private void Start()
-        {
-            _currentDelayBetweenTakingDamage = _startDelayBetweenTakingDamage;
-        }
-
-        private void Update()
-        {
-            if (!_canTakeDamage && _currentDelayBetweenTakingDamage < 0)
-            {
-                _canTakeDamage = true;
-            }
-            else if (_currentDelayBetweenTakingDamage > 0)
-            {
-                _currentDelayBetweenTakingDamage -= Time.deltaTime;
-            }
+            AudioClipPlayer = GetComponentInChildren<IAudioClipPlayer>();
         }
 
         public void TakeDamage(float damage)
         {
-            if (_canTakeDamage)
-            {
-                Health.DecreaseHealth(damage);
-                _canTakeDamage = false;
-                _currentDelayBetweenTakingDamage = _startDelayBetweenTakingDamage;
-            }
+            Health.DecreaseHealth(damage);
+            AudioClipPlayer.PlayOneShot("Damaged");
         }
 
         public void InstantKill()
