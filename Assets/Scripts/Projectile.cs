@@ -35,9 +35,9 @@ namespace Assets.Scripts
 
             _piercedCounter = _config.MaxPiercing;
 
-            StartMovingProjectileForward();
-
             transform.localScale = new Vector3(_config.Size, _config.Size, transform.localScale.y);
+
+            StartMovingProjectileForward();
 
             _isInitialized = true;
         }
@@ -77,10 +77,10 @@ namespace Assets.Scripts
             transform
                 .DOMove(targetPos, _config.TimeToArriveAtEndRangeMultiplier * _config.Range)
                 .SetEase(Ease.Linear)
-                .OnComplete(OnProjectileReachedDestination);
+                .OnComplete(PlayEndLifeAnimation);
         }
 
-        private void OnProjectileReachedDestination()
+        private void PlayEndLifeAnimation()
         {
             transform.LifeEndingShrinkToZeroTween(
                 _config.DisapearingDuration,
