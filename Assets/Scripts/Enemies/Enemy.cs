@@ -1,3 +1,4 @@
+using Assets.Scripts.Audio;
 using Assets.Scripts.Collisions;
 using Assets.Scripts.DamagePopups;
 using Assets.Scripts.HealthSystem;
@@ -18,6 +19,7 @@ namespace Assets.Scripts.Enemies
         public IStunController StunController { get; private set; }
         public ICollisionsController CollisionsController { get; private set; }
         public IMovementController MovementController { get; private set; }
+        public IAudioClipPlayer AudioClipPlayer { get; private set; }
         public EnemyAnimator EnemyAnimator { get; private set; }
 
         public event EventHandler OnCanBeReleased;
@@ -31,6 +33,7 @@ namespace Assets.Scripts.Enemies
             StunController = GetComponent<IStunController>();
             CollisionsController = GetComponent<ICollisionsController>();
             MovementController = GetComponent<IMovementController>();
+            AudioClipPlayer = GetComponentInChildren<IAudioClipPlayer>();
             _enemyDeathSequence = GetComponent<INeedToCompleteBeforeDisable>();
             EnemyAnimator = GetComponentInChildren<EnemyAnimator>();
         }

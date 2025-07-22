@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Extensions;
+﻿using Assets.Scripts.Audio;
+using Assets.Scripts.Extensions;
 using Assets.Scripts.Player;
 using Assets.Scripts.Skills;
 using Assets.Scripts.Skills.ObjectsImpactingSkills.Crate;
@@ -33,6 +34,13 @@ namespace Assets.Scripts.UI.Skills
         private SkillsVisualPresenter _skillsVisualPresenter;
 
         private bool _isShowingAnySection;
+
+        private IAudioClipPlayer _audioClipPlayer;
+
+        private void Awake()
+        {
+            _audioClipPlayer = GetComponentInChildren<IAudioClipPlayer>();
+        }
 
         private void Start()
         {
@@ -83,6 +91,7 @@ namespace Assets.Scripts.UI.Skills
                 ISkillBase skill = _skillsQueuedForInitialization.Dequeue();
                 PlayerManager.Instance.SkillsRegistry.InitializeSkill(skill);
                 ShowNewSkillSection(skill);
+                _audioClipPlayer.Play("Show");
                 GameTime.PauseTime();
             }
             else if (_skillsQueuedForUpgrade.Count > 0)
@@ -92,6 +101,7 @@ namespace Assets.Scripts.UI.Skills
                 if (skill is not null)
                 {
                     ShowStatsUpgradeSection(skill);
+                    _audioClipPlayer.Play("Show");
                     GameTime.PauseTime();
                 }
             }
