@@ -91,6 +91,7 @@ namespace Assets.Scripts.UI.Skills
                 ISkillBase skill = _skillsQueuedForInitialization.Dequeue();
                 PlayerManager.Instance.SkillsRegistry.InitializeSkill(skill);
                 ShowNewSkillSection(skill);
+                _audioClipPlayer.Play("Show");
                 GameTime.PauseTime();
             }
             else if (_skillsQueuedForUpgrade.Count > 0)
@@ -100,6 +101,7 @@ namespace Assets.Scripts.UI.Skills
                 if (skill is not null)
                 {
                     ShowStatsUpgradeSection(skill);
+                    _audioClipPlayer.Play("Show");
                     GameTime.PauseTime();
                 }
             }
@@ -168,8 +170,6 @@ namespace Assets.Scripts.UI.Skills
             DisplayNewButtons(skillStatsUpgradeButtonsData.Shuffle().Take(MAX_SKILLS_UPGRADE_BUTTONS));
 
             _skillsVisualPresenter.ShowSkillVisualBasedOnSkillInfo(upgradeableStats.SkillInfo);
-
-            _audioClipPlayer.Play("Show");
 
             _upgradeSkillSection.SetActive(true);
         }
