@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.Audio;
-using Assets.Scripts.LevelSystem.Exp;
+﻿using Assets.Scripts.LevelSystem.Exp;
 using System;
 using UnityEngine;
 using VFX;
@@ -12,7 +11,6 @@ namespace Assets.Scripts.Enemies
         [SerializeField] private GameObject _visual;
         [SerializeField] private VFXPlayer _deathVfxPlayer;
         private Enemy _enemy;
-        private IAudioClipPlayer _audioClipPlayer;
         private byte _startEffectsToFinish = 2;
         private byte _effectsToFinish;
         private Collider _collider;
@@ -23,7 +21,6 @@ namespace Assets.Scripts.Enemies
         private void Awake()
         {
             _enemy = GetComponent<Enemy>();
-            _audioClipPlayer = GetComponentInChildren<IAudioClipPlayer>();
             _collider = GetComponent<Collider>();
             _rb = GetComponent<Rigidbody>();
         }
@@ -35,7 +32,7 @@ namespace Assets.Scripts.Enemies
             _effectsToFinish = _startEffectsToFinish;
 
             _deathVfxPlayer.OnVFXFinished += OnDeathEffectFinishedPlaying;
-            _audioClipPlayer.OnAudioClipFinished += OnDeathEffectFinishedPlaying;
+            _enemy.AudioClipPlayer.OnAudioClipFinished += OnDeathEffectFinishedPlaying;
 
             _enemy.Health.OnNoHealth += Health_OnNoHealth;
         }
@@ -43,7 +40,7 @@ namespace Assets.Scripts.Enemies
         private void OnDisable()
         {
             _deathVfxPlayer.OnVFXFinished -= OnDeathEffectFinishedPlaying;
-            _audioClipPlayer.OnAudioClipFinished -= OnDeathEffectFinishedPlaying;
+            _enemy.AudioClipPlayer.OnAudioClipFinished -= OnDeathEffectFinishedPlaying;
 
             _enemy.Health.OnNoHealth -= Health_OnNoHealth;
         }
@@ -59,7 +56,7 @@ namespace Assets.Scripts.Enemies
 
             SpawnExp();
 
-            _audioClipPlayer.Play("Death");
+            _enemy.AudioClipPlayer.Play("Death");
         }
 
         private void OnDeathEffectFinishedPlaying(object sender, EventArgs e)

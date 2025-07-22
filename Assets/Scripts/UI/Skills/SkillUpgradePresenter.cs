@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Extensions;
+﻿using Assets.Scripts.Audio;
+using Assets.Scripts.Extensions;
 using Assets.Scripts.Player;
 using Assets.Scripts.Skills;
 using Assets.Scripts.Skills.ObjectsImpactingSkills.Crate;
@@ -33,6 +34,13 @@ namespace Assets.Scripts.UI.Skills
         private SkillsVisualPresenter _skillsVisualPresenter;
 
         private bool _isShowingAnySection;
+
+        private IAudioClipPlayer _audioClipPlayer;
+
+        private void Awake()
+        {
+            _audioClipPlayer = GetComponentInChildren<IAudioClipPlayer>();
+        }
 
         private void Start()
         {
@@ -160,6 +168,8 @@ namespace Assets.Scripts.UI.Skills
             DisplayNewButtons(skillStatsUpgradeButtonsData.Shuffle().Take(MAX_SKILLS_UPGRADE_BUTTONS));
 
             _skillsVisualPresenter.ShowSkillVisualBasedOnSkillInfo(upgradeableStats.SkillInfo);
+
+            _audioClipPlayer.Play("Show");
 
             _upgradeSkillSection.SetActive(true);
         }
