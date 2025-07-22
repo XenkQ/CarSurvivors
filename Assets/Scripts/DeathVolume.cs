@@ -12,7 +12,7 @@ namespace Assets.Scripts
         {
             if (other.TryGetComponent(out IDamageable damageable))
             {
-                damageable.InstantKill();
+                damageable.TakeFullHpDamage();
             }
         }
 

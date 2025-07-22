@@ -62,7 +62,7 @@ namespace Assets.Scripts.Enemies
             MovementController.MoveToPositionInTimeIgnoringSpeed(transform.position + (direction * power), timeToArriveAtLocation);
         }
 
-        public void InstantKill()
+        public void TakeFullHpDamage()
         {
             Health.DecreaseHealth(Health.MaxHealth);
         }

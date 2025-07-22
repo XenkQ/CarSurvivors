@@ -4,6 +4,6 @@
     {
         public void TakeDamage(float damage);
 
-        public void InstantKill();
+        public void TakeFullHpDamage();
     }
 }
