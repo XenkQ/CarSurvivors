@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Assets.Scripts.Utils;
 
 namespace Assets.Scripts.UI.Level
 {
@@ -195,7 +196,7 @@ namespace Assets.Scripts.UI.Level
             {
                 elapsed += Time.deltaTime;
                 float t = Mathf.Clamp01(elapsed / duration);
-                _expSlider.value = Mathf.Lerp(startValue, endValue, EaseOutQuad(t));
+                _expSlider.value = Mathf.Lerp(startValue, endValue, EaseUtils.EaseOutQuad(t));
                 yield return null;
             }
 
@@ -219,10 +220,5 @@ namespace Assets.Scripts.UI.Level
 
         private void UpdateLevelText()
             => _levelText.text = $"{_currentlyVisibleLevelData.Lvl} Lvl";
-
-        private float EaseOutQuad(float t)
-        {
-            return 1 - (1 - t) * (1 - t);
-        }
     }
 }
