@@ -2,7 +2,6 @@
 using Assets.ScriptableObjects.Skills;
 using Assets.ScriptableObjects.Skills.PlayerSkills.MinigunSkill;
 using Assets.Scripts.Activators;
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -27,10 +26,10 @@ namespace Assets.Scripts.Skills.PlayerSkills.Minigun
             _config.NumberOfTurrets.OnUpgrade += (s, e) =>
                 _turretsActivator.InitializeRandom(_config.TurretConfig);
 
-            StartCoroutine(SpawnBulletsProcess());
+            StartCoroutine(SpawnProjectilesProcess());
         }
 
-        private IEnumerator SpawnBulletsProcess()
+        private IEnumerator SpawnProjectilesProcess()
         {
             while (true)
             {
@@ -40,15 +39,6 @@ namespace Assets.Scripts.Skills.PlayerSkills.Minigun
                 }
 
                 yield return new WaitForSeconds(_config.DelayBetweenShoots.Value);
-            }
-        }
-
-        private void Projectile_OnLifeEnd(object sender, EventArgs e)
-        {
-            Projectile projectile = sender as Projectile;
-            if (projectile != null)
-            {
-                Destroy(projectile.gameObject);
             }
         }
     }

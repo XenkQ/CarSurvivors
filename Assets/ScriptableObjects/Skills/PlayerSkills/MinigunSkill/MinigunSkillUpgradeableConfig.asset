@@ -49,8 +49,19 @@ MonoBehaviour:
     _byteRangeOfPossibleValuesForUpgrade:
       <Min>k__BackingField: 1
       <Max>k__BackingField: 1
-  _bulletTimeToArriveAtEndRangeMultiplier: 0.1
   _projectileConfig: {fileID: 11400000, guid: b196fd0c1c6051341865604dd4fa9534, type: 2}
+  _startBulletSpeed:
+    <IsSubstractModeOn>k__BackingField: 0
+    <Unit>k__BackingField: 1
+    _alwaysUseMinValueForUpgrade: 0
+    <CanBeUpgraded>k__BackingField: 1
+    <Value>k__BackingField: 5
+    _floatMinMaxRange:
+      <Min>k__BackingField: 5
+      <Max>k__BackingField: 12
+    _floatRangeOfPossibleValuesForUpgrade:
+      <Min>k__BackingField: 2.2
+      <Max>k__BackingField: 4.2
   _startBulletSize:
     <IsSubstractModeOn>k__BackingField: 0
     <Unit>k__BackingField: 1

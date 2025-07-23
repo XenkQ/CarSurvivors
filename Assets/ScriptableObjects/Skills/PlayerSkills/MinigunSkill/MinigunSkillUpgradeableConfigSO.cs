@@ -19,12 +19,13 @@ namespace Assets.ScriptableObjects.Skills.PlayerSkills.MinigunSkill
         public ByteUpgradeableStat NumberOfTurrets { get; private set; }
 
         [Header("Bullets Stats")]
-        [SerializeField] private float _bulletTimeToArriveAtEndRangeMultiplier;
         [SerializeField] private ProjectileConfigSO _projectileConfig;
+        [SerializeField] private FloatUpgradeableStat _startBulletSpeed;
         [SerializeField] private FloatUpgradeableStat _startBulletSize;
         [SerializeField] private ByteUpgradeableStat _startBulletDamage;
         [SerializeField] private ByteUpgradeableStat _startBulletMaxPiercing;
         public FloatUpgradeableStat BulletSize { get; private set; }
+        public FloatUpgradeableStat BulletSpeed { get; private set; }
         public ByteUpgradeableStat BulletDamage { get; private set; }
         public ByteUpgradeableStat BulletMaxPiercing { get; private set; }
 
@@ -41,11 +42,12 @@ namespace Assets.ScriptableObjects.Skills.PlayerSkills.MinigunSkill
 
         private void DeepCopyUpgradeableStats()
         {
-            NumberOfTurrets = DeepCopyUtility.DeepCopy(_numberOfTurrets);
             Range = DeepCopyUtility.DeepCopy(_range);
+            NumberOfTurrets = DeepCopyUtility.DeepCopy(_numberOfTurrets);
             DelayBetweenShoots = DeepCopyUtility.DeepCopy(_delayBetweenShootingBullets);
-            BulletDamage = DeepCopyUtility.DeepCopy(_startBulletDamage);
             BulletSize = DeepCopyUtility.DeepCopy(_startBulletSize);
+            BulletSpeed = DeepCopyUtility.DeepCopy(_startBulletSpeed);
+            BulletDamage = DeepCopyUtility.DeepCopy(_startBulletDamage);
             BulletMaxPiercing = DeepCopyUtility.DeepCopy(_startBulletMaxPiercing);
         }
 
@@ -61,11 +63,12 @@ namespace Assets.ScriptableObjects.Skills.PlayerSkills.MinigunSkill
             _projectileConfig.Size = BulletSize.Value;
             _projectileConfig.Range = Range.Value;
             _projectileConfig.MaxPiercing = BulletMaxPiercing.Value;
-            _projectileConfig.TimeToArriveAtEndRangeMultiplier = _bulletTimeToArriveAtEndRangeMultiplier;
+            _projectileConfig.Speed = BulletSpeed.Value;
 
-            BulletDamage.OnUpgrade += (s, e) => _projectileConfig.Damage = BulletDamage.Value;
-            BulletSize.OnUpgrade += (s, e) => _projectileConfig.Size = BulletSize.Value;
             Range.OnUpgrade += (s, e) => _projectileConfig.Range = Range.Value;
+            BulletSize.OnUpgrade += (s, e) => _projectileConfig.Size = BulletSize.Value;
+            BulletSpeed.OnUpgrade += (s, e) => _projectileConfig.Speed = BulletSpeed.Value;
+            BulletDamage.OnUpgrade += (s, e) => _projectileConfig.Damage = BulletDamage.Value;
             BulletMaxPiercing.OnUpgrade += (s, e) => _projectileConfig.MaxPiercing = BulletMaxPiercing.Value;
         }
     }

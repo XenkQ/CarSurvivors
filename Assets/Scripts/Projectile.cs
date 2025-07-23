@@ -3,9 +3,8 @@ using Assets.Scripts.Extensions;
 using Assets.Scripts.Initializers;
 using Assets.Scripts.LayerMasks;
 using Assets.Scripts.StatusAffectables;
-using DG.Tweening;
-using System;
 using UnityEngine;
+using System;
 
 namespace Assets.Scripts
 {
@@ -19,6 +18,9 @@ namespace Assets.Scripts
 
         public event EventHandler OnLifeEnd;
 
+        private float _distanceTraveled;
+        private Vector3 _movementDir;
+
         private void FixedUpdate()
         {
             if (!_isAlive || !_isInitialized)
@@ -26,7 +28,13 @@ namespace Assets.Scripts
                 return;
             }
 
+            MoveProjectileForward();
             HandleCollisions();
+        }
+
+        private void Start()
+        {
+            _movementDir = transform.forward;
         }
 
         public void Initialize(ProjectileConfigSO config)
@@ -37,12 +45,37 @@ namespace Assets.Scripts
 
             transform.localScale = new Vector3(_config.Size, _config.Size, transform.localScale.y);
 
-            StartMovingProjectileForward();
+            _distanceTraveled = 0f;
 
             _isInitialized = true;
         }
 
         public bool IsInitialized() => _isInitialized;
+
+        public bool SetMovementDirection(Vector3 direction)
+        {
+            if (direction.Equals(Vector3.zero))
+            {
+                return false;
+            }
+
+            _movementDir = direction.normalized;
+
+            return true;
+        }
+
+        private void MoveProjectileForward()
+        {
+            float moveStep = _config.Speed * Time.fixedDeltaTime;
+            transform.position += _movementDir * moveStep;
+            _distanceTraveled += moveStep;
+
+            if (_distanceTraveled >= _config.Range)
+            {
+                _isAlive = false;
+                PlayEndLifeAnimation();
+            }
+        }
 
         private void HandleCollisions()
         {
@@ -64,20 +97,9 @@ namespace Assets.Scripts
                 else
                 {
                     _isAlive = false;
-                    DOTween.Kill(transform);
                     OnLifeEnd?.Invoke(this, EventArgs.Empty);
                 }
             }
-        }
-
-        private void StartMovingProjectileForward()
-        {
-            Vector3 targetPos = transform.position + transform.forward * _config.Range;
-            targetPos.y = transform.position.y;
-            transform
-                .DOMove(targetPos, _config.TimeToArriveAtEndRangeMultiplier * _config.Range)
-                .SetEase(Ease.Linear)
-                .OnComplete(PlayEndLifeAnimation);
         }
 
         private void PlayEndLifeAnimation()

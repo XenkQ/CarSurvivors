@@ -45,6 +45,7 @@ namespace Assets.Scripts.Skills.PlayerSkills.Minigun
         {
             Projectile projectile = Instantiate(_turretsProejctile, _gunTip.position, _gunTip.rotation, _projectilesParent);
             projectile.OnLifeEnd += Projectile_OnLifeEnd;
+            projectile.SetMovementDirection(_gunTip.forward);
             projectile.Initialize(_config.ProjectileStatsSO);
 
             _muzzleFleshVFXPlayer.Play(new());

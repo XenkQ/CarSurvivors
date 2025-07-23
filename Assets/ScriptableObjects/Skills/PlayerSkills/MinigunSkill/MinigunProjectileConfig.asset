@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06b2e9cf0d4ac354286ec0c582dfbb76, type: 3}
   m_Name: MinigunProjectileConfig
   m_EditorClassIdentifier: 
+  <DisapearingDuration>k__BackingField: 0.1
   _startDamage: 5
   _startSize: 1
-  _timeToArriveAtEndRangeMultiplier: 0.1
-  _startTimeToArriveAtRangeEnd: 1
+  _startSpeed: 5
   _startRange: 12
   _startMaxPiercing: 8
