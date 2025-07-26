@@ -4,16 +4,16 @@ namespace Assets.Scripts
 {
     public enum Scenes
     {
-        DeathCity = 0,
-        MainMenu = 1
+        MainMenu = 0,
+        DeathCity = 1
     }
 
     public static class SceneLoader
     {
         public static Scenes CurrentScene => SceneManager.GetActiveScene().buildIndex switch
         {
-            0 => Scenes.DeathCity,
-            1 => Scenes.MainMenu,
+            0 => Scenes.MainMenu,
+            1 => Scenes.DeathCity,
             _ => throw new System.ArgumentOutOfRangeException("Unknown scene index")
         };
 

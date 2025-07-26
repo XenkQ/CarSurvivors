@@ -6,8 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Main.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/Menu.unity
+    guid: 7f60b3debe606bb429d31728317ec301
+  - enabled: 1
+    path: Assets/Scenes/RuinedBloodCity.unity
+    guid: c638a4ebed9716243be8b36d2a799489
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
