@@ -194,6 +194,7 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   _health: {fileID: 0}
   _fillImage: {fileID: 1392485172912787361}
+  _shakeOnHealthDecrease: 0
 --- !u!114 &4205118747865137846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -469,7 +470,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &2725266226125143720
 MonoBehaviour:
   m_ObjectHideFlags: 0

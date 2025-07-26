@@ -28,8 +28,17 @@ namespace Assets.Scripts
                 return;
             }
 
-            MoveProjectileForward();
             HandleCollisions();
+        }
+
+        private void Update()
+        {
+            if (!_isAlive || !_isInitialized)
+            {
+                return;
+            }
+
+            MoveProjectileForward();
         }
 
         private void Start()
@@ -66,7 +75,7 @@ namespace Assets.Scripts
 
         private void MoveProjectileForward()
         {
-            float moveStep = _config.Speed * Time.fixedDeltaTime;
+            float moveStep = _config.Speed * Time.deltaTime;
             transform.position += _movementDir * moveStep;
             _distanceTraveled += moveStep;
 

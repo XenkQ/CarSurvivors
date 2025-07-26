@@ -217,7 +217,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 631904919c02cf24d83d3202baddf0a1, type: 2}
+  - {fileID: 2100000, guid: a4d8d66ba61208a43b2ca2d38a43b042, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -250,7 +250,6 @@ GameObject:
   - component: {fileID: 632776580628652660}
   - component: {fileID: 2432047573316968158}
   - component: {fileID: 3206386065100887514}
-  - component: {fileID: 8397447550922609711}
   - component: {fileID: 173282884818906446}
   - component: {fileID: 9071597717056110045}
   m_Layer: 12
@@ -294,12 +293,12 @@ MonoBehaviour:
   _visual: {fileID: 2497718662250730421}
   _particleApearanceByTreshold:
   - Treshold: 0
-    Material: {fileID: 2100000, guid: 631904919c02cf24d83d3202baddf0a1, type: 2}
+    Material: {fileID: 2100000, guid: a4d8d66ba61208a43b2ca2d38a43b042, type: 2}
     ScaleValueRange:
       <Min>k__BackingField: 0.3
       <Max>k__BackingField: 0.4
   - Treshold: 100
-    Material: {fileID: 2100000, guid: 819ee156c29ce2a40ace21eed08932bf, type: 2}
+    Material: {fileID: 2100000, guid: 51d97dc8c0d9f3e438bf7e456384d929, type: 2}
     ScaleValueRange:
       <Min>k__BackingField: 0.5
       <Max>k__BackingField: 0.6
@@ -317,18 +316,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   separationRadius: 1.2
   separationStrength: 0.5
---- !u!114 &8397447550922609711
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3531891143532923326}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5046112d6f4322c4486d710d475e2a44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &173282884818906446
 MonoBehaviour:
   m_ObjectHideFlags: 0
