@@ -96,7 +96,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9213714906758919787}
   m_Layer: 4
-  m_Name: Water_1
+  m_Name: Water_Tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
