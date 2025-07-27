@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b266db0da7daa904384a171c4240c258
+guid: 96dbe6215863c9c449c20ce07e1a551e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -93,11 +93,50 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SettingsButton_0
+      name: ButtonBackground_0
       rect:
         serializedVersion: 2
         x: 0
@@ -112,8 +151,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 276afb10af3b9d343b25c23e4d921aaa
-      internalID: -895397197
+      spriteID: 813e8ba5a6f524d45997ed433d3fd907
+      internalID: 102725856
       vertices: []
       indices: 
       edges: []
@@ -122,7 +161,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 2f82f24d7e2f77644b4e4ffacbfce987
+    spriteID: 669974af1ac69e44a80b452a103b85dd
     internalID: 0
     vertices: []
     indices: 
@@ -132,7 +171,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      SettingsButton_0: -895397197
+      ButtonBackground_0: 102725856
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

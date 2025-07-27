@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Effects
 {
-    public class ScaleUpAnimationOnEnable : MonoBehaviour
+    public class ScaleToAnimationOnEnable : MonoBehaviour
     {
         [SerializeField] private Vector3 _startScale = Vector3.one;
         [SerializeField] private Vector3 _endScale = Vector3.one;

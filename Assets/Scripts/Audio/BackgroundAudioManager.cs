@@ -13,7 +13,7 @@ namespace Assets.Scripts.Audio
         public class AudioClipInSceneConfig
         {
             public AudioClipConfig ClipConfig;
-            public Scenes Scene;
+            public GameScene Scene;
         }
 
         [SerializeField] private AudioClipInSceneConfig[] _clipConfigInScenes;
@@ -66,7 +66,7 @@ namespace Assets.Scripts.Audio
         private void PlayOrContinuePlayingCorrectSceneBackgroundMusic()
         {
             AudioClipConfig clipConfig = _clipConfigInScenes
-                .FirstOrDefault(config => config.Scene == SceneLoader.CurrentScene)
+                .FirstOrDefault(config => config.Scene == GameSceneLoader.CurrentGameScene)
                 ?.ClipConfig;
 
             if (clipConfig is null)
