@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.Player;
-using System;
+﻿using System;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -50,17 +49,19 @@ namespace Assets.Scripts.Audio
             SceneManager.sceneLoaded -= SceneManager_SceneLoaded;
         }
 
+        public void ChangeAudioToDeathAudioMode()
+        {
+            _audioSource.pitch = _deathAudioPitch;
+        }
+
+        public void ChangeAudioToDefaultAudioMode()
+        {
+            _audioSource.pitch = 1f;
+        }
+
         private void SceneManager_SceneLoaded(Scene arg0, LoadSceneMode arg1)
         {
             PlayOrContinuePlayingCorrectSceneBackgroundMusic();
-
-            PlayerManager.Instance.Health.OnNoHealth -= Health_OnNoHealth;
-            PlayerManager.Instance.Health.OnNoHealth += Health_OnNoHealth;
-        }
-
-        private void Health_OnNoHealth(object sender, EventArgs e)
-        {
-            _audioSource.pitch = _deathAudioPitch;
         }
 
         private void PlayOrContinuePlayingCorrectSceneBackgroundMusic()

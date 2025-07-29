@@ -1,4 +1,5 @@
 using Assets.Scripts;
+using Assets.Scripts.Audio;
 using Assets.Scripts.Player;
 using Assets.Scripts.UI;
 using Assets.Scripts.Utils;
@@ -29,6 +30,11 @@ public sealed class PlayerDeathPresenter : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        BackgroundAudioManager.Instance.ChangeAudioToDefaultAudioMode();
+    }
+
     public void EnableDeathScreen()
     {
         SetLevelText();
@@ -36,6 +42,8 @@ public sealed class PlayerDeathPresenter : MonoBehaviour
         SetTimeText();
 
         _visual.SetActive(true);
+
+        BackgroundAudioManager.Instance.ChangeAudioToDeathAudioMode();
 
         GameTime.PauseTime();
     }
