@@ -1,6 +1,6 @@
-﻿namespace Assets.Scripts.UI.Settings
+﻿namespace Assets.Scripts.Storage
 {
-    public interface IPlayerPref
+    public interface IStoredValue
     {
         public void LoadValue();
 
