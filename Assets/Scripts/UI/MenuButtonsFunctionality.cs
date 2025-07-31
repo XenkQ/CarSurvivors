@@ -10,7 +10,6 @@ namespace Assets.Scripts.UI
             if (Enum.TryParse(scene, true, out GameScene gameScene))
             {
                 GameSceneLoader.Load(gameScene);
-                GameTime.ResumeTime();
             }
             else
             {
@@ -25,8 +24,7 @@ namespace Assets.Scripts.UI
 
         public void OnTryAgainClick()
         {
-            GameSceneLoader.Load(GameScene.RuinedBloodCity);
-            GameTime.ResumeTime();
+            GameSceneLoader.ReloadCurrentScene();
         }
 
         public void OnExitClick()

@@ -727,7 +727,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2031225373}
   m_HandleRect: {fileID: 2031225372}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -17565,7 +17565,7 @@ Light:
   serializedVersion: 11
   m_Type: 0
   m_Color: {r: 1, g: 0.888674, b: 0.08962262, a: 1}
-  m_Intensity: 11.3
+  m_Intensity: 6.6
   m_Range: 10
   m_SpotAngle: 95.32544
   m_InnerSpotAngle: 71.24007
@@ -36807,7 +36807,7 @@ Light:
   serializedVersion: 11
   m_Type: 0
   m_Color: {r: 1, g: 0.888674, b: 0.08962262, a: 1}
-  m_Intensity: 11.3
+  m_Intensity: 6.6
   m_Range: 10
   m_SpotAngle: 95.32544
   m_InnerSpotAngle: 71.24007
