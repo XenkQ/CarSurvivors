@@ -18,7 +18,7 @@ namespace Assets.Scripts.UI.Settings
 
         [SerializeField] private TMP_Dropdown _dropDown;
 
-        private string _qualityLevel = "Low";
+        private string _qualityLevel = "High";
 
         public string GetValue()
         {
@@ -50,6 +50,7 @@ namespace Assets.Scripts.UI.Settings
 
         public void OnValueChanged(int value)
         {
+            Debug.Log(value);
             var pair = _qualityLevels.FirstOrDefault(x => x.Value == value);
 
             if (pair.Equals(default(KeyValuePair<string, int>)))

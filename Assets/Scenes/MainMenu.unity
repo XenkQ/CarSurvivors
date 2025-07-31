@@ -2687,16 +2687,16 @@ MonoBehaviour:
   m_MultiSelect: 0
   m_Options:
     m_Options:
+    - m_Text: Low
+      m_Image: {fileID: 0}
+      m_Color: {r: 0.47058827, g: 0.20784315, b: 0, a: 1}
+    - m_Text: Medium
+      m_Image: {fileID: 0}
+      m_Color: {r: 0.47058827, g: 0.20784315, b: 0, a: 1}
+    - m_Text: High
+      m_Image: {fileID: 0}
+      m_Color: {r: 0.47058827, g: 0.20784315, b: 0, a: 1}
     - m_Text: Ultra
-      m_Image: {fileID: 0}
-      m_Color: {r: 0.47058827, g: 0.20784315, b: 0, a: 1}
-    - m_Text: HIGH
-      m_Image: {fileID: 0}
-      m_Color: {r: 0.47058827, g: 0.20784315, b: 0, a: 1}
-    - m_Text: MEDIUM
-      m_Image: {fileID: 0}
-      m_Color: {r: 0.47058827, g: 0.20784315, b: 0, a: 1}
-    - m_Text: LOW
       m_Image: {fileID: 0}
       m_Color: {r: 0.47058827, g: 0.20784315, b: 0, a: 1}
   m_OnValueChanged:
