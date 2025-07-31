@@ -22,6 +22,13 @@ namespace Assets.Scripts
         public static void Load(GameScene scene)
         {
             SceneManager.LoadScene((int)scene);
+            GameTime.ResumeTime();
+        }
+
+        public static void ReloadCurrentScene()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            GameTime.ResumeTime();
         }
     }
 }
