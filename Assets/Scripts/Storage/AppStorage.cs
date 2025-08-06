@@ -19,7 +19,7 @@ namespace Assets.Scripts.Storage
             Load();
         }
 
-        public static T Get<T>(string key)
+        public static T Get<T>(string key, Action<Exception> onError = null)
         {
             if (_settingsCache.TryGetValue(key, out var value))
             {
@@ -29,13 +29,15 @@ namespace Assets.Scripts.Storage
                 }
                 catch (Exception ex)
                 {
-                    throw new InvalidOperationException($"Failed to convert setting '{key}' to type {typeof(T)}", ex);
+                    onError?.Invoke(new InvalidOperationException($"Failed to convert setting '{key}' to type {typeof(T)}", ex));
                 }
             }
             else
             {
-                throw new KeyNotFoundException($"Setting '{key}' not found in settings file.");
+                onError?.Invoke(new KeyNotFoundException($"Setting '{key}' not found in settings file."));
             }
+
+            return default;
         }
 
         public static void Set<T>(string key, T value)

@@ -1,17 +1,20 @@
-﻿using System;
+﻿using Assets.Scripts.Audio;
 using Assets.Scripts.Storage;
-using UnityEngine;
-using UnityEngine.Audio;
 
 namespace Assets.Scripts.Settings
 {
     public class AudioVolumeSetting : IAppStorageValue<float>, ISettingLoader
     {
-        [SerializeField] private AudioMixer _audioMixer;
+        private readonly IAudioMixersManager _audioMixersManager;
+
+        public AudioVolumeSetting(IAudioMixersManager audioMixersManager)
+        {
+            _audioMixersManager = audioMixersManager;
+        }
 
         public string GetKey()
         {
-            return "AudioVolume";
+            return "Volume";
         }
 
         public float GetValue()
@@ -26,7 +29,7 @@ namespace Assets.Scripts.Settings
 
         public void Load()
         {
-            _audioMixer.SetFloat(GetKey(), GetValue());
+            _audioMixersManager.SetMixerVolume(volume: GetValue());
         }
     }
 }

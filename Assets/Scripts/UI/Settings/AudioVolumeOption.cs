@@ -2,23 +2,23 @@
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
-using System;
-using Assets.Scripts.CustomEventArgs;
+using Reflex.Attributes;
+using Assets.Scripts.Settings;
 
 namespace Assets.Scripts.UI.Settings
 {
-    public class AudioVolumeOption : MonoBehaviour, ISettingsOption<float>
+    public class AudioVolumeOption : MonoBehaviour
     {
+        [Inject] private readonly AudioVolumeSetting _audioVolumeSetting;
+
         [SerializeField] private TextMeshProUGUI _volumeText;
         [SerializeField] private Slider _slider;
-        [SerializeField] private AudioMixer _audioMixer;
 
-        private float _volume;
-
-        public event EventHandler<ValueEventArgs<float>> OnValueChanged;
+        private float _volume = 50f;
 
         private void OnEnable()
         {
+            LoadComponent();
             _slider.onValueChanged.AddListener(PerformValueChange);
         }
 
@@ -29,14 +29,11 @@ namespace Assets.Scripts.UI.Settings
 
         public void PerformValueChange(float value)
         {
+            _audioVolumeSetting.SaveValue(_volume);
+            _audioVolumeSetting.Load();
+
             UpdateText();
             UpdateVolumeValue();
-            OnValueChanged?.Invoke(this, new(_volume));
-        }
-
-        public float GetValue()
-        {
-            return _volume;
         }
 
         private void UpdateText()
@@ -52,6 +49,13 @@ namespace Assets.Scripts.UI.Settings
         private void SetSliderValueBasedOnVolumeValue()
         {
             _slider.value = Mathf.Pow(10f, _volume / 20f);
+        }
+
+        private void LoadComponent()
+        {
+            _volume = _audioVolumeSetting.GetValue();
+            PerformValueChange(_volume);
+            SetSliderValueBasedOnVolumeValue();
         }
     }
 }

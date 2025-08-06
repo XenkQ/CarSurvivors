@@ -1,21 +1,13 @@
 ﻿using System.Collections.Generic;
+using Reflex.Attributes;
 using UnityEngine;
 
 namespace Assets.Scripts.Settings
 {
-    public sealed class UserSettingsLoadManager : MonoBehaviour
+    public sealed class UserSettingsLoader : MonoBehaviour
     {
-        private static UserSettingsLoadManager _instance;
-        private static List<ISettingLoader> _settingLoaders;
-
-        static UserSettingsLoadManager()
-        {
-            _settingLoaders = new()
-            {
-                new GraphicSetting(),
-                new AudioVolumeSetting(),
-            };
-        }
+        [Inject] private readonly IEnumerable<ISettingLoader> _settingLoaders;
+        private static UserSettingsLoader _instance;
 
         public void Awake()
         {
