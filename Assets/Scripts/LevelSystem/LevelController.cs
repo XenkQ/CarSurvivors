@@ -1,4 +1,5 @@
 using System;
+using Assets.Scripts.CustomEventArgs;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -30,18 +31,13 @@ namespace Assets.Scripts.LevelSystem
         }
     }
 
-    public class LevelDataEventArgs : EventArgs
-    {
-        public LevelData ExpData { get; set; }
-    }
-
     public interface ILevelController
     {
         public LevelData LevelData { get; }
 
-        public event EventHandler<LevelDataEventArgs> OnExpChange;
+        public event EventHandler<ValueEventArgs<LevelData>> OnExpChange;
 
-        public event EventHandler<LevelDataEventArgs> OnLvlUp;
+        public event EventHandler<ValueEventArgs<LevelData>> OnLvlUp;
 
         public void AddExp(float value);
     }
@@ -52,9 +48,9 @@ namespace Assets.Scripts.LevelSystem
 
         public LevelData LevelData { get; private set; } = new LevelData();
 
-        public event EventHandler<LevelDataEventArgs> OnLvlUp;
+        public event EventHandler<ValueEventArgs<LevelData>> OnLvlUp;
 
-        public event EventHandler<LevelDataEventArgs> OnExpChange;
+        public event EventHandler<ValueEventArgs<LevelData>> OnExpChange;
 
         private void Awake()
         {
@@ -97,17 +93,11 @@ namespace Assets.Scripts.LevelSystem
                 maxExp = CalculateMaxExp(lvl);
 
                 LevelData = new LevelData(lvl, exp, maxExp);
-                OnLvlUp?.Invoke(this, new LevelDataEventArgs()
-                {
-                    ExpData = LevelData
-                });
+                OnLvlUp?.Invoke(this, new(LevelData));
             }
 
             LevelData = new LevelData(lvl, exp, maxExp);
-            OnExpChange?.Invoke(this, new LevelDataEventArgs()
-            {
-                ExpData = LevelData
-            });
+            OnExpChange?.Invoke(this, new(LevelData));
         }
 
         private float CalculateMaxExp(byte level)

@@ -7,6 +7,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Assets.Scripts.Utils;
+using Assets.Scripts.CustomEventArgs;
 
 namespace Assets.Scripts.UI.Level
 {
@@ -73,17 +74,17 @@ namespace Assets.Scripts.UI.Level
             InvokeRepeating(nameof(HandleTweensAnimations), 0, DELAY_BETWEEN_TWEENS_ANIMATION_CHECK);
         }
 
-        private void LevelController_OnExpChange(object sender, LevelDataEventArgs e)
+        private void LevelController_OnExpChange(object sender, ValueEventArgs<LevelData> e)
         {
-            if (e.ExpData.Lvl == _currentlyVisibleLevelData.Lvl)
+            if (e.Value.Lvl == _currentlyVisibleLevelData.Lvl)
             {
-                _lastQueuedExpInSameLevelIncreaseEvent = new ExpVisualEvent(e.ExpData, false);
+                _lastQueuedExpInSameLevelIncreaseEvent = new ExpVisualEvent(e.Value, false);
             }
         }
 
-        private void LevelController_OnLvlChange(object sender, LevelDataEventArgs e)
+        private void LevelController_OnLvlChange(object sender, ValueEventArgs<LevelData> e)
         {
-            _expVisualQueue.Enqueue(new ExpVisualEvent(e.ExpData, true));
+            _expVisualQueue.Enqueue(new ExpVisualEvent(e.Value, true));
         }
 
         private void HandleTweensAnimations()

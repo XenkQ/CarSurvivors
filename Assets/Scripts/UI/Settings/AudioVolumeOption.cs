@@ -2,49 +2,36 @@
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
-using Assets.Scripts.Storage;
+using System;
+using Assets.Scripts.CustomEventArgs;
 
 namespace Assets.Scripts.UI.Settings
 {
-    public class VolumeOption : MonoBehaviour, ISettingsOption<float>
+    public class AudioVolumeOption : MonoBehaviour, ISettingsOption<float>
     {
-        private const string PLAYER_PREFS_KEY = "Volume";
-
         [SerializeField] private TextMeshProUGUI _volumeText;
         [SerializeField] private Slider _slider;
         [SerializeField] private AudioMixer _audioMixer;
 
         private float _volume;
 
+        public event EventHandler<ValueEventArgs<float>> OnValueChanged;
+
         private void OnEnable()
         {
-            _slider.onValueChanged.AddListener(OnValueChanged);
-            LoadValue();
+            _slider.onValueChanged.AddListener(PerformValueChange);
         }
 
         private void OnDisable()
         {
-            _slider.onValueChanged.RemoveListener(OnValueChanged);
-            SaveValue();
+            _slider.onValueChanged.RemoveListener(PerformValueChange);
         }
 
-        public void LoadValue()
-        {
-            _volume = AppStorage.Get<float>(PLAYER_PREFS_KEY);
-            SetSliderValueBasedOnVolumeValue();
-            UpdateText();
-        }
-
-        public void SaveValue()
-        {
-            AppStorage.Set(PLAYER_PREFS_KEY, _volume);
-        }
-
-        public void OnValueChanged(float value)
+        public void PerformValueChange(float value)
         {
             UpdateText();
             UpdateVolumeValue();
-            _audioMixer.SetFloat(PLAYER_PREFS_KEY, _volume);
+            OnValueChanged?.Invoke(this, new(_volume));
         }
 
         public float GetValue()

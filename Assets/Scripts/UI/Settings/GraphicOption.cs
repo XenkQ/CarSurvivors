@@ -1,6 +1,7 @@
-﻿using Assets.Scripts.Storage;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Assets.Scripts.CustomEventArgs;
 using TMPro;
 using UnityEngine;
 
@@ -8,6 +9,10 @@ namespace Assets.Scripts.UI.Settings
 {
     public class GraphicOption : MonoBehaviour, ISettingsOption<string>
     {
+        public event EventHandler<ValueEventArgs<string>> OnValueChanged;
+
+        [SerializeField] private TMP_Dropdown _dropDown;
+
         private Dictionary<string, int> _qualityLevels = new Dictionary<string, int>
         {
             { "Low", 0 },
@@ -16,41 +21,25 @@ namespace Assets.Scripts.UI.Settings
             { "Ultra", 3 }
         };
 
-        [SerializeField] private TMP_Dropdown _dropDown;
-
         private string _qualityLevel = "High";
+
+        private void OnEnable()
+        {
+            _dropDown.onValueChanged.AddListener(PerformValueChange);
+        }
+
+        private void OnDisable()
+        {
+            _dropDown.onValueChanged.RemoveListener(PerformValueChange);
+        }
 
         public string GetValue()
         {
             return _qualityLevel;
         }
 
-        private void OnEnable()
+        public void PerformValueChange(int value)
         {
-            LoadValue();
-            _dropDown.onValueChanged.AddListener(OnValueChanged);
-        }
-
-        private void OnDisable()
-        {
-            SaveValue();
-            _dropDown.onValueChanged.RemoveListener(OnValueChanged);
-        }
-
-        public void LoadValue()
-        {
-            _qualityLevel = AppStorage.Get<string>(GraphicQualityManager.GRAPHICS_QUALITY_KEY);
-            _dropDown.SetValueWithoutNotify(_qualityLevels[_qualityLevel]);
-        }
-
-        public void SaveValue()
-        {
-            AppStorage.Set(GraphicQualityManager.GRAPHICS_QUALITY_KEY, _qualityLevel);
-        }
-
-        public void OnValueChanged(int value)
-        {
-            Debug.Log(value);
             var pair = _qualityLevels.FirstOrDefault(x => x.Value == value);
 
             if (pair.Equals(default(KeyValuePair<string, int>)))
@@ -58,13 +47,7 @@ namespace Assets.Scripts.UI.Settings
                 return;
             }
 
-            OnValueChanged(pair.Key);
-        }
-
-        public void OnValueChanged(string value)
-        {
-            GraphicQualityManager.Instance.SetQualityLevel(_qualityLevels[value]);
-            _qualityLevel = value;
+            OnValueChanged?.Invoke(this, new(pair.Key));
         }
     }
 }

@@ -1,11 +1,10 @@
-﻿using Assets.Scripts.Storage;
+﻿using System;
+using Assets.Scripts.CustomEventArgs;
 
 namespace Assets.Scripts.UI.Settings
 {
-    public interface ISettingsOption<T> : IStoredValue
+    public interface ISettingsOption<T>
     {
-        public void OnValueChanged(T value);
-
-        public T GetValue();
+        public event EventHandler<ValueEventArgs<T>> OnValueChanged;
     }
 }
