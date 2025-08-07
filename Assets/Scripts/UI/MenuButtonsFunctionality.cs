@@ -9,7 +9,7 @@ namespace Assets.Scripts.UI
         {
             if (Enum.TryParse(scene, true, out GameScene gameScene))
             {
-                GameSceneLoader.Load(gameScene);
+                GameScenesAttacher.AttachNewSceneWithDetachmentOfLast(gameScene);
             }
             else
             {
@@ -24,7 +24,7 @@ namespace Assets.Scripts.UI
 
         public void OnTryAgainClick()
         {
-            GameSceneLoader.ReloadCurrentScene();
+            GameScenesAttacher.ReloadLastAttachedSceneAsync();
         }
 
         public void OnExitClick()

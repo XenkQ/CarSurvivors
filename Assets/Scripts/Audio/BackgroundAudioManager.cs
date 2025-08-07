@@ -67,7 +67,7 @@ namespace Assets.Scripts.Audio
         private void PlayOrContinuePlayingCorrectSceneBackgroundMusic()
         {
             AudioClipConfig clipConfig = _clipConfigInScenes
-                .FirstOrDefault(config => config.Scene == GameSceneLoader.CurrentGameScene)
+                .FirstOrDefault(config => config.Scene == GameScenesAttacher.LastAttachedGameScene)
                 ?.ClipConfig;
 
             if (clipConfig is null)
