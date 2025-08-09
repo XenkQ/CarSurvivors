@@ -1,12 +1,20 @@
 ﻿using System;
 using System.Linq;
+using Assets.Scripts.CustomEventArgs;
+using Reflex.Attributes;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts.Audio
 {
+    public interface IBackgroundAudioManager
+    {
+        public void ChangeAudioToDeathAudioMode();
+
+        public void ChangeAudioToDefaultAudioMode();
+    }
+
     [RequireComponent(typeof(AudioSource))]
-    public class BackgroundAudioManager : MonoBehaviour
+    public class BackgroundAudioManager : MonoBehaviour, IBackgroundAudioManager
     {
         [Serializable]
         public class AudioClipInSceneConfig
@@ -15,38 +23,26 @@ namespace Assets.Scripts.Audio
             public GameScene Scene;
         }
 
-        [SerializeField] private AudioClipInSceneConfig[] _clipConfigInScenes;
+        [Inject] private readonly IGameSceneLoader _gameSceneLoader;
 
-        public static BackgroundAudioManager Instance;
+        [SerializeField] private AudioClipInSceneConfig[] _clipConfigInScenes;
 
         private AudioSource _audioSource;
         private float _deathAudioPitch = 0.6f;
 
-        private BackgroundAudioManager()
-        { }
-
         private void Awake()
         {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-
             _audioSource = GetComponent<AudioSource>();
         }
 
         private void OnEnable()
         {
-            SceneManager.sceneLoaded += SceneManager_SceneLoaded;
+            _gameSceneLoader.OnSceneLoaded += SceneManager_OnSceneLoaded;
         }
 
         private void OnDisable()
         {
-            SceneManager.sceneLoaded -= SceneManager_SceneLoaded;
+            _gameSceneLoader.OnSceneLoaded -= SceneManager_OnSceneLoaded;
         }
 
         public void ChangeAudioToDeathAudioMode()
@@ -59,15 +55,15 @@ namespace Assets.Scripts.Audio
             _audioSource.pitch = 1f;
         }
 
-        private void SceneManager_SceneLoaded(Scene arg0, LoadSceneMode arg1)
+        private void SceneManager_OnSceneLoaded(object sender, ValueEventArgs<GameScene> args)
         {
-            PlayOrContinuePlayingCorrectSceneBackgroundMusic();
+            PlayOrContinuePlayingCorrectSceneBackgroundMusic(args.Value);
         }
 
-        private void PlayOrContinuePlayingCorrectSceneBackgroundMusic()
+        private void PlayOrContinuePlayingCorrectSceneBackgroundMusic(GameScene newScene)
         {
             AudioClipConfig clipConfig = _clipConfigInScenes
-                .FirstOrDefault(config => config.Scene == GameScenesAttacher.LastAttachedGameScene)
+                .FirstOrDefault(config => config.Scene == newScene)
                 ?.ClipConfig;
 
             if (clipConfig is null)

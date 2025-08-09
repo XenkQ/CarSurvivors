@@ -3,11 +3,14 @@ using Assets.Scripts.Audio;
 using Assets.Scripts.Player;
 using Assets.Scripts.UI;
 using Assets.Scripts.Utils;
+using Reflex.Attributes;
 using TMPro;
 using UnityEngine;
 
 public sealed class PlayerDeathPresenter : MonoBehaviour
 {
+    [Inject] private readonly IBackgroundAudioManager _backgroundAudioManager;
+
     [SerializeField] private GameObject _visual;
     [SerializeField] private TextMeshProUGUI _levelText;
     [SerializeField] private TextMeshProUGUI _timeText;
@@ -32,7 +35,7 @@ public sealed class PlayerDeathPresenter : MonoBehaviour
 
     private void Start()
     {
-        BackgroundAudioManager.Instance.ChangeAudioToDefaultAudioMode();
+        _backgroundAudioManager.ChangeAudioToDefaultAudioMode();
     }
 
     public void EnableDeathScreen()
@@ -43,7 +46,7 @@ public sealed class PlayerDeathPresenter : MonoBehaviour
 
         _visual.SetActive(true);
 
-        BackgroundAudioManager.Instance.ChangeAudioToDeathAudioMode();
+        _backgroundAudioManager.ChangeAudioToDeathAudioMode();
 
         GameTime.PauseTime();
     }

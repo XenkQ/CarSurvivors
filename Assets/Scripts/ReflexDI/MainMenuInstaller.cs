@@ -1,21 +1,20 @@
 ﻿using Assets.Scripts.Settings;
 using Reflex.Core;
 using UnityEngine;
-using UnityEngine.Rendering;
 
-namespace Assets.Scripts.Installers
+namespace Assets.Scripts.ReflexDI
 {
     public class MainMenuInstaller : MonoBehaviour, IInstaller
     {
         public void InstallBindings(ContainerBuilder containerBuilder)
         {
-            containerBuilder.AddScoped(
+            containerBuilder.AddSingleton(
                 typeof(AudioVolumeSetting),
                 typeof(AudioVolumeSetting),
                 typeof(ISettingLoader)
             );
 
-            containerBuilder.AddScoped(
+            containerBuilder.AddSingleton(
                 typeof(GraphicSetting),
                 typeof(GraphicSetting),
                 typeof(ISettingLoader)

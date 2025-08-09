@@ -1,15 +1,18 @@
 ﻿using System;
+using Reflex.Attributes;
 using UnityEngine;
 
 namespace Assets.Scripts.UI
 {
     public class MenuButtonsFunctionality : MonoBehaviour
     {
+        [Inject] private readonly IGameSceneLoader _gameSceneLoader;
+
         public void OnSceneLoadButtonClick(string scene)
         {
             if (Enum.TryParse(scene, true, out GameScene gameScene))
             {
-                GameScenesAttacher.AttachNewSceneWithDetachmentOfLast(gameScene);
+                _gameSceneLoader.LoadNewSceneAsync(gameScene);
             }
             else
             {
@@ -24,7 +27,7 @@ namespace Assets.Scripts.UI
 
         public void OnTryAgainClick()
         {
-            GameScenesAttacher.ReloadLastAttachedSceneAsync();
+            _gameSceneLoader.ReloadCurrentSceneAsync();
         }
 
         public void OnExitClick()
