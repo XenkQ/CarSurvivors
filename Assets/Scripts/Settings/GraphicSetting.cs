@@ -15,7 +15,7 @@ namespace Assets.Scripts
 
         public string GetValueOrStoredDefault()
         {
-            if (AppStorage.TryGet(GetKey(), out string value))
+            if (AppStorage.TryGetValue(GetKey(), out string value))
             {
                 return value;
             }
@@ -25,7 +25,7 @@ namespace Assets.Scripts
 
         public void SaveValue(string value)
         {
-            AppStorage.Set(GetKey(), value);
+            AppStorage.SetValue(GetKey(), value);
         }
 
         public void Load()

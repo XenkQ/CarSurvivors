@@ -8,15 +8,28 @@ namespace Assets.Scripts.ReflexDI
     {
         public void InstallBindings(ContainerBuilder containerBuilder)
         {
-            containerBuilder.AddSingleton(
+            //Settings
+            containerBuilder.AddScoped(
                 typeof(AudioVolumeSetting),
                 typeof(AudioVolumeSetting),
                 typeof(ISettingLoader)
             );
 
-            containerBuilder.AddSingleton(
+            containerBuilder.AddScoped(
                 typeof(GraphicSetting),
                 typeof(GraphicSetting),
+                typeof(ISettingLoader)
+            );
+
+            containerBuilder.AddScoped(
+                typeof(FullScreenSetting),
+                typeof(FullScreenSetting),
+                typeof(ISettingLoader)
+            );
+
+            containerBuilder.AddScoped(
+                typeof(ResolutionSetting),
+                typeof(ResolutionSetting),
                 typeof(ISettingLoader)
             );
         }

@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Assets.Scripts.CustomEventArgs;
-using Assets.Scripts.Settings;
 using Reflex.Attributes;
 using TMPro;
 using UnityEngine;
 
 namespace Assets.Scripts.UI.Settings
 {
-    public class GraphicOption : MonoBehaviour
+    public class GraphicOption : MonoBehaviour, IOptionComponent<int>
     {
         public event EventHandler<ValueEventArgs<string>> OnValueChanged;
 
@@ -28,8 +27,6 @@ namespace Assets.Scripts.UI.Settings
             }
         );
 
-        private string _qualityLevel = "High";
-
         private void OnEnable()
         {
             LoadComponent();
@@ -39,7 +36,6 @@ namespace Assets.Scripts.UI.Settings
 
         private void OnDisable()
         {
-            _graphicSetting.SaveValue(_qualityLevel);
             _dropDown.onValueChanged.RemoveListener(PerformValueChange);
         }
 
@@ -52,18 +48,17 @@ namespace Assets.Scripts.UI.Settings
                 return;
             }
 
-            _qualityLevel = pair.Key;
-            _graphicSetting.SaveValue(_qualityLevel);
+            _graphicSetting.SaveValue(pair.Key);
             _graphicSetting.Load();
         }
 
-        private void LoadComponent()
+        public void LoadComponent()
         {
             _graphicSetting.Load();
 
-            _qualityLevel = _graphicSetting.GetValueOrStoredDefault();
+            string qualityLevel = _graphicSetting.GetValueOrStoredDefault();
 
-            _dropDown.SetValueWithoutNotify(_qualityLevels[_qualityLevel]);
+            _dropDown.SetValueWithoutNotify(_qualityLevels[qualityLevel]);
         }
     }
 }

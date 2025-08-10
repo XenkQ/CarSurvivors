@@ -21,7 +21,7 @@ namespace Assets.Scripts.Settings
 
         public float GetValueOrStoredDefault()
         {
-            if (AppStorage.TryGet(GetKey(), out float value))
+            if (AppStorage.TryGetValue(GetKey(), out float value))
             {
                 return value;
             }
@@ -31,7 +31,7 @@ namespace Assets.Scripts.Settings
 
         public void SaveValue(float value)
         {
-            AppStorage.Set(GetKey(), value);
+            AppStorage.SetValue(GetKey(), value);
         }
 
         public void Load()

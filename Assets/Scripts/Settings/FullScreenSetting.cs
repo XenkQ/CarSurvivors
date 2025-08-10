@@ -1,0 +1,37 @@
+﻿using System;
+using Assets.Scripts.Storage;
+using UnityEngine;
+
+namespace Assets.Scripts.Settings
+{
+    public class FullScreenSetting : IAppStorageValue<FullScreenMode>, ISettingLoader
+    {
+        public FullScreenMode DefaultValue => FullScreenMode.MaximizedWindow;
+
+        public string GetKey()
+        {
+            return "FullScreenMode";
+        }
+
+        public FullScreenMode GetValueOrStoredDefault()
+        {
+            if (AppStorage.TryGetValue(GetKey(), out FullScreenMode storedMode))
+            {
+                return storedMode;
+            }
+
+            return DefaultValue;
+        }
+
+        public void SaveValue(FullScreenMode value)
+        {
+            AppStorage.SetValue(GetKey(), value);
+        }
+
+        public void Load()
+        {
+            FullScreenMode mode = GetValueOrStoredDefault();
+            Screen.fullScreenMode = mode;
+        }
+    }
+}

@@ -6,7 +6,7 @@ using Assets.Scripts.Settings;
 
 namespace Assets.Scripts.UI.Settings
 {
-    public class AudioVolumeOption : MonoBehaviour
+    public class AudioVolumeOption : MonoBehaviour, IOptionComponent<float>
     {
         [Inject] private readonly AudioVolumeSetting _audioVolumeSetting;
 
@@ -26,6 +26,22 @@ namespace Assets.Scripts.UI.Settings
             _slider.onValueChanged.RemoveListener(PerformValueChange);
         }
 
+        public void PerformValueChange(float value)
+        {
+            _volume = SliderValueToVolumeValue();
+            _audioVolumeSetting.SaveValue(_volume);
+            _audioVolumeSetting.Load();
+            UpdateText();
+        }
+
+        public void LoadComponent()
+        {
+            _audioVolumeSetting.Load();
+            _volume = _audioVolumeSetting.GetValueOrStoredDefault();
+            _slider.value = VolumeValueToSliderValue();
+            UpdateText();
+        }
+
         private void UpdateText()
         {
             _volumeText.text = $"{Mathf.Round(_slider.value * 100)}%";
@@ -39,22 +55,6 @@ namespace Assets.Scripts.UI.Settings
         private float VolumeValueToSliderValue()
         {
             return Mathf.Pow(10f, _volume / 20f);
-        }
-
-        private void LoadComponent()
-        {
-            _volume = _audioVolumeSetting.GetValueOrStoredDefault();
-            _slider.value = VolumeValueToSliderValue();
-            UpdateText();
-        }
-
-        private void PerformValueChange(float value)
-        {
-            UpdateText();
-            _volume = SliderValueToVolumeValue();
-
-            _audioVolumeSetting.SaveValue(_volume);
-            _audioVolumeSetting.Load();
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Assets.Scripts.Storage
             Load();
         }
 
-        public static bool TryGet<T>(string key, out T value)
+        public static bool TryGetValue<T>(string key, out T value)
         {
             if (_settingsCache.TryGetValue(key, out var result))
             {
@@ -37,7 +37,7 @@ namespace Assets.Scripts.Storage
             return false;
         }
 
-        public static void Set<T>(string key, T value)
+        public static void SetValue<T>(string key, T value)
         {
             _settingsCache[key] = JToken.FromObject(value);
             var json = JsonConvert.SerializeObject(_settingsCache, Formatting.Indented);
