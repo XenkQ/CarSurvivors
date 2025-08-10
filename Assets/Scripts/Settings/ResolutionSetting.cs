@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Assets.Scripts.Helpers;
 using Assets.Scripts.Storage;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ namespace Assets.Scripts.Settings
     public class ResolutionSetting : IAppStorageValue<Resolution>, ISettingLoader
     {
         public Resolution DefaultValue => Screen.resolutions.FirstOrDefault();
+
         private readonly FullScreenSetting _fullScreenSetting;
 
         public ResolutionSetting(FullScreenSetting fullScreenSetting)
@@ -36,10 +38,15 @@ namespace Assets.Scripts.Settings
 
         public void Load()
         {
-            Resolution resolution = Screen.resolutions
+            Resolution resolution = ScreenResolutionsHelper
+                .GetAvailableResolutions()
                 .FirstOrDefault(r => r.Equals(GetValueOrStoredDefault()));
 
-            Screen.SetResolution(resolution.width, resolution.height, _fullScreenSetting.GetValueOrStoredDefault());
+            Screen.SetResolution(
+                resolution.width,
+                resolution.height,
+                _fullScreenSetting.GetValueOrStoredDefault()
+            );
         }
     }
 }

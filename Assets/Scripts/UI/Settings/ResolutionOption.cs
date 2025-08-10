@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Assets.Scripts.Helpers;
 using Assets.Scripts.Settings;
 using Reflex.Attributes;
 using TMPro;
@@ -31,7 +32,9 @@ namespace Assets.Scripts.UI.Settings
         public void LoadComponent()
         {
             _resolutionDropdown.SetValueWithoutNotify(
-                Screen.resolutions.ToList().IndexOf(_resolutionSetting.GetValueOrStoredDefault())
+                ScreenResolutionsHelper.GetAvailableResolutions()
+                .ToList()
+                .IndexOf(_resolutionSetting.GetValueOrStoredDefault())
             );
         }
 
@@ -44,7 +47,11 @@ namespace Assets.Scripts.UI.Settings
         private void SetDropdownOptions()
         {
             _resolutionDropdown.ClearOptions();
-            var options = Screen.resolutions.Select(r => $"{r.width} x {r.height}").ToList();
+
+            var options = ScreenResolutionsHelper.GetAvailableResolutions()
+                .Select(r => $"{r.width} x {r.height}")
+                .ToList();
+
             _resolutionDropdown.AddOptions(options);
         }
     }

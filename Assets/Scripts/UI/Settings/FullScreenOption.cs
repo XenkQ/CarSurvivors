@@ -1,11 +1,11 @@
 ﻿using Assets.Scripts.Settings;
 using Reflex.Attributes;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.UI.Settings
 {
-    internal class FullScreenOption : MonoBehaviour, IOptionComponent<bool>
+    public class FullScreenOption : MonoBehaviour, IOptionComponent<bool>
     {
         [Inject] private readonly FullScreenSetting _fullScreenSetting;
 
@@ -14,18 +14,18 @@ namespace Assets.Scripts.UI.Settings
         private void OnEnable()
         {
             LoadComponent();
-            _toggle.RegisterValueChangedCallback(OnToogleValueChanged);
+            _toggle.onValueChanged.AddListener(PerformValueChange);
         }
 
         private void OnDisable()
         {
-            _toggle.UnregisterValueChangedCallback(OnToogleValueChanged);
+            _toggle.onValueChanged.RemoveListener(PerformValueChange);
         }
 
         public void LoadComponent()
         {
             _fullScreenSetting.Load();
-            _toggle.SetValueWithoutNotify(
+            _toggle.SetIsOnWithoutNotify(
                 _fullScreenSetting.GetValueOrStoredDefault() == FullScreenMode.ExclusiveFullScreen);
         }
 
@@ -35,11 +35,6 @@ namespace Assets.Scripts.UI.Settings
                  value ? FullScreenMode.ExclusiveFullScreen : FullScreenMode.Windowed
             );
             _fullScreenSetting.Load();
-        }
-
-        private void OnToogleValueChanged(ChangeEvent<bool> evt)
-        {
-            PerformValueChange(evt.newValue);
         }
     }
 }
