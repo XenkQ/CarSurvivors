@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Assets.Scripts.CustomEventArgs;
+using Assets.Scripts.Settings;
 using Reflex.Attributes;
 using TMPro;
 using UnityEngine;
@@ -59,7 +60,9 @@ namespace Assets.Scripts.UI.Settings
         private void LoadComponent()
         {
             _graphicSetting.Load();
-            _qualityLevel = _graphicSetting.GetValue();
+
+            _qualityLevel = _graphicSetting.GetValueOrStoredDefault();
+
             _dropDown.SetValueWithoutNotify(_qualityLevels[_qualityLevel]);
         }
     }

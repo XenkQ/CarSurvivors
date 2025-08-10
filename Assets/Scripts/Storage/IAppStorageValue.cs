@@ -1,10 +1,14 @@
-﻿namespace Assets.Scripts.Storage
+﻿using System;
+
+namespace Assets.Scripts.Storage
 {
     public interface IAppStorageValue<T>
     {
+        public T DefaultValue { get; }
+
         public string GetKey();
 
-        public T GetValue();
+        public T GetValueOrStoredDefault();
 
         public void SaveValue(T value);
     }

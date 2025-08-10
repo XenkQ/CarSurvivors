@@ -7,6 +7,8 @@ namespace Assets.Scripts.Settings
     {
         private readonly IAudioMixersManager _audioMixersManager;
 
+        public float DefaultValue => -6.02f;
+
         public AudioVolumeSetting(IAudioMixersManager audioMixersManager)
         {
             _audioMixersManager = audioMixersManager;
@@ -17,9 +19,14 @@ namespace Assets.Scripts.Settings
             return "Volume";
         }
 
-        public float GetValue()
+        public float GetValueOrStoredDefault()
         {
-            return AppStorage.Get<float>(GetKey());
+            if (AppStorage.TryGet(GetKey(), out float value))
+            {
+                return value;
+            }
+
+            return DefaultValue;
         }
 
         public void SaveValue(float value)
@@ -29,7 +36,7 @@ namespace Assets.Scripts.Settings
 
         public void Load()
         {
-            _audioMixersManager.SetMixerVolume(volume: GetValue());
+            _audioMixersManager.SetMixerVolume(volume: GetValueOrStoredDefault());
         }
     }
 }

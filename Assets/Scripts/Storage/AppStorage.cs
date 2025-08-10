@@ -19,25 +19,22 @@ namespace Assets.Scripts.Storage
             Load();
         }
 
-        public static T Get<T>(string key, Action<Exception> onError = null)
+        public static bool TryGet<T>(string key, out T value)
         {
-            if (_settingsCache.TryGetValue(key, out var value))
+            if (_settingsCache.TryGetValue(key, out var result))
             {
                 try
                 {
-                    return value.ToObject<T>();
+                    value = result.ToObject<T>();
+                    return true;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    onError?.Invoke(new InvalidOperationException($"Failed to convert setting '{key}' to type {typeof(T)}", ex));
                 }
-            }
-            else
-            {
-                onError?.Invoke(new KeyNotFoundException($"Setting '{key}' not found in settings file."));
             }
 
-            return default;
+            value = default;
+            return false;
         }
 
         public static void Set<T>(string key, T value)

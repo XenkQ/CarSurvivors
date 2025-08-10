@@ -6,14 +6,21 @@ namespace Assets.Scripts
 {
     public class GraphicSetting : IAppStorageValue<string>, ISettingLoader
     {
+        public string DefaultValue => "High";
+
         public string GetKey()
         {
             return "GraphicsQuality";
         }
 
-        public string GetValue()
+        public string GetValueOrStoredDefault()
         {
-            return AppStorage.Get<string>(GetKey());
+            if (AppStorage.TryGet(GetKey(), out string value))
+            {
+                return value;
+            }
+
+            return DefaultValue;
         }
 
         public void SaveValue(string value)
@@ -23,7 +30,7 @@ namespace Assets.Scripts
 
         public void Load()
         {
-            int savedLevel = Array.IndexOf(QualitySettings.names, GetValue());
+            int savedLevel = Array.IndexOf(QualitySettings.names, GetValueOrStoredDefault());
             SetQualityLevel(savedLevel);
         }
 
