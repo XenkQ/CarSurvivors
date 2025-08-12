@@ -11,7 +11,18 @@ namespace Assets.Scripts.Helpers
 
         public static IEnumerable<Resolution> GetAvailableResolutions()
         {
-            _availableResolutions ??= Screen.resolutions.Reverse();
+            if(_availableResolutions is null)
+            {
+                var resolutions = Screen.resolutions;
+                var currentRefreshRatio = Screen.currentResolution.refreshRateRatio;
+
+                for (int i = resolutions.Length - 1; i >= 0; i--)
+                {
+                    resolutions[i].refreshRateRatio = currentRefreshRatio;
+                }
+
+                _availableResolutions = resolutions.Reverse();
+            }
 
             return _availableResolutions;
         }

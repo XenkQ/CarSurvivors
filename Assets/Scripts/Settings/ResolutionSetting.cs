@@ -7,7 +7,9 @@ namespace Assets.Scripts.Settings
 {
     public class ResolutionSetting : IAppStorageValue<Resolution>, ISettingLoader
     {
-        public Resolution DefaultValue => Screen.resolutions.FirstOrDefault();
+        public Resolution DefaultValue => ScreenResolutionsHelper
+            .GetAvailableResolutions()
+            .FirstOrDefault();
 
         private readonly FullScreenSetting _fullScreenSetting;
 
@@ -38,9 +40,16 @@ namespace Assets.Scripts.Settings
 
         public void Load()
         {
+            var storedValue = GetValueOrStoredDefault();
+
             Resolution resolution = ScreenResolutionsHelper
                 .GetAvailableResolutions()
-                .FirstOrDefault(r => r.Equals(GetValueOrStoredDefault()));
+                .FirstOrDefault(r => r.Equals(storedValue));
+
+            if (resolution.Equals(default(Resolution)))
+            {
+                resolution = DefaultValue;
+            }
 
             Screen.SetResolution(
                 resolution.width,

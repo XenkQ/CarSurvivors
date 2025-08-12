@@ -50,7 +50,10 @@ namespace Assets.Scripts.GridSystem
 
             WorldGrid = new Grid(_worldGridConfiguration);
             _flowField = new FlowField();
+
+#if DEBUG
             _flowFieldDebugConfiguration.Grid = WorldGrid;
+#endif
         }
 
         private void OnEnable()
@@ -62,22 +65,16 @@ namespace Assets.Scripts.GridSystem
             InvokeRepeating(nameof(UpdateFlowFieldWithNewPlayerChunkGrid), 0, _delayBetweenPlayerChunkGridUpdate);
         }
 
+#if DEBUG
+
         public void Start()
         {
-#if DEBUG
             if (_debugGrid)
             {
                 float drawTimeOffset = 0.02f;
                 InvokeRepeating(nameof(DebugWorldGrid), 0, _delayBetweenWorldGridUpdate + drawTimeOffset);
                 InvokeRepeating(nameof(DebugPlayerChunkGrid), 0, _delayBetweenPlayerChunkGridUpdate + drawTimeOffset);
             }
-#endif
-        }
-
-        private void UpdateFlowFieldWithNewPlayerChunkGrid()
-        {
-            GridPlayerChunk = CreatePlayerChunkBasedOnPlayerPositionInWorldGrid();
-            UpdateFlowField(GridPlayerChunk, _playerManager.transform.position);
         }
 
         private void DebugPlayerChunkGrid()
@@ -99,6 +96,14 @@ namespace Assets.Scripts.GridSystem
             {
                 FlowFieldDebug.DisplayFlowFieldDebugTextOnGrid(_flowFieldDebugConfiguration);
             }
+        }
+
+#endif
+
+        private void UpdateFlowFieldWithNewPlayerChunkGrid()
+        {
+            GridPlayerChunk = CreatePlayerChunkBasedOnPlayerPositionInWorldGrid();
+            UpdateFlowField(GridPlayerChunk, _playerManager.transform.position);
         }
 
         private Grid CreatePlayerChunkBasedOnPlayerPositionInWorldGrid()

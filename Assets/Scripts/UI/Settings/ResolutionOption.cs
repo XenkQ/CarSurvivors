@@ -40,7 +40,10 @@ namespace Assets.Scripts.UI.Settings
 
         public void PerformValueChange(int value)
         {
-            _resolutionSetting.SaveValue(Screen.resolutions[value]);
+            _resolutionSetting.SaveValue(
+                ScreenResolutionsHelper.GetAvailableResolutions().ToList()[value]
+            );
+
             _resolutionSetting.Load();
         }
 

@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Assets.Scripts.CustomEventArgs;
 using Reflex.Attributes;
 using TMPro;
 using UnityEngine;
@@ -11,8 +9,6 @@ namespace Assets.Scripts.UI.Settings
 {
     public class GraphicOption : MonoBehaviour, IOptionComponent<int>
     {
-        public event EventHandler<ValueEventArgs<string>> OnValueChanged;
-
         [Inject] private readonly GraphicSetting _graphicSetting;
 
         [SerializeField] private TMP_Dropdown _dropDown;
