@@ -6,50 +6,28 @@ using UnityEngine;
 
 namespace Assets.Scripts.DamagePopups
 {
-    [Serializable]
-    public struct DamagePopupApearance
-    {
-        public float FontSize;
-        public float GrowFontSizeAnimationScaleMultiplier;
-        public Color Color;
-
-        public DamagePopupApearance(float fontSize, float growFontSizeAnimationScaleMultiplier, Color color)
-        {
-            FontSize = fontSize;
-            GrowFontSizeAnimationScaleMultiplier = growFontSizeAnimationScaleMultiplier;
-            Color = color;
-        }
-
-        public void Deconstruct(out float fontSize, out float growFontSizeAnimationScaleMultiplier, out Color color)
-        {
-            growFontSizeAnimationScaleMultiplier = GrowFontSizeAnimationScaleMultiplier;
-            fontSize = FontSize;
-            color = Color;
-        }
-    }
-
-    public struct DamagePopupConfig
+    public struct DamageNumberConfig
     {
         public float Damage;
-        public DamagePopupApearance DamagePopupApearance;
+        public DamageNumberApearance DamagePopupApearance;
 
-        public DamagePopupConfig(float damage, DamagePopupApearance damagePopupApearance)
+        public DamageNumberConfig(float damage, DamageNumberApearance damagePopupApearance)
         {
             Damage = damage;
             DamagePopupApearance = damagePopupApearance;
         }
     }
 
-    public class DamagePopup : MonoBehaviour, IInitializable<DamagePopupConfig>
+    public class DamageNumber : MonoBehaviour, IInitializable<DamageNumberConfig>
     {
         [SerializeField] private TextMeshPro _textMeshPro;
         private bool _isInitialized;
         private const float RESIZING_ANIMATION_SPEED = 0.6f;
-        private DamagePopupConfig _config;
+        private DamageNumberConfig _config;
 
         public event EventHandler OnLifeEnd;
 
-        public void Initialize(DamagePopupConfig config)
+        public void Initialize(DamageNumberConfig config)
         {
             _config = config;
 
@@ -71,7 +49,7 @@ namespace Assets.Scripts.DamagePopups
             return _isInitialized;
         }
 
-        private void SetTextApearance(DamagePopupConfig config)
+        private void SetTextApearance(DamageNumberConfig config)
         {
             var (fontSize, growFontSizeAnimationScaleMultiplier, color) = config.DamagePopupApearance;
             _textMeshPro.text = config.Damage.ToString();

@@ -1,6 +1,6 @@
 using Assets.Scripts.CustomTypes;
 using Assets.Scripts.GridSystem;
-using Assets.Scripts.Spawners;
+using Assets.Scripts.Spawners.GridSpace;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ using UnityEngine.Pool;
 
 namespace Assets.Scripts.Enemies
 {
-    public sealed class EnemiesSpawner : MonoBehaviour, ISpawner
+    public sealed class EnemiesSpawner : MonoBehaviour, IOnRandomGridPosSpawner<EnemiesSpawner>, IPool
     {
         [Header("SpawnExpParticle Chance Settings")]
         [SerializeField] private FloatValueRange _spawnChanceDecreaseFactor;
@@ -22,27 +22,12 @@ namespace Assets.Scripts.Enemies
 
         public event EventHandler OnSpawnedEntityReleased;
 
-        public ushort SpawnedEnemiesCounter { get; private set; }
-
-        public static EnemiesSpawner Instance { get; private set; }
+        public uint CurrentlySpawnedObjectsCount { get; private set; }
 
         private GridManager _gridManager;
 
-        private EnemiesSpawner()
-        {
-        }
-
         private void Awake()
         {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-
             PoolEnemies();
         }
 
@@ -93,7 +78,7 @@ namespace Assets.Scripts.Enemies
 
             enemy.gameObject.SetActive(true);
 
-            SpawnedEnemiesCounter++;
+            CurrentlySpawnedObjectsCount++;
         }
 
         private void OnEnemyRelease(Enemy enemy)
@@ -106,7 +91,7 @@ namespace Assets.Scripts.Enemies
 
             OnSpawnedEntityReleased?.Invoke(enemy, EventArgs.Empty);
 
-            SpawnedEnemiesCounter--;
+            CurrentlySpawnedObjectsCount--;
         }
 
         private void Enemy_OnRelease(object sender, EventArgs e)
@@ -119,6 +104,20 @@ namespace Assets.Scripts.Enemies
             }
 
             OnEnemyRelease(enemy);
+        }
+
+        public void SpawnAtRandomGridPos(int count = 1)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                EnemySpawnInfo currentEnemyToSpawnInfo = RandomEnemyInfoBasedOnSpawnChance();
+                if (currentEnemyToSpawnInfo != null)
+                {
+                    _enemyPools[currentEnemyToSpawnInfo].Get();
+                }
+            }
+
+            _enemiesSpawnChanceRedistributionSystem.RedistributeSpawnChance();
         }
 
         public void SpawnRandomEnemiesBasedOnSpawnChance(int count)

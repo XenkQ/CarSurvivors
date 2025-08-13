@@ -1,8 +1,11 @@
 using Assets.Scripts.Audio;
 using Assets.Scripts.Collisions;
+using Assets.Scripts.DamageNumbers;
 using Assets.Scripts.DamagePopups;
 using Assets.Scripts.HealthSystem;
+using Assets.Scripts.Spawners.WorldSpace;
 using Assets.Scripts.StatusAffectables;
+using Reflex.Attributes;
 using System;
 using UnityEngine;
 using VFX;
@@ -11,6 +14,8 @@ namespace Assets.Scripts.Enemies
 {
     public class Enemy : MonoBehaviour, IHealthy, IDamageable, IKnockable, IStunnable, IPoolable
     {
+        [Inject] private readonly IInWorldSpaceSpawner<DamageNumbersSpawner, DamageNubmersSpawnerConfig> _damageNumbersSpawner;
+
         [field: SerializeField] public EnemyConfigSO Config { get; private set; }
         [SerializeField] private VFXPlayer _bloodVfxPlayer;
         [SerializeField] private GameObject _visual;
@@ -24,7 +29,6 @@ namespace Assets.Scripts.Enemies
 
         public event EventHandler OnCanBeReleased;
 
-        private IDamagePopupsSpawner _damagePopupsSpawner;
         private INeedToCompleteBeforeDisable _enemyDeathSequence;
 
         private void Awake()
@@ -36,11 +40,6 @@ namespace Assets.Scripts.Enemies
             AudioClipPlayer = GetComponentInChildren<IAudioClipPlayer>();
             _enemyDeathSequence = GetComponent<INeedToCompleteBeforeDisable>();
             EnemyAnimator = GetComponentInChildren<EnemyAnimator>();
-        }
-
-        private void Start()
-        {
-            _damagePopupsSpawner = DamagePopupsSpawner.Instance;
         }
 
         public void OnGet()
@@ -69,10 +68,12 @@ namespace Assets.Scripts.Enemies
 
         public void TakeDamage(float damage)
         {
-            _damagePopupsSpawner.SpawnDamagePopup(
+            _damageNumbersSpawner.Spawn(
                 _bloodVfxPlayer.transform.position,
-                damage,
-                SpawnShapeModes.Hemisphere
+                new DamageNubmersSpawnerConfig(
+                    damage,
+                    SpawnShapeModes.Hemisphere
+                )
             );
 
             Health.DecreaseHealth(damage);

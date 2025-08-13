@@ -1,0 +1,27 @@
+﻿using System;
+using UnityEngine;
+
+namespace Assets.Scripts.DamagePopups
+{
+    [Serializable]
+    public struct DamageNumberApearance
+    {
+        public float FontSize;
+        public float GrowFontSizeAnimationScaleMultiplier;
+        public Color Color;
+
+        public DamageNumberApearance(float fontSize, float growFontSizeAnimationScaleMultiplier, Color color)
+        {
+            FontSize = fontSize;
+            GrowFontSizeAnimationScaleMultiplier = growFontSizeAnimationScaleMultiplier;
+            Color = color;
+        }
+
+        public void Deconstruct(out float fontSize, out float growFontSizeAnimationScaleMultiplier, out Color color)
+        {
+            growFontSizeAnimationScaleMultiplier = GrowFontSizeAnimationScaleMultiplier;
+            fontSize = FontSize;
+            color = Color;
+        }
+    }
+}

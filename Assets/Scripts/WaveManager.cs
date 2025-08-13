@@ -1,11 +1,14 @@
 using Assets.Scripts.Enemies;
-using System.Linq;
+using Assets.Scripts.Spawners.GridSpace;
+using Reflex.Attributes;
 using UnityEngine;
 
 namespace Assets.Scripts
 {
     public class WaveManager : MonoBehaviour
     {
+        [Inject] private readonly IOnRandomGridPosSpawner<EnemiesSpawner> _enemiesSpawner;
+
         [SerializeField] private float _startSpawnWaveDelay = 8f;
         private float _currentSpawnWaveDelay;
         private float _firstWaveDelay = 1f;
@@ -25,7 +28,7 @@ namespace Assets.Scripts
 
         private void WavesProcess()
         {
-            if ((_wave == 1 || EnemiesSpawner.Instance.SpawnedEnemiesCounter > 0) && _currentSpawnWaveDelay > 0)
+            if ((_wave == 1 || _enemiesSpawner.CurrentlySpawnedObjectsCount > 0) && _currentSpawnWaveDelay > 0)
             {
                 _currentSpawnWaveDelay -= Time.deltaTime;
             }
@@ -38,7 +41,7 @@ namespace Assets.Scripts
 
         private void SpawnWave()
         {
-            EnemiesSpawner.Instance.SpawnRandomEnemiesBasedOnSpawnChance(_maxEnemiesInWave);
+            _enemiesSpawner.SpawnAtRandomGridPos(_maxEnemiesInWave);
             float maxEnemiesInWave = _maxEnemiesInWave * _maxEnemiesInWaveMultiplier;
             if (maxEnemiesInWave < ushort.MaxValue)
             {

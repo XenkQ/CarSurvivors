@@ -2,12 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.GridSystem;
-using Assets.Scripts.Spawners;
+using Assets.Scripts.Spawners.GridSpace;
 using UnityEngine;
 
 namespace Assets.Scripts.Skills.ObjectsImpactingSkills.Crate
 {
-    public sealed class CollectibleItemsSpawner : MonoBehaviour, ISpawner
+    public sealed class CollectibleItemsSpawner : MonoBehaviour,
+        IOnRandomGridPosSpawner<CollectibleItemsSpawner>, IPool
     {
         [Serializable]
         private struct CollectibleItemSpawnData
@@ -23,9 +24,10 @@ namespace Assets.Scripts.Skills.ObjectsImpactingSkills.Crate
         [SerializeField] private CollectibleItemSpawnData[] _collectibleItemsSpawnData;
         private List<ICollectible> _spawnedCollectibleItems = new List<ICollectible>(MAX_SPAWN_COUNT);
 
-        public event EventHandler OnSpawnedEntityReleased;
-
+        public uint CurrentlySpawnedObjectsCount { get; private set; }
         public static CollectibleItemsSpawner Instance { get; private set; }
+
+        public event EventHandler OnSpawnedEntityReleased;
 
         private CollectibleItemsSpawner()
         { }
@@ -44,12 +46,12 @@ namespace Assets.Scripts.Skills.ObjectsImpactingSkills.Crate
 
         private void Start()
         {
-            InvokeRepeating(nameof(SpawnCollectibleItemAtRandomNotOccupiedCell), _spawnDelay, _spawnDelay);
+            InvokeRepeating(nameof(SpawnAtRandomGridPos), _spawnDelay, _spawnDelay);
         }
 
-        private void SpawnCollectibleItemAtRandomNotOccupiedCell()
+        public void SpawnAtRandomGridPos(int count)
         {
-            if (_spawnedCollectibleItems.Count < MAX_SPAWN_COUNT)
+            for (int i = 0; i < count && _spawnedCollectibleItems.Count < MAX_SPAWN_COUNT; i++)
             {
                 Cell drawnCell = RandomWalkableCellsFinder
                     .FindCellWithoutCollectible(GridManager.Instance.WorldGrid);
@@ -79,6 +81,8 @@ namespace Assets.Scripts.Skills.ObjectsImpactingSkills.Crate
                         drawnCell.IsOccupiedByCollectible = true;
                     }
                 }
+
+                CurrentlySpawnedObjectsCount++;
             }
         }
 
@@ -111,6 +115,8 @@ namespace Assets.Scripts.Skills.ObjectsImpactingSkills.Crate
                 _spawnedCollectibleItems.Remove(collectible);
 
                 OnSpawnedEntityReleased?.Invoke(collectible, EventArgs.Empty);
+
+                CurrentlySpawnedObjectsCount--;
             }
         }
 
