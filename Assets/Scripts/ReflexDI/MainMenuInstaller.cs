@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Settings;
+using Assets.Scripts.Settings.Resolution;
 using Reflex.Core;
 using UnityEngine;
 

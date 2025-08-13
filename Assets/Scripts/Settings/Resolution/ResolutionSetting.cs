@@ -1,13 +1,12 @@
 ﻿using System.Linq;
 using Assets.Scripts.Helpers;
 using Assets.Scripts.Storage;
-using UnityEngine;
 
-namespace Assets.Scripts.Settings
+namespace Assets.Scripts.Settings.Resolution
 {
-    public class ResolutionSetting : IAppStorageValue<Resolution>, ISettingLoader
+    public class ResolutionSetting : IAppStorageValue<SerializableResolution>, ISettingLoader
     {
-        public Resolution DefaultValue => ScreenResolutionsHelper
+        public SerializableResolution DefaultValue => ScreenSerializableResolutionHelper
             .GetAvailableResolutions()
             .FirstOrDefault();
 
@@ -23,9 +22,9 @@ namespace Assets.Scripts.Settings
             return "Resolution";
         }
 
-        public Resolution GetValueOrStoredDefault()
+        public SerializableResolution GetValueOrStoredDefault()
         {
-            if (AppStorage.TryGetValue(GetKey(), out Resolution storedResolution))
+            if (AppStorage.TryGetValue(GetKey(), out SerializableResolution storedResolution))
             {
                 return storedResolution;
             }
@@ -33,7 +32,7 @@ namespace Assets.Scripts.Settings
             return DefaultValue;
         }
 
-        public void SaveValue(Resolution value)
+        public void SaveValue(SerializableResolution value)
         {
             AppStorage.SetValue(GetKey(), value);
         }
@@ -42,18 +41,17 @@ namespace Assets.Scripts.Settings
         {
             var storedValue = GetValueOrStoredDefault();
 
-            Resolution resolution = ScreenResolutionsHelper
+            SerializableResolution resolution = ScreenSerializableResolutionHelper
                 .GetAvailableResolutions()
                 .FirstOrDefault(r => r.Equals(storedValue));
 
-            if (resolution.Equals(default(Resolution)))
+            if (resolution.Equals(default(SerializableResolution)))
             {
                 resolution = DefaultValue;
             }
 
-            Screen.SetResolution(
-                resolution.width,
-                resolution.height,
+            ScreenSerializableResolutionHelper.SetResolution(
+                resolution,
                 _fullScreenSetting.GetValueOrStoredDefault()
             );
         }
