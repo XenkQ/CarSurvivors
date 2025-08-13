@@ -13,8 +13,17 @@ namespace Assets.Scripts.Helpers
         {
             if (_availableResolutions is null)
             {
-                _availableResolutions = Screen
-                    .resolutions
+                var resolutions = Screen.resolutions;
+
+                var currentRefreshRatio = Screen.currentResolution.refreshRateRatio;
+
+                for (int i = resolutions.Length - 1; i >= 0; i--)
+                {
+                    resolutions[i].refreshRateRatio = currentRefreshRatio;
+                }
+
+                _availableResolutions = resolutions
+                    .Distinct()
                     .Select(r => SerializableResolution.FromUnityResolution(r))
                     .Reverse();
             }

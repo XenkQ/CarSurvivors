@@ -2,9 +2,9 @@ using Assets.ScriptableObjects;
 using Assets.Scripts.Extensions;
 using Assets.Scripts.Initializers;
 using Assets.Scripts.LayerMasks;
-using Assets.Scripts.StatusAffectables;
 using UnityEngine;
 using System;
+using Assets.Scripts.Helpers;
 
 namespace Assets.Scripts
 {

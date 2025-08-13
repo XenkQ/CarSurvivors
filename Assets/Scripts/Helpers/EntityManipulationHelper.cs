@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.StatusAffectables;
+using UnityEngine;
 
-namespace Assets.Scripts.StatusAffectables
+namespace Assets.Scripts.Helpers
 {
     public static class EntityManipulationHelper
     {
