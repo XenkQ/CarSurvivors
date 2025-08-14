@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 2035910355702977201}
   - component: {fileID: 4599289953647572422}
   - component: {fileID: 4891577199527744142}
+  - component: {fileID: 4741833597274308545}
   - component: {fileID: 4176904749440768749}
   - component: {fileID: 7128695265574407790}
   m_Layer: 7
@@ -153,6 +154,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _visual: {fileID: 8598757608740303722}
   _deathVfxPlayer: {fileID: 4703585134151044536}
+--- !u!114 &4741833597274308545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3261852426992956232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20620ae30fdd0164c9bb5bdc717d3ada, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _injectionStrategy: 1
 --- !u!65 &4176904749440768749
 BoxCollider:
   m_ObjectHideFlags: 0
