@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Reflex.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -9,6 +10,8 @@ namespace Assets.Scripts.Player
     [RequireComponent(typeof(PlayerManager))]
     public class PlayerDeathHandler : MonoBehaviour
     {
+        [Inject] private readonly IPlayerDeathPresenter _playerDeathPresenter;
+
         [SerializeField] private GameObject _visual;
         [SerializeField] private VFXPlayer _deathVfxPlayer;
         [SerializeField] private Collider[] _wheelColliders;
@@ -42,7 +45,7 @@ namespace Assets.Scripts.Player
 
         private void DeathVfxPlayer_OnVFXFinished(object sender, EventArgs e)
         {
-            PlayerDeathPresenter.Instace.EnableDeathScreen();
+            _playerDeathPresenter.EnableDeathScreen();
         }
 
         private void DisableNotWheelColliders()

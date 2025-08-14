@@ -832,6 +832,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemiesSpawner: {fileID: 449990457}
+  _playerDeathPresenter: {fileID: 4976825079199166630}
+  _timerPresenter: {fileID: 2407471052203165078}
 --- !u!1 &549734345
 GameObject:
   m_ObjectHideFlags: 0
@@ -3119,6 +3121,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3c6bd5de9177cf4cb84cb9e60b2980f, type: 3}
+--- !u!114 &2407471052203165078 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7937244922585027759, guid: d3c6bd5de9177cf4cb84cb9e60b2980f, type: 3}
+  m_PrefabInstance: {fileID: 2407471052203165077}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c24de38f60e878a408fc1ffeffcb017f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2542314164881236254
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3505,6 +3518,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c61bc1e8e369a1c458d163aee3c679eb, type: 3}
+--- !u!114 &4976825079199166630 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3438193249699454528, guid: c61bc1e8e369a1c458d163aee3c679eb, type: 3}
+  m_PrefabInstance: {fileID: 4976825079199166629}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d2b4d273e3a18b41a92b6a3054e4c65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5865174279706548784
 PrefabInstance:
   m_ObjectHideFlags: 0

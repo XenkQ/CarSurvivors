@@ -1,3 +1,4 @@
+using Assets.Scripts.ScoreBoard;
 using Reflex.Core;
 using UnityEngine;
 
@@ -5,9 +6,15 @@ namespace Assets.Scripts.ReflexDI
 {
     public class ProjectInstaller : MonoBehaviour, IInstaller
     {
-        public void InstallBindings(ContainerBuilder containerBuilder)
+        public void InstallBindings(ContainerBuilder builder)
         {
-            containerBuilder.AddSingleton(typeof(GameSceneLoader), typeof(IGameSceneLoader));
+            //Scenes Loading
+            builder.AddSingleton(typeof(GameSceneLoader), typeof(IGameSceneLoader));
+
+            //ScoreBoard
+            builder.AddSingleton(typeof(StoredScoreBoard));
+            builder.AddSingleton(typeof(ScoreBoardNewScoreSaver), typeof(IScoreBoardNewScoreSaver));
+            builder.AddSingleton(typeof(ScoreBoardBestScoreGetter), typeof(IScoreBoardBestScoreGetter));
         }
     }
 }

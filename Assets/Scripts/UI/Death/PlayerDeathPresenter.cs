@@ -1,37 +1,28 @@
 using Assets.Scripts;
 using Assets.Scripts.Audio;
 using Assets.Scripts.Player;
+using Assets.Scripts.ScoreBoard;
 using Assets.Scripts.UI;
 using Assets.Scripts.Utils;
 using Reflex.Attributes;
 using TMPro;
 using UnityEngine;
 
-public sealed class PlayerDeathPresenter : MonoBehaviour
+public interface IPlayerDeathPresenter
+{
+    void EnableDeathScreen();
+}
+
+public class PlayerDeathPresenter : MonoBehaviour, IPlayerDeathPresenter
 {
     [Inject] private readonly IBackgroundAudioManager _backgroundAudioManager;
+    [Inject] private readonly IScoreBoardNewScoreSaver _scoreBoardNewScoreSaver;
+    [Inject] private readonly IScoreBoardBestScoreGetter _scoreBoardBestScoreGetter;
+    [Inject] private readonly ITimerPresenter _timerPresenter;
 
     [SerializeField] private GameObject _visual;
     [SerializeField] private TextMeshProUGUI _levelText;
     [SerializeField] private TextMeshProUGUI _timeText;
-
-    public static PlayerDeathPresenter Instace { get; private set; }
-
-    private PlayerDeathPresenter()
-    {
-    }
-
-    private void Awake()
-    {
-        if (Instace == null)
-        {
-            Instace = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
     private void Start()
     {
@@ -40,6 +31,8 @@ public sealed class PlayerDeathPresenter : MonoBehaviour
 
     public void EnableDeathScreen()
     {
+        _scoreBoardNewScoreSaver.Save(_timerPresenter.TimerValue);
+
         SetLevelText();
 
         SetTimeText();
@@ -63,7 +56,14 @@ public sealed class PlayerDeathPresenter : MonoBehaviour
 
     private void SetTimeText()
     {
-        _timeText.text = "Time Alive: " +
-            TimeConversionUtility.FormatSecondsToTimeString(TimerPresenter.Instance.TimerValue);
+        string timeText = "Time Alive: " +
+            TimeConversionUtility.FormatSecondsToTimeString(_timerPresenter.TimerValue);
+
+        if (_scoreBoardBestScoreGetter.GetBestScore() == _timerPresenter.TimerValue)
+        {
+            timeText += $" <Color=#F8D61C>(New Best!)</Color>";
+        }
+
+        _timeText.text = timeText;
     }
 }
