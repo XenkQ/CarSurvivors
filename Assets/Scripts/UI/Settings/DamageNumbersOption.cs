@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts.UI.Settings
 {
-    public class FullScreenOption : MonoBehaviour, IOptionComponent<bool>
+    public class DamageNumbersOption : MonoBehaviour, IOptionComponent<bool>
     {
-        [Inject] private readonly ISetting<FullScreenSetting, FullScreenMode> _fullScreenSetting;
+        [Inject] private readonly ISetting<DamageNumbersSetting, bool> _damageNumbersSetting;
 
         [SerializeField] private Toggle _toggle;
 
@@ -24,17 +24,14 @@ namespace Assets.Scripts.UI.Settings
 
         public void LoadComponent()
         {
-            _fullScreenSetting.Load();
-            _toggle.SetIsOnWithoutNotify(
-                _fullScreenSetting.GetValueOrStoredDefault() == FullScreenMode.ExclusiveFullScreen);
+            _damageNumbersSetting.Load();
+            _toggle.SetIsOnWithoutNotify(_damageNumbersSetting.GetValueOrStoredDefault());
         }
 
         public void PerformValueChange(bool value)
         {
-            _fullScreenSetting.SaveValue(
-                 value ? FullScreenMode.ExclusiveFullScreen : FullScreenMode.Windowed
-            );
-            _fullScreenSetting.Load();
+            _damageNumbersSetting.SaveValue(value);
+            _damageNumbersSetting.Load();
         }
     }
 }

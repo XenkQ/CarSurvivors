@@ -3,7 +3,7 @@ using Assets.Scripts.Storage;
 
 namespace Assets.Scripts.Settings
 {
-    internal class DamageNumbersSetting : IAppStorageValue<bool>, ISettingLoader
+    public class DamageNumbersSetting : ISetting<DamageNumbersSetting, bool>
     {
         public bool DefaultValue => true;
 

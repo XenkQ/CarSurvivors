@@ -1,10 +1,11 @@
-﻿using Assets.Scripts.Storage;
+﻿using Assets.Scripts.Settings;
+using Assets.Scripts.Storage;
 using System;
 using UnityEngine;
 
 namespace Assets.Scripts
 {
-    public class GraphicSetting : IAppStorageValue<string>, ISettingLoader
+    public class GraphicSetting : ISetting<GraphicSetting, string>
     {
         public string DefaultValue => "High";
 

@@ -3,7 +3,7 @@ using Assets.Scripts.Storage;
 
 namespace Assets.Scripts.Settings
 {
-    public class AudioVolumeSetting : IAppStorageValue<float>, ISettingLoader
+    public class AudioVolumeSetting : ISetting<AudioVolumeSetting, float>
     {
         private readonly IAudioMixersManager _audioMixersManager;
 

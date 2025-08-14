@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Assets.Scripts.Helpers;
+using Assets.Scripts.Settings;
 using Assets.Scripts.Settings.Resolution;
 using Reflex.Attributes;
 using TMPro;
@@ -9,7 +10,7 @@ namespace Assets.Scripts.UI.Settings
 {
     public class ResolutionOption : MonoBehaviour, IOptionComponent<int>
     {
-        [Inject] private readonly ResolutionSetting _resolutionSetting;
+        [Inject] private readonly ISetting<ResolutionSetting, SerializableResolution> _resolutionSetting;
 
         [SerializeField] private TMP_Dropdown _resolutionDropdown;
 

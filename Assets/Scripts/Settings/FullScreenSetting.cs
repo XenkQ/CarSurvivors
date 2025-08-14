@@ -1,10 +1,9 @@
-﻿using System;
-using Assets.Scripts.Storage;
+﻿using Assets.Scripts.Storage;
 using UnityEngine;
 
 namespace Assets.Scripts.Settings
 {
-    public class FullScreenSetting : IAppStorageValue<FullScreenMode>, ISettingLoader
+    public class FullScreenSetting : ISetting<FullScreenSetting, FullScreenMode>
     {
         public FullScreenMode DefaultValue => FullScreenMode.MaximizedWindow;
 

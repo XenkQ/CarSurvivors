@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Assets.Scripts.Settings;
 using Reflex.Attributes;
 using TMPro;
 using UnityEngine;
@@ -9,7 +10,7 @@ namespace Assets.Scripts.UI.Settings
 {
     public class GraphicOption : MonoBehaviour, IOptionComponent<int>
     {
-        [Inject] private readonly GraphicSetting _graphicSetting;
+        [Inject] private readonly ISetting<GraphicSetting, string> _graphicSetting;
 
         [SerializeField] private TMP_Dropdown _dropDown;
 

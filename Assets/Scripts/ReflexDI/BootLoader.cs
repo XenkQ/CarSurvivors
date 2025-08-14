@@ -1,4 +1,7 @@
 ﻿using Assets.Scripts.Audio;
+using Assets.Scripts.DamageNumbers;
+using Assets.Scripts.Settings;
+using Assets.Scripts.Spawners.WorldSpace;
 using Reflex.Attributes;
 using Reflex.Core;
 using UnityEngine;
@@ -10,14 +13,9 @@ namespace Assets.Scripts.ReflexDI
     {
         [Inject] private readonly IGameSceneLoader _gameSceneLoader;
 
-        private AudioMixersManager _audioMixersManager;
-        private BackgroundAudioManager _backgroundAudioManager;
-
-        private void Awake()
-        {
-            _audioMixersManager = FindFirstObjectByType<AudioMixersManager>();
-            _backgroundAudioManager = FindFirstObjectByType<BackgroundAudioManager>();
-        }
+        [SerializeField] private AudioMixersManager _audioMixersManager;
+        [SerializeField] private BackgroundAudioManager _backgroundAudioManager;
+        [SerializeField] private DamageNumbersSpawner _damageNumbersSpawner;
 
         private void Start()
         {
@@ -35,6 +33,11 @@ namespace Assets.Scripts.ReflexDI
         {
             builder.AddSingleton(_audioMixersManager, typeof(IAudioMixersManager));
             builder.AddSingleton(_backgroundAudioManager, typeof(IBackgroundAudioManager));
+            builder.AddSingleton(
+                _damageNumbersSpawner,
+                typeof(IInWorldSpaceSpawner<DamageNumbersSpawner, DamageNubmersSpawnerConfig>),
+                typeof(IEnableDisableFunctionalityTrigger<DamageNumbersSpawner>)
+            );
         }
     }
 }

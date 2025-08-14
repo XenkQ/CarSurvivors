@@ -1713,6 +1713,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 405740975}
+  - component: {fileID: 405740976}
   m_Layer: 5
   m_Name: DamageNumbersOption
   m_TagString: Untagged
@@ -1742,6 +1743,19 @@ RectTransform:
   m_AnchoredPosition: {x: 357.552, y: -554}
   m_SizeDelta: {x: 608, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &405740976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 405740974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be130e77587d9ce448295470c2ea23c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _toggle: {fileID: 740981261}
 --- !u!1 &507199867
 GameObject:
   m_ObjectHideFlags: 0
@@ -3592,7 +3606,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1823680637}
   m_HandleRect: {fileID: 1823680636}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:

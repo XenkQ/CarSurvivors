@@ -1,18 +1,19 @@
-﻿using System.Linq;
-using Assets.Scripts.Helpers;
+﻿using Assets.Scripts.Helpers;
 using Assets.Scripts.Storage;
+using System.Linq;
+using UnityEngine;
 
 namespace Assets.Scripts.Settings.Resolution
 {
-    public class ResolutionSetting : IAppStorageValue<SerializableResolution>, ISettingLoader
+    public class ResolutionSetting : ISetting<ResolutionSetting, SerializableResolution>
     {
         public SerializableResolution DefaultValue => ScreenSerializableResolutionHelper
             .GetAvailableResolutions()
             .FirstOrDefault();
 
-        private readonly FullScreenSetting _fullScreenSetting;
+        private readonly ISetting<FullScreenSetting, FullScreenMode> _fullScreenSetting;
 
-        public ResolutionSetting(FullScreenSetting fullScreenSetting)
+        public ResolutionSetting(ISetting<FullScreenSetting, FullScreenMode> fullScreenSetting)
         {
             _fullScreenSetting = fullScreenSetting;
         }
