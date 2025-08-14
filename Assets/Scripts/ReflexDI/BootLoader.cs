@@ -1,9 +1,9 @@
 ﻿using Assets.Scripts.Audio;
 using Assets.Scripts.DamageNumbers;
-using Assets.Scripts.Settings;
 using Assets.Scripts.Spawners.WorldSpace;
 using Reflex.Attributes;
 using Reflex.Core;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -21,7 +21,7 @@ namespace Assets.Scripts.ReflexDI
         {
             SceneScope.OnSceneContainerBuilding += InstallExtra;
 
-            _gameSceneLoader.LoadNewSceneAsync(GameScene.MainMenu);
+            StartCoroutine(LoadNewSceneAsyncWithOneFrameDelay());
         }
 
         private void OnDisable()
@@ -38,6 +38,12 @@ namespace Assets.Scripts.ReflexDI
                 typeof(IInWorldSpaceSpawner<DamageNumbersSpawner, DamageNubmersSpawnerConfig>),
                 typeof(IEnableDisableFunctionalityTrigger<DamageNumbersSpawner>)
             );
+        }
+
+        private IEnumerator LoadNewSceneAsyncWithOneFrameDelay()
+        {
+            yield return new WaitForEndOfFrame();
+            _gameSceneLoader.LoadNewSceneAsync(GameScene.MainMenu);
         }
     }
 }
