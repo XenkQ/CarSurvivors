@@ -36,8 +36,8 @@ MonoBehaviour:
       <Min>k__BackingField: 10
       <Max>k__BackingField: 35
     _byteRangeOfPossibleValuesForUpgrade:
-      <Min>k__BackingField: 7
-      <Max>k__BackingField: 11
+      <Min>k__BackingField: 5
+      <Max>k__BackingField: 8
   _numberOfSaws:
     <IsSubstractModeOn>k__BackingField: 0
     <Unit>k__BackingField: 0

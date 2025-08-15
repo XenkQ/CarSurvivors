@@ -19,7 +19,6 @@ namespace Assets.ScriptableObjects.Skills.PlayerSkills.MinigunSkill
         public ByteUpgradeableStat NumberOfTurrets { get; private set; }
 
         [Header("Bullets Stats")]
-        [SerializeField] private ProjectileConfigSO _projectileConfig;
         [SerializeField] private FloatUpgradeableStat _startBulletSpeed;
         [SerializeField] private FloatUpgradeableStat _startBulletSize;
         [SerializeField] private ByteUpgradeableStat _startBulletDamage;
@@ -28,6 +27,8 @@ namespace Assets.ScriptableObjects.Skills.PlayerSkills.MinigunSkill
         public FloatUpgradeableStat BulletSpeed { get; private set; }
         public ByteUpgradeableStat BulletDamage { get; private set; }
         public ByteUpgradeableStat BulletMaxPiercing { get; private set; }
+
+        private ProjectileConfigSO _projectileConfig;
 
         private void OnEnable()
         {
@@ -59,11 +60,14 @@ namespace Assets.ScriptableObjects.Skills.PlayerSkills.MinigunSkill
 
         private void PrepareProjectileConfig()
         {
-            _projectileConfig.Damage = BulletDamage.Value;
-            _projectileConfig.Size = BulletSize.Value;
-            _projectileConfig.Range = Range.Value;
-            _projectileConfig.MaxPiercing = BulletMaxPiercing.Value;
-            _projectileConfig.Speed = BulletSpeed.Value;
+            _projectileConfig = new ProjectileConfigSO()
+            {
+                Damage = BulletDamage.Value,
+                Size = BulletSize.Value,
+                Range = Range.Value,
+                MaxPiercing = BulletMaxPiercing.Value,
+                Speed = BulletSpeed.Value
+            };
 
             Range.OnUpgrade += (s, e) => _projectileConfig.Range = Range.Value;
             BulletSize.OnUpgrade += (s, e) => _projectileConfig.Size = BulletSize.Value;

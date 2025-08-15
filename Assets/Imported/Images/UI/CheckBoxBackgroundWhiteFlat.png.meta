@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: fd01abdd6a35141408d5f26a392830dd
+guid: 09803c1c7a3a3424ab9ea07c251b1dc4
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -93,17 +93,56 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Vector 1 (1)_0
+      name: CheckBoxBackgroundWhiteFlat_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 1
-        width: 63
-        height: 50
+        y: 0
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -112,8 +151,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: de09260e92a64f5449cfdeaafb569b15
-      internalID: 340569499
+      spriteID: 6d14c169b1533d146836c50c1740dfc2
+      internalID: 1598901162
       vertices: []
       indices: 
       edges: []
@@ -122,7 +161,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 96a4fd01b7a1d7f4c8fdb90ee02ad30f
+    spriteID: b332eb74cd8c17c40bc3e6206786e3c2
     internalID: 0
     vertices: []
     indices: 
@@ -132,7 +171,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Vector 1 (1)_0: 340569499
+      CheckBoxBackgroundWhiteFlat_0: 1598901162
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1646846411702646356}
   - component: {fileID: 4121756610385644229}
   - component: {fileID: 5484061065923271503}
-  m_Layer: 7
+  m_Layer: 15
   m_Name: ZombieAudioClipPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}

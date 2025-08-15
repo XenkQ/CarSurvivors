@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0e68fea9a8beaca4693973b91a0612fd
+guid: 892d9ea2698d4de42ab0a178d2c0f044
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -136,13 +136,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: LabelBackground_0
+      name: DropDown_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 500
-        height: 80
+        width: 268
+        height: 198
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,8 +151,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b670b280ab4e62540862963514516c3b
-      internalID: 871296988
+      spriteID: 335159e3cddf1ff4d848ede2bea13408
+      internalID: 349121457
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 27e80b1ae99e94640860d04e790e7a72
+    spriteID: 2138eef40f93e434599999b9c9fb264c
     internalID: 0
     vertices: []
     indices: 
@@ -171,7 +171,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      LabelBackground_0: 871296988
+      DropDown_0: 349121457
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

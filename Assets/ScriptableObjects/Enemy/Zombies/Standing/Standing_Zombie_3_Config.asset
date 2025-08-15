@@ -17,5 +17,5 @@ MonoBehaviour:
   RotationSpeed: 2
   Damage: 60
   DangerLevel: 5
-  ExpForKill: 220
+  ExpForKill: 180
   IsMovingByCrawling: 0

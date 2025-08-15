@@ -18,7 +18,7 @@ public class LasergunTurret : Turret<TurretConfigSO>
     private Collider _currentTarget;
     private Vector3 _lastTargetClosestPoint;
 
-    private const float SMALLEST_ANGLE_QUALIFIING_AS_LOOKING_AT_TARGET = 2f;
+    private const float SMALLEST_ANGLE_QUALIFIING_AS_LOOKING_AT_TARGET = 4f;
     private bool _isLookingAtTarget;
 
     private IAudioClipPlayer _audioClipPlayer;
@@ -37,13 +37,16 @@ public class LasergunTurret : Turret<TurretConfigSO>
         gameObject.SetActive(true);
 
         _currentShowLaserShootDuration = _startShowLaserShootDuration;
-
-        InvokeRepeating(nameof(HandleTargetAssigment), 0f, _config.SearchForTargetInterval);
     }
 
     private void FixedUpdate()
     {
         HandleRotation();
+
+        if (!IsCurrentTargetInRange())
+        {
+            AssignNewTarget();
+        }
     }
 
     private void OnEnable()
@@ -116,18 +119,8 @@ public class LasergunTurret : Turret<TurretConfigSO>
         _currentShowLaserShootDuration = _startShowLaserShootDuration;
     }
 
-    private void HandleTargetAssigment()
+    private void AssignNewTarget()
     {
-        if (_currentTarget is not null)
-        {
-            if (!IsCurrentTargetInRange())
-            {
-                _currentTarget = null;
-            }
-
-            return;
-        }
-
         Collider[] potentialTargets = Physics.OverlapSphere(transform.position, _config.Range, EntityLayers.Enemy);
 
         if (potentialTargets.Length > 0)

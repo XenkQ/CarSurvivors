@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4e65c64e99d8e044da00efed80384b33
+guid: 37ae5e634ae737e4191f6b700d7133b6
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -93,17 +93,56 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Background_0
+      name: ButtonBackgroundWhite_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 600
-        height: 645
+        width: 388
+        height: 110
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -112,8 +151,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2f654410c46b81c4a9856ab50c70e590
-      internalID: 313947908
+      spriteID: 829dce935bf75f742b98db6345ea8ddd
+      internalID: -1717350533
       vertices: []
       indices: 
       edges: []
@@ -122,7 +161,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 702e30c6ac0a90349ae4de2d70e45df3
+    spriteID: 1d40058ad1486354a87a800b16bcc532
     internalID: 0
     vertices: []
     indices: 
@@ -132,7 +171,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Background_0: 313947908
+      ButtonBackgroundWhite_0: -1717350533
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
