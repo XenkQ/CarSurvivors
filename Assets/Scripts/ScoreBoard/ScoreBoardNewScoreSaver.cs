@@ -19,7 +19,10 @@ namespace Assets.Scripts.ScoreBoard
 
         public void Save(uint score)
         {
-            var scoreBoardValues = new SortedSet<uint>(_storedScoreBoard.GetValueOrStoredDefault());
+            var scoreBoardValues = new SortedSet<uint>(
+                _storedScoreBoard.GetValueOrStoredDefault(),
+                Comparer<uint>.Create((a, b) => b.CompareTo(a))
+            );
 
             void SaveNewScore()
             {
@@ -27,10 +30,11 @@ namespace Assets.Scripts.ScoreBoard
                 _storedScoreBoard.SaveValue(scoreBoardValues.ToList());
             }
 
+            var lastValue = scoreBoardValues.LastOrDefault();
             if (scoreBoardValues.Count >= _storedScoreBoard.MAX_SAVED_SCORES_COUNT
-                && score > scoreBoardValues.Last())
+                && score > lastValue)
             {
-                scoreBoardValues.Remove(scoreBoardValues.Last());
+                scoreBoardValues.Remove(lastValue);
                 SaveNewScore();
             }
             else

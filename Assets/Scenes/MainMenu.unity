@@ -1019,7 +1019,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 357.552, y: -50}
+  m_AnchoredPosition: {x: 344, y: -50}
   m_SizeDelta: {x: 608, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &164353023
@@ -1740,7 +1740,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 357.552, y: -554}
+  m_AnchoredPosition: {x: 344, y: -554}
   m_SizeDelta: {x: 608, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &405740976
@@ -2376,7 +2376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9d882b936047c74f8a22bc6be64fc98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scoreBoardEntryPrefab: {fileID: 5412980148332105823, guid: fef57ed571b33114fa62f437f12f9f6f, type: 3}
+  _scoreBoardEntryPrefab: {fileID: 4936959672121707712, guid: 3b1dda8533d50014381ac2e0bd7c0adb, type: 3}
   _scoreBoardEntriesParent: {fileID: 7309749782144200491}
 --- !u!1 &714758473
 GameObject:
@@ -3601,7 +3601,7 @@ GameObject:
   - component: {fileID: 1025199198}
   - component: {fileID: 1025199197}
   m_Layer: 5
-  m_Name: SettingsLabel
+  m_Name: ScoreBoardLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3853,7 +3853,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1823680637}
   m_HandleRect: {fileID: 1823680636}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -4996,7 +4996,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 357.552, y: -428}
+  m_AnchoredPosition: {x: 344, y: -428}
   m_SizeDelta: {x: 608, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1449184972
@@ -5869,7 +5869,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1658262253}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -13.526041}
+  m_LocalPosition: {x: 0, y: 0, z: -14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5882,8 +5882,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 344, y: -374.6655}
-  m_SizeDelta: {x: 715.104, y: 409.331}
+  m_AnchoredPosition: {x: 344, y: -486}
+  m_SizeDelta: {x: 688, y: 632}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1658262255
 MonoBehaviour:
@@ -5902,7 +5902,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 7
+  m_ChildAlignment: 1
   m_Spacing: 26
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
@@ -5947,7 +5947,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 357.552, y: -302}
+  m_AnchoredPosition: {x: 344, y: -302}
   m_SizeDelta: {x: 608, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1700426756
@@ -7300,7 +7300,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 357.552, y: -176}
+  m_AnchoredPosition: {x: 344, y: -176}
   m_SizeDelta: {x: 608, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2131243701
@@ -49237,7 +49237,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 857657333923070118}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -13.526041}
+  m_LocalPosition: {x: 0, y: 0, z: -14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -49245,8 +49245,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 344, y: -462.58124}
-  m_SizeDelta: {x: 404.5485, y: 585.1625}
+  m_AnchoredPosition: {x: 344, y: -486}
+  m_SizeDelta: {x: 688, y: 632}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &7312738286891218492
 MeshRenderer:
@@ -56649,12 +56649,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
-    m_Right: 0
+    m_Left: 40
+    m_Right: 40
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 1
-  m_Spacing: 8
+  m_Spacing: 10
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
