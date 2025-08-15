@@ -7,7 +7,7 @@ namespace Assets.Scripts
     public class StoredScoreBoard : IAppStorageValue<List<uint>>
     {
         public List<uint> DefaultValue => new();
-        public byte MAX_SAVED_SCORES_COUNT = 7;
+        public byte MAX_SAVED_SCORES_COUNT = 6;
 
         public string GetKey()
         {
