@@ -8,7 +8,7 @@ namespace Assets.Scripts.UI
     {
         [Inject] private readonly IGameSceneLoader _gameSceneLoader;
 
-        [SerializeField] private GameObject[] _enabledDisabledPanels;
+        [SerializeField] private GameObject[] _enabledDisabledObjects;
 
         public void OnSceneLoadButtonClick(string scene)
         {
@@ -22,9 +22,9 @@ namespace Assets.Scripts.UI
             }
         }
 
-        public void EnableSingleObjectDisableOthers(GameObject gameObject)
+        public void ToogleActivityOfObjectDisableOthers(GameObject gameObject)
         {
-            foreach (var panel in _enabledDisabledPanels)
+            foreach (var panel in _enabledDisabledObjects)
             {
                 if (panel != gameObject)
                 {
@@ -32,7 +32,7 @@ namespace Assets.Scripts.UI
                 }
             }
 
-            gameObject.SetActive(true);
+            ToogleActivityOfObject(gameObject);
         }
 
         public void ToogleActivityOfObject(GameObject gameObject)
