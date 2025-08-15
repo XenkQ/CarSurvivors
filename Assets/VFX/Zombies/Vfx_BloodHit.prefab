@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7144963001511160286}
   - component: {fileID: 4218905367670435757}
   - component: {fileID: 5348593603890542767}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: BloodTrails
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4901,7 +4901,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6311699360074215641}
   - component: {fileID: 628700794751159051}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: Vfx_BloodHit
   m_TagString: Untagged
   m_Icon: {fileID: 0}

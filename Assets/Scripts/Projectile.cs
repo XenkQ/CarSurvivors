@@ -21,16 +21,6 @@ namespace Assets.Scripts
         private float _distanceTraveled;
         private Vector3 _movementDir;
 
-        private void FixedUpdate()
-        {
-            if (!_isAlive || !_isInitialized)
-            {
-                return;
-            }
-
-            HandleCollisions();
-        }
-
         private void Update()
         {
             if (!_isAlive || !_isInitialized)
@@ -44,6 +34,16 @@ namespace Assets.Scripts
         private void Start()
         {
             _movementDir = transform.forward;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (!_isAlive || !_isInitialized)
+            {
+                return;
+            }
+
+            HandleCollisions();
         }
 
         public void Initialize(ProjectileConfigSO config)
