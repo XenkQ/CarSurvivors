@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: dc9bcb8ac5111354796bccc73e68ce20
+guid: ebc4f08889528084e94e1491e2f450d1
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -71,7 +71,7 @@ TextureImporter:
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 4
+    textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -136,13 +136,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PanelBackground_0
+      name: SkillUpgradePanel_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 508
-        height: 710
+        width: 882
+        height: 360
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,8 +151,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8565f8ae1ad242a41a155daf8041d194
-      internalID: -258000420
+      spriteID: ecefdb94fb6c0ec4784ca67a2f0f23c4
+      internalID: 2139361144
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 0e66ff773ebc04b4d9802304f726a89d
+    spriteID: 1a72d161b079ab04da7d8349bf98559a
     internalID: 0
     vertices: []
     indices: 
@@ -171,7 +171,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      PanelBackground_0: -258000420
+      SkillUpgradePanel_0: 2139361144
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

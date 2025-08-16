@@ -8,7 +8,9 @@ using Assets.Scripts.UI.Level;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.UI.Skills
@@ -27,6 +29,8 @@ namespace Assets.Scripts.UI.Skills
         [SerializeField] private TextMeshProUGUI _newSkillDescription;
         [SerializeField] private Button _continueButton;
         private const string SKILL_NAME_TEMPLATE = "New Skill: {0}";
+
+        [SerializeField] private AudioClipPlayer _buttonsAudioPlayer;
 
         private Queue<ISkillBase> _skillsQueuedForInitialization = new Queue<ISkillBase>();
         private Queue<IUpgradeableSkill> _skillsQueuedForUpgrade = new Queue<IUpgradeableSkill>();
@@ -163,6 +167,7 @@ namespace Assets.Scripts.UI.Skills
                     {
                         nameUpgradeableStatPair.UpgradeableStat.Upgrade(upgradeValue);
                         HandleUpgradeableOrInitializableSkillsShowing();
+                        _buttonsAudioPlayer.Play("Click");
                     }
                 });
             }
@@ -193,9 +198,15 @@ namespace Assets.Scripts.UI.Skills
             foreach (var clickableButtonData in clickableButtonsData)
             {
                 Button button = Instantiate(_upgradeButtonPrefab, _buttonsHolder);
-                button.onClick.AddListener(() => clickableButtonData.OnClick?.Invoke());
-                TextMeshProUGUI buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
 
+                button.onClick.AddListener(() => clickableButtonData.OnClick?.Invoke());
+
+                button.AddComponent<PointerEnterHandler>().OnPointerEnterAction += () =>
+                {
+                    _buttonsAudioPlayer.Play("Hover");
+                };
+
+                TextMeshProUGUI buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
                 if (button != null)
                 {
                     buttonText.text = clickableButtonData.Text;
