@@ -149,6 +149,7 @@ GameObject:
   - component: {fileID: 854464559589660550}
   - component: {fileID: 3363372039348785807}
   - component: {fileID: 1335111317746146778}
+  - component: {fileID: 2492815791813105612}
   m_Layer: 5
   m_Name: MenuButton
   m_TagString: Untagged
@@ -287,7 +288,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 2492815791813105612}
           m_TargetAssemblyTypeName: Assets.Scripts.Effects.UIElementEffects, Assembly-CSharp
           m_MethodName: PlayGrowAnimation
           m_Mode: 2
@@ -315,7 +316,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 2492815791813105612}
           m_TargetAssemblyTypeName: Assets.Scripts.Effects.UIElementEffects, Assembly-CSharp
           m_MethodName: PlayShrinkAnimation
           m_Mode: 2
@@ -327,3 +328,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &2492815791813105612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4097289475806214469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dc6cb8c62dad3c41bce6512318a7ddf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _growScaleMultiplier: 1.14
+  _growAnimationDuration: 0.2
+  _shrinkAnimatioDuration: 0.1
