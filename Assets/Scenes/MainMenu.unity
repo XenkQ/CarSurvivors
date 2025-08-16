@@ -2737,7 +2737,7 @@ PrefabInstance:
     - target: {fileID: 1335111317746146778, guid: 5fac32f54fb149543b8fd5f2c57662ec, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1652702444}
+      objectReference: {fileID: 1381243598}
     - target: {fileID: 1335111317746146778, guid: 5fac32f54fb149543b8fd5f2c57662ec, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -2745,7 +2745,15 @@ PrefabInstance:
     - target: {fileID: 1335111317746146778, guid: 5fac32f54fb149543b8fd5f2c57662ec, type: 3}
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1652702444}
+      objectReference: {fileID: 1381243598}
+    - target: {fileID: 1335111317746146778, guid: 5fac32f54fb149543b8fd5f2c57662ec, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlayGrowAnimation
+      objectReference: {fileID: 0}
+    - target: {fileID: 1335111317746146778, guid: 5fac32f54fb149543b8fd5f2c57662ec, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlayShrinkAnimation
+      objectReference: {fileID: 0}
     - target: {fileID: 3363372039348785807, guid: 5fac32f54fb149543b8fd5f2c57662ec, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 2
@@ -2876,6 +2884,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 9218799379313030927, guid: 5fac32f54fb149543b8fd5f2c57662ec, type: 3}
   m_PrefabInstance: {fileID: 1381243596}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1381243598 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2492815791813105612, guid: 5fac32f54fb149543b8fd5f2c57662ec, type: 3}
+  m_PrefabInstance: {fileID: 1381243596}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dc6cb8c62dad3c41bce6512318a7ddf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1405819817
 GameObject:
   m_ObjectHideFlags: 0
@@ -3119,7 +3138,7 @@ PrefabInstance:
     - target: {fileID: 1335111317746146778, guid: 5fac32f54fb149543b8fd5f2c57662ec, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1652702444}
+      objectReference: {fileID: 1532394414}
     - target: {fileID: 1335111317746146778, guid: 5fac32f54fb149543b8fd5f2c57662ec, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -3127,7 +3146,15 @@ PrefabInstance:
     - target: {fileID: 1335111317746146778, guid: 5fac32f54fb149543b8fd5f2c57662ec, type: 3}
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1652702444}
+      objectReference: {fileID: 1532394414}
+    - target: {fileID: 1335111317746146778, guid: 5fac32f54fb149543b8fd5f2c57662ec, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlayGrowAnimation
+      objectReference: {fileID: 0}
+    - target: {fileID: 1335111317746146778, guid: 5fac32f54fb149543b8fd5f2c57662ec, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlayShrinkAnimation
+      objectReference: {fileID: 0}
     - target: {fileID: 3363372039348785807, guid: 5fac32f54fb149543b8fd5f2c57662ec, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 2
@@ -3262,6 +3289,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 9218799379313030927, guid: 5fac32f54fb149543b8fd5f2c57662ec, type: 3}
   m_PrefabInstance: {fileID: 1532394412}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1532394414 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2492815791813105612, guid: 5fac32f54fb149543b8fd5f2c57662ec, type: 3}
+  m_PrefabInstance: {fileID: 1532394412}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dc6cb8c62dad3c41bce6512318a7ddf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1544915914
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3297,7 +3335,7 @@ PrefabInstance:
     - target: {fileID: 1335111317746146778, guid: 5fac32f54fb149543b8fd5f2c57662ec, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1652702444}
+      objectReference: {fileID: 1544915916}
     - target: {fileID: 1335111317746146778, guid: 5fac32f54fb149543b8fd5f2c57662ec, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -3305,7 +3343,15 @@ PrefabInstance:
     - target: {fileID: 1335111317746146778, guid: 5fac32f54fb149543b8fd5f2c57662ec, type: 3}
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1652702444}
+      objectReference: {fileID: 1544915916}
+    - target: {fileID: 1335111317746146778, guid: 5fac32f54fb149543b8fd5f2c57662ec, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlayGrowAnimation
+      objectReference: {fileID: 0}
+    - target: {fileID: 1335111317746146778, guid: 5fac32f54fb149543b8fd5f2c57662ec, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlayShrinkAnimation
+      objectReference: {fileID: 0}
     - target: {fileID: 3363372039348785807, guid: 5fac32f54fb149543b8fd5f2c57662ec, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 2
@@ -3448,6 +3494,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 9218799379313030927, guid: 5fac32f54fb149543b8fd5f2c57662ec, type: 3}
   m_PrefabInstance: {fileID: 1544915914}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1544915916 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2492815791813105612, guid: 5fac32f54fb149543b8fd5f2c57662ec, type: 3}
+  m_PrefabInstance: {fileID: 1544915914}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dc6cb8c62dad3c41bce6512318a7ddf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1565409771
 GameObject:
   m_ObjectHideFlags: 0
@@ -3561,7 +3618,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1652702442}
-  - component: {fileID: 1652702444}
   - component: {fileID: 1652702445}
   m_Layer: 5
   m_Name: MainMenu
@@ -3591,21 +3647,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 740, y: 0}
   m_Pivot: {x: 0, y: 0.5}
---- !u!114 &1652702444
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1652702441}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9dc6cb8c62dad3c41bce6512318a7ddf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _growScaleMultiplier: 1.14
-  _growAnimationDuration: 0.2
-  _shrinkAnimatioDuration: 0.1
 --- !u!114 &1652702445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43834,7 +43875,7 @@ PrefabInstance:
     - target: {fileID: 1335111317746146778, guid: 5fac32f54fb149543b8fd5f2c57662ec, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1652702444}
+      objectReference: {fileID: 6694617819732382147}
     - target: {fileID: 1335111317746146778, guid: 5fac32f54fb149543b8fd5f2c57662ec, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -43842,7 +43883,15 @@ PrefabInstance:
     - target: {fileID: 1335111317746146778, guid: 5fac32f54fb149543b8fd5f2c57662ec, type: 3}
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1652702444}
+      objectReference: {fileID: 6694617819732382147}
+    - target: {fileID: 1335111317746146778, guid: 5fac32f54fb149543b8fd5f2c57662ec, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlayGrowAnimation
+      objectReference: {fileID: 0}
+    - target: {fileID: 1335111317746146778, guid: 5fac32f54fb149543b8fd5f2c57662ec, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlayShrinkAnimation
+      objectReference: {fileID: 0}
     - target: {fileID: 3363372039348785807, guid: 5fac32f54fb149543b8fd5f2c57662ec, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 2
@@ -43972,6 +44021,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5fac32f54fb149543b8fd5f2c57662ec, type: 3}
+--- !u!114 &6694617819732382147 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2492815791813105612, guid: 5fac32f54fb149543b8fd5f2c57662ec, type: 3}
+  m_PrefabInstance: {fileID: 6694617819732382146}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dc6cb8c62dad3c41bce6512318a7ddf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &6697147443136851882
 Transform:
   m_ObjectHideFlags: 0

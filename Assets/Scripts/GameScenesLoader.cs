@@ -42,7 +42,7 @@ namespace Assets.Scripts
 
             result.completed += operation =>
             {
-                GameTime.ResumeTime();
+                GameTime.Resume();
                 CurrentLoadedScene = scene;
                 OnSceneLoaded?.Invoke(this, eventArgs);
             };

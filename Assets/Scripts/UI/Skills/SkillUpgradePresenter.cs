@@ -88,15 +88,15 @@ namespace Assets.Scripts.UI.Skills
         {
             _skillsVisualPresenter.HideAll();
 
-            GameTime.ResumeTime();
+            GameTime.Resume();
 
             if (_skillsQueuedForInitialization.Count > 0)
             {
                 ISkillBase skill = _skillsQueuedForInitialization.Dequeue();
                 PlayerManager.Instance.SkillsRegistry.InitializeSkill(skill);
                 ShowNewSkillSection(skill);
-                _audioClipPlayer.Play("Show");
-                GameTime.PauseTime();
+                _audioClipPlayer.Play("ToogleActivation");
+                GameTime.Pause();
             }
             else if (_skillsQueuedForUpgrade.Count > 0)
             {
@@ -105,8 +105,8 @@ namespace Assets.Scripts.UI.Skills
                 if (skill is not null)
                 {
                     ShowStatsUpgradeSection(skill);
-                    _audioClipPlayer.Play("Show");
-                    GameTime.PauseTime();
+                    _audioClipPlayer.Play("ToogleActivation");
+                    GameTime.Pause();
                 }
             }
             else

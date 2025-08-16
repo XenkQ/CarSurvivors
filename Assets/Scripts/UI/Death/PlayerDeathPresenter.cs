@@ -41,7 +41,7 @@ public class PlayerDeathPresenter : MonoBehaviour, IPlayerDeathPresenter
 
         _backgroundAudioManager.ChangeAudioToDeathAudioMode();
 
-        GameTime.PauseTime();
+        GameTime.Pause();
     }
 
     private void SetLevelText()

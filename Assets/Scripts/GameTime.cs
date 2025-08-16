@@ -4,12 +4,12 @@ namespace Assets.Scripts
 {
     public static class GameTime
     {
-        public static void PauseTime()
+        public static void Pause()
         {
             Time.timeScale = 0f;
         }
 
-        public static void ResumeTime()
+        public static void Resume()
         {
             Time.timeScale = 1f;
         }
