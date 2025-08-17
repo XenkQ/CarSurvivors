@@ -30,11 +30,20 @@ namespace Assets.Scripts.ScoreBoard
                 _storedScoreBoard.SaveValue(scoreBoardValues.ToList());
             }
 
-            var lastValue = scoreBoardValues.LastOrDefault();
-            if (scoreBoardValues.Count >= _storedScoreBoard.MAX_SAVED_SCORES_COUNT
-                && score > lastValue)
+            if (score <= scoreBoardValues.LastOrDefault())
             {
-                scoreBoardValues.Remove(lastValue);
+                return;
+            }
+
+            if (scoreBoardValues.Count >= _storedScoreBoard.MAX_SAVED_SCORES_COUNT)
+            {
+                int diff = (scoreBoardValues.Count + 1) - _storedScoreBoard.MAX_SAVED_SCORES_COUNT;
+
+                for (int i = 0; i < diff; i++)
+                {
+                    scoreBoardValues.Remove(scoreBoardValues.Last());
+                }
+
                 SaveNewScore();
             }
             else
