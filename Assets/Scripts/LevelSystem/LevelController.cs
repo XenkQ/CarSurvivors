@@ -57,24 +57,6 @@ namespace Assets.Scripts.LevelSystem
             LevelData = new LevelData(maxExp: CalculateMaxExp(LevelData.Lvl));
         }
 
-        private void Update()
-        {
-            if (Keyboard.current.eKey.wasPressedThisFrame)
-            {
-                AddExp(20f);
-            }
-
-            if (Keyboard.current.rKey.wasPressedThisFrame)
-            {
-                AddExp(220f);
-            }
-
-            if (Keyboard.current.tKey.wasPressedThisFrame)
-            {
-                AddExp(22000000000f);
-            }
-        }
-
         public void AddExp(float value)
         {
             if (LevelData.Lvl == byte.MaxValue)
