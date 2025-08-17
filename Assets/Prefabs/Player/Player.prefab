@@ -2391,10 +2391,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6743467847652727225}
     m_Modifications:
-    - target: {fileID: 321606557577890571, guid: 8dec117a41ce26d4282c7cfc833994ec, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 593428645127512961, guid: 8dec117a41ce26d4282c7cfc833994ec, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -2483,65 +2479,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2776879564224222294, guid: 8dec117a41ce26d4282c7cfc833994ec, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3685001746232589537, guid: 8dec117a41ce26d4282c7cfc833994ec, type: 3}
-      propertyPath: m_EffectColor.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4205118747865137846, guid: 8dec117a41ce26d4282c7cfc833994ec, type: 3}
-      propertyPath: m_Direction
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4205118747865137846, guid: 8dec117a41ce26d4282c7cfc833994ec, type: 3}
-      propertyPath: m_Transition
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4755619676840758172, guid: 8dec117a41ce26d4282c7cfc833994ec, type: 3}
-      propertyPath: m_PresetInfoIsWorld
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6128568630164278554, guid: 8dec117a41ce26d4282c7cfc833994ec, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 6707097406674323763, guid: 8dec117a41ce26d4282c7cfc833994ec, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 6941146590113762250, guid: 8dec117a41ce26d4282c7cfc833994ec, type: 3}
       propertyPath: _health
       value: 
       objectReference: {fileID: 4300351418844164862}
-    - target: {fileID: 6941146590113762250, guid: 8dec117a41ce26d4282c7cfc833994ec, type: 3}
-      propertyPath: _shakeOnHealthDecrease
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6985478346368457557, guid: 8dec117a41ce26d4282c7cfc833994ec, type: 3}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7170411060555518990, guid: 8dec117a41ce26d4282c7cfc833994ec, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 8895422677561366378, guid: 8dec117a41ce26d4282c7cfc833994ec, type: 3}
       propertyPath: m_Name
       value: HealthBarCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 8895422677561366378, guid: 8dec117a41ce26d4282c7cfc833994ec, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8895422677561366378, guid: 8dec117a41ce26d4282c7cfc833994ec, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5742082694639862792, guid: 8dec117a41ce26d4282c7cfc833994ec, type: 3}
-    - {fileID: 1886783292760684429, guid: 8dec117a41ce26d4282c7cfc833994ec, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
