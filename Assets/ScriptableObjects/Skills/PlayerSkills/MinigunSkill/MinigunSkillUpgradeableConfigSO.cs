@@ -60,14 +60,13 @@ namespace Assets.ScriptableObjects.Skills.PlayerSkills.MinigunSkill
 
         private void PrepareProjectileConfig()
         {
-            _projectileConfig = new ProjectileConfigSO()
-            {
-                Damage = BulletDamage.Value,
-                Size = BulletSize.Value,
-                Range = Range.Value,
-                MaxPiercing = BulletMaxPiercing.Value,
-                Speed = BulletSpeed.Value
-            };
+            _projectileConfig = ScriptableObject.CreateInstance<ProjectileConfigSO>();
+
+            _projectileConfig.Damage = BulletDamage.Value;
+            _projectileConfig.Size = BulletSize.Value;
+            _projectileConfig.Range = Range.Value;
+            _projectileConfig.Speed = BulletSpeed.Value;
+            _projectileConfig.MaxPiercing = BulletMaxPiercing.Value;
 
             Range.OnUpgrade += (s, e) => _projectileConfig.Range = Range.Value;
             BulletSize.OnUpgrade += (s, e) => _projectileConfig.Size = BulletSize.Value;
