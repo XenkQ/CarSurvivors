@@ -554,7 +554,7 @@ MonoBehaviour:
     Scene: 1
   - ClipConfig:
       AudioClip: {fileID: 8300000, guid: a5462f9177ff91f46a0a774efa1c0e24, type: 3}
-      Volume: 0.12
+      Volume: 0.092
       Pitch: 1
       Loop: 1
     Scene: 2
