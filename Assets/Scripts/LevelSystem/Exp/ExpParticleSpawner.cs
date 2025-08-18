@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Utils;
+﻿using Assets.Scripts.Spawners.WorldSpace;
+using Assets.Scripts.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,9 +7,8 @@ using UnityEngine;
 
 namespace Assets.Scripts.LevelSystem.Exp
 {
-    public sealed class ExpParticleSpawner : MonoBehaviour
+    public class ExpParticleSpawner : MonoBehaviour, IInWorldSpaceSpawner<ExpParticleSpawner, float>
     {
-        [Serializable]
         public struct ExpParticleSpawnData
         {
             public Vector3 Pos;
@@ -34,20 +34,9 @@ namespace Assets.Scripts.LevelSystem.Exp
         [SerializeField, Range(0, 30f)] private float _spawningCircleRadius;
 
         private const float CHECK_QUEUED_EXP_SPAWNS_DELAY = 0.2f;
-        public static ExpParticleSpawner Instance;
         private Queue<ExpParticleSpawnData> _queuedExpSpawns = new();
 
-        private void Awake()
-        {
-            if (Instance is null)
-            {
-                Instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-        }
+        public uint CurrentlySpawnedObjectsCount => throw new NotImplementedException();
 
         private void Start()
         {
@@ -58,12 +47,12 @@ namespace Assets.Scripts.LevelSystem.Exp
             );
         }
 
-        private ExpParticleSpawner()
-        { }
-
-        public void SpawnExpParticle(ExpParticleSpawnData expParticleSpawnData)
+        public void Spawn(Vector3 pos, float expValue, int count = 1)
         {
-            _queuedExpSpawns.Enqueue(expParticleSpawnData);
+            for (int i = 0; i < count; i++)
+            {
+                _queuedExpSpawns.Enqueue(new ExpParticleSpawnData(pos, expValue));
+            }
         }
 
         private void SpawnParticlesBasedOnExpAmount()

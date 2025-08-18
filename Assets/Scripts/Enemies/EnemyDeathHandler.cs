@@ -1,4 +1,6 @@
 ﻿using Assets.Scripts.LevelSystem.Exp;
+using Assets.Scripts.Spawners.WorldSpace;
+using Reflex.Attributes;
 using System;
 using UnityEngine;
 using VFX;
@@ -8,6 +10,8 @@ namespace Assets.Scripts.Enemies
     [RequireComponent(typeof(Enemy))]
     public class EnemyDeathHandler : MonoBehaviour, INeedToCompleteBeforeDisable
     {
+        [Inject] private readonly IInWorldSpaceSpawner<ExpParticleSpawner, float> _expParticleSpawner;
+
         [SerializeField] private GameObject _visual;
         [SerializeField] private VFXPlayer _deathVfxPlayer;
         private Enemy _enemy;
@@ -71,12 +75,7 @@ namespace Assets.Scripts.Enemies
 
         private void SpawnExp()
         {
-            ExpParticleSpawner.Instance.SpawnExpParticle(
-                new ExpParticleSpawner.ExpParticleSpawnData(
-                    transform.position,
-                    _enemy.Config.ExpForKill
-                )
-            );
+            _expParticleSpawner.Spawn(transform.position, _enemy.Config.ExpForKill);
         }
     }
 }

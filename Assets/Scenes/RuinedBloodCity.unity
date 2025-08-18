@@ -1012,6 +1012,7 @@ MonoBehaviour:
   _enemiesSpawner: {fileID: 449990457}
   _playerDeathPresenter: {fileID: 4976825079199166630}
   _timerPresenter: {fileID: 2407471052203165078}
+  _expParticleSpawner: {fileID: 375309169}
 --- !u!1 &549734345
 GameObject:
   m_ObjectHideFlags: 0
