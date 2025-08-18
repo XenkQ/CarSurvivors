@@ -18,11 +18,11 @@ namespace Assets.Scripts.Skills.ObjectsImpactingSkills.Crate
             public float SpawnChance;
         }
 
-        private const byte MAX_SPAWN_COUNT = 6;
+        [SerializeField] private byte maxSpawnedCollectiblesCount = 6;
         [SerializeField] private Transform _collectibleItemsParent;
         [SerializeField] private float _spawnDelay = 8f;
         [SerializeField] private CollectibleItemSpawnData[] _collectibleItemsSpawnData;
-        private List<ICollectible> _spawnedCollectibleItems = new List<ICollectible>(MAX_SPAWN_COUNT);
+        private List<ICollectible> _spawnedCollectibleItems;
 
         public uint CurrentlySpawnedObjectsCount { get; private set; }
         public static CollectibleItemsSpawner Instance { get; private set; }
@@ -46,12 +46,13 @@ namespace Assets.Scripts.Skills.ObjectsImpactingSkills.Crate
 
         private void Start()
         {
-            InvokeRepeating(nameof(SpawnAtRandomGridPos), _spawnDelay, _spawnDelay);
+            _spawnedCollectibleItems = new List<ICollectible>(maxSpawnedCollectiblesCount);
+            InvokeRepeating(nameof(SpawnSingleCollectible), _spawnDelay, _spawnDelay);
         }
 
         public void SpawnAtRandomGridPos(int count)
         {
-            for (int i = 0; i < count && _spawnedCollectibleItems.Count < MAX_SPAWN_COUNT; i++)
+            for (int i = 0; i < count && _spawnedCollectibleItems.Count < maxSpawnedCollectiblesCount; i++)
             {
                 Cell drawnCell = RandomWalkableCellsFinder
                     .FindCellWithoutCollectible(GridManager.Instance.WorldGrid);
@@ -84,6 +85,11 @@ namespace Assets.Scripts.Skills.ObjectsImpactingSkills.Crate
 
                 CurrentlySpawnedObjectsCount++;
             }
+        }
+
+        private void SpawnSingleCollectible()
+        {
+            SpawnAtRandomGridPos(1);
         }
 
         private CollectibleItemSpawnData? RandomCollectibleItemBasedOnSpawnChance()

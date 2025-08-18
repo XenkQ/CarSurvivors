@@ -163,6 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03e03dcbbbe0fa74e94f36fe61d25633, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxSpawnedCollectiblesCount: 6
   _collectibleItemsParent: {fileID: 39965858}
   _spawnDelay: 8
   _collectibleItemsSpawnData:
@@ -1617,7 +1618,7 @@ PrefabInstance:
       objectReference: {fileID: 927079917}
     - target: {fileID: 1825431135983145675, guid: 4b58a017790ff094a8a4abb43b67de5f, type: 3}
       propertyPath: m_VersionIndex
-      value: 3859
+      value: 3865
       objectReference: {fileID: 0}
     - target: {fileID: 1913068321102114453, guid: 4b58a017790ff094a8a4abb43b67de5f, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -1677,7 +1678,7 @@ PrefabInstance:
       objectReference: {fileID: 140074584}
     - target: {fileID: 3519673624740486580, guid: 4b58a017790ff094a8a4abb43b67de5f, type: 3}
       propertyPath: m_VersionIndex
-      value: 1269
+      value: 1275
       objectReference: {fileID: 0}
     - target: {fileID: 3562203179734479469, guid: 4b58a017790ff094a8a4abb43b67de5f, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -1733,7 +1734,7 @@ PrefabInstance:
       objectReference: {fileID: 1593915516}
     - target: {fileID: 6455089960773699133, guid: 4b58a017790ff094a8a4abb43b67de5f, type: 3}
       propertyPath: m_VersionIndex
-      value: 698
+      value: 704
       objectReference: {fileID: 0}
     - target: {fileID: 6584722644658625807, guid: 4b58a017790ff094a8a4abb43b67de5f, type: 3}
       propertyPath: m_Mesh
@@ -1749,7 +1750,7 @@ PrefabInstance:
       objectReference: {fileID: 182220110}
     - target: {fileID: 6858605309717453701, guid: 4b58a017790ff094a8a4abb43b67de5f, type: 3}
       propertyPath: m_VersionIndex
-      value: 358
+      value: 364
       objectReference: {fileID: 0}
     - target: {fileID: 8069096434535269489, guid: 4b58a017790ff094a8a4abb43b67de5f, type: 3}
       propertyPath: m_StaticEditorFlags
