@@ -1,6 +1,7 @@
 ﻿using Assets.ScriptableObjects;
 using Assets.Scripts.Audio;
 using Assets.Scripts.Extensions;
+using Assets.Scripts.Projectiles;
 using Assets.Scripts.VFX;
 using DG.Tweening;
 using UnityEngine;

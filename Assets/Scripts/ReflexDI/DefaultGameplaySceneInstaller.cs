@@ -26,14 +26,21 @@ namespace Assets.Scripts.ReflexDI
 
         public void InstallBindings(ContainerBuilder builder)
         {
+            //Player
             builder.AddSingleton(_playerManager, typeof(IPlayerManager));
+
+            //UI Presenters
             builder.AddSingleton(_playerDeathPresenter, typeof(IPlayerDeathPresenter));
             builder.AddSingleton(_playerLevelPresenter, typeof(IPlayerLevelPresenter));
+            builder.AddSingleton(_timerPresenter, typeof(ITimerPresenter));
+
+            //Grid System
             builder.AddSingleton(_gridManager, typeof(IGridManager));
+
+            //Spawners
             builder.AddSingleton(_enemiesSpawner, typeof(IOnRandomGridPosSpawner<EnemiesSpawner>));
             builder.AddSingleton(_collectibleItemsSpawner, typeof(IOnRandomGridPosSpawner<CollectibleItemsSpawner>));
             builder.AddSingleton(_expParticleSpawner, typeof(IInWorldSpaceSpawner<ExpParticleSpawner, float>));
-            builder.AddSingleton(_timerPresenter, typeof(ITimerPresenter));
         }
     }
 }

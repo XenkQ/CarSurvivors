@@ -4,6 +4,7 @@ using Assets.Scripts.Extensions;
 using Assets.Scripts.FlowFieldSystem;
 using Assets.Scripts.LayerMasks;
 using Assets.Scripts.Player;
+using Assets.Scripts.Pooling;
 using Assets.Scripts.Providers;
 using Reflex.Attributes;
 using System;

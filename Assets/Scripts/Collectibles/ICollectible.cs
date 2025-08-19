@@ -1,7 +1,7 @@
 ﻿using Assets.Scripts.Providers;
 using System;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.Collectibles
 {
     public interface ICollectible : IGameObjectProvider
     {

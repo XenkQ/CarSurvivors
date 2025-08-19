@@ -1,8 +1,7 @@
-using Assets.Scripts;
 using Assets.Scripts.Audio;
+using Assets.Scripts.GameManipulators;
 using Assets.Scripts.Player;
 using Assets.Scripts.ScoreBoard;
-using Assets.Scripts.UI;
 using Assets.Scripts.Utils;
 using Reflex.Attributes;
 using TMPro;

@@ -1,5 +1,6 @@
 using Assets.Scripts.FlowFieldSystem;
 using Assets.Scripts.LayerMasks;
+using Assets.Scripts.Movement;
 using DG.Tweening;
 using System.Runtime.CompilerServices;
 using UnityEngine;

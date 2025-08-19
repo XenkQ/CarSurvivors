@@ -3,7 +3,7 @@ using Assets.Scripts.Spawners.GridSpace;
 using Reflex.Attributes;
 using UnityEngine;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.Waves
 {
     public class WaveManager : MonoBehaviour
     {

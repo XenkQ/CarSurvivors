@@ -1,5 +1,6 @@
 using Assets.Scripts.CustomTypes;
 using Assets.Scripts.GridSystem;
+using Assets.Scripts.Pooling;
 using Assets.Scripts.Spawners.GridSpace;
 using Reflex.Attributes;
 using System;
@@ -10,7 +11,8 @@ using UnityEngine.Pool;
 
 namespace Assets.Scripts.Enemies
 {
-    public sealed class EnemiesSpawner : MonoBehaviour, IOnRandomGridPosSpawner<EnemiesSpawner>, IObjectReleaseNotifier
+    public class EnemiesSpawner : MonoBehaviour,
+        IOnRandomGridPosSpawner<EnemiesSpawner>, IObjectReleaseNotifier
     {
         [Inject] private readonly IGridManager _gridManager;
 

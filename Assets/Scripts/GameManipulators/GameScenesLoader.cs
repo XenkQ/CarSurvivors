@@ -3,7 +3,7 @@ using Assets.Scripts.CustomEventArgs;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.GameManipulators
 {
     [Serializable]
     public enum GameScene

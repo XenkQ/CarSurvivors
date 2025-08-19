@@ -1,7 +1,8 @@
-﻿using Assets.Scripts.StatusAffectables;
+﻿using Assets.Scripts.Pooling;
+using Assets.Scripts.StatusAffectables;
 using UnityEngine;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.Volumes
 {
     [RequireComponent(typeof(BoxCollider))]
     public class DeathVolume : MonoBehaviour

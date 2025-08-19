@@ -1,4 +1,6 @@
 using Assets.Scripts.CustomTypes;
+using Assets.Scripts.ObjectLifeCycle.Actions;
+using Assets.Scripts.Shapes;
 using Assets.Scripts.Spawners.WorldSpace;
 using Assets.Scripts.Utils;
 using DG.Tweening;
@@ -11,15 +13,15 @@ namespace Assets.Scripts.DamageNumbers
     public class DamageNubmersSpawnerConfig
     {
         public float Damage;
-        public SpawnShapeModes SpawnShapeMode;
+        public ShapeModes SpawnShapeMode;
 
-        public DamageNubmersSpawnerConfig(float damage, SpawnShapeModes spawnShapeMode)
+        public DamageNubmersSpawnerConfig(float damage, ShapeModes spawnShapeMode)
         {
             Damage = damage;
             SpawnShapeMode = spawnShapeMode;
         }
 
-        public void Deconstruct(out float damage, out SpawnShapeModes spawnShapeMode)
+        public void Deconstruct(out float damage, out ShapeModes spawnShapeMode)
         {
             damage = Damage;
             spawnShapeMode = SpawnShapeMode;
@@ -135,12 +137,12 @@ namespace Assets.Scripts.DamageNumbers
             }
         }
 
-        private Vector3 GetDestinationBasedOnSpawnShapeMode(Vector3 startPos, SpawnShapeModes spawnShapeMode)
+        private Vector3 GetDestinationBasedOnSpawnShapeMode(Vector3 startPos, ShapeModes spawnShapeMode)
         {
             return spawnShapeMode switch
             {
-                SpawnShapeModes.Sphere => RandomUtility.GetRandomPointOnSphereSurface(startPos, _popupsMovementRange),
-                SpawnShapeModes.Hemisphere => RandomUtility.GetRandomPointOnHemisphereSurface(startPos, _popupsMovementRange),
+                ShapeModes.Sphere => RandomUtility.GetRandomPointOnSphereSurface(startPos, _popupsMovementRange),
+                ShapeModes.Hemisphere => RandomUtility.GetRandomPointOnHemisphereSurface(startPos, _popupsMovementRange),
                 _ => transform.position,
             };
         }

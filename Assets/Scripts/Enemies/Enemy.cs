@@ -2,6 +2,10 @@ using Assets.Scripts.Audio;
 using Assets.Scripts.Collisions;
 using Assets.Scripts.DamageNumbers;
 using Assets.Scripts.HealthSystem;
+using Assets.Scripts.Movement;
+using Assets.Scripts.ObjectLifeCycle.Actions;
+using Assets.Scripts.Pooling;
+using Assets.Scripts.Shapes;
 using Assets.Scripts.Spawners.WorldSpace;
 using Assets.Scripts.StatusAffectables;
 using Assets.Scripts.VFX;
@@ -78,7 +82,7 @@ namespace Assets.Scripts.Enemies
                 _bloodVfxPlayer.transform.position,
                 new DamageNubmersSpawnerConfig(
                     damage,
-                    SpawnShapeModes.Hemisphere
+                    ShapeModes.Hemisphere
                 )
             );
 

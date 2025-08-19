@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Initializers;
+using Assets.Scripts.Projectiles;
 using UnityEngine;
 
 namespace Assets.Scripts.Skills

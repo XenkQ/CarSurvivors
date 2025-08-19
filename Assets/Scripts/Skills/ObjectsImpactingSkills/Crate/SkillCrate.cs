@@ -1,3 +1,4 @@
+using Assets.Scripts.Collectibles;
 using Assets.Scripts.LayerMasks;
 using System;
 using UnityEngine;

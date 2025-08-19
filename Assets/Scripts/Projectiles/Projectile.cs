@@ -6,7 +6,7 @@ using UnityEngine;
 using System;
 using Assets.Scripts.Helpers;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.Projectiles
 {
     public class Projectile : MonoBehaviour, IInitializableWithScriptableConfig<ProjectileConfigSO>
     {

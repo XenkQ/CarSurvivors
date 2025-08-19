@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.Pooling
 {
     public interface IObjectReleaseNotifier
     {
