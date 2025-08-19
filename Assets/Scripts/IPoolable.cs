@@ -8,6 +8,8 @@ namespace Assets.Scripts
 
         public void OnRelease();
 
+        public void ReturnToPool();
+
         public event EventHandler OnCanBeReleased;
     }
 }

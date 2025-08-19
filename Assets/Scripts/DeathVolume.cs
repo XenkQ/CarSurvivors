@@ -14,6 +14,10 @@ namespace Assets.Scripts
             {
                 damageable.TakeFullHpDamage();
             }
+            else if (other.TryGetComponent(out IPoolable poolable))
+            {
+                poolable.ReturnToPool();
+            }
         }
 
         private void OnDrawGizmos()

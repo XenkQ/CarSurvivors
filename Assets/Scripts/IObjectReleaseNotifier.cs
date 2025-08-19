@@ -2,7 +2,7 @@
 
 namespace Assets.Scripts
 {
-    public interface IPool
+    public interface IObjectReleaseNotifier
     {
         event EventHandler OnSpawnedEntityReleased;
     }

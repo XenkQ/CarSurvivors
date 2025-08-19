@@ -51,6 +51,13 @@ namespace Assets.Scripts.Enemies
             Health.MaxHealth = Config.MaxHealth;
         }
 
+        public void ReturnToPool()
+        {
+            OnRelease();
+
+            OnCanBeReleased?.Invoke(this, EventArgs.Empty);
+        }
+
         public void OnRelease()
         {
             _enemyDeathSequence.OnCompleted -= EnemyDeathSequence_OnCompleted;

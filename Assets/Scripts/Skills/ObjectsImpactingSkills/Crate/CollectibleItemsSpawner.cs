@@ -8,8 +8,8 @@ using UnityEngine;
 
 namespace Assets.Scripts.Skills.ObjectsImpactingSkills.Crate
 {
-    public sealed class CollectibleItemsSpawner : MonoBehaviour,
-        IOnRandomGridPosSpawner<CollectibleItemsSpawner>, IPool
+    public class CollectibleItemsSpawner : MonoBehaviour,
+        IOnRandomGridPosSpawner<CollectibleItemsSpawner>
     {
         [Serializable]
         private struct CollectibleItemSpawnData
@@ -28,24 +28,8 @@ namespace Assets.Scripts.Skills.ObjectsImpactingSkills.Crate
         private List<ICollectible> _spawnedCollectibleItems;
 
         public uint CurrentlySpawnedObjectsCount { get; private set; }
-        public static CollectibleItemsSpawner Instance { get; private set; }
 
         public event EventHandler OnSpawnedEntityReleased;
-
-        private CollectibleItemsSpawner()
-        { }
-
-        private void Awake()
-        {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-        }
 
         private void Start()
         {

@@ -187,7 +187,7 @@ MonoBehaviour:
   rotateZ: 0
   _maxRotationOnAxis: 360
   _useLocalRotation: 0
-  _tweenIterationTime: 2.5
+  _tweenIterationTime: 3.4
   _unscaleWithTime: 0
 --- !u!114 &5036209717268796472
 MonoBehaviour:

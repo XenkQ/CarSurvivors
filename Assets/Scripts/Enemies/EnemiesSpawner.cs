@@ -10,7 +10,7 @@ using UnityEngine.Pool;
 
 namespace Assets.Scripts.Enemies
 {
-    public sealed class EnemiesSpawner : MonoBehaviour, IOnRandomGridPosSpawner<EnemiesSpawner>, IPool
+    public sealed class EnemiesSpawner : MonoBehaviour, IOnRandomGridPosSpawner<EnemiesSpawner>, IObjectReleaseNotifier
     {
         [Inject] private readonly IGridManager _gridManager;
 

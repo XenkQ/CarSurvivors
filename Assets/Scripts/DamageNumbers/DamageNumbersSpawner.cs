@@ -5,6 +5,7 @@ using Assets.Scripts.Utils;
 using DG.Tweening;
 using System;
 using UnityEngine;
+using UnityEngine.Pool;
 
 namespace Assets.Scripts.DamageNumbers
 {
@@ -50,7 +51,24 @@ namespace Assets.Scripts.DamageNumbers
         [SerializeField] private float _popupsMovementRange = 1f;
         private bool _isPopupsEnabled = true;
 
+        public event EventHandler OnSpawnedEntityReleased;
+
         public uint CurrentlySpawnedObjectsCount { get; private set; }
+
+        private IObjectPool<DamageNumber> _damageNumberPool;
+
+        private void Awake()
+        {
+            _damageNumberPool = new ObjectPool<DamageNumber>(
+                createFunc: () => Instantiate(_damagePopupPrefab, transform),
+                actionOnGet: (obj) => obj.gameObject.SetActive(true),
+                actionOnRelease: (obj) => obj.gameObject.SetActive(false),
+                actionOnDestroy: (obj) => Destroy(obj.gameObject),
+                collectionCheck: false,
+                defaultCapacity: 20,
+                maxSize: 100
+            );
+        }
 
         public void EnableFunctionality()
         {
@@ -78,7 +96,10 @@ namespace Assets.Scripts.DamageNumbers
 
             for (int i = 0; i < count; i++)
             {
-                DamageNumber damageNumber = Instantiate(_damagePopupPrefab, pos, Quaternion.identity);
+                DamageNumber damageNumber = _damageNumberPool.Get();
+                damageNumber.transform.position = pos;
+                damageNumber.transform.rotation = Quaternion.identity;
+
                 var (damage, spawnShapeMode) = specificConfig;
 
                 VisualApearanceByDamageTreshold? visualApearanceByDamageTreshold
@@ -86,16 +107,13 @@ namespace Assets.Scripts.DamageNumbers
 
                 if (visualApearanceByDamageTreshold is null)
                 {
+                    _damageNumberPool.Release(damageNumber);
                     return;
                 }
 
                 damageNumber.Initialize(new DamageNumberConfig(damage, visualApearanceByDamageTreshold.Value.DamagePopupApearance));
 
-                damageNumber.OnLifeEnd += (sender, args) =>
-                {
-                    CurrentlySpawnedObjectsCount--;
-                    Destroy(damageNumber.gameObject);
-                };
+                damageNumber.OnLifeEnd += DamageNumber_OnLifeEnd;
 
                 Vector3 dest = GetDestinationBasedOnSpawnShapeMode(pos, spawnShapeMode);
                 damageNumber
@@ -104,6 +122,17 @@ namespace Assets.Scripts.DamageNumbers
                     .SetEase(Ease.InOutSine);
 
                 CurrentlySpawnedObjectsCount++;
+            }
+        }
+
+        private void DamageNumber_OnLifeEnd(object sender, EventArgs args)
+        {
+            if (sender is DamageNumber damageNumber)
+            {
+                CurrentlySpawnedObjectsCount--;
+                damageNumber.OnLifeEnd -= DamageNumber_OnLifeEnd;
+                _damageNumberPool.Release(damageNumber);
+                OnSpawnedEntityReleased?.Invoke(damageNumber, EventArgs.Empty);
             }
         }
 

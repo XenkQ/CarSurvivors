@@ -21,7 +21,7 @@ namespace Assets.Scripts.LevelSystem.Exp
     }
 
     [RequireComponent(typeof(FlowFieldMovementController))]
-    public class ExpParticle : MonoBehaviour, IExpParticle
+    public class ExpParticle : MonoBehaviour, IExpParticle, IPoolable
     {
         [Serializable]
         private struct ExpParticleApearanceByTreshold
@@ -41,6 +41,8 @@ namespace Assets.Scripts.LevelSystem.Exp
 
         public event EventHandler OnExpReachedTarget;
 
+        public event EventHandler OnCanBeReleased;
+
         private float _expAmount;
         private bool _expCollected;
 
@@ -54,12 +56,6 @@ namespace Assets.Scripts.LevelSystem.Exp
             _audoClipPlayer = GetComponentInChildren<IAudioClipPlayer>();
         }
 
-        private void OnEnable()
-        {
-            _expCollected = false;
-            _expAmount = 0;
-        }
-
         private void FixedUpdate()
         {
             _flowFieldMovementController.MoveOnFlowFieldGrid(_movementSpeed);
@@ -71,6 +67,24 @@ namespace Assets.Scripts.LevelSystem.Exp
             {
                 OnExpReachedTarget?.Invoke(this, EventArgs.Empty);
             }
+        }
+
+        public void ReturnToPool()
+        {
+            OnRelease();
+
+            OnCanBeReleased?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void OnGet()
+        {
+            _expCollected = false;
+            _expAmount = 0;
+        }
+
+        public void OnRelease()
+        {
+            throw new NotImplementedException();
         }
 
         public void SetSizeAndMaterialBasedOnExpAmount(float exp)
@@ -113,7 +127,11 @@ namespace Assets.Scripts.LevelSystem.Exp
                 }
                 else
                 {
-                    _audoClipPlayer.OnAudioClipFinished += (s, e) => callback?.Invoke();
+                    _audoClipPlayer.OnAudioClipFinished += (s, e) =>
+                    {
+                        OnCanBeReleased?.Invoke(this, EventArgs.Empty);
+                        callback?.Invoke();
+                    };
                 }
             });
         }

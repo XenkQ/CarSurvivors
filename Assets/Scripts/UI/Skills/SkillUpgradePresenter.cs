@@ -3,8 +3,10 @@ using Assets.Scripts.Extensions;
 using Assets.Scripts.Player;
 using Assets.Scripts.Skills;
 using Assets.Scripts.Skills.ObjectsImpactingSkills.Crate;
+using Assets.Scripts.Spawners.GridSpace;
 using Assets.Scripts.Stats;
 using Assets.Scripts.UI.Level;
+using Reflex.Attributes;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -17,6 +19,8 @@ namespace Assets.Scripts.UI.Skills
 {
     public class SkillUpgradePresenter : MonoBehaviour
     {
+        [Inject] private readonly IOnRandomGridPosSpawner<CollectibleItemsSpawner> _collectibleItemsSpawner;
+
         [Header("Upgrade Skill")]
         [SerializeField] private GameObject _upgradeSkillSection;
         [SerializeField] private Button _upgradeButtonPrefab;
@@ -52,7 +56,7 @@ namespace Assets.Scripts.UI.Skills
                 .FindGameObjectWithTag(typeof(SkillsVisualPresenter).Name)
                 .GetComponent<SkillsVisualPresenter>();
 
-            CollectibleItemsSpawner.Instance.OnSpawnedEntityReleased += ShowRandomSkillInInitializationOrUpgradeSection_OnEvent;
+            _collectibleItemsSpawner.OnSpawnedEntityReleased += ShowRandomSkillInInitializationOrUpgradeSection_OnEvent;
             PlayerLevelPresenter.Instance.OnExpSliderVisualEndValueReached += ShowRandomSkillInInitializationOrUpgradeSection_OnEvent;
             _continueButton.onClick.AddListener(() => HandleUpgradeableOrInitializableSkillsShowing());
         }
