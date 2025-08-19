@@ -1,9 +1,10 @@
-﻿using Reflex.Attributes;
+﻿using Assets.Scripts.UI.Death;
+using Assets.Scripts.VFX;
+using Reflex.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using VFX;
 
 namespace Assets.Scripts.Player
 {

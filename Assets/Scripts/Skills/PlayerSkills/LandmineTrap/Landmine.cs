@@ -3,8 +3,8 @@ using Assets.Scripts.Audio;
 using Assets.Scripts.Helpers;
 using Assets.Scripts.Initializers;
 using Assets.Scripts.LayerMasks;
+using Assets.Scripts.VFX;
 using UnityEngine;
-using VFX;
 
 namespace Assets.Scripts.Skills.PlayerSkills.LandmineTrap
 {

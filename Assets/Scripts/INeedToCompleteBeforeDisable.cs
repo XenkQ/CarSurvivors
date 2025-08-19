@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Assets.Scripts.Enemies
+namespace Assets.Scripts
 {
     public interface INeedToCompleteBeforeDisable
     {

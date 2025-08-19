@@ -3,7 +3,7 @@ using Assets.Scripts.Storage;
 using System;
 using UnityEngine;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.Settings
 {
     public class GraphicSetting : ISetting<GraphicSetting, string>
     {

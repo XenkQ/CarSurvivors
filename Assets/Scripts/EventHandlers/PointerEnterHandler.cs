@@ -2,6 +2,8 @@
 using UnityEngine.EventSystems;
 using System;
 
+namespace Assets.Scripts.EventHandlers
+{
 public class PointerEnterHandler : MonoBehaviour, IPointerEnterHandler
 {
     public Action OnPointerEnterAction;
@@ -10,4 +12,5 @@ public class PointerEnterHandler : MonoBehaviour, IPointerEnterHandler
     {
         OnPointerEnterAction?.Invoke();
     }
+}
 }

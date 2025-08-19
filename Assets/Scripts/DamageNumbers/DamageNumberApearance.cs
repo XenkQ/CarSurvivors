@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Assets.Scripts.DamagePopups
+namespace Assets.Scripts.DamageNumbers
 {
     [Serializable]
     public struct DamageNumberApearance

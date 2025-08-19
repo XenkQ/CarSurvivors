@@ -5,6 +5,7 @@ using Assets.Scripts.Skills.ObjectsImpactingSkills.Crate;
 using Assets.Scripts.Spawners.GridSpace;
 using Assets.Scripts.Spawners.WorldSpace;
 using Assets.Scripts.UI;
+using Assets.Scripts.UI.Death;
 using Reflex.Core;
 using UnityEngine;
 

@@ -4,6 +4,8 @@ using Assets.Scripts.Activators;
 using Assets.Scripts.Skills;
 using UnityEngine;
 
+namespace Assets.Scripts.Skills.PlayerSkills.Lasergun
+{
 public class LasergunSkill : UpgradeableSkill<LasergunSkillSO>
 {
     [field: SerializeField] public override SkillInfoSO SkillInfo { get; protected set; }
@@ -33,4 +35,5 @@ public class LasergunSkill : UpgradeableSkill<LasergunSkillSO>
             turret.Shoot(_config.DelayBetweenShoots.MinMaxRange.Min / _config.DelayBetweenShoots.Value);
         }
     }
+}
 }

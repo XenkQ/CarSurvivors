@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace VFX
+namespace Assets.Scripts.VFX
 {
     public class VFXPlayConfig
     {

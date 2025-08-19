@@ -1,9 +1,9 @@
 ﻿using Assets.ScriptableObjects;
 using Assets.Scripts.Audio;
 using Assets.Scripts.Extensions;
+using Assets.Scripts.VFX;
 using DG.Tweening;
 using UnityEngine;
-using VFX;
 
 namespace Assets.Scripts.Skills.PlayerSkills.Minigun
 {

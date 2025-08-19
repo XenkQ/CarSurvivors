@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Audio;
+using Assets.Scripts.EventHandlers;
 using Assets.Scripts.Extensions;
 using Assets.Scripts.Player;
 using Assets.Scripts.Skills;
@@ -12,7 +13,6 @@ using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.UI.Skills

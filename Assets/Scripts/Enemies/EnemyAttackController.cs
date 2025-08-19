@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Animations;
+﻿using Assets.Scripts.AnimationPlayers;
 using Assets.Scripts.Collisions;
 using Assets.Scripts.Extensions;
 using Assets.Scripts.LayerMasks;

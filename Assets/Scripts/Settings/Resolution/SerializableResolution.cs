@@ -1,5 +1,7 @@
 ﻿using System;
 
+namespace Assets.Scripts.Settings.Resolution
+{
 [Serializable]
 public struct SerializableResolution
 {
@@ -25,4 +27,5 @@ public struct SerializableResolution
             resolution.refreshRateRatio.denominator
         );
     }
+}
 }

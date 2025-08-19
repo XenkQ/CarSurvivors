@@ -1,6 +1,6 @@
 using System;
 
-namespace Assets.Scripts.Animations
+namespace Assets.Scripts.AnimationPlayers
 {
     public interface IAttackAnimationPlayer
     {

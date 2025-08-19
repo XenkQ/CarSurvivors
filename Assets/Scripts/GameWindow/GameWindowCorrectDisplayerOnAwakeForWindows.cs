@@ -8,6 +8,8 @@ using UnityEngine;
 using System;
 using System.Runtime.InteropServices;
 
+namespace Assets.Scripts.GameWindow
+{
 public class GameWindowCorrectDisplayerOnAwakeForWindows : MonoBehaviour
 {
 #if UNITY_STANDALONE_WIN && !UNITY_EDITOR
@@ -58,4 +60,5 @@ public class GameWindowCorrectDisplayerOnAwakeForWindows : MonoBehaviour
     }
 
 #endif
+}
 }

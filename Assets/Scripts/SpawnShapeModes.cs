@@ -1,4 +1,4 @@
-namespace Assets.Scripts.DamagePopups
+namespace Assets.Scripts
 {
     public enum SpawnShapeModes
     {

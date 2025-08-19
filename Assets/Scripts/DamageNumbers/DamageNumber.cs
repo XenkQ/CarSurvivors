@@ -4,7 +4,7 @@ using System;
 using TMPro;
 using UnityEngine;
 
-namespace Assets.Scripts.DamagePopups
+namespace Assets.Scripts.DamageNumbers
 {
     public struct DamageNumberConfig
     {

@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.ScoreBoard
 {
     public class StoredScoreBoard : IAppStorageValue<List<uint>>
     {

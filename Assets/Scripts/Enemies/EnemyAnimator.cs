@@ -1,4 +1,4 @@
-using Assets.Scripts.Animations;
+using Assets.Scripts.AnimationPlayers;
 using System;
 using UnityEngine;
 

@@ -1,7 +1,7 @@
 ﻿using Assets.Scripts.GridSystem;
 using UnityEditor;
 
-namespace Assets.Scripts.Editor
+namespace Assets.Scripts.Editor.GUI
 {
     [CustomEditor(typeof(GridManager))]
     public class GridManagerEditor : UnityEditor.Editor

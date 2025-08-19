@@ -9,7 +9,7 @@ using UnityEngine;
 using UnityEditor.Animations;
 using System.Collections.Generic;
 
-namespace Assets.Scripts.Editor
+namespace Assets.Scripts.Editor.Tools
 {
     public class AnimationPosePreviewer : EditorWindow
     {

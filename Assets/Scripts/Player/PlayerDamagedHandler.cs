@@ -1,7 +1,7 @@
 ﻿using Assets.Scripts.StatusAffectables;
+using Assets.Scripts.VFX;
 using DG.Tweening;
 using UnityEngine;
-using VFX;
 
 namespace Assets.Scripts.Player
 {

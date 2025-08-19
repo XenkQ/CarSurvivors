@@ -1,14 +1,13 @@
 using Assets.Scripts.Audio;
 using Assets.Scripts.Collisions;
 using Assets.Scripts.DamageNumbers;
-using Assets.Scripts.DamagePopups;
 using Assets.Scripts.HealthSystem;
 using Assets.Scripts.Spawners.WorldSpace;
 using Assets.Scripts.StatusAffectables;
+using Assets.Scripts.VFX;
 using Reflex.Attributes;
 using System;
 using UnityEngine;
-using VFX;
 
 namespace Assets.Scripts.Enemies
 {

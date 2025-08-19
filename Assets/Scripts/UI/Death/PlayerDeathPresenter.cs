@@ -8,6 +8,8 @@ using Reflex.Attributes;
 using TMPro;
 using UnityEngine;
 
+namespace Assets.Scripts.UI.Death
+{
 public interface IPlayerDeathPresenter
 {
     void EnableDeathScreen();
@@ -66,4 +68,5 @@ public class PlayerDeathPresenter : MonoBehaviour, IPlayerDeathPresenter
 
         _timeText.text = timeText;
     }
+}
 }

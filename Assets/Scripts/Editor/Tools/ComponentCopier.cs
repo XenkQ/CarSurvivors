@@ -8,7 +8,7 @@ using UnityEditor;
 using UnityEngine;
 using System;
 
-namespace Assets.Scripts.Editor
+namespace Assets.Scripts.Editor.Tools
 {
     public class SmartComponentCopier : EditorWindow
     {

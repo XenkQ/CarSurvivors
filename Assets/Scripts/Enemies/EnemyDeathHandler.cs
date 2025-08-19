@@ -1,9 +1,9 @@
 ﻿using Assets.Scripts.LevelSystem.Exp;
 using Assets.Scripts.Spawners.WorldSpace;
+using Assets.Scripts.VFX;
 using Reflex.Attributes;
 using System;
 using UnityEngine;
-using VFX;
 
 namespace Assets.Scripts.Enemies
 {

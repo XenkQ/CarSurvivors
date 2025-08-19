@@ -9,6 +9,8 @@ using UnityEditor;
 using System.Linq;
 using System.Text.RegularExpressions;
 
+namespace Assets.Scripts.Editor.Tools
+{
 public class SortChildrenByName : EditorWindow
 {
     private GameObject _parentObject;
@@ -59,4 +61,5 @@ public class SortChildrenByName : EditorWindow
         int number = match.Groups[2].Success ? int.Parse(match.Groups[2].Value) : 0;
         return (baseName, number);
     }
+}
 }
