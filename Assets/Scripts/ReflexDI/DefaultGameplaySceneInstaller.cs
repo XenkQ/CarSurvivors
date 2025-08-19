@@ -7,6 +7,7 @@ using Assets.Scripts.Spawners.GridSpace;
 using Assets.Scripts.Spawners.WorldSpace;
 using Assets.Scripts.UI;
 using Assets.Scripts.UI.Death;
+using Assets.Scripts.UI.Level;
 using Reflex.Core;
 using UnityEngine;
 
@@ -15,9 +16,10 @@ namespace Assets.Scripts.ReflexDI
     public class DefaultGameplaySceneInstaller : MonoBehaviour, IInstaller
     {
         [SerializeField] private PlayerManager _playerManager;
+        [SerializeField] private PlayerDeathPresenter _playerDeathPresenter;
+        [SerializeField] private PlayerLevelPresenter _playerLevelPresenter;
         [SerializeField] private GridManager _gridManager;
         [SerializeField] private EnemiesSpawner _enemiesSpawner;
-        [SerializeField] private PlayerDeathPresenter _playerDeathPresenter;
         [SerializeField] private TimerPresenter _timerPresenter;
         [SerializeField] private ExpParticleSpawner _expParticleSpawner;
         [SerializeField] private CollectibleItemsSpawner _collectibleItemsSpawner;
@@ -25,11 +27,12 @@ namespace Assets.Scripts.ReflexDI
         public void InstallBindings(ContainerBuilder builder)
         {
             builder.AddSingleton(_playerManager, typeof(IPlayerManager));
+            builder.AddSingleton(_playerDeathPresenter, typeof(IPlayerDeathPresenter));
+            builder.AddSingleton(_playerLevelPresenter, typeof(IPlayerLevelPresenter));
             builder.AddSingleton(_gridManager, typeof(IGridManager));
             builder.AddSingleton(_enemiesSpawner, typeof(IOnRandomGridPosSpawner<EnemiesSpawner>));
             builder.AddSingleton(_collectibleItemsSpawner, typeof(IOnRandomGridPosSpawner<CollectibleItemsSpawner>));
             builder.AddSingleton(_expParticleSpawner, typeof(IInWorldSpaceSpawner<ExpParticleSpawner, float>));
-            builder.AddSingleton(_playerDeathPresenter, typeof(IPlayerDeathPresenter));
             builder.AddSingleton(_timerPresenter, typeof(ITimerPresenter));
         }
     }

@@ -38,8 +38,6 @@ namespace Assets.Scripts.GridSystem
 #endif
         private FlowField _flowField;
 
-        public static GridManager Instance { get; private set; }
-
         public Cell DestinationCell { get; private set; }
 
         private void Awake()

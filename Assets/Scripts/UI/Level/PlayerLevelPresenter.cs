@@ -12,7 +12,12 @@ using Reflex.Attributes;
 
 namespace Assets.Scripts.UI.Level
 {
-    public sealed class PlayerLevelPresenter : MonoBehaviour
+    public interface IPlayerLevelPresenter
+    {
+        event EventHandler OnExpSliderVisualEndValueReached;
+    }
+
+    public class PlayerLevelPresenter : MonoBehaviour, IPlayerLevelPresenter
     {
         private const float BASE_EXP_INCREASE_ANIM_SPEED = 1f;
         private const float FASTEST_EXP_INCREASE_ANIM_SPEED = 0.6f;
@@ -24,8 +29,6 @@ namespace Assets.Scripts.UI.Level
         [SerializeField] private Slider _expSlider;
 
         public event EventHandler OnExpSliderVisualEndValueReached;
-
-        public static PlayerLevelPresenter Instance { get; private set; }
 
         private ILevelController _playerLevelController;
 
@@ -45,21 +48,6 @@ namespace Assets.Scripts.UI.Level
             {
                 LevelData = data;
                 IsLevelUp = isLevelUp;
-            }
-        }
-
-        private PlayerLevelPresenter()
-        { }
-
-        private void Awake()
-        {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
             }
         }
 

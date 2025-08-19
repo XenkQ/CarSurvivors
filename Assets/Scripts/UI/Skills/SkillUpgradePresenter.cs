@@ -20,6 +20,7 @@ namespace Assets.Scripts.UI.Skills
     public class SkillUpgradePresenter : MonoBehaviour
     {
         [Inject] private readonly IPlayerManager _playerManager;
+        [Inject] private readonly IPlayerLevelPresenter _playerLevelPresenter;
         [Inject] private readonly IOnRandomGridPosSpawner<CollectibleItemsSpawner> _collectibleItemsSpawner;
 
         [Header("Upgrade Skill")]
@@ -58,7 +59,7 @@ namespace Assets.Scripts.UI.Skills
                 .GetComponent<SkillsVisualPresenter>();
 
             _collectibleItemsSpawner.OnSpawnedEntityReleased += ShowRandomSkillInInitializationOrUpgradeSection_OnEvent;
-            PlayerLevelPresenter.Instance.OnExpSliderVisualEndValueReached += ShowRandomSkillInInitializationOrUpgradeSection_OnEvent;
+            _playerLevelPresenter.OnExpSliderVisualEndValueReached += ShowRandomSkillInInitializationOrUpgradeSection_OnEvent;
             _continueButton.onClick.AddListener(() => HandleUpgradeableOrInitializableSkillsShowing());
         }
 
