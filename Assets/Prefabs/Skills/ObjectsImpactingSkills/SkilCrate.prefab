@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 6440005455980207201}
   - component: {fileID: 7219567721460505566}
   - component: {fileID: 2752937453561489778}
+  - component: {fileID: 5036209717268796472}
   - component: {fileID: 2590883899213531858}
   m_Layer: 12
   m_Name: SkilCrate
@@ -188,6 +189,21 @@ MonoBehaviour:
   _useLocalRotation: 0
   _tweenIterationTime: 2.5
   _unscaleWithTime: 0
+--- !u!114 &5036209717268796472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8743226647122829456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f11a286c19088944981d6e025992b11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startScale: {x: 0.2, y: 0.2, z: 0.2}
+  _endScale: {x: 1, y: 1, z: 1}
+  _scalingDuration: 0.3
 --- !u!65 &2590883899213531858
 BoxCollider:
   m_ObjectHideFlags: 0
