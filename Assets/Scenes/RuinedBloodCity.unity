@@ -1010,6 +1010,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddb24f9b1630c5a4c8bf2b0c8e699462, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerManager: {fileID: 2007183185026868722}
   _gridManager: {fileID: 2116983121}
   _enemiesSpawner: {fileID: 449990457}
   _playerDeathPresenter: {fileID: 4976825079199166630}
@@ -3740,7 +3741,7 @@ PrefabInstance:
       objectReference: {fileID: 1938938823}
     - target: {fileID: 6215313516695621011, guid: cb84583e0c2818e42b12a0baeb2f6f1b, type: 3}
       propertyPath: m_Name
-      value: PlayerCar
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6257441156095345877, guid: cb84583e0c2818e42b12a0baeb2f6f1b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3795,6 +3796,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb84583e0c2818e42b12a0baeb2f6f1b, type: 3}
+--- !u!114 &2007183185026868722 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3205813391929429011, guid: cb84583e0c2818e42b12a0baeb2f6f1b, type: 3}
+  m_PrefabInstance: {fileID: 2007183185026868721}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39c25c600f7b5f44f8ec305065c09adf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2407471052203165077
 PrefabInstance:
   m_ObjectHideFlags: 0

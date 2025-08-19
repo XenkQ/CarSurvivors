@@ -11,6 +11,7 @@ namespace Assets.Scripts.Player
     [RequireComponent(typeof(PlayerManager))]
     public class PlayerDeathHandler : MonoBehaviour
     {
+        [Inject] private readonly IPlayerManager _playerManager;
         [Inject] private readonly IPlayerDeathPresenter _playerDeathPresenter;
 
         [SerializeField] private GameObject _visual;
@@ -25,13 +26,13 @@ namespace Assets.Scripts.Player
 
         private void OnEnable()
         {
-            PlayerManager.Instance.Health.OnNoHealth += Health_OnNoHealth;
+            _playerManager.Health.OnNoHealth += Health_OnNoHealth;
             _deathVfxPlayer.OnVFXFinished += DeathVfxPlayer_OnVFXFinished;
         }
 
         private void OnDisable()
         {
-            PlayerManager.Instance.Health.OnNoHealth -= Health_OnNoHealth;
+            _playerManager.Health.OnNoHealth -= Health_OnNoHealth;
             _deathVfxPlayer.OnVFXFinished -= DeathVfxPlayer_OnVFXFinished;
         }
 

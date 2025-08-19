@@ -4,26 +4,23 @@ using Assets.Scripts.Helpers;
 using Assets.Scripts.Initializers;
 using Assets.Scripts.LayerMasks;
 using Assets.Scripts.Player;
+using Reflex.Attributes;
 using UnityEngine;
 
 namespace Assets.Scripts.Skills.PlayerSkills.Saw
 {
     public class SawBlade : MonoBehaviour, IInitializableWithScriptableConfig<SawSkillUpgradeableConfigSO>
     {
+        [Inject] private readonly IPlayerManager _playerManager;
+
         private SawSkillUpgradeableConfigSO _config;
         private bool _isInitialized;
-        private PlayerManager _playerManager;
         private const float _defaultCollisionKnockback = 2f;
         private IAudioClipPlayer _audioClipPlayer;
 
         private void Awake()
         {
             _audioClipPlayer = GetComponentInChildren<IAudioClipPlayer>();
-        }
-
-        private void Start()
-        {
-            _playerManager = PlayerManager.Instance;
         }
 
         private void OnTriggerEnter(Collider other)

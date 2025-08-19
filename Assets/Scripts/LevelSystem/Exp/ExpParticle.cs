@@ -5,6 +5,7 @@ using Assets.Scripts.FlowFieldSystem;
 using Assets.Scripts.LayerMasks;
 using Assets.Scripts.Player;
 using Assets.Scripts.Providers;
+using Reflex.Attributes;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,6 +31,8 @@ namespace Assets.Scripts.LevelSystem.Exp
             public Material Material;
             public FloatValueRange ScaleValueRange;
         }
+
+        [Inject] private readonly IPlayerManager _playerManager;
 
         [SerializeField] private float _movementSpeed;
         [SerializeField] private float _disapearingDuration = 0.1f;
@@ -119,7 +122,7 @@ namespace Assets.Scripts.LevelSystem.Exp
 
             transform.LifeEndingShrinkToZeroTween(_disapearingDuration, () =>
             {
-                PlayerManager.Instance.LevelController.AddExp(_expAmount);
+                _playerManager.LevelController.AddExp(_expAmount);
 
                 if (audioClipPlayFinished)
                 {

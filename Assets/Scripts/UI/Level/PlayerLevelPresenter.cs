@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Assets.Scripts.Utils;
 using Assets.Scripts.CustomEventArgs;
+using Reflex.Attributes;
 
 namespace Assets.Scripts.UI.Level
 {
@@ -16,6 +17,8 @@ namespace Assets.Scripts.UI.Level
         private const float BASE_EXP_INCREASE_ANIM_SPEED = 1f;
         private const float FASTEST_EXP_INCREASE_ANIM_SPEED = 0.6f;
         private const float DELAY_BETWEEN_TWEENS_ANIMATION_CHECK = 0.02f;
+
+        [Inject] private readonly IPlayerManager _playerManager;
 
         [SerializeField] private TextMeshProUGUI _levelText;
         [SerializeField] private Slider _expSlider;
@@ -62,7 +65,7 @@ namespace Assets.Scripts.UI.Level
 
         private void Start()
         {
-            _playerLevelController = PlayerManager.Instance.LevelController;
+            _playerLevelController = _playerManager.LevelController;
 
             _currentlyVisibleLevelData = _playerLevelController.LevelData;
             _expSlider.value = _currentlyVisibleLevelData.Exp;

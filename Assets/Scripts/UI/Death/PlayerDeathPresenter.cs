@@ -10,63 +10,63 @@ using UnityEngine;
 
 namespace Assets.Scripts.UI.Death
 {
-public interface IPlayerDeathPresenter
-{
-    void EnableDeathScreen();
-}
-
-public class PlayerDeathPresenter : MonoBehaviour, IPlayerDeathPresenter
-{
-    [Inject] private readonly IBackgroundAudioManager _backgroundAudioManager;
-    [Inject] private readonly IScoreBoardNewScoreSaver _scoreBoardNewScoreSaver;
-    [Inject] private readonly IScoreBoardBestScoreGetter _scoreBoardBestScoreGetter;
-    [Inject] private readonly ITimerPresenter _timerPresenter;
-
-    [SerializeField] private GameObject _visual;
-    [SerializeField] private TextMeshProUGUI _levelText;
-    [SerializeField] private TextMeshProUGUI _timeText;
-
-    private void Start()
+    public interface IPlayerDeathPresenter
     {
-        _backgroundAudioManager.ChangeAudioToDefaultAudioMode();
+        void EnableDeathScreen();
     }
 
-    public void EnableDeathScreen()
+    public class PlayerDeathPresenter : MonoBehaviour, IPlayerDeathPresenter
     {
-        _scoreBoardNewScoreSaver.Save(_timerPresenter.TimerValue);
+        [Inject] private readonly IPlayerManager _playerManager;
+        [Inject] private readonly IBackgroundAudioManager _backgroundAudioManager;
+        [Inject] private readonly IScoreBoardNewScoreSaver _scoreBoardNewScoreSaver;
+        [Inject] private readonly IScoreBoardBestScoreGetter _scoreBoardBestScoreGetter;
+        [Inject] private readonly ITimerPresenter _timerPresenter;
 
-        SetLevelText();
+        [SerializeField] private GameObject _visual;
+        [SerializeField] private TextMeshProUGUI _levelText;
+        [SerializeField] private TextMeshProUGUI _timeText;
 
-        SetTimeText();
-
-        _visual.SetActive(true);
-
-        _backgroundAudioManager.ChangeAudioToDeathAudioMode();
-
-        GameTime.Pause();
-    }
-
-    private void SetLevelText()
-    {
-        _levelText.text = "Level: " + PlayerManager
-            .Instance
-            .LevelController
-            .LevelData
-            .Lvl
-            .ToString();
-    }
-
-    private void SetTimeText()
-    {
-        string timeText = "Time Alive: " +
-            TimeConversionUtility.FormatSecondsToTimeString(_timerPresenter.TimerValue);
-
-        if (_scoreBoardBestScoreGetter.GetBestScore() == _timerPresenter.TimerValue)
+        private void Start()
         {
-            timeText += $" <Color=#F8D61C>(New Best!)</Color>";
+            _backgroundAudioManager.ChangeAudioToDefaultAudioMode();
         }
 
-        _timeText.text = timeText;
+        public void EnableDeathScreen()
+        {
+            _scoreBoardNewScoreSaver.Save(_timerPresenter.TimerValue);
+
+            SetLevelText();
+
+            SetTimeText();
+
+            _visual.SetActive(true);
+
+            _backgroundAudioManager.ChangeAudioToDeathAudioMode();
+
+            GameTime.Pause();
+        }
+
+        private void SetLevelText()
+        {
+            _levelText.text = "Level: " + _playerManager
+                .LevelController
+                .LevelData
+                .Lvl
+                .ToString();
+        }
+
+        private void SetTimeText()
+        {
+            string timeText = "Time Alive: " +
+                TimeConversionUtility.FormatSecondsToTimeString(_timerPresenter.TimerValue);
+
+            if (_scoreBoardBestScoreGetter.GetBestScore() == _timerPresenter.TimerValue)
+            {
+                timeText += $" <Color=#F8D61C>(New Best!)</Color>";
+            }
+
+            _timeText.text = timeText;
+        }
     }
-}
 }

@@ -19,6 +19,7 @@ namespace Assets.Scripts.UI.Skills
 {
     public class SkillUpgradePresenter : MonoBehaviour
     {
+        [Inject] private readonly IPlayerManager _playerManager;
         [Inject] private readonly IOnRandomGridPosSpawner<CollectibleItemsSpawner> _collectibleItemsSpawner;
 
         [Header("Upgrade Skill")]
@@ -63,7 +64,7 @@ namespace Assets.Scripts.UI.Skills
 
         private void ShowRandomSkillInInitializationOrUpgradeSection_OnEvent(object sender, System.EventArgs e)
         {
-            ISkillsRegistry skillsRegistry = PlayerManager.Instance.SkillsRegistry;
+            ISkillsRegistry skillsRegistry = _playerManager.SkillsRegistry;
             if (_skillsQueuedForInitialization.Count < skillsRegistry.UninitializedSkillsCount)
             {
                 ISkillBase skill = RandomUninitializedSkillsInitializator.Initialize(skillsRegistry);
@@ -97,7 +98,7 @@ namespace Assets.Scripts.UI.Skills
             if (_skillsQueuedForInitialization.Count > 0)
             {
                 ISkillBase skill = _skillsQueuedForInitialization.Dequeue();
-                PlayerManager.Instance.SkillsRegistry.InitializeSkill(skill);
+                _playerManager.SkillsRegistry.InitializeSkill(skill);
                 ShowNewSkillSection(skill);
                 _audioClipPlayer.Play("Show");
                 GameTime.Pause();

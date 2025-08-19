@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Assets.Scripts.Player;
 using Assets.Scripts.FlowFieldSystem;
+using Reflex.Attributes;
 
 namespace Assets.Scripts.GridSystem
 {
@@ -13,6 +14,8 @@ namespace Assets.Scripts.GridSystem
 
     public class GridManager : MonoBehaviour, IGridManager
     {
+        [Inject] private readonly IPlayerManager _playerManager;
+
         [SerializeField] private GridConfiguration _worldGridConfiguration;
         [SerializeField] private float _delayBetweenWorldGridUpdate = 0.2f;
         public Grid WorldGrid { get; private set; }
@@ -39,8 +42,6 @@ namespace Assets.Scripts.GridSystem
 
         public Cell DestinationCell { get; private set; }
 
-        private PlayerManager _playerManager;
-
         private void Awake()
         {
             WorldGrid = new Grid(_worldGridConfiguration);
@@ -53,8 +54,6 @@ namespace Assets.Scripts.GridSystem
 
         private void OnEnable()
         {
-            _playerManager = PlayerManager.Instance;
-
             UpdateFlowField(WorldGrid, WorldGrid.Cells[WorldGrid.Width / 2, WorldGrid.Height / 2].WorldPos);
 
             InvokeRepeating(nameof(UpdateFlowFieldWithNewPlayerChunkGrid), 0, _delayBetweenPlayerChunkGridUpdate);
@@ -98,7 +97,7 @@ namespace Assets.Scripts.GridSystem
         private void UpdateFlowFieldWithNewPlayerChunkGrid()
         {
             GridPlayerChunk = CreatePlayerChunkBasedOnPlayerPositionInWorldGrid();
-            UpdateFlowField(GridPlayerChunk, _playerManager.transform.position);
+            UpdateFlowField(GridPlayerChunk, _playerManager.GameObject.transform.position);
         }
 
         private Grid CreatePlayerChunkBasedOnPlayerPositionInWorldGrid()
@@ -109,7 +108,7 @@ namespace Assets.Scripts.GridSystem
 
             Cell cellClosestToPlayer = WorldPosToCellConverter.GetCellFromGridByWorldPos(
                 WorldGrid,
-                _playerManager.transform.position
+                _playerManager.GameObject.transform.position
             );
 
             int halfWidth = chunkWidth >> 1;

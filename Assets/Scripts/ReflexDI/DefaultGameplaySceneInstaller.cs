@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Enemies;
 using Assets.Scripts.GridSystem;
 using Assets.Scripts.LevelSystem.Exp;
+using Assets.Scripts.Player;
 using Assets.Scripts.Skills.ObjectsImpactingSkills.Crate;
 using Assets.Scripts.Spawners.GridSpace;
 using Assets.Scripts.Spawners.WorldSpace;
@@ -13,6 +14,7 @@ namespace Assets.Scripts.ReflexDI
 {
     public class DefaultGameplaySceneInstaller : MonoBehaviour, IInstaller
     {
+        [SerializeField] private PlayerManager _playerManager;
         [SerializeField] private GridManager _gridManager;
         [SerializeField] private EnemiesSpawner _enemiesSpawner;
         [SerializeField] private PlayerDeathPresenter _playerDeathPresenter;
@@ -22,6 +24,7 @@ namespace Assets.Scripts.ReflexDI
 
         public void InstallBindings(ContainerBuilder builder)
         {
+            builder.AddSingleton(_playerManager, typeof(IPlayerManager));
             builder.AddSingleton(_gridManager, typeof(IGridManager));
             builder.AddSingleton(_enemiesSpawner, typeof(IOnRandomGridPosSpawner<EnemiesSpawner>));
             builder.AddSingleton(_collectibleItemsSpawner, typeof(IOnRandomGridPosSpawner<CollectibleItemsSpawner>));

@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.StatusAffectables;
 using Assets.Scripts.VFX;
 using DG.Tweening;
+using Reflex.Attributes;
 using UnityEngine;
 
 namespace Assets.Scripts.Player
@@ -8,6 +9,8 @@ namespace Assets.Scripts.Player
     [RequireComponent(typeof(PlayerManager))]
     public class PlayerDamagedHandler : MonoBehaviour, IDamageable
     {
+        [Inject] private readonly IPlayerManager _playerManager;
+
         [Header("Needed references")]
         [SerializeField] private VFXPlayer _damageVfxPlayer;
         [SerializeField] private GameObject _carVisual;
@@ -16,13 +19,7 @@ namespace Assets.Scripts.Player
         [SerializeField] private float _duration = 0.2f;
         [SerializeField] private float _strength = 0.1f;
 
-        private PlayerManager _playerManager;
         private Tween _shakeTween;
-
-        private void Start()
-        {
-            _playerManager = PlayerManager.Instance;
-        }
 
         public void TakeDamage(float damage)
         {
