@@ -1009,6 +1009,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddb24f9b1630c5a4c8bf2b0c8e699462, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gridManager: {fileID: 2116983121}
   _enemiesSpawner: {fileID: 449990457}
   _playerDeathPresenter: {fileID: 4976825079199166630}
   _timerPresenter: {fileID: 2407471052203165078}

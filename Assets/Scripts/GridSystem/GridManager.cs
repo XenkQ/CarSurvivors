@@ -4,7 +4,14 @@ using Assets.Scripts.FlowFieldSystem;
 
 namespace Assets.Scripts.GridSystem
 {
-    public sealed class GridManager : MonoBehaviour
+    public interface IGridManager
+    {
+        Cell DestinationCell { get; }
+        Grid GridPlayerChunk { get; }
+        Grid WorldGrid { get; }
+    }
+
+    public class GridManager : MonoBehaviour, IGridManager
     {
         [SerializeField] private GridConfiguration _worldGridConfiguration;
         [SerializeField] private float _delayBetweenWorldGridUpdate = 0.2f;
@@ -34,20 +41,8 @@ namespace Assets.Scripts.GridSystem
 
         private PlayerManager _playerManager;
 
-        private GridManager()
-        { }
-
-        public void Awake()
+        private void Awake()
         {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-
             WorldGrid = new Grid(_worldGridConfiguration);
             _flowField = new FlowField();
 
@@ -67,7 +62,7 @@ namespace Assets.Scripts.GridSystem
 
 #if DEBUG
 
-        public void Start()
+        private void Start()
         {
             if (_debugGrid)
             {

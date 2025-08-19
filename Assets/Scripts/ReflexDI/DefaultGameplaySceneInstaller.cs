@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Enemies;
+using Assets.Scripts.GridSystem;
 using Assets.Scripts.LevelSystem.Exp;
 using Assets.Scripts.Spawners.GridSpace;
 using Assets.Scripts.Spawners.WorldSpace;
@@ -10,6 +11,7 @@ namespace Assets.Scripts.ReflexDI
 {
     public class DefaultGameplaySceneInstaller : MonoBehaviour, IInstaller
     {
+        [SerializeField] private GridManager _gridManager;
         [SerializeField] private EnemiesSpawner _enemiesSpawner;
         [SerializeField] private PlayerDeathPresenter _playerDeathPresenter;
         [SerializeField] private TimerPresenter _timerPresenter;
@@ -17,10 +19,11 @@ namespace Assets.Scripts.ReflexDI
 
         public void InstallBindings(ContainerBuilder builder)
         {
+            builder.AddSingleton(_gridManager, typeof(IGridManager));
             builder.AddSingleton(_enemiesSpawner, typeof(IOnRandomGridPosSpawner<EnemiesSpawner>));
+            builder.AddSingleton(_expParticleSpawner, typeof(IInWorldSpaceSpawner<ExpParticleSpawner, float>));
             builder.AddSingleton(_playerDeathPresenter, typeof(IPlayerDeathPresenter));
             builder.AddSingleton(_timerPresenter, typeof(ITimerPresenter));
-            builder.AddSingleton(_expParticleSpawner, typeof(IInWorldSpaceSpawner<ExpParticleSpawner, float>));
         }
     }
 }

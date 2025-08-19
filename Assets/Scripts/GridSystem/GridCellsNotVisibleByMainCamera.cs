@@ -7,6 +7,16 @@ namespace Assets.Scripts.GridSystem
 {
     public static class GridCellsNotVisibleByMainCamera
     {
+        public static IEnumerable<Cell> GetRandomWalkableCells(Grid grid)
+        {
+            return GetWalkableCells(grid).Shuffle();
+        }
+
+        public static IEnumerable<Cell> GetRandomWalkableCells(Grid grid, int count)
+        {
+            return GetRandomWalkableCells(grid).Take(count);
+        }
+
         public static IEnumerable<Cell> GetWalkableCells(Grid grid)
         {
             List<Cell> notVisibleCells = new List<Cell>();
@@ -27,16 +37,6 @@ namespace Assets.Scripts.GridSystem
             }
 
             return notVisibleCells;
-        }
-
-        public static IEnumerable<Cell> GetRandomWalkableCells(Grid grid)
-        {
-            return GetWalkableCells(GridManager.Instance.GridPlayerChunk).Shuffle();
-        }
-
-        public static IEnumerable<Cell> GetRandomWalkableCells(Grid grid, int count)
-        {
-            return GetRandomWalkableCells(grid).Take(count);
         }
 
         private static bool IsCellVisibleFromCamera(Vector3 cellPosition, Camera camera)

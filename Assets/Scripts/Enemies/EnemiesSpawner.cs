@@ -1,6 +1,7 @@
 using Assets.Scripts.CustomTypes;
 using Assets.Scripts.GridSystem;
 using Assets.Scripts.Spawners.GridSpace;
+using Reflex.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,8 @@ namespace Assets.Scripts.Enemies
 {
     public sealed class EnemiesSpawner : MonoBehaviour, IOnRandomGridPosSpawner<EnemiesSpawner>, IPool
     {
+        [Inject] private readonly IGridManager _gridManager;
+
         [Header("SpawnExpParticle Chance Settings")]
         [SerializeField] private FloatValueRange _spawnChanceDecreaseFactor;
         private EnemiesSpawnChanceRedistributionSystem _enemiesSpawnChanceRedistributionSystem = new();
@@ -24,8 +27,6 @@ namespace Assets.Scripts.Enemies
 
         public uint CurrentlySpawnedObjectsCount { get; private set; }
 
-        private GridManager _gridManager;
-
         private void Awake()
         {
             PoolEnemies();
@@ -33,8 +34,6 @@ namespace Assets.Scripts.Enemies
 
         private void Start()
         {
-            _gridManager = GridManager.Instance;
-
             EnemiesSpawnChanceRedistributionSystem.Configuration config = new()
             {
                 EnemiesInfo = _poolEnemiesInfo,

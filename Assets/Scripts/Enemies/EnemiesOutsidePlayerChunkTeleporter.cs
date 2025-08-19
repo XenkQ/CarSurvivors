@@ -1,5 +1,6 @@
 using Assets.Scripts.Extensions;
 using Assets.Scripts.GridSystem;
+using Reflex.Attributes;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -8,14 +9,13 @@ namespace Assets.Scripts.Enemies
 {
     public class EnemiesOutsidePlayerChunkTeleporter : MonoBehaviour
     {
+        [Inject] private readonly IGridManager _gridManager;
+
         [SerializeField] private Transform _enemiesHolder;
         [SerializeField] private float _checkForEnemiesOutsidePlayerChunkDelay = 2f;
-        private GridManager _gridManager;
 
         private void Start()
         {
-            _gridManager = GridManager.Instance;
-
             InvokeRepeating(
                 nameof(TeleportEnemiesFromOutsideToInsidePlayerChunk),
                 _checkForEnemiesOutsidePlayerChunkDelay,

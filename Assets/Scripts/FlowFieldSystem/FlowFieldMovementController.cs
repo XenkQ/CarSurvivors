@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.GridSystem;
 using Assets.Scripts.LayerMasks;
+using Reflex.Attributes;
 using UnityEngine;
 
 namespace Assets.Scripts.FlowFieldSystem
@@ -11,6 +12,8 @@ namespace Assets.Scripts.FlowFieldSystem
 
     public class FlowFieldMovementController : MonoBehaviour, IFlowFieldMovementController
     {
+        [Inject] private readonly IGridManager _gridManager;
+
         [Header("Separating moving entities")]
         [SerializeField] private float separationRadius = 1.2f;
         [SerializeField] private float separationStrength = 0.5f;
@@ -40,8 +43,10 @@ namespace Assets.Scripts.FlowFieldSystem
 
         private Vector3 GetMoveDirectionBasedOnCurrentCell()
         {
-            GridSystem.Grid grid = GridManager.Instance.WorldGrid;
-            Cell currentCell = WorldPosToCellConverter.GetCellFromGridByWorldPos(grid, transform.position);
+            Cell currentCell = WorldPosToCellConverter.GetCellFromGridByWorldPos(
+                _gridManager.WorldGrid, transform.position
+            );
+
             if (currentCell != null && currentCell.BestDirection != null)
             {
                 Vector2Int gridDirection = currentCell.BestDirection.Vector;

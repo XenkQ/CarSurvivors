@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.GridSystem;
 using Assets.Scripts.Spawners.GridSpace;
+using Reflex.Attributes;
 using UnityEngine;
 
 namespace Assets.Scripts.Skills.ObjectsImpactingSkills.Crate
@@ -17,6 +18,8 @@ namespace Assets.Scripts.Skills.ObjectsImpactingSkills.Crate
             public float SpawnYOffset;
             public float SpawnChance;
         }
+
+        [Inject] private readonly IGridManager _gridManager;
 
         [SerializeField] private byte maxSpawnedCollectiblesCount = 6;
         [SerializeField] private Transform _collectibleItemsParent;
@@ -55,7 +58,7 @@ namespace Assets.Scripts.Skills.ObjectsImpactingSkills.Crate
             for (int i = 0; i < count && _spawnedCollectibleItems.Count < maxSpawnedCollectiblesCount; i++)
             {
                 Cell drawnCell = RandomWalkableCellsFinder
-                    .FindCellWithoutCollectible(GridManager.Instance.WorldGrid);
+                    .FindCellWithoutCollectible(_gridManager.WorldGrid);
 
                 if (drawnCell == null)
                 {
@@ -129,7 +132,7 @@ namespace Assets.Scripts.Skills.ObjectsImpactingSkills.Crate
         private void ReleaseOccupiedCellByCollectible(GameObject collectable)
         {
             Cell occupiedCell = WorldPosToCellConverter
-                 .GetCellFromGridByWorldPos(GridManager.Instance.WorldGrid, collectable.transform.position);
+                 .GetCellFromGridByWorldPos(_gridManager.WorldGrid, collectable.transform.position);
 
             if (occupiedCell != null)
             {
