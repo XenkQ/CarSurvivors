@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using UnityEngine;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -10,7 +9,7 @@ namespace Assets.Scripts.Storage
     public static class AppStorage
     {
         private static readonly string SettingsFilePath =
-            Path.Combine(Application.persistentDataPath, "AppStorage.json");
+            Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "AppStorage.json");
 
         private static Dictionary<string, JToken> _settingsCache;
 
@@ -39,6 +38,12 @@ namespace Assets.Scripts.Storage
 
         public static void SetValue<T>(string key, T value)
         {
+            string dataDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data");
+            if (!Directory.Exists(dataDirectory))
+            {
+                Directory.CreateDirectory(dataDirectory);
+            }
+
             _settingsCache[key] = JToken.FromObject(value);
             var json = JsonConvert.SerializeObject(_settingsCache, Formatting.Indented);
             File.WriteAllText(SettingsFilePath, json);
