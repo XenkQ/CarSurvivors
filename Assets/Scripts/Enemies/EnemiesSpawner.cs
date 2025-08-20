@@ -61,8 +61,6 @@ namespace Assets.Scripts.Enemies
 
         private void OnEnemyGet(Enemy enemy)
         {
-            enemy.OnCanBeReleased += Enemy_OnRelease;
-
             Cell cell = GridCellsNotVisibleByMainCamera
                 .GetRandomWalkableCells(_gridManager.GridPlayerChunk, 1)
                 .FirstOrDefault();
@@ -73,9 +71,11 @@ namespace Assets.Scripts.Enemies
                 return;
             }
 
-            enemy.transform.position = cell.WorldPos;
-
             enemy.OnGet();
+
+            enemy.OnCanBeReleased += Enemy_OnRelease;
+
+            enemy.transform.position = cell.WorldPos;
 
             enemy.gameObject.SetActive(true);
 
@@ -84,9 +84,9 @@ namespace Assets.Scripts.Enemies
 
         private void OnEnemyRelease(Enemy enemy)
         {
-            enemy.OnCanBeReleased -= Enemy_OnRelease;
-
             enemy.OnRelease();
+
+            enemy.OnCanBeReleased -= Enemy_OnRelease;
 
             enemy.gameObject.SetActive(false);
 

@@ -71,6 +71,8 @@ namespace Assets.Scripts.LevelSystem.Exp
 
         private void OnGet(ExpParticle expParticle)
         {
+            expParticle.OnGet();
+
             expParticle.OnCanBeReleased += ExpParticle_OnRelease;
 
             expParticle.gameObject.SetActive(true);
@@ -80,6 +82,8 @@ namespace Assets.Scripts.LevelSystem.Exp
 
         private void OnRelease(ExpParticle expParticle)
         {
+            expParticle.OnRelease();
+
             expParticle.OnCanBeReleased -= ExpParticle_OnRelease;
 
             expParticle.gameObject.SetActive(false);

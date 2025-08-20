@@ -50,6 +50,8 @@ namespace Assets.Scripts.LevelSystem.Exp
         private float _expAmount;
         private bool _expCollected;
 
+        private Vector3 _startScale;
+
         private IFlowFieldMovementController _flowFieldMovementController;
 
         private IAudioClipPlayer _audoClipPlayer;
@@ -73,6 +75,11 @@ namespace Assets.Scripts.LevelSystem.Exp
             }
         }
 
+        private void Start()
+        {
+            _startScale = transform.localScale;
+        }
+
         public void ReturnToPool()
         {
             OnRelease();
@@ -83,12 +90,13 @@ namespace Assets.Scripts.LevelSystem.Exp
         public void OnGet()
         {
             _expCollected = false;
+
             _expAmount = 0;
         }
 
         public void OnRelease()
         {
-            throw new NotImplementedException();
+            transform.localScale = _startScale;
         }
 
         public void SetSizeAndMaterialBasedOnExpAmount(float exp)

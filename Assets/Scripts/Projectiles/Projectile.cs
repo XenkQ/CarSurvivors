@@ -5,10 +5,12 @@ using Assets.Scripts.LayerMasks;
 using UnityEngine;
 using System;
 using Assets.Scripts.Helpers;
+using DG.Tweening;
+using Assets.Scripts.Pooling;
 
 namespace Assets.Scripts.Projectiles
 {
-    public class Projectile : MonoBehaviour, IInitializableWithScriptableConfig<ProjectileConfigSO>
+    public class Projectile : MonoBehaviour, IInitializableWithScriptableConfig<ProjectileConfigSO>, IPoolable
     {
         [SerializeField] private ProjectileConfigSO _config;
         [SerializeField] private SphereCollider _sphereCollider;
@@ -18,22 +20,21 @@ namespace Assets.Scripts.Projectiles
 
         public event EventHandler OnLifeEnd;
 
+        public event EventHandler OnCanBeReleased;
+
         private float _distanceTraveled;
         private Vector3 _movementDir;
 
-        private void Update()
+        private Vector3 _startScale;
+
+        private void FixedUpdate()
         {
             if (!_isAlive || !_isInitialized)
             {
                 return;
             }
 
-            MoveProjectileForward();
-        }
-
-        private void Start()
-        {
-            _movementDir = transform.forward;
+            MoveProjectileInDirection(_movementDir);
         }
 
         private void OnTriggerEnter(Collider other)
@@ -46,6 +47,34 @@ namespace Assets.Scripts.Projectiles
             HandleCollisions();
         }
 
+        private void Start()
+        {
+            _startScale = transform.localScale;
+        }
+
+        public void OnGet()
+        {
+            _distanceTraveled = 0f;
+
+            _isAlive = true;
+        }
+
+        public void OnRelease()
+        {
+            DOTween.Kill(transform);
+
+            _isInitialized = false;
+
+            transform.localScale = _startScale;
+        }
+
+        public void ReturnToPool()
+        {
+            OnRelease();
+
+            OnCanBeReleased?.Invoke(this, EventArgs.Empty);
+        }
+
         public void Initialize(ProjectileConfigSO config)
         {
             _config = config;
@@ -53,8 +82,6 @@ namespace Assets.Scripts.Projectiles
             _piercedCounter = _config.MaxPiercing;
 
             transform.localScale = new Vector3(_config.Size, _config.Size, transform.localScale.y);
-
-            _distanceTraveled = 0f;
 
             _isInitialized = true;
         }
@@ -73,7 +100,7 @@ namespace Assets.Scripts.Projectiles
             return true;
         }
 
-        private void MoveProjectileForward()
+        private void MoveProjectileInDirection(Vector3 direction)
         {
             float moveStep = _config.Speed * Time.deltaTime;
             transform.position += _movementDir * moveStep;
