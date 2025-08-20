@@ -42,11 +42,11 @@ MonoBehaviour:
     <IsSubstractModeOn>k__BackingField: 0
     <Unit>k__BackingField: 0
     _alwaysUseMinValueForUpgrade: 1
-    <CanBeUpgraded>k__BackingField: 1
+    <CanBeUpgraded>k__BackingField: 0
     <Value>k__BackingField: 1
     _byteMinMaxRange:
       <Min>k__BackingField: 1
-      <Max>k__BackingField: 2
+      <Max>k__BackingField: 1
     _byteRangeOfPossibleValuesForUpgrade:
       <Min>k__BackingField: 1
       <Max>k__BackingField: 1
