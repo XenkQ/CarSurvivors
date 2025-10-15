@@ -8,7 +8,7 @@ The apocalypse has arrived. Your only task is to survive. Fortunately, you are a
 In this project I wanted to learn
 
 - **DOTween** - https://github.com/Demigiant/dotween (reducing number of frame by frame animations, by simple code functions)
-- **Reflex** - https://github.com/reflex-dev (using DI instead of making objects as singletons)
+- **Reflex** - https://github.com/gustavopsantos/Reflex (using DI instead of making objects as singletons)
 - **Better codding** 
     - Using `events` to communicate between scripts more often.
     - Start using `Scriptable Objects`.
