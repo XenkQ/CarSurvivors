@@ -11,12 +11,13 @@ Use this skill to add or review dependency injection integration in ProjectLizar
 
 Before changing DI-related code, ground the work in:
 
-- agent-docs/AGENTS.md
-- agent-docs/project-coding-standards.md
-- agent-docs/technology-documentation.md
-- Assets/Installers/SceneInstaller.cs
+- AGENTS.md
+- .agents/README.md
+- .agents/docs/project-coding-standards.md
+- .agents/docs/technology-documentation.md
+- Assets/Scripts/ReflexDI/
 
-Use official Reflex documentation from `agent-docs/technology-documentation.md` when binding or injection behavior is uncertain.
+Use official Reflex documentation from `.agents/docs/technology-documentation.md` when binding or injection behavior is uncertain.
 
 ## Inputs
 
@@ -41,7 +42,7 @@ Use official Reflex documentation from `agent-docs/technology-documentation.md` 
    - If adding an interface primarily used by one implementation, colocate it above the implementation class.
    - Prefix interface names with `I`.
 4. Add or update Reflex binding.
-   - Register scene services in `Assets/Installers/SceneInstaller.cs`.
+   - Register scene services in the appropriate installer under `Assets/Scripts/ReflexDI/`.
    - Bind concrete implementations to interfaces consumed by runtime systems.
    - Keep binding names and lifetimes consistent with nearby registrations.
 5. Update consumers.

@@ -28,7 +28,7 @@ Read agent guidance in this order:
 5. `.agents/docs/ai-game-dev-best-practices.md` for gameplay and review guardrails.
 6. Relevant `.agents/skills/*/SKILL.md` files when the task matches a skill trigger.
 
-Some skill files still reference `agent-docs/`. In this repository state, use `.agents/docs/` as the current documentation location unless an `agent-docs/` folder is later added.
+Use `.agents/docs/` as the current documentation location for agent-facing project guidance.
 
 ## Technology Baseline
 
@@ -100,8 +100,6 @@ Use `.agents/skills/` as reusable workflows:
 When a request matches a skill trigger, read the relevant `SKILL.md` before editing.
 
 ## Agent Descriptors
-
-`.agents/README.md` reserves `.agents/agents/` for future specialist agents, but that top-level folder is not present in the current repository state.
 
 Current vendor-specific descriptors are nested under skills:
 

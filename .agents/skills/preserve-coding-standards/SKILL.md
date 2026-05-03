@@ -1,6 +1,6 @@
 ---
 name: preserve-coding-standards
-description: "Use when: auditing and fixing a provided ProjectLizard scope for practices that compile or work but drift from agent-docs/project-coding-standards.md. Triggers: preserve coding standards, coding standards cleanup, style drift, naming/order cleanup, fix standards violations, align scope with ProjectLizard standards."
+description: "Use when: auditing and fixing a provided ProjectLizard scope for practices that compile or work but drift from .agents/docs/project-coding-standards.md. Triggers: preserve coding standards, coding standards cleanup, style drift, naming/order cleanup, fix standards violations, align scope with ProjectLizard standards."
 ---
 
 # Preserve Coding Standards
@@ -11,11 +11,12 @@ Use this skill to inspect a user-provided scope, find code that is not behaviora
 
 Always read these before editing:
 
-- ../../../agent-docs/project-coding-standards.md
-- ../../../agent-docs/AGENTS.md
-- ../../../agent-docs/ai-game-dev-best-practices.md
+- AGENTS.md
+- .agents/README.md
+- .agents/docs/project-coding-standards.md
+- .agents/docs/ai-game-dev-best-practices.md
 
-Use ../../../agent-docs/technology-documentation.md and official Unity or Reflex documentation only when a standards fix depends on framework behavior.
+Use .agents/docs/technology-documentation.md and official Unity or Reflex documentation only when a standards fix depends on framework behavior.
 
 ## Scope Rules
 

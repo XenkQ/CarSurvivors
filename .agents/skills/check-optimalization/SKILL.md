@@ -11,13 +11,14 @@ Use this skill to inspect a targeted ProjectLizard system, script, or code secti
 
 Before reviewing code, ground the work in:
 
-- agent-docs/AGENTS.md
-- agent-docs/project-coding-standards.md
-- agent-docs/technology-documentation.md
-- Relevant system summary under agent-docs/, if one exists.
+- AGENTS.md
+- .agents/README.md
+- .agents/docs/project-coding-standards.md
+- .agents/docs/technology-documentation.md
+- Relevant system summary under .agents/docs/, if one exists.
 - The exact target files, systems, or code excerpts named by the user.
 
-Use official Unity, Reflex, and DOTween documentation from `agent-docs/technology-documentation.md` when performance behavior depends on engine or package details.
+Use official Unity, Reflex, and DOTween documentation from `.agents/docs/technology-documentation.md` when performance behavior depends on engine or package details.
 
 ## Inputs
 

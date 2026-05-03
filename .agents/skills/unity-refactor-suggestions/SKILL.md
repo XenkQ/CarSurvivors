@@ -22,9 +22,11 @@ If the request spans multiple systems, split into separate passes.
 
 Always ground suggestions in:
 
-- ../../../agent-docs/project-coding-standards.md
-- ../../../agent-docs/ai-game-dev-best-practices.md
-- ../../../agent-docs/technology-documentation.md
+- AGENTS.md
+- .agents/README.md
+- .agents/docs/project-coding-standards.md
+- .agents/docs/ai-game-dev-best-practices.md
+- .agents/docs/technology-documentation.md
 
 Use official Unity and Reflex documentation first when API behavior is uncertain.
 
@@ -100,6 +102,6 @@ A good output must:
 
 ## Output
 
-Produce a filled report in ./agent-docs/refactor-suggestions/<report-name>.md using:
+Produce a filled report in `.agents/docs/refactor-suggestions/<report-name>.md` using:
 
-- ./templates/refactor-suggestion-report.md
+- `.agents/skills/unity-refactor-suggestions/templates/refactor-suggestion-report.md`
