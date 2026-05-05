@@ -2,7 +2,7 @@ name: Unity CI
 
 on:
   pull_request:
-    branches: [ main, development ]
+    branches: [main]
 
 permissions:
   contents: read
